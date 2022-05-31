@@ -15,7 +15,9 @@ public class PlayerMovement : MonoBehaviour
     // jumping variables
     public float jumpForce = 2.0f;
     public float maxJumps = 2;
+    [SerializeField]
     private float jumpsLeft;
+    private bool isJumpPressed;
 
 
     // gravity variables
@@ -30,10 +32,10 @@ public class PlayerMovement : MonoBehaviour
     void handleGravity() 
     {
         if(characterController.isGrounded) {
-            currentMovement.y = groundedGravity;
+            currentMovement.y += groundedGravity;
         }
         else {
-            currentMovement.y = gravity * Time.deltaTime;
+            currentMovement.y += gravity * Time.deltaTime;
         }
     }
 
@@ -61,9 +63,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump(InputAction.CallbackContext context) {
-        if(characterController.isGrounded && jumpsLeft < maxJumps) {
-            jumpsLeft = maxJumps;
-        }
+
 
         if(jumpsLeft > 0) {
             characterController.Move(new Vector3(0.0f, jumpForce, 0.0f));
@@ -72,13 +72,30 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    // if we touch the ground, we want to gain all of our jumps back
+    // however, IIRC, in smash if you walk off an edge(or get knocked off)
+    // you'll lose your first jump, so this will reduce max jumps by one if not grounded
+    private void resetJumps() {
+        if(characterController.isGrounded && jumpsLeft < maxJumps) {
+            jumpsLeft = maxJumps;
+        }
+        else if(!characterController.isGrounded && jumpsLeft == maxJumps) {
+            jumpsLeft = maxJumps-1;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // reset currentMovement each frame and just combine everything into it that runs in update
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
+
+        // reset jumps, if you fall 
+        resetJumps();
+
         if(playerInput.Player.Move.inProgress) {
             Vector2 move = playerInput.Player.Move.ReadValue<Vector2>();
-            currentMovement = new Vector3(playerSpeed * Time.deltaTime * move.x, 0.0f, playerSpeed * Time.deltaTime * move.y);
+            currentMovement += new Vector3(playerSpeed * Time.deltaTime * move.x, 0.0f, playerSpeed * Time.deltaTime * move.y);
             
         }
         handleGravity();
