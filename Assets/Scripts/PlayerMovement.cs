@@ -57,14 +57,8 @@ public class PlayerMovement : MonoBehaviour
             currentMovement.y = groundedGravity;
         }
         else {
-            // Velocity Verlet - to make gravity frame independent
-            // TODO: Add to jumps
             float multiplier = isFalling ? fallMultiplier : 1.0f;
-            float previousYVelocity = currentMovement.y;
-            float newYVelocity = currentMovement.y + (gravity * multiplier * Time.deltaTime);
-            float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
-            currentMovement.y = nextYVelocity;
-            currentMovement.y = Mathf.Max(currentMovement.y, gravity);
+            currentMovement.y += Mathf.Max((gravity * multiplier * Time.deltaTime), gravity);
         }
     }
 
@@ -103,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         // Steals a jump if you're not on the ground(like smash). This part is finicky since we're 
         // relying on isGrounded. Should probably find a better way or remove the jump stealing.
         else if(!characterController.isGrounded && jumpsLeft == maxJumps) {
-            jumpsLeft = maxJumps-1;
+            //jumpsLeft = maxJumps-1;
         }
     }
 
@@ -111,13 +105,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         currentMovement = new Vector3 (0.0f, currentMovement.y, 0.0f);
-        resetJumps();
 
         if(playerInput.Player.Move.inProgress) {
             Vector2 move = playerInput.Player.Move.ReadValue<Vector2>();
             currentMovement += new Vector3(playerSpeed * move.x, 0.0f, playerSpeed * move.y);
         }
         characterController.Move(currentMovement * Time.deltaTime);
+        
+    }
+
+    void FixedUpdate() 
+    {
+        resetJumps();
         handleGravity();
     }
 
