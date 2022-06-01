@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
     public float maxJumpTime = 0.5f;
+    public float fallMultiplier = 2.0f;
     private float initialJumpVelocity;
     private bool isJumpPressed = false;
     private float jumpsLeft;
@@ -31,6 +32,13 @@ public class PlayerMovement : MonoBehaviour
         setupJumpVariables();
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        jumpsLeft = maxJumps;
+    }
+
     void setupJumpVariables()
     {
         // setting gravity and our jump velocity in terms of jump height and jump time
@@ -42,12 +50,20 @@ public class PlayerMovement : MonoBehaviour
 
     void handleGravity() 
     {
+        // this will handle early falling if you release the jump button
+        bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
         if(characterController.isGrounded) {
             currentMovement.y = groundedGravity;
         }
         else {
-            currentMovement.y += gravity * Time.deltaTime;
+            // Velocity Verlet - to make gravity frame independent
+            // TODO: Add to jumps
+            float multiplier = isFalling ? fallMultiplier : 1.0f;
+            float previousYVelocity = currentMovement.y;
+            float newYVelocity = currentMovement.y + (gravity * multiplier * Time.deltaTime);
+            float nextYVelocity = (previousYVelocity + newYVelocity) * 0.5f;
+            currentMovement.y = nextYVelocity;
             currentMovement.y = Mathf.Max(currentMovement.y, gravity);
         }
     }
@@ -57,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Enable();
 
         // subscribe to events
-        playerInput.Player.Jump.started += Jump;
-        playerInput.Player.Jump.canceled += Jump;
+        playerInput.Player.Jump.started += onJump;
+        playerInput.Player.Jump.canceled += onJump;
     }
 
     private void OnDisable()
@@ -66,18 +82,13 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Disable();
 
         // unsubscribe to events
-        playerInput.Player.Jump.started -= Jump;
-        playerInput.Player.Jump.canceled -= Jump;
+        playerInput.Player.Jump.started -= onJump;
+        playerInput.Player.Jump.canceled -= onJump;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        jumpsLeft = maxJumps;
-    }
 
-    private void Jump(InputAction.CallbackContext context) {
+
+    private void onJump(InputAction.CallbackContext context) {
         isJumpPressed = context.ReadValueAsButton();
         if(jumpsLeft > 0 && isJumpPressed == true) {
             currentMovement.y = initialJumpVelocity;

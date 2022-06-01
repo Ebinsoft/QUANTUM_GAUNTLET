@@ -456,11 +456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8259421e1e938dc7f9ca958dedecb810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMovement: {x: 0, y: 0, z: 0}
   playerSpeed: 3.5
   maxJumps: 2
-  jumpsLeft: 0
-  isJumpPressed: 0
+  maxJumpHeight: 1
+  maxJumpTime: 0.5
+  fallMultiplier: 2
 --- !u!143 &1252780181
 CharacterController:
   m_ObjectHideFlags: 0
