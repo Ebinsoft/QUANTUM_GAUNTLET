@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     // gravity variables
     private float gravity;
     private float groundedGravity = -0.05f;
+    public float maxFallingSpeed = -15.0f;
 
     private void Awake() {
         playerInput = new PlayerInput();
@@ -58,7 +59,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else {
             float multiplier = isFalling ? fallMultiplier : 1.0f;
-            currentMovement.y += Mathf.Max((gravity * multiplier * Time.deltaTime), gravity);
+            currentMovement.y += (gravity * multiplier * Time.deltaTime);
+            currentMovement.y = Mathf.Max(currentMovement.y, maxFallingSpeed);
         }
     }
 
@@ -84,20 +86,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void onJump(InputAction.CallbackContext context) {
         isJumpPressed = context.ReadValueAsButton();
+
+        // check if player is on the ground, if not, steal their first jump(like smash)
+        if(jumpsLeft == maxJumps && !IsCloseToGround()) {
+            jumpsLeft = maxJumps-1;
+        }
+
         if(jumpsLeft > 0 && isJumpPressed == true) {
             currentMovement.y = initialJumpVelocity;
             jumpsLeft--;
         }
     }
 
+    private bool IsCloseToGround() 
+    {
+        float minJumpDistance = 0.6f;
+        int layer_mask = LayerMask.GetMask("Ground");
+        bool isClosetoGround = Physics.Raycast(transform.position, Vector3.down, minJumpDistance, layer_mask);
+        Debug.Log(isClosetoGround);
+        return isClosetoGround;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3.down * 0.6f));
+    }
+
     private void resetJumps() {
         if(characterController.isGrounded && jumpsLeft < maxJumps) {
             jumpsLeft = maxJumps;
-        }
-        // Steals a jump if you're not on the ground(like smash). This part is finicky since we're 
-        // relying on isGrounded. Should probably find a better way or remove the jump stealing.
-        else if(!characterController.isGrounded && jumpsLeft == maxJumps) {
-            //jumpsLeft = maxJumps-1;
         }
     }
 

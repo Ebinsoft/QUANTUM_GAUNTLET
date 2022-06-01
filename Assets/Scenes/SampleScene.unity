@@ -458,9 +458,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 7
   maxJumps: 2
-  maxJumpHeight: 2
-  maxJumpTime: 0.5
+  maxJumpHeight: 4
+  maxJumpTime: 2
   fallMultiplier: 1.5
+  isGrounded: 0
+  maxFallingSpeed: -15
 --- !u!143 &1252780181
 CharacterController:
   m_ObjectHideFlags: 0
@@ -491,12 +493,12 @@ GameObject:
   - component: {fileID: 1972860411}
   - component: {fileID: 1972860410}
   - component: {fileID: 1972860409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &1972860409
 BoxCollider:
