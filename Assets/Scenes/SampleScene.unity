@@ -459,9 +459,8 @@ MonoBehaviour:
   playerSpeed: 7
   maxJumps: 2
   maxJumpHeight: 4
-  maxJumpTime: 2
+  maxJumpTime: 0.5
   fallMultiplier: 1.5
-  isGrounded: 0
   maxFallingSpeed: -15
 --- !u!143 &1252780181
 CharacterController:
