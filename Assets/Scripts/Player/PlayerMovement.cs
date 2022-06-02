@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -23,17 +24,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         playerInput.Enable();
+        playerInput.Player.Move.started += onMove;
+        playerInput.Player.Move.performed += onMove;
+        playerInput.Player.Move.canceled += onMove;
 
     }
 
-    private void OnDisable()
-    {
-        playerInput.Disable();
-
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void onMove(InputAction.CallbackContext context)
     {
         if(playerInput.Player.Move.inProgress) {
             
@@ -45,5 +42,20 @@ public class PlayerMovement : MonoBehaviour
             playerManager.currentMovement.x = 0.0f;
             playerManager.currentMovement.z = 0.0f;
         }
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
+        playerInput.Player.Move.started -= onMove;
+        playerInput.Player.Move.performed -= onMove;
+        playerInput.Player.Move.canceled -= onMove;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }

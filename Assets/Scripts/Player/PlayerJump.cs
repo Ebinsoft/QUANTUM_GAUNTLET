@@ -101,7 +101,6 @@ public class PlayerJump: MonoBehaviour
         float minJumpDistance = 0.6f;
         int layer_mask = LayerMask.GetMask("Ground");
         bool isClosetoGround = Physics.Raycast(transform.position, Vector3.down, minJumpDistance, layer_mask);
-        Debug.Log(isClosetoGround);
         return isClosetoGround;
     }
 

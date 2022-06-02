@@ -315,11 +315,11 @@ GameObject:
   - component: {fileID: 1252780181}
   - component: {fileID: 1252780179}
   - component: {fileID: 1252780182}
-  - component: {fileID: 1252780180}
   - component: {fileID: 1252780183}
+  - component: {fileID: 1252780180}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8259421e1e938dc7f9ca958dedecb810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 7
   maxJumps: 2
   maxJumpHeight: 4
   maxJumpTime: 0.5
@@ -507,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5894e2ad9ca506fe195593b74e29b681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 7
 --- !u!1 &1972860408
 GameObject:
   m_ObjectHideFlags: 0
