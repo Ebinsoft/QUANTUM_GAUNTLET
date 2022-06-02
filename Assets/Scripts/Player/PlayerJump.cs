@@ -2,16 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerJump: MonoBehaviour
 {
 
+    private PlayerManager playerManager;
     private PlayerInput playerInput;
     private CharacterController characterController;
     private Rigidbody rb;
-
-    // movement variables
-    private Vector3 currentMovement;
-    public float playerSpeed = 3.5f;
 
     // jumping variables
     public float maxJumps = 2;
@@ -28,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxFallingSpeed = -15.0f;
 
     private void Awake() {
+        playerManager = GetComponent<PlayerManager>();
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         setupJumpVariables();
@@ -52,15 +50,15 @@ public class PlayerMovement : MonoBehaviour
     void handleGravity() 
     {
         // this will handle early falling if you release the jump button
-        bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
+        bool isFalling = playerManager.currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
         if(characterController.isGrounded) {
-            currentMovement.y = groundedGravity;
+            playerManager.currentMovement.y = groundedGravity;
         }
         else {
             float multiplier = isFalling ? fallMultiplier : 1.0f;
-            currentMovement.y += (gravity * multiplier * Time.deltaTime);
-            currentMovement.y = Mathf.Max(currentMovement.y, maxFallingSpeed);
+            playerManager.currentMovement.y += (gravity * multiplier * Time.deltaTime);
+            playerManager.currentMovement.y = Mathf.Max(playerManager.currentMovement.y, maxFallingSpeed);
         }
     }
 
@@ -93,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(jumpsLeft > 0 && isJumpPressed == true) {
-            currentMovement.y = initialJumpVelocity;
+            playerManager.currentMovement.y = initialJumpVelocity;
             jumpsLeft--;
         }
     }
@@ -103,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         float minJumpDistance = 0.6f;
         int layer_mask = LayerMask.GetMask("Ground");
         bool isClosetoGround = Physics.Raycast(transform.position, Vector3.down, minJumpDistance, layer_mask);
-        Debug.Log(isClosetoGround);
         return isClosetoGround;
     }
 
@@ -121,13 +118,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentMovement = new Vector3 (0.0f, currentMovement.y, 0.0f);
-
-        if(playerInput.Player.Move.inProgress) {
-            Vector2 move = playerInput.Player.Move.ReadValue<Vector2>();
-            currentMovement += new Vector3(playerSpeed * move.x, 0.0f, playerSpeed * move.y);
-        }
-        characterController.Move(currentMovement * Time.deltaTime);
         
     }
 
