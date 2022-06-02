@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerJump: MonoBehaviour
+public class PlayerJump : MonoBehaviour
 {
 
     private PlayerManager playerManager;
     private PlayerInput playerInput;
     private CharacterController characterController;
     private Rigidbody rb;
+    public Animator anim;
 
     // jumping variables
     public float maxJumps = 2;
@@ -24,7 +25,8 @@ public class PlayerJump: MonoBehaviour
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
 
-    private void Awake() {
+    private void Awake()
+    {
         playerManager = GetComponent<PlayerManager>();
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
@@ -47,15 +49,17 @@ public class PlayerJump: MonoBehaviour
     }
 
 
-    void handleGravity() 
+    void handleGravity()
     {
         // this will handle early falling if you release the jump button
         bool isFalling = playerManager.currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if(characterController.isGrounded) {
+        if (characterController.isGrounded)
+        {
             playerManager.currentMovement.y = groundedGravity;
         }
-        else {
+        else
+        {
             float multiplier = isFalling ? fallMultiplier : 1.0f;
             playerManager.currentMovement.y += (gravity * multiplier * Time.deltaTime);
             playerManager.currentMovement.y = Mathf.Max(playerManager.currentMovement.y, maxFallingSpeed);
@@ -82,21 +86,25 @@ public class PlayerJump: MonoBehaviour
 
 
 
-    private void onJump(InputAction.CallbackContext context) {
+    private void onJump(InputAction.CallbackContext context)
+    {
         isJumpPressed = context.ReadValueAsButton();
 
         // check if player is on the ground, if not, steal their first jump(like smash)
-        if(jumpsLeft == maxJumps && !IsCloseToGround()) {
-            jumpsLeft = maxJumps-1;
+        if (jumpsLeft == maxJumps && !IsCloseToGround())
+        {
+            jumpsLeft = maxJumps - 1;
         }
 
-        if(jumpsLeft > 0 && isJumpPressed == true) {
+        if (jumpsLeft > 0 && isJumpPressed == true)
+        {
             playerManager.currentMovement.y = initialJumpVelocity;
             jumpsLeft--;
+            anim.SetBool("Jumping", true);
         }
     }
 
-    private bool IsCloseToGround() 
+    private bool IsCloseToGround()
     {
         float minJumpDistance = 0.6f;
         int layer_mask = LayerMask.GetMask("Ground");
@@ -104,13 +112,16 @@ public class PlayerJump: MonoBehaviour
         return isClosetoGround;
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3.down * 0.6f));
     }
 
-    private void resetJumps() {
-        if(characterController.isGrounded && jumpsLeft < maxJumps) {
+    private void resetJumps()
+    {
+        if (characterController.isGrounded && jumpsLeft < maxJumps)
+        {
             jumpsLeft = maxJumps;
         }
     }
@@ -118,13 +129,13 @@ public class PlayerJump: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
         resetJumps();
         handleGravity();
+        anim.SetBool("InAir", !IsCloseToGround());
     }
 
 }
