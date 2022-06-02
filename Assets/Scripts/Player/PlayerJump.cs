@@ -10,9 +10,6 @@ public class PlayerJump: MonoBehaviour
     private CharacterController characterController;
     private Rigidbody rb;
 
-    // movement variables
-    public float playerSpeed = 3.5f;
-
     // jumping variables
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
@@ -122,13 +119,6 @@ public class PlayerJump: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerManager.currentMovement = new Vector3 (0.0f, playerManager.currentMovement.y, 0.0f);
-
-        if(playerInput.Player.Move.inProgress) {
-            Vector2 move = playerInput.Player.Move.ReadValue<Vector2>();
-            playerManager.currentMovement += new Vector3(playerSpeed * move.x, 0.0f, playerSpeed * move.y);
-        }
-        //characterController.Move(playerManager.currentMovement * Time.deltaTime);
         
     }
 
