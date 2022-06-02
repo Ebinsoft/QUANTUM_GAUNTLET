@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private PlayerManager playerManager;
     private PlayerInput playerInput;
+    public Animator anim;
     // movement variables
     public float playerSpeed = 7.0f;
     public float rotationSpeed = 30.0f;
 
-    void Awake() 
+    void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         playerInput = new PlayerInput();
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void OnEnable()
@@ -41,16 +42,20 @@ public class PlayerMovement : MonoBehaviour
     }
     private void onMove(InputAction.CallbackContext context)
     {
-        
-        if(playerInput.Player.Move.inProgress) {
-            
+
+        if (playerInput.Player.Move.inProgress)
+        {
             Vector2 move = playerInput.Player.Move.ReadValue<Vector2>();
             playerManager.currentMovement.x = playerSpeed * move.x;
             playerManager.currentMovement.z = playerSpeed * move.y;
+            anim.SetBool("IsMoving", true);
+            anim.SetFloat("WalkToRun", move.magnitude);
         }
-        else {
+        else
+        {
             playerManager.currentMovement.x = 0.0f;
             playerManager.currentMovement.z = 0.0f;
+            anim.SetBool("IsMoving", false);
         }
     }
 
@@ -61,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
         positionToLookAt.y = 0.0f;
         positionToLookAt.z = playerManager.currentMovement.z;
         // rotation
-        if(positionToLookAt.magnitude > 0) {
+        if (positionToLookAt.magnitude > 0)
+        {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
