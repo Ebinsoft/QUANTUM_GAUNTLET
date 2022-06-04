@@ -20,5 +20,9 @@ public class PlayerIdleState : PlayerBaseState
         if(player.isJumpPressed) {
             SwitchState(player.JumpingState);
         }
+
+        if(player.isMovePressed) {
+            SwitchState(player.MovingState);
+        }
     }
 }

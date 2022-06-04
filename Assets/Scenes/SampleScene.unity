@@ -245,7 +245,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -329,7 +329,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -575,7 +575,7 @@ Transform:
   m_Children:
   - {fileID: 534114192}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1252780179
 MonoBehaviour:
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252780173}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5894e2ad9ca506fe195593b74e29b681, type: 3}
   m_Name: 
@@ -685,13 +685,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 1252780182}
   anim: {fileID: 1863470900}
+  characterController: {fileID: 0}
   isJumpPressed: 0
   isMovePressed: 0
+  isMoving: 0
+  inputMovement: {x: 0, y: 0}
   playerSpeed: 7
   rotationSpeed: 30
   isJumping: 0
   maxJumps: 2
-  maxJumpHeight: 1
+  maxJumpHeight: 2
   maxJumpTime: 0.5
   fallMultiplier: 2
   jumpsLeft: 0
@@ -790,7 +793,7 @@ RectTransform:
   m_Children:
   - {fileID: 1085799635}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -992,5 +995,5 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}

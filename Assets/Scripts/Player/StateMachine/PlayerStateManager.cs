@@ -27,6 +27,8 @@ public class PlayerStateManager : MonoBehaviour
     public bool isMovePressed = false;
 
     // movement variables
+    public bool isMoving = false;
+    public Vector2 inputMovement;
     public float playerSpeed = 7.0f;
     public float rotationSpeed = 30.0f;
 
@@ -70,7 +72,7 @@ public class PlayerStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        resetJumps();
+        handleRotation();
         currentState.Update();
     }
 
@@ -87,7 +89,22 @@ public class PlayerStateManager : MonoBehaviour
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
-        void handleGravity()
+    void handleRotation()
+    {
+        Vector3 positionToLookAt;
+        positionToLookAt.x = playerManager.currentMovement.x;
+        positionToLookAt.y = 0.0f;
+        positionToLookAt.z = playerManager.currentMovement.z;
+        // rotation
+        if (positionToLookAt.magnitude > 0)
+        {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    void handleGravity()
     {
         // this will handle early falling if you release the jump button
         bool isFalling = playerManager.currentMovement.y <= 0.0f || !isJumpPressed;
@@ -103,6 +120,7 @@ public class PlayerStateManager : MonoBehaviour
             playerManager.currentMovement.y = Mathf.Max(playerManager.currentMovement.y, maxFallingSpeed);
         }
     }
+
     private void resetJumps()
     {
         if (characterController.isGrounded && jumpsLeft < maxJumps)
@@ -113,7 +131,11 @@ public class PlayerStateManager : MonoBehaviour
 
     private void onJump(InputAction.CallbackContext context) {
         isJumpPressed = context.ReadValueAsButton();
-        //anim.SetBool("Jumping", isJumpPressed);
+    }
+
+    private void onMove(InputAction.CallbackContext context) {
+        inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
+        isMovePressed = inputMovement.magnitude > 0;
     }
 
     private void OnEnable()
@@ -123,6 +145,10 @@ public class PlayerStateManager : MonoBehaviour
         // subscribe to events
         playerInput.Player.Jump.started += onJump;
         playerInput.Player.Jump.canceled += onJump;
+
+        playerInput.Player.Move.started += onMove;
+        playerInput.Player.Move.performed += onMove;
+        playerInput.Player.Move.canceled += onMove;
     }
 
     private void OnDisable()
@@ -132,5 +158,9 @@ public class PlayerStateManager : MonoBehaviour
         // unsubscribe to events
         playerInput.Player.Jump.started -= onJump;
         playerInput.Player.Jump.canceled -= onJump;
+
+        playerInput.Player.Move.started -= onMove;
+        playerInput.Player.Move.performed -= onMove;
+        playerInput.Player.Move.canceled -= onMove;
     }
 }
