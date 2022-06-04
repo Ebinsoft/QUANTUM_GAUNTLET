@@ -20,7 +20,9 @@ public class PlayerJumpingState : PlayerBaseState
     }
 
     public override void CheckStateUpdate() {
-
+        if(player.characterController.isGrounded) {
+            SwitchState(player.IdleState);
+        }
     }
 
     private void Jump() {

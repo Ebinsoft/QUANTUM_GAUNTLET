@@ -19,7 +19,7 @@ public class JumpingState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("Jumping", false);
+        //animator.SetBool("Jumping", false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

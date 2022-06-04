@@ -17,6 +17,8 @@ public class PlayerIdleState : PlayerBaseState
     }
 
     public override void CheckStateUpdate() {
-        
+        if(player.isJumpPressed) {
+            SwitchState(player.JumpingState);
+        }
     }
 }

@@ -18,7 +18,7 @@ public class PlayerStateManager : MonoBehaviour
     // Other Stuff
     public Animator anim;
     private PlayerInput playerInput;
-    private CharacterController characterController;
+    public CharacterController characterController;
 
     // Animation flags
 
@@ -113,7 +113,7 @@ public class PlayerStateManager : MonoBehaviour
 
     private void onJump(InputAction.CallbackContext context) {
         isJumpPressed = context.ReadValueAsButton();
-        anim.SetBool("Jumping", isJumpPressed);
+        //anim.SetBool("Jumping", isJumpPressed);
     }
 
     private void OnEnable()
