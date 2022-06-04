@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState
 {
-    public override void EnterState(PlayerStateManager player) {
-
+    private PlayerStateManager player;
+    public PlayerFallingState(PlayerStateManager psm) : base(psm) {
+        player = psm;
     }
-
-    public override void UpdateState(PlayerStateManager player) {
+    public override void EnterState() {
         
     }
 
-    public override void ExitState(PlayerStateManager player) {
+    public override void UpdateState() {
+    }
+
+    public override void ExitState() {
+        
+    }
+
+    public override void CheckStateUpdate() {
         
     }
 }

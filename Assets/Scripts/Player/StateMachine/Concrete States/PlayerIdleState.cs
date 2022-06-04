@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerBaseState
 {
-    public override void EnterState(PlayerStateManager player) {
-
+    private PlayerStateManager player;
+    public PlayerIdleState(PlayerStateManager psm) : base(psm) {
+        player = psm;
+    }
+    public override void EnterState() {
     }
 
-    public override void UpdateState(PlayerStateManager player) {
+    public override void UpdateState() {
+    }
+
+    public override void ExitState() {
         
     }
 
-    public override void ExitState(PlayerStateManager player) {
+    public override void CheckStateUpdate() {
         
     }
 }
