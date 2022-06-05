@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerStateManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     public PlayerBaseState currentState;
 

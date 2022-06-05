@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerFallingState : PlayerBaseState
 {
-    private PlayerStateManager player;
-    public PlayerFallingState(PlayerStateManager psm) : base(psm)
+    private PlayerManager player;
+    public PlayerFallingState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = true;

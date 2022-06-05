@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StateUI : MonoBehaviour
 {
     public Text stateText;
-    public PlayerStateManager player;
+    public PlayerManager player;
     // Start is called before the first frame update
     void Start()
     {

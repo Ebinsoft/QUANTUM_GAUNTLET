@@ -471,7 +471,6 @@ GameObject:
   - component: {fileID: 1252780174}
   - component: {fileID: 1252780181}
   - component: {fileID: 1252780179}
-  - component: {fileID: 1252780182}
   - component: {fileID: 1252780184}
   m_Layer: 0
   m_Name: Player
@@ -572,19 +571,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1252780182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252780173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba3448dda6d34ce1b694a8c816c47a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentMovement: {x: 0, y: 0, z: 0}
 --- !u!114 &1252780184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd955ed18fcbe3caeaab301b53139897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1252780182}
   anim: {fileID: 1863470900}
   characterController: {fileID: 0}
+  currentMovement: {x: 0, y: 0, z: 0}
   isJumpPressed: 0
   isMovePressed: 0
   isIdle: 0

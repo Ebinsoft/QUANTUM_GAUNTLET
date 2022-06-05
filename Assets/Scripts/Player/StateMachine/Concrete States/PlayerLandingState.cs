@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerLandingState : PlayerBaseState
 {
-    private PlayerStateManager player;
+    private PlayerManager player;
 
     // time to stay in landing state before going back to idle
     private float cooldownBeforeIdle = 0.2f;
@@ -13,7 +13,7 @@ public class PlayerLandingState : PlayerBaseState
     // how long we've been in the state so far
     private float timer = 0;
 
-    public PlayerLandingState(PlayerStateManager psm) : base(psm)
+    public PlayerLandingState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = false;

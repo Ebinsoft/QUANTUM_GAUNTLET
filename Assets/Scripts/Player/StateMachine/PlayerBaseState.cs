@@ -2,12 +2,12 @@ using UnityEngine;
 
 public abstract class PlayerBaseState
 {
-    private PlayerStateManager player;
+    private PlayerManager player;
 
     // Behavior booleans - concrete states can override these to easily modify common behaviors
     // allows X/Z movement during state
     protected bool canMove = false;
-    public PlayerBaseState(PlayerStateManager psm)
+    public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
 

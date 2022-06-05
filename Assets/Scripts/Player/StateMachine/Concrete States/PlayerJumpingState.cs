@@ -3,8 +3,8 @@ using UnityEngine;
 public class PlayerJumpingState : PlayerBaseState
 {
 
-    private PlayerStateManager player;
-    public PlayerJumpingState(PlayerStateManager psm) : base(psm)
+    private PlayerManager player;
+    public PlayerJumpingState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = true;
