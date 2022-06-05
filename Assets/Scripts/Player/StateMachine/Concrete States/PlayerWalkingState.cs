@@ -25,8 +25,12 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.IdleState);
         }
 
-        if (player.isJumpPressed && player.canJump) {
+        else if(player.jumpsLeft > 0 && player.canJump) {
             SwitchState(player.JumpingState);
+        }
+
+        else if(!player.characterController.isGrounded) {
+            SwitchState(player.FallingState);
         }
 
     }

@@ -18,15 +18,15 @@ public class PlayerIdleState : PlayerBaseState
     }
 
     public override void CheckStateUpdate() {
-        if(player.isJumpPressed && player.canJump) {
+        if(player.jumpsLeft > 0 && player.canJump) {
             SwitchState(player.JumpingState);
         }
 
-        if(player.isMovePressed) {
+        else if(player.isMovePressed) {
             SwitchState(player.WalkingState);
         }
-
-        if(!player.characterController.isGrounded) {
+        
+        else if(!player.characterController.isGrounded) {
             SwitchState(player.FallingState);
         }
     }
