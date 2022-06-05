@@ -29,7 +29,6 @@ public class PlayerJumpingState : PlayerBaseState
     {
         if (player.characterController.isGrounded)
         {
-            Debug.Log("doodoo");
             SwitchState(player.LandingState);
         }
 
