@@ -7,8 +7,6 @@ public class PlayerStateManager : MonoBehaviour
 {
     public PlayerBaseState currentState;
 
-    public PlayerManager playerManager;
-
     // One for each concrete state
     public PlayerIdleState IdleState;
     public PlayerWalkingState WalkingState;
@@ -21,7 +19,8 @@ public class PlayerStateManager : MonoBehaviour
     private PlayerInput playerInput;
     public CharacterController characterController;
 
-    // Animation flags
+    // Handles all movmement once per frame with cc.Move
+    public Vector3 currentMovement;
 
     // input variables
     public bool isJumpPressed = false;
@@ -65,10 +64,10 @@ public class PlayerStateManager : MonoBehaviour
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
 
-        playerManager = GetComponent<PlayerManager>();
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
 
+        currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         setupJumpVariables();
         jumpsLeft = maxJumps;
     }
@@ -87,7 +86,7 @@ public class PlayerStateManager : MonoBehaviour
         handleRotation();
         currentState.Update();
 
-        characterController.Move(playerManager.currentMovement * Time.deltaTime);
+        characterController.Move(currentMovement * Time.deltaTime);
     }
 
     void FixedUpdate()
@@ -107,9 +106,9 @@ public class PlayerStateManager : MonoBehaviour
     void handleRotation()
     {
         Vector3 positionToLookAt;
-        positionToLookAt.x = playerManager.currentMovement.x;
+        positionToLookAt.x = currentMovement.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = playerManager.currentMovement.z;
+        positionToLookAt.z = currentMovement.z;
         // rotation
         if (positionToLookAt.magnitude > 0)
         {
@@ -122,16 +121,16 @@ public class PlayerStateManager : MonoBehaviour
     void handleGravity()
     {
         // this will handle early falling if you release the jump button
-        bool isFalling = playerManager.currentMovement.y <= 0.0f || !isJumpPressed;
+        bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
         if (characterController.isGrounded)
         {
-            playerManager.currentMovement.y = groundedGravity;
+            currentMovement.y = groundedGravity;
         }
         else
         {
-            playerManager.currentMovement.y += (gravity * gravityMultiplier * Time.deltaTime);
-            playerManager.currentMovement.y = Mathf.Max(playerManager.currentMovement.y, maxFallingSpeed);
+            currentMovement.y += (gravity * gravityMultiplier * Time.deltaTime);
+            currentMovement.y = Mathf.Max(currentMovement.y, maxFallingSpeed);
         }
     }
 

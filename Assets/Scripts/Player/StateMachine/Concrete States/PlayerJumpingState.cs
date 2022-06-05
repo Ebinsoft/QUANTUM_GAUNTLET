@@ -33,7 +33,7 @@ public class PlayerJumpingState : PlayerBaseState
             SwitchState(player.LandingState);
         }
 
-        else if (player.playerManager.currentMovement.y < 0.0f)
+        else if (player.currentMovement.y < 0.0f)
         {
             SwitchState(player.FallingState);
         }
@@ -46,7 +46,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     private void Jump()
     {
-        player.playerManager.currentMovement.y = player.initialJumpVelocity;
+        player.currentMovement.y = player.initialJumpVelocity;
         player.jumpsLeft--;
         player.canJump = false;
     }

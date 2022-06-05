@@ -42,8 +42,8 @@ public abstract class PlayerBaseState
 
     private void Move()
     {
-        player.playerManager.currentMovement.x = player.playerSpeed * player.inputMovement.x;
-        player.playerManager.currentMovement.z = player.playerSpeed * player.inputMovement.y;
+        player.currentMovement.x = player.playerSpeed * player.inputMovement.x;
+        player.currentMovement.z = player.playerSpeed * player.inputMovement.y;
 
         player.anim.SetFloat("MoveSpeed", player.inputMovement.magnitude);
     }
@@ -58,8 +58,8 @@ public abstract class PlayerBaseState
         if (canMove)
         {
             player.isMoving = false;
-            player.playerManager.currentMovement.x = 0.0f;
-            player.playerManager.currentMovement.z = 0.0f;
+            player.currentMovement.x = 0.0f;
+            player.currentMovement.z = 0.0f;
             player.anim.SetFloat("MoveSpeed", 0);
         }
     }
