@@ -30,7 +30,7 @@ public class PlayerJumpingState : PlayerBaseState
         if (player.characterController.isGrounded)
         {
             Debug.Log("doodoo");
-            SwitchState(player.IdleState);
+            SwitchState(player.LandingState);
         }
 
         else if (player.playerManager.currentMovement.y < 0.0f)

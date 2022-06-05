@@ -14,6 +14,7 @@ public class PlayerStateManager : MonoBehaviour
     public PlayerWalkingState WalkingState;
     public PlayerJumpingState JumpingState;
     public PlayerFallingState FallingState;
+    public PlayerLandingState LandingState;
 
     // Other Stuff
     public Animator anim;
@@ -55,12 +56,14 @@ public class PlayerStateManager : MonoBehaviour
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
 
-    void Awake() {
+    void Awake()
+    {
         // initialize each concrete state
         IdleState = new PlayerIdleState(this);
         WalkingState = new PlayerWalkingState(this);
         JumpingState = new PlayerJumpingState(this);
         FallingState = new PlayerFallingState(this);
+        LandingState = new PlayerLandingState(this);
 
         playerManager = GetComponent<PlayerManager>();
         playerInput = new PlayerInput();
@@ -85,7 +88,8 @@ public class PlayerStateManager : MonoBehaviour
         currentState.Update();
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         resetJumps();
         handleGravity();
     }
@@ -137,13 +141,15 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
-    private void onJump(InputAction.CallbackContext context) {
+    private void onJump(InputAction.CallbackContext context)
+    {
         isJumpPressed = context.ReadValueAsButton();
         canJump = context.ReadValueAsButton();
 
     }
 
-    private void onMove(InputAction.CallbackContext context) {
+    private void onMove(InputAction.CallbackContext context)
+    {
         inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
         isMovePressed = inputMovement.magnitude > 0;
     }
