@@ -9,6 +9,7 @@ public class PlayerFallingState : PlayerBaseState
     }
     public override void EnterState() {
         player.isFalling = true;
+        player.anim.SetBool("IsFalling", true);
         player.gravityMultiplier = player.fallMultiplier;
 
     }
@@ -18,6 +19,7 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void ExitState() {
         player.isFalling = false;
+        player.anim.SetBool("IsFalling", false);
         player.gravityMultiplier = 1.0f;
     }
 

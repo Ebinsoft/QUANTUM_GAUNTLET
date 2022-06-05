@@ -34,13 +34,13 @@ public class PlayerJumpingState : PlayerBaseState
     }
 
     private void Jump() {
-        if (player.jumpsLeft > 0 && player.isJumpPressed && player.canJump) {
+        if (player.jumpsLeft > 0 && player.canJump) {
             // so we can't hold jump to keep jumping
-            player.canJump = false;
             player.playerManager.currentMovement.y = player.initialJumpVelocity;
             player.jumpsLeft--;
             player.isJumping = true;
             player.anim.SetBool("Jumping", true);
+            player.canJump = false;
         }
     }
 }
