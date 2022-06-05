@@ -33,8 +33,7 @@ public class PlayerFallingState : PlayerBaseState
         {
             SwitchState(player.LandingState);
         }
-
-        if (player.jumpsLeft > 0 && player.canJump)
+        else if (player.jumpsLeft > 0 && player.canJump)
         {
             SwitchState(player.JumpingState);
         }
