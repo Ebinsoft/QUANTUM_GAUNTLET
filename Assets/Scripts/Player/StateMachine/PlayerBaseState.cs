@@ -60,6 +60,7 @@ public abstract class PlayerBaseState
             player.isMoving = false;
             player.playerManager.currentMovement.x = 0.0f;
             player.playerManager.currentMovement.z = 0.0f;
+            player.anim.SetFloat("MoveSpeed", 0);
         }
     }
 
