@@ -7,13 +7,14 @@ public class PlayerIdleState : PlayerBaseState
         player = psm;
     }
     public override void EnterState() {
+        player.isIdle = true;
     }
 
     public override void UpdateState() {
     }
 
     public override void ExitState() {
-        
+        player.isIdle = false;
     }
 
     public override void CheckStateUpdate() {
@@ -23,6 +24,10 @@ public class PlayerIdleState : PlayerBaseState
 
         if(player.isMovePressed) {
             SwitchState(player.WalkingState);
+        }
+
+        if(!player.characterController.isGrounded) {
+            SwitchState(player.FallingState);
         }
     }
 }

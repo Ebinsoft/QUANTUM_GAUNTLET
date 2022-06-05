@@ -9,8 +9,6 @@ public class PlayerJumpingState : PlayerBaseState
         canMove = true;
     }
     public override void EnterState() {
-        Debug.Log("jump state");
-        Debug.Log(canMove);
         Jump();
     }
 
@@ -28,6 +26,10 @@ public class PlayerJumpingState : PlayerBaseState
     public override void CheckStateUpdate() {
         if(player.characterController.isGrounded) {
             SwitchState(player.IdleState);
+        }
+
+        if(player.playerManager.currentMovement.y <= 0.0f) {
+            SwitchState(player.FallingState);
         }
     }
 

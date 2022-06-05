@@ -26,6 +26,9 @@ public class PlayerStateManager : MonoBehaviour
     public bool isJumpPressed = false;
     public bool isMovePressed = false;
 
+    // idle variables
+    public bool isIdle = false;
+
     // movement variables
     public bool isMoving = false;
     public Vector2 inputMovement;
@@ -34,16 +37,21 @@ public class PlayerStateManager : MonoBehaviour
 
     // jumping variables
     public bool isJumping = false;
+
     public bool canJump = false;
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
     public float maxJumpTime = 0.5f;
-    public float fallMultiplier = 2.0f;
     public float jumpsLeft;
     public float initialJumpVelocity;
 
+    // falling variables
+    public bool isFalling = false;
+    public float fallMultiplier = 2.0f;
+
     // gravity variables
     private float gravity;
+    public float gravityMultiplier = 1.0f;
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
 
@@ -116,8 +124,7 @@ public class PlayerStateManager : MonoBehaviour
         }
         else
         {
-            float multiplier = isFalling ? fallMultiplier : 1.0f;
-            playerManager.currentMovement.y += (gravity * multiplier * Time.deltaTime);
+            playerManager.currentMovement.y += (gravity * gravityMultiplier * Time.deltaTime);
             playerManager.currentMovement.y = Mathf.Max(playerManager.currentMovement.y, maxFallingSpeed);
         }
     }
