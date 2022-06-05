@@ -3,6 +3,10 @@ using UnityEngine;
 public abstract class PlayerBaseState
 {
     private PlayerStateManager player;
+
+    // Behavior booleans - concrete states can override these to easily modify common behaviors
+    // allows X/Z movement during state
+    protected bool canMove = false;
     public PlayerBaseState(PlayerStateManager psm) {
         player = psm;
         
@@ -12,14 +16,40 @@ public abstract class PlayerBaseState
     public abstract void ExitState();
     public abstract void CheckStateUpdate();
 
+    public void SwitchState(PlayerBaseState newState) {
+        player.currentState.ExitState();
+        Cleanup();
+        Setup();
+        player.currentState = newState;
+        newState.EnterState();
+    }
     public void Update() {
+
+        if(canMove && player.isMovePressed) {
+            Move();
+        }
+
         CheckStateUpdate();
         UpdateState();
     }
 
-    public void SwitchState(PlayerBaseState newState) {
-        player.currentState.ExitState();
-        player.currentState = newState;
-        newState.EnterState();
+    private void Move() {
+        player.playerManager.currentMovement.x = player.playerSpeed * player.inputMovement.x;
+        player.playerManager.currentMovement.z = player.playerSpeed * player.inputMovement.y;
+
+        player.anim.SetFloat("WalkToRun", player.inputMovement.magnitude);
     }
+
+    private void Setup() {
+
+    }
+
+    private void Cleanup() {
+        if(canMove) {
+            player.isMoving = false;
+            player.playerManager.currentMovement.x = 0.0f;
+            player.playerManager.currentMovement.z = 0.0f;
+        }
+    }
+
 }

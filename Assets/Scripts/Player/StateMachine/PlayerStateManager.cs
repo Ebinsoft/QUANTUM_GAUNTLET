@@ -11,7 +11,7 @@ public class PlayerStateManager : MonoBehaviour
 
     // One for each concrete state
     public PlayerIdleState IdleState;
-    public PlayerMovingState MovingState;
+    public PlayerWalkingState WalkingState;
     public PlayerJumpingState JumpingState;
     public PlayerFallingState FallingState;
 
@@ -34,6 +34,7 @@ public class PlayerStateManager : MonoBehaviour
 
     // jumping variables
     public bool isJumping = false;
+    public bool canJump = false;
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
     public float maxJumpTime = 0.5f;
@@ -49,7 +50,7 @@ public class PlayerStateManager : MonoBehaviour
     void Awake() {
         // initialize each concrete state
         IdleState = new PlayerIdleState(this);
-        MovingState = new PlayerMovingState(this);
+        WalkingState = new PlayerWalkingState(this);
         JumpingState = new PlayerJumpingState(this);
         FallingState = new PlayerFallingState(this);
 
@@ -131,6 +132,8 @@ public class PlayerStateManager : MonoBehaviour
 
     private void onJump(InputAction.CallbackContext context) {
         isJumpPressed = context.ReadValueAsButton();
+        canJump = context.ReadValueAsButton();
+
     }
 
     private void onMove(InputAction.CallbackContext context) {

@@ -17,12 +17,12 @@ public class PlayerIdleState : PlayerBaseState
     }
 
     public override void CheckStateUpdate() {
-        if(player.isJumpPressed) {
+        if(player.isJumpPressed && player.canJump) {
             SwitchState(player.JumpingState);
         }
 
         if(player.isMovePressed) {
-            SwitchState(player.MovingState);
+            SwitchState(player.WalkingState);
         }
     }
 }

@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class PlayerMovingState : PlayerBaseState
+public class PlayerWalkingState : PlayerBaseState
 {
     private PlayerStateManager player;
-    public PlayerMovingState(PlayerStateManager psm) : base(psm) {
+    public PlayerWalkingState(PlayerStateManager psm) : base(psm) {
         player = psm;
+        canMove = true;
     }
     public override void EnterState() {
         player.isMoving = true;
@@ -12,13 +13,11 @@ public class PlayerMovingState : PlayerBaseState
     }
 
     public override void UpdateState() {
-        Move();
     }
 
     public override void ExitState() {
         player.isMoving = false;
-        player.playerManager.currentMovement.x = 0.0f;
-        player.playerManager.currentMovement.z = 0.0f;
+        player.anim.SetBool("IsMoving", false);
     }
 
     public override void CheckStateUpdate() {
@@ -30,13 +29,6 @@ public class PlayerMovingState : PlayerBaseState
             SwitchState(player.JumpingState);
         }
 
-    
     }
 
-    private void Move() {
-        player.playerManager.currentMovement.x = player.playerSpeed * player.inputMovement.x;
-        player.playerManager.currentMovement.z = player.playerSpeed * player.inputMovement.y;
-
-        player.anim.SetFloat("WalkToRun", player.inputMovement.magnitude);
-    }
 }
