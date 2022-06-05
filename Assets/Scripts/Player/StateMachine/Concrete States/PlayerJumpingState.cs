@@ -47,8 +47,6 @@ public class PlayerJumpingState : PlayerBaseState
     private void Jump()
     {
         player.playerManager.currentMovement.y = player.initialJumpVelocity;
-        // Weird band-aid to make Jump not randomly not work for some reason
-        player.characterController.Move(player.playerManager.currentMovement * Time.deltaTime);
         player.jumpsLeft--;
         player.canJump = false;
     }

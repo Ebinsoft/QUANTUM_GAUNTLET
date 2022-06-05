@@ -15,6 +15,5 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        characterController.Move(currentMovement * Time.deltaTime);
     }
 }

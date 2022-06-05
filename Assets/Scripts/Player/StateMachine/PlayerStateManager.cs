@@ -86,6 +86,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         handleRotation();
         currentState.Update();
+
+        characterController.Move(playerManager.currentMovement * Time.deltaTime);
     }
 
     void FixedUpdate()
