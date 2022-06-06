@@ -37,5 +37,10 @@ public class PlayerIdleState : PlayerBaseState
         {
             SwitchState(player.FallingState);
         }
+
+        else if (player.attackTriggered && player.attacksLeft > 0)
+        {
+            SwitchState(player.NormalAttackState);
+        }
     }
 }

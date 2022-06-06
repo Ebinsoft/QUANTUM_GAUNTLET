@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerJumpingState JumpingState;
     public PlayerFallingState FallingState;
     public PlayerLandingState LandingState;
+    public PlayerNormalAttackState NormalAttackState;
 
     // Other Stuff
     public Animator anim;
@@ -25,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     // input variables
     public bool isJumpPressed = false;
     public bool isMovePressed = false;
+    public bool isNormalAttackPressed = false;
 
     // idle variables
     public bool isIdle = false;
@@ -55,6 +57,12 @@ public class PlayerManager : MonoBehaviour
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
 
+    // normal-attack variables
+    public bool isAttacking = false;
+    public bool attackTriggered = false;
+    public int maxAttackChain = 3;
+    public int attacksLeft = 3;
+
     void Awake()
     {
         // initialize each concrete state
@@ -63,6 +71,7 @@ public class PlayerManager : MonoBehaviour
         JumpingState = new PlayerJumpingState(this);
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
+        NormalAttackState = new PlayerNormalAttackState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
@@ -155,6 +164,12 @@ public class PlayerManager : MonoBehaviour
         isMovePressed = inputMovement.magnitude > 0;
     }
 
+    private void onNormalAttack(InputAction.CallbackContext context)
+    {
+        isNormalAttackPressed = context.ReadValueAsButton();
+        attackTriggered = context.ReadValueAsButton();
+    }
+
     private void OnEnable()
     {
         playerInput.Enable();
@@ -166,6 +181,9 @@ public class PlayerManager : MonoBehaviour
         playerInput.Player.Move.started += onMove;
         playerInput.Player.Move.performed += onMove;
         playerInput.Player.Move.canceled += onMove;
+
+        playerInput.Player.NormalAttack.started += onNormalAttack;
+        playerInput.Player.NormalAttack.canceled += onNormalAttack;
     }
 
     private void OnDisable()
@@ -179,5 +197,8 @@ public class PlayerManager : MonoBehaviour
         playerInput.Player.Move.started -= onMove;
         playerInput.Player.Move.performed -= onMove;
         playerInput.Player.Move.canceled -= onMove;
+
+        playerInput.Player.NormalAttack.started -= onNormalAttack;
+        playerInput.Player.NormalAttack.canceled -= onNormalAttack;
     }
 }
