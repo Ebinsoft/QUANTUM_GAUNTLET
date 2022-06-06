@@ -12,11 +12,11 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Team1
+  - Team2
+  - Hitbox
+  - Hurtbox
+  - Pushbox
   - 
   - 
   - 
