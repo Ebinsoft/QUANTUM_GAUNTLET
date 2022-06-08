@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +10,24 @@ public class PlayerAttackHandler : MonoBehaviour
     public struct AttackRef
     {
         public string name;
+        public int damage;
+        public float stunTime;
+        public float hitlagTime;
         public Collider[] colliders;
     }
 
     public AttackRef[] attacks;
-    private Dictionary<String, Collider[]> attackDict;
+    private Dictionary<String, AttackRef> attackDict;
+    private AttackRef? activeAttack;
 
     private List<Rigidbody> hitRigidBodies;
+
+    public Animator anim;
 
     void Start()
     {
         // load list of attacks into dictionary for better lookup
-        attackDict = attacks.ToDictionary(a => a.name, a => a.colliders);
+        attackDict = attacks.ToDictionary(a => a.name, a => a);
 
         // disable all hitboxes by default
         foreach (var attack in attacks)
@@ -39,17 +46,53 @@ public class PlayerAttackHandler : MonoBehaviour
             if (!hitRigidBodies.Contains(other.attachedRigidbody))
             {
                 hitRigidBodies.Add(other.attachedRigidbody);
+                HitPlayer(other.attachedRigidbody.gameObject);
             }
+        }
+        else
+        {
+            Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
         }
     }
 
-    public void ActivateAttackHitboxes(string attackName)
+    private void HitPlayer(GameObject playerObj)
+    {
+        if (activeAttack == null) return;
+
+        // do hitlag for attacking player
+        StartCoroutine(HitLag(activeAttack.Value.hitlagTime));
+
+        // deal damage
+        playerObj.GetComponent<DummyHealth>().currentHealth -= activeAttack.Value.damage;
+    }
+
+    IEnumerator HitLag(float duration)
+    {
+        // pause animator
+        anim.speed = 0;
+        yield return new WaitForSeconds(duration);
+
+        // play animator at 2x speed for same duration to catch up
+        anim.speed = 2;
+        yield return new WaitForSeconds(duration);
+
+        // return to normal speed
+        anim.speed = 1;
+    }
+
+    public void InitiateAttack(string attackName)
     {
         try
         {
+            // search for attackref in dict and set as active attack
+            AttackRef attack = attackDict[attackName];
+            activeAttack = attack;
+
+            // reset list of rigidbodies hit by attack
             hitRigidBodies = new List<Rigidbody>();
-            Collider[] colliders = attackDict[attackName];
-            foreach (Collider collider in colliders)
+
+            // turn on hitbox colliders
+            foreach (Collider collider in attack.colliders)
             {
                 collider.enabled = true;
             }
@@ -60,25 +103,21 @@ public class PlayerAttackHandler : MonoBehaviour
         }
     }
 
-    public void DeactivateAttackHitboxes(string attackName)
+    public void FinishAttack()
     {
-        try
-        {
-            Collider[] colliders = attackDict[attackName];
-            foreach (Collider collider in colliders)
-            {
-                collider.enabled = false;
-            }
+        if (activeAttack == null) return;
 
-            DealDamage();
-        }
-        catch (KeyNotFoundException)
+        // turn off hitbox colliders
+        foreach (Collider collider in activeAttack.Value.colliders)
         {
-            Debug.LogError("Attack does not exist: " + attackName);
+            collider.enabled = false;
         }
+
+        // reset active attack
+        activeAttack = null;
     }
 
-    private void DealDamage()
+    private void DealDamage(int amount)
     {
         foreach (Rigidbody rb in hitRigidBodies)
         {
