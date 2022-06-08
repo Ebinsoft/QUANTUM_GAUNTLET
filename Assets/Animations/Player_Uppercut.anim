@@ -28275,15 +28275,15 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.16666667
-    functionName: ActivateAttackHitboxes
+    functionName: InitiateAttack
     data: Uppercut
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.25
-    functionName: DeactivateAttackHitboxes
-    data: Uppercut
+    functionName: FinishAttack
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
