@@ -23,17 +23,41 @@ public class PlayerManager : MonoBehaviour
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
 
-    // input variables
+    /********** input variables **********/
     // Left Stick
     public bool isMovePressed = false;
     // Gamepad South
     public bool isJumpPressed = false;
-    public bool jumpTriggered = false;
+    public bool isJumpTriggered = false;
     // Gamepad West
-    public bool isNormalAttackPressed = false;
-    public bool attackTriggered = false;
+    public bool isLightAttackPressed = false;
+    public bool isLightAttackTriggered = false;
     // Gamepad North
+    public bool isHeavyAttackPressed;
+    public bool isHeavyAttackTriggered;
+    // Gamepad East
+    public bool isUtilityAttackPressed;
+    public bool isUtilityAttackTriggered;
+    // RT + West
+    public bool isSpecial1Pressed;
+    public bool isSpecial1Triggered;
+    // RT + North
+    public bool isSpecial2Pressed;
+    public bool isSpecial2Triggered;
+    // RT + East
+    public bool isSpecial3Pressed;
+    public bool isSpecial3Triggered;
+    // LT
+    public bool isBlockPressed;
+    public bool isBlockTriggered;
+    // Start
+    public bool isStartPressed;
+    public bool isStartTriggered;
+    // Select
+    public bool isSelectPressed;
+    public bool isSelectTriggered;
 
+    /***************************************/
     // idle variables
     public bool isIdle = false;
 

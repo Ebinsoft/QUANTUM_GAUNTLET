@@ -55,7 +55,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""StrongAttack"",
+                    ""name"": ""HeavyAttack"",
                     ""type"": ""Button"",
                     ""id"": ""bfb0eeda-a29c-4a7c-90e7-abee356347cb"",
                     ""expectedControlType"": ""Button"",
@@ -245,7 +245,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StrongAttack"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -256,7 +256,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StrongAttack"",
+                    ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -534,7 +534,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("LightAttack", throwIfNotFound: true);
-        m_Player_StrongAttack = m_Player.FindAction("StrongAttack", throwIfNotFound: true);
+        m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_UtilityAttack = m_Player.FindAction("UtilityAttack", throwIfNotFound: true);
         m_Player_Special1 = m_Player.FindAction("Special1", throwIfNotFound: true);
         m_Player_Special2 = m_Player.FindAction("Special2", throwIfNotFound: true);
@@ -604,7 +604,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LightAttack;
-    private readonly InputAction m_Player_StrongAttack;
+    private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_UtilityAttack;
     private readonly InputAction m_Player_Special1;
     private readonly InputAction m_Player_Special2;
@@ -619,7 +619,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
-        public InputAction @StrongAttack => m_Wrapper.m_Player_StrongAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @UtilityAttack => m_Wrapper.m_Player_UtilityAttack;
         public InputAction @Special1 => m_Wrapper.m_Player_Special1;
         public InputAction @Special2 => m_Wrapper.m_Player_Special2;
@@ -645,9 +645,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @LightAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
                 @LightAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
                 @LightAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLightAttack;
-                @StrongAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStrongAttack;
-                @StrongAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStrongAttack;
-                @StrongAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStrongAttack;
+                @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @UtilityAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtilityAttack;
                 @UtilityAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtilityAttack;
                 @UtilityAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtilityAttack;
@@ -682,9 +682,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @LightAttack.started += instance.OnLightAttack;
                 @LightAttack.performed += instance.OnLightAttack;
                 @LightAttack.canceled += instance.OnLightAttack;
-                @StrongAttack.started += instance.OnStrongAttack;
-                @StrongAttack.performed += instance.OnStrongAttack;
-                @StrongAttack.canceled += instance.OnStrongAttack;
+                @HeavyAttack.started += instance.OnHeavyAttack;
+                @HeavyAttack.performed += instance.OnHeavyAttack;
+                @HeavyAttack.canceled += instance.OnHeavyAttack;
                 @UtilityAttack.started += instance.OnUtilityAttack;
                 @UtilityAttack.performed += instance.OnUtilityAttack;
                 @UtilityAttack.canceled += instance.OnUtilityAttack;
@@ -715,7 +715,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
-        void OnStrongAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
         void OnUtilityAttack(InputAction.CallbackContext context);
         void OnSpecial1(InputAction.CallbackContext context);
         void OnSpecial2(InputAction.CallbackContext context);

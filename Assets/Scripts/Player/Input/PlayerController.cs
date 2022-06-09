@@ -24,54 +24,62 @@ public class PlayerController : MonoBehaviour
     private void onJump(InputAction.CallbackContext context)
     {
         player.isJumpPressed = context.ReadValueAsButton();
-        player.jumpTriggered = context.ReadValueAsButton();
+        player.isJumpTriggered = context.ReadValueAsButton();
 
     }
 
     private void onLightAttack(InputAction.CallbackContext context)
     {
-        player.isNormalAttackPressed = context.ReadValueAsButton();
-        player.attackTriggered = context.ReadValueAsButton();
+        player.isLightAttackPressed = context.ReadValueAsButton();
+        player.isLightAttackTriggered = context.ReadValueAsButton();
     }
 
-    private void onStrongAttack(InputAction.CallbackContext context)
+    private void onHeavyAttack(InputAction.CallbackContext context)
     {
-
+        player.isHeavyAttackPressed = context.ReadValueAsButton();
+        player.isHeavyAttackTriggered = context.ReadValueAsButton();
     }
 
     private void onUtilityAttack(InputAction.CallbackContext context)
     {
-
+        player.isUtilityAttackPressed = context.ReadValueAsButton();
+        player.isUtilityAttackTriggered = context.ReadValueAsButton();
     }
 
     private void onSpecial1(InputAction.CallbackContext context)
     {
-
+        player.isSpecial1Pressed = context.ReadValueAsButton();
+        player.isSpecial1Triggered = context.ReadValueAsButton();
     }
 
     private void onSpecial2(InputAction.CallbackContext context)
     {
-
+        player.isSpecial2Pressed = context.ReadValueAsButton();
+        player.isSpecial2Triggered = context.ReadValueAsButton();
     }
 
     private void onSpecial3(InputAction.CallbackContext context)
     {
-
+        player.isSpecial3Pressed = context.ReadValueAsButton();
+        player.isSpecial3Triggered = context.ReadValueAsButton();
     }
 
     private void onBlock(InputAction.CallbackContext context)
     {
-
+        player.isBlockPressed = context.ReadValueAsButton();
+        player.isBlockTriggered = context.ReadValueAsButton();
     }
 
     private void onStart(InputAction.CallbackContext context)
     {
-
+        player.isStartPressed = context.ReadValueAsButton();
+        player.isStartTriggered = context.ReadValueAsButton();
     }
 
     private void onSelect(InputAction.CallbackContext context)
     {
-
+        player.isSelectPressed = context.ReadValueAsButton();
+        player.isSelectTriggered = context.ReadValueAsButton();
     }
 
 
@@ -92,11 +100,29 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.LightAttack.started += onLightAttack;
         playerInput.Player.LightAttack.canceled += onLightAttack;
 
-        playerInput.Player.StrongAttack.started += onStrongAttack;
-        playerInput.Player.StrongAttack.canceled += onStrongAttack;
+        playerInput.Player.HeavyAttack.started += onHeavyAttack;
+        playerInput.Player.HeavyAttack.canceled += onHeavyAttack;
 
         playerInput.Player.UtilityAttack.started += onUtilityAttack;
         playerInput.Player.UtilityAttack.canceled += onUtilityAttack;
+
+        playerInput.Player.Special1.started += onSpecial1;
+        playerInput.Player.Special1.canceled += onSpecial1;
+
+        playerInput.Player.Special2.started += onSpecial2;
+        playerInput.Player.Special2.canceled += onSpecial2;
+
+        playerInput.Player.Special3.started += onSpecial3;
+        playerInput.Player.Special3.canceled += onSpecial3;
+
+        playerInput.Player.Block.started += onBlock;
+        playerInput.Player.Block.canceled += onBlock;
+
+        playerInput.Player.Start.started += onStart;
+        playerInput.Player.Start.canceled += onStart;
+
+        playerInput.Player.Select.started += onSelect;
+        playerInput.Player.Select.canceled += onSelect;
 
 
     }
@@ -117,10 +143,28 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.LightAttack.started -= onLightAttack;
         playerInput.Player.LightAttack.canceled -= onLightAttack;
 
-        playerInput.Player.StrongAttack.started -= onStrongAttack;
-        playerInput.Player.StrongAttack.canceled -= onStrongAttack;
+        playerInput.Player.HeavyAttack.started -= onHeavyAttack;
+        playerInput.Player.HeavyAttack.canceled -= onHeavyAttack;
 
         playerInput.Player.UtilityAttack.started -= onUtilityAttack;
         playerInput.Player.UtilityAttack.canceled -= onUtilityAttack;
+
+        playerInput.Player.Special1.started -= onSpecial1;
+        playerInput.Player.Special1.canceled -= onSpecial1;
+
+        playerInput.Player.Special2.started -= onSpecial2;
+        playerInput.Player.Special2.canceled -= onSpecial2;
+
+        playerInput.Player.Special3.started -= onSpecial3;
+        playerInput.Player.Special3.canceled -= onSpecial3;
+
+        playerInput.Player.Block.started -= onBlock;
+        playerInput.Player.Block.canceled -= onBlock;
+
+        playerInput.Player.Start.started -= onStart;
+        playerInput.Player.Start.canceled -= onStart;
+
+        playerInput.Player.Select.started -= onSelect;
+        playerInput.Player.Select.canceled -= onSelect;
     }
 }
