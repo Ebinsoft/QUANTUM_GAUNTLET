@@ -14,7 +14,7 @@ public class PlayerNormalAttackState : PlayerBaseState
         player.isAttacking = true;
         player.anim.SetTrigger("NormalAttack");     // triggers the start of an attack
         // player.anim.SetBool("InMelee", true);   // true until animator leaves melee state machine
-        player.attackTriggered = false;
+        player.isLightAttackTriggered = false;
         player.attacksLeft--;
     }
 
@@ -36,7 +36,7 @@ public class PlayerNormalAttackState : PlayerBaseState
             player.attacksLeft = player.maxAttackChain;
         }
 
-        else if (player.attacksLeft > 0 && player.attackTriggered)
+        else if (player.attacksLeft > 0 && player.isLightAttackTriggered)
         {
             SwitchState(player.NormalAttackState);
         }
