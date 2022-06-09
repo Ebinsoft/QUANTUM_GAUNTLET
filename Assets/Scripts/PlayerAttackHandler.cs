@@ -23,9 +23,13 @@ public class PlayerAttackHandler : MonoBehaviour
     private List<Rigidbody> hitRigidBodies;
 
     public Animator anim;
+    private PlayerParticleEffects effects;
 
     void Start()
     {
+        // load particle effects player
+        effects = GetComponent<PlayerParticleEffects>();
+
         // load list of attacks into dictionary for better lookup
         attackDict = attacks.ToDictionary(a => a.name, a => a);
 
@@ -46,7 +50,7 @@ public class PlayerAttackHandler : MonoBehaviour
             if (!hitRigidBodies.Contains(other.attachedRigidbody))
             {
                 hitRigidBodies.Add(other.attachedRigidbody);
-                HitPlayer(other.attachedRigidbody.gameObject);
+                HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
             }
         }
         else
@@ -55,12 +59,15 @@ public class PlayerAttackHandler : MonoBehaviour
         }
     }
 
-    private void HitPlayer(GameObject playerObj)
+    private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
         if (activeAttack == null) return;
 
         // do hitlag for attacking player
         StartCoroutine(HitLag(activeAttack.Value.hitlagTime));
+
+        // play hit particle effect at contact point
+        effects.PlayHitEffectAt(hitPoint);
 
         // deal damage
         playerObj.GetComponent<DummyHealth>().currentHealth -= activeAttack.Value.damage;
