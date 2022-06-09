@@ -69,6 +69,11 @@ public class PlayerAttackHandler : MonoBehaviour
         // play hit particle effect at contact point
         effects.PlayHitEffectAt(hitPoint);
 
+        // make opponent play TakeHit animation (temporary until we have an actual state for this)
+        playerObj.GetComponentInChildren<Animator>().SetTrigger("TakeHit");
+        // also make them hitlag
+        StartCoroutine(playerObj.GetComponentInChildren<PlayerAttackHandler>().HitLag(activeAttack.Value.hitlagTime));
+
         // deal damage
         playerObj.GetComponent<DummyHealth>().currentHealth -= activeAttack.Value.damage;
     }
