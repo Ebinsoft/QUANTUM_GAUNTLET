@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -105,7 +105,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -10089,6 +10089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landParticles: {fileID: 3529720923983653139}
+  hitParticles: {fileID: 6573626058281548730}
 --- !u!1 &8965930902334167631
 GameObject:
   m_ObjectHideFlags: 0
