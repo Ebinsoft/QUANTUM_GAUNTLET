@@ -10,6 +10,8 @@ public class PlayerParticleEffects : MonoBehaviour
 
     public ParticleSystem hitParticles;
 
+    public ParticleSystem fireParticles;
+
     public void PlayLandingEffect()
     {
         landParticles.Play();
@@ -19,5 +21,11 @@ public class PlayerParticleEffects : MonoBehaviour
     {
         hitParticles.transform.position = pos;
         hitParticles.Play();
+    }
+
+    public void PlayFireBurstAt(Vector3 pos)
+    {
+        fireParticles.transform.position = pos;
+        fireParticles.Play();
     }
 }
