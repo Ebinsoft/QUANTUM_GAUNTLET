@@ -52,8 +52,8 @@
                 },
                 {
                     "name": "Special1",
-                    "type": "PassThrough",
-                    "id": "1dcaeddb-a37b-46c1-8f96-2181ca267db1",
+                    "type": "Button",
+                    "id": "4b92eb78-e60d-43e9-811f-aa38b29666ac",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -61,7 +61,7 @@
                 },
                 {
                     "name": "Special2",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "00c7d3ca-c550-4cd7-adc1-a77a0e42ba01",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -70,7 +70,7 @@
                 },
                 {
                     "name": "Special3",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "1862ab3a-ade5-4379-857d-21da57a50895",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -261,75 +261,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "5b58a1e2-62ee-4fc7-8761-6bfa3b27bcfb",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "0f88764d-eb05-471b-9393-fec502979dd7",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "72518fe9-649b-482a-8d63-41c7a82f001d",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "One Modifier",
-                    "id": "eb233661-749e-44a1-b490-ac65e47c0246",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "e15729f3-7dfa-4f69-a37f-be4ac89c1eff",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "91a45599-889d-4ac8-baad-dfc9f11a6f48",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special1",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "One Modifier",
+                    "name": "Button With One Modifier",
                     "id": "9ecb5cb9-9c90-45f6-a6eb-79a78aa9a5a7",
-                    "path": "OneModifier",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -338,7 +272,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
+                    "name": "Modifier",
                     "id": "06b37696-311c-42f9-9185-0759c680a55d",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
@@ -349,7 +283,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "binding",
+                    "name": "Button",
                     "id": "0f59324e-3ec0-4d8e-9b24-8d06a7728b83",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -360,9 +294,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "One Modifier",
+                    "name": "Button With One Modifier",
                     "id": "eae3fe0a-803f-4e04-a653-b8593db086e4",
-                    "path": "OneModifier",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -371,9 +305,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
+                    "name": "Modifier",
                     "id": "cbb47ac4-277a-4f18-87d7-649842d9efff",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -382,7 +316,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "binding",
+                    "name": "Button",
                     "id": "731182aa-d026-4326-8215-3313a20e7ac5",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -393,9 +327,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "One Modifier",
+                    "name": "Button With One Modifier",
                     "id": "bb6bc35a-92d4-4f92-97b4-7dfa0647185b",
-                    "path": "OneModifier",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -404,7 +338,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
+                    "name": "Modifier",
                     "id": "3771b127-5eb1-4e76-b414-ab16a5d26778",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
@@ -415,7 +349,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "binding",
+                    "name": "Button",
                     "id": "19e5834c-9549-48f4-a355-5433c00d7290",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -426,9 +360,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "One Modifier",
+                    "name": "Button With One Modifier",
                     "id": "a1aa1a1b-3f9f-45f2-a203-3fb2f5b30ba6",
-                    "path": "OneModifier",
+                    "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -437,9 +371,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "modifier",
+                    "name": "Modifier",
                     "id": "980cf24d-8a4b-455c-9b02-c13ebe07b6bb",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -448,7 +382,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "binding",
+                    "name": "Button",
                     "id": "28d7fdf0-08e0-4498-a046-31efa78b8386",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -501,6 +435,72 @@
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "118ac0b1-57e7-48aa-a5d1-b26ec9d05f1a",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "49a4076e-6885-4d2d-b700-b3257327119c",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "ebe37eba-0ba7-4b5b-ba3e-77cdbe65c4cc",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "81df258d-c060-4a25-8d1d-fce21cd2e633",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "d23a4ff3-ebb3-483c-b88a-4d645965a8c8",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "b798d15d-7e4f-4d24-b0c8-303af431e042",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
