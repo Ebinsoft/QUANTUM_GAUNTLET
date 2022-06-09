@@ -37,7 +37,7 @@ public class PlayerJumpingState : PlayerBaseState
             SwitchState(player.FallingState);
         }
 
-        else if (player.jumpsLeft > 0 && player.canJump)
+        else if (player.jumpsLeft > 0 && player.jumpTriggered)
         {
             SwitchState(player.JumpingState);
         }
@@ -47,6 +47,6 @@ public class PlayerJumpingState : PlayerBaseState
     {
         player.currentMovement.y = player.initialJumpVelocity;
         player.jumpsLeft--;
-        player.canJump = false;
+        player.jumpTriggered = false;
     }
 }

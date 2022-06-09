@@ -40,7 +40,7 @@ public class PlayerLandingState : PlayerBaseState
             SwitchState(player.IdleState);
         }
 
-        else if (timer >= cooldownBeforeJump && player.jumpsLeft > 0 && player.canJump)
+        else if (timer >= cooldownBeforeJump && player.jumpsLeft > 0 && player.jumpTriggered)
         {
             SwitchState(player.JumpingState);
         }

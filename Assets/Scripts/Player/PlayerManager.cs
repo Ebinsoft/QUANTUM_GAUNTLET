@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class PlayerManager : MonoBehaviour
 {
@@ -24,9 +24,15 @@ public class PlayerManager : MonoBehaviour
     public Vector3 currentMovement;
 
     // input variables
-    public bool isJumpPressed = false;
+    // Left Stick
     public bool isMovePressed = false;
+    // Gamepad South
+    public bool isJumpPressed = false;
+    public bool jumpTriggered = false;
+    // Gamepad West
     public bool isNormalAttackPressed = false;
+    public bool attackTriggered = false;
+    // Gamepad North
 
     // idle variables
     public bool isIdle = false;
@@ -39,8 +45,6 @@ public class PlayerManager : MonoBehaviour
 
     // jumping variables
     public bool isJumping = false;
-
-    public bool canJump = false;
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
     public float maxJumpTime = 0.5f;
@@ -59,7 +63,6 @@ public class PlayerManager : MonoBehaviour
 
     // normal-attack variables
     public bool isAttacking = false;
-    public bool attackTriggered = false;
     public int maxAttackChain = 3;
     public int attacksLeft = 3;
 
@@ -151,54 +154,4 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void onJump(InputAction.CallbackContext context)
-    {
-        isJumpPressed = context.ReadValueAsButton();
-        canJump = context.ReadValueAsButton();
-
-    }
-
-    private void onMove(InputAction.CallbackContext context)
-    {
-        inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
-        isMovePressed = inputMovement.magnitude > 0;
-    }
-
-    private void onNormalAttack(InputAction.CallbackContext context)
-    {
-        isNormalAttackPressed = context.ReadValueAsButton();
-        attackTriggered = context.ReadValueAsButton();
-    }
-
-    private void OnEnable()
-    {
-        playerInput.Enable();
-
-        // subscribe to events
-        playerInput.Player.Jump.started += onJump;
-        playerInput.Player.Jump.canceled += onJump;
-
-        playerInput.Player.Move.started += onMove;
-        playerInput.Player.Move.performed += onMove;
-        playerInput.Player.Move.canceled += onMove;
-
-        playerInput.Player.NormalAttack.started += onNormalAttack;
-        playerInput.Player.NormalAttack.canceled += onNormalAttack;
-    }
-
-    private void OnDisable()
-    {
-        playerInput.Disable();
-
-        // unsubscribe to events
-        playerInput.Player.Jump.started -= onJump;
-        playerInput.Player.Jump.canceled -= onJump;
-
-        playerInput.Player.Move.started -= onMove;
-        playerInput.Player.Move.performed -= onMove;
-        playerInput.Player.Move.canceled -= onMove;
-
-        playerInput.Player.NormalAttack.started -= onNormalAttack;
-        playerInput.Player.NormalAttack.canceled -= onNormalAttack;
-    }
 }
