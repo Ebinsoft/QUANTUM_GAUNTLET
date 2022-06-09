@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!135 &376712972 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 2430216584004626383, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+  m_PrefabInstance: {fileID: 1069045351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &705111069 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8965930901073386840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
@@ -227,6 +232,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!135 &884893328 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 8965930900471981249, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+  m_PrefabInstance: {fileID: 1069045351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,44 +370,40 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: anim
-      value: 
-      objectReference: {fileID: 1230248803}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.data[0]
+      propertyPath: attacks.Array.size
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.data[1]
-      value: 1
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].name
+      value: Uppercut
       objectReference: {fileID: 0}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.data[2]
-      value: 0
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].damage
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.data[3]
-      value: 4
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].hitlagTime
+      value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_VertexStreams.Array.data[4]
-      value: 4
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].colliders.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 884893328}
+    - target: {fileID: 1866671546389507605, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: attacks.Array.data[3].colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 376712972}
+    - target: {fileID: 1935037961697598141, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_Name
+      value: Hit Particle
       objectReference: {fileID: 0}
     - target: {fileID: 2906883457197538461, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_VertexStreams.Array.data[5]
       value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: ColorModule.enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -413,27 +419,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: InitialModule.startSizeY.minScalar
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: InitialModule.startSizeZ.minScalar
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      propertyPath: ForceModule.y.maxCurve.m_Curve.Array.data[0].value
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0
+      propertyPath: ForceModule.y.maxCurve.m_Curve.Array.data[1].value
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
+      propertyPath: ForceModule.y.minCurve.m_Curve.Array.data[0].value
+      value: -0.041666627
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529720923983653139, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: ForceModule.y.minCurve.m_Curve.Array.data[1].value
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6336278588010159354, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_IsActive
@@ -588,11 +598,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085799634}
   m_CullTransparentMesh: 1
---- !u!95 &1230248803 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8965930900459420404, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-  m_PrefabInstance: {fileID: 1069045351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1614659182
 PrefabInstance:
   m_ObjectHideFlags: 0

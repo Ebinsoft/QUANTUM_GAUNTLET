@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EdmondAlt_mat
-  m_Shader: {fileID: -6465566751694194690, guid: bf36778a400a0894b86a1f49c422fa62, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 52d38db4de9f44346a580e0727df2cad, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9cbc901927706bb4988ff9d4f2564309, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
@@ -60,6 +60,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -84,6 +88,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_4a37eea7311d414d8c9b0af60662086a: 1
+    - Vector1_4f2087eb82254a4db8e24345dd7248db: 1
+    - Vector1_9a61eae6694145c78968380a116b4e70: 1
+    - Vector1_af562dfd6264411eac95f50b151c2c62: 1
+    - Vector1_cfe9375606514501a39db7fc3b802450: 1
+    - Vector1_d836ee95d4254c808391543d36d22a96: 128
+    - Vector1_e3b7f8f6aa6647788b7a2298278bda33: 10
+    - Vector1_f18c67acf1d64dde9bade33db2b5c754: 5
+    - Vector1_f54f51ef7aab46589d2bcc11bf5b0644: 1.9
+    - Vector1_f68f232d6b814c5d9ac57aa7c7efe469: 0.9
+    - Vector1_f94e8ca38bb14c18bc24f55759b037ec: 0.74
+    - Vector1_fdf0af0b46b64068b6c44b1379533d1d: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -103,12 +119,14 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineDepthSensitivity: 1
+    - _OutlineDot: 0.25
+    - _OutlineExtrusion: 0
     - _OutlineNormalsSensitivity: 1
-    - _OutlineThickness: 1
+    - _OutlineThickness: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.405
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -117,11 +135,16 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_a43ed3969f5f431aa2e35e1f40137722: {r: 0, g: 0, b: 0, a: 0}
+    - Color_a874bc1c6a204665b37932fa712a3d2b: {r: 1, g: 1, b: 1, a: 0}
+    - Color_dc1280af2e4a4cfeafc81f861773bde9: {r: 1, g: 0, b: 0, a: 0}
+    - Color_ed618b7739474e088ed607ea9f8ef4b8: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
