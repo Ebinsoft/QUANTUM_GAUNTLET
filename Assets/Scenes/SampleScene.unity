@@ -279,7 +279,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 18
   orthographic: 1
   orthographic size: 3.25
   m_Depth: -1
@@ -351,6 +351,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2813609751823556470, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813609751823556470, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.062
+      objectReference: {fileID: 0}
     - target: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Name
       value: Player
@@ -502,6 +510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7109913074104906445, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7695769704339744672, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
