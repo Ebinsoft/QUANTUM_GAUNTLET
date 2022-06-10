@@ -14773,6 +14773,7 @@ GameObject:
   - component: {fileID: 8965930901073386834}
   - component: {fileID: 8965930901073386830}
   - component: {fileID: 8965930901073386837}
+  - component: {fileID: 5704862707593501057}
   - component: {fileID: 8965930901073386835}
   - component: {fileID: 8965930901073386840}
   - component: {fileID: 1866671546389507605}
@@ -14836,6 +14837,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &5704862707593501057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965930901073386829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dacec3875bcc73bbb285c1c728eba79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8965930901073386835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14881,16 +14894,33 @@ MonoBehaviour:
   anim: {fileID: 8965930900459420404}
   characterController: {fileID: 0}
   currentMovement: {x: 0, y: 0, z: 0}
-  isJumpPressed: 0
   isMovePressed: 0
-  isNormalAttackPressed: 0
+  isJumpPressed: 0
+  isJumpTriggered: 0
+  isLightAttackPressed: 0
+  isLightAttackTriggered: 0
+  isHeavyAttackPressed: 0
+  isHeavyAttackTriggered: 0
+  isUtilityAttackPressed: 0
+  isUtilityAttackTriggered: 0
+  isSpecial1Pressed: 0
+  isSpecial1Triggered: 0
+  isSpecial2Pressed: 0
+  isSpecial2Triggered: 0
+  isSpecial3Pressed: 0
+  isSpecial3Triggered: 0
+  isBlockPressed: 0
+  isBlockTriggered: 0
+  isStartPressed: 0
+  isStartTriggered: 0
+  isSelectPressed: 0
+  isSelectTriggered: 0
   isIdle: 0
   isMoving: 0
   inputMovement: {x: 0, y: 0}
   playerSpeed: 7
   rotationSpeed: 30
   isJumping: 0
-  canJump: 0
   maxJumps: 2
   maxJumpHeight: 2
   maxJumpTime: 0.5
@@ -14901,7 +14931,6 @@ MonoBehaviour:
   gravityMultiplier: 1
   maxFallingSpeed: -15
   isAttacking: 0
-  attackTriggered: 0
   maxAttackChain: 3
   attacksLeft: 3
 --- !u!114 &1866671546389507605

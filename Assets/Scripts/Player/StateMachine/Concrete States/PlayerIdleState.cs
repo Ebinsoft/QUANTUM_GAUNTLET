@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.jumpsLeft > 0 && player.canJump)
+        if (player.jumpsLeft > 0 && player.isJumpTriggered)
         {
             SwitchState(player.JumpingState);
         }
@@ -38,7 +38,7 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(player.FallingState);
         }
 
-        else if (player.attackTriggered && player.attacksLeft > 0)
+        else if (player.isLightAttackTriggered && player.attacksLeft > 0)
         {
             SwitchState(player.NormalAttackState);
         }
