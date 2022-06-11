@@ -21,7 +21,6 @@ public class PlayerDashingState : PlayerBaseState
     public override void UpdateState()
     {
         dashTimer += Time.deltaTime;
-        Debug.Log(dashTimer);
     }
 
     public override void ExitState()
