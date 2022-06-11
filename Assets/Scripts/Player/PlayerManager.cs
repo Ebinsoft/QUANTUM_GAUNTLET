@@ -77,7 +77,15 @@ public class PlayerManager : MonoBehaviour
 
     // falling variables
     public bool isFalling = false;
+
     public float fallMultiplier = 2.0f;
+
+    // dashing variables
+    public bool isDashing = false;
+    public int maxDashes = 1;
+    public float dashLength = 5.0f;
+    public float initialDashVelocity = 20.0f;
+    public float dashesLeft;
 
     // gravity variables
     private float gravity;
@@ -106,6 +114,7 @@ public class PlayerManager : MonoBehaviour
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         setupJumpVariables();
         jumpsLeft = maxJumps;
+        dashesLeft = maxDashes;
     }
 
     // Start is called before the first frame update
