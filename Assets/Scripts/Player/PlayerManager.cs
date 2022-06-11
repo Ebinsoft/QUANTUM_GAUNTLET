@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerJumpingState JumpingState;
     public PlayerFallingState FallingState;
     public PlayerLandingState LandingState;
+    public PlayerDashingState DashingState;
     public PlayerNormalAttackState NormalAttackState;
 
     // Other Stuff
@@ -107,6 +108,7 @@ public class PlayerManager : MonoBehaviour
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
         NormalAttackState = new PlayerNormalAttackState(this);
+        DashingState = new PlayerDashingState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();

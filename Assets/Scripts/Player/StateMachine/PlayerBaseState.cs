@@ -19,6 +19,7 @@ public abstract class PlayerBaseState
 
     public void SwitchState(PlayerBaseState newState)
     {
+        Debug.Log(player.currentState);
         player.currentState.ExitState();
         Cleanup();
         Setup();
