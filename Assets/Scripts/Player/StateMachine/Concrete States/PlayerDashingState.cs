@@ -12,8 +12,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void EnterState()
     {
         player.isDashing = true;
-        // just a guess for Jesse
-        // player.anim.SetTrigger("Dash");
+        player.anim.SetBool("IsDashing", true);
         dashTimer = 0.0f;
         Dash();
     }
@@ -26,6 +25,7 @@ public class PlayerDashingState : PlayerBaseState
     public override void ExitState()
     {
         player.isDashing = false;
+        player.anim.SetBool("IsDashing", false);
         player.currentMovement.x = 0;
         player.currentMovement.z = 0;
 
