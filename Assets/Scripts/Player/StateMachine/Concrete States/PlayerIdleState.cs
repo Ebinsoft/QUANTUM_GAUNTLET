@@ -28,6 +28,11 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(player.JumpingState);
         }
 
+        else if (player.isUtilityAttackTriggered)
+        {
+            SwitchState(player.DashingState);
+        }
+
         else if (player.isMovePressed)
         {
             SwitchState(player.WalkingState);

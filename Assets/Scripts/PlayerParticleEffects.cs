@@ -7,6 +7,7 @@ public class PlayerParticleEffects : MonoBehaviour
     PlayerManager player;
 
     public ParticleSystem landParticles;
+    public ParticleSystem dashParticles;
 
     public ParticleSystem hitParticles;
 
@@ -27,5 +28,15 @@ public class PlayerParticleEffects : MonoBehaviour
     {
         fireParticles.transform.position = pos;
         fireParticles.Play();
+    }
+
+    public void StartDashingEffect()
+    {
+        dashParticles.Play();
+    }
+
+    public void StopDashingEffect()
+    {
+        dashParticles.Stop();
     }
 }

@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerJumpingState JumpingState;
     public PlayerFallingState FallingState;
     public PlayerLandingState LandingState;
+    public PlayerDashingState DashingState;
     public PlayerNormalAttackState NormalAttackState;
 
     // Other Stuff
@@ -77,7 +78,14 @@ public class PlayerManager : MonoBehaviour
 
     // falling variables
     public bool isFalling = false;
+
     public float fallMultiplier = 2.0f;
+
+    // dashing variables
+    public bool isDashing = false;
+    public int maxDashes = 1;
+    public float dashLength = 2.5f;
+    public float dashesLeft;
 
     // gravity variables
     private float gravity;
@@ -99,6 +107,7 @@ public class PlayerManager : MonoBehaviour
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
         NormalAttackState = new PlayerNormalAttackState(this);
+        DashingState = new PlayerDashingState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
@@ -106,6 +115,7 @@ public class PlayerManager : MonoBehaviour
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         setupJumpVariables();
         jumpsLeft = maxJumps;
+        dashesLeft = maxDashes;
     }
 
     // Start is called before the first frame update

@@ -18,13 +18,11 @@ public class PlayerController : MonoBehaviour
     private void onMove(InputAction.CallbackContext context)
     {
         player.inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
-        Debug.Log("move: " + player.inputMovement);
         player.isMovePressed = player.inputMovement.magnitude > 0;
     }
 
     private void onJump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jump");
         player.isJumpPressed = context.ReadValueAsButton();
         player.isJumpTriggered = context.ReadValueAsButton();
 
@@ -32,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void onLightAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Light Attack");
         player.isLightAttackPressed = context.ReadValueAsButton();
         player.isLightAttackTriggered = context.ReadValueAsButton();
     }
@@ -46,7 +43,6 @@ public class PlayerController : MonoBehaviour
 
     private void onUtilityAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Utility Attack");
         player.isUtilityAttackPressed = context.ReadValueAsButton();
         player.isUtilityAttackTriggered = context.ReadValueAsButton();
     }
