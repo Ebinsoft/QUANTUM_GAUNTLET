@@ -36,6 +36,11 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.JumpingState);
         }
 
+        else if (player.dashesLeft > 0 && player.isUtilityAttackTriggered)
+        {
+            SwitchState(player.DashingState);
+        }
+
         else if (!player.characterController.isGrounded)
         {
             SwitchState(player.FallingState);
