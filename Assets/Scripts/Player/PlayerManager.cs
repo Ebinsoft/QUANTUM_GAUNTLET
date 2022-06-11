@@ -84,8 +84,7 @@ public class PlayerManager : MonoBehaviour
     // dashing variables
     public bool isDashing = false;
     public int maxDashes = 1;
-    public float dashLength = 5.0f;
-    public float initialDashVelocity = 20.0f;
+    public float dashLength = 2.5f;
     public float dashesLeft;
 
     // gravity variables

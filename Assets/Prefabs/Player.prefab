@@ -19766,7 +19766,7 @@ MonoBehaviour:
   fallMultiplier: 2
   isDashing: 0
   maxDashes: 1
-  dashLength: 5
+  dashLength: 2.5
   initialDashVelocity: 20
   dashesLeft: 0
   gravityMultiplier: 1
@@ -19822,7 +19822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landParticles: {fileID: 3529720923983653139}
-  dashParticles: {fileID: 0}
+  dashParticles: {fileID: 8138982393385202766}
   hitParticles: {fileID: 6573626058281548730}
   fireParticles: {fileID: 4320238638953608270}
 --- !u!1 &8965930902334167631

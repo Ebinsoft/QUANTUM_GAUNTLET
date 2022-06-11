@@ -409,6 +409,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8965930901073386840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: dashLength
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8965930901073386840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: initialDashVelocity
       value: 20
       objectReference: {fileID: 0}
