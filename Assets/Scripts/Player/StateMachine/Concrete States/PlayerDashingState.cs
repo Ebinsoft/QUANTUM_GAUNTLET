@@ -3,16 +3,19 @@ using UnityEngine;
 public class PlayerDashingState : PlayerBaseState
 {
     public PlayerManager player;
+    private PlayerParticleEffects effects;
     private float dashTimer = 0.0f;
     private float dashDuration = 0.15f;
     public PlayerDashingState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        effects = player.gameObject.GetComponent<PlayerParticleEffects>();
     }
     public override void EnterState()
     {
         player.isDashing = true;
         player.anim.SetBool("IsDashing", true);
+        effects.StartDashingEffect();
         dashTimer = 0.0f;
         Dash();
     }
@@ -26,9 +29,9 @@ public class PlayerDashingState : PlayerBaseState
     {
         player.isDashing = false;
         player.anim.SetBool("IsDashing", false);
+        effects.StopDashingEffect();
         player.currentMovement.x = 0;
         player.currentMovement.z = 0;
-
     }
 
     public override void CheckStateUpdate()
