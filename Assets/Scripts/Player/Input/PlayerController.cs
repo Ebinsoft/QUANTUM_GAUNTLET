@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
 
     private void onLightAttack(InputAction.CallbackContext context)
     {
-        Debug.Log(player.transform.forward);
         player.isLightAttackPressed = context.ReadValueAsButton();
         player.isLightAttackTriggered = context.ReadValueAsButton();
     }
