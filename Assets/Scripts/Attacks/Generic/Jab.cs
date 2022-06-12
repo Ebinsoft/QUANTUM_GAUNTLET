@@ -24,9 +24,16 @@ public class Jab : Attack
 
     public Jab(GameObject player)
     {
-        Collider c = player.transform.Find("Model/Edmond/Armature/Spine1/Spine2/Spine3/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Hand.L.Hitbox").GetComponent<Collider>();
+        findColliders(player);
+    }
 
-        colliders = new Collider[] { c };
+    private void findColliders(GameObject p)
+    {
+        Collider c;
+        c = p.transform.Find("Model/Edmond/Armature/Spine1/Spine2/Spine3/Shouler.L/UpperArm.L/Forearm.L/Hand.L/Hand.L.Hitbox").GetComponent<Collider>();
+        colliders.Add(c);
+        c = p.transform.Find("Model/Edmond/Armature/Spine1/Spine2/Spine3/Shouler.L/UpperArm.L/Forearm.L/Forearm.L.Hitbox").GetComponent<Collider>();
+        colliders.Add(c);
     }
 
 }

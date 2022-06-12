@@ -16,6 +16,7 @@ public class PlayerAttackHandler : MonoBehaviour
         public Collider[] colliders;
     }
 
+    public Jab jab;
     public AttackRef[] attacks;
     private Dictionary<String, AttackRef> attackDict;
     private AttackRef? activeAttack;
@@ -27,6 +28,8 @@ public class PlayerAttackHandler : MonoBehaviour
 
     void Start()
     {
+        // Jab?
+        jab = new Jab(gameObject);
         // load particle effects player
         effects = GetComponent<PlayerParticleEffects>();
 
