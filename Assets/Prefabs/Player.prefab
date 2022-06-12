@@ -19767,7 +19767,6 @@ MonoBehaviour:
   isDashing: 0
   maxDashes: 1
   dashLength: 2.5
-  initialDashVelocity: 20
   dashesLeft: 0
   gravityMultiplier: 1
   maxFallingSpeed: -15
@@ -19787,27 +19786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacks:
-  - name: Jab
-    damage: 1
-    stunTime: 0
-    hitlagTime: 0.1
-    colliders:
-    - {fileID: 8965930900471981249}
-    - {fileID: 2430216584004626383}
-  - name: Hook
-    damage: 2
-    stunTime: 0
-    hitlagTime: 0.1
-    colliders:
-    - {fileID: 422349863486300765}
-    - {fileID: 2905607785485426501}
-  - name: Uppercut
-    damage: 3
-    stunTime: 0
-    hitlagTime: 0.2
-    colliders:
-    - {fileID: 8965930900471981249}
-    - {fileID: 2430216584004626383}
+  - {fileID: 11400000, guid: 6d5f6b3e94513994f85b7af87a679e06, type: 2}
+  - {fileID: 11400000, guid: e1b7dbed26942ad4d8ce32b9f05d53c9, type: 2}
+  - {fileID: 11400000, guid: 2d4995aa0e074364396c6a9300c649db, type: 2}
   anim: {fileID: 8965930900459420404}
 --- !u!114 &7626139061233023363
 MonoBehaviour:
