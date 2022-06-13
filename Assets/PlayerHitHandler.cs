@@ -14,9 +14,6 @@ public class PlayerHitHandler : MonoBehaviour
 
     public bool handleHit(AttackInfo attack)
     {
-        Debug.Log("GET HIT");
-        Debug.Log(player.stats.currentStatus);
-        Debug.Log(player.stats.canGetStunned);
         if (player.stats.canTakeDamage)
         {
             player.stats.health -= attack.damage;
