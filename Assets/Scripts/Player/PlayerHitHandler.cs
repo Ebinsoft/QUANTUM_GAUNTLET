@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerHitHandler : MonoBehaviour
 {
     public PlayerManager player;
-    // Start is called before the first frame update
 
     void Awake()
     {
@@ -22,7 +21,7 @@ public class PlayerHitHandler : MonoBehaviour
         if (player.stats.canGetStunned)
         {
             player.triggerHit = true;
-            StartCoroutine(player.animEffects.HitLag(attack.hitlagTime));
+            player.animEffects.PlayHitlag(attack.hitlagTime);
         }
 
         return player.stats.canGiveRecoil;

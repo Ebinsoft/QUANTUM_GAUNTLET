@@ -7,8 +7,6 @@ public class PlayerStats : MonoBehaviour
     private PlayerBaseState baseStats;
     public int health = 100;
 
-
-    private Status _currentStatus;
     public bool canTakeDamage { get; private set; }
     public bool canGiveRecoil { get; private set; }
     public bool canGetStunned { get; private set; }
@@ -21,6 +19,7 @@ public class PlayerStats : MonoBehaviour
         invulnerable
     }
 
+    private Status _currentStatus = Status.normal;
     public Status currentStatus
     {
         get { return _currentStatus; }
@@ -53,8 +52,8 @@ public class PlayerStats : MonoBehaviour
                     break;
             }
         }
-
     }
+
     void Awake()
     {
         canTakeDamage = true;

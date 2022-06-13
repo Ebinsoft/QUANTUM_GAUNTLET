@@ -15,6 +15,8 @@ public class PlayerHitState : PlayerBaseState
     {
         player.isHit = true;
         player.triggerHit = false;
+
+        // force the animator to ignore its current transition rules and play the stun animation
         player.anim.Play("Take Hit");
     }
 

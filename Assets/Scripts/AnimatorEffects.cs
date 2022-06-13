@@ -5,11 +5,18 @@ using UnityEngine;
 public class AnimatorEffects : MonoBehaviour
 {
     private Animator anim;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
     }
-    public IEnumerator HitLag(float duration)
+
+    public void PlayHitlag(float duration)
+    {
+        StartCoroutine(Hitlag(duration));
+    }
+
+    private IEnumerator Hitlag(float duration)
     {
         // pause animator
         anim.speed = 0;

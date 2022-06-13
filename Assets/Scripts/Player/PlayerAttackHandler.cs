@@ -103,27 +103,25 @@ public class PlayerAttackHandler : MonoBehaviour
         if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
         {
             // do hitlag for attacking player
-            StartCoroutine(animEffects.HitLag(activeAttack.hitlagTime));
+            animEffects.PlayHitlag(activeAttack.hitlagTime);
 
             // play hit particle effect at contact point
             effects.PlayHitEffectAt(hitPoint);
         }
     }
 
-
     public void InitiateAttack(string attackName)
     {
         try
         {
             // search for attack in dict and set as active attack
-            AttackInfo attack = attackDict[attackName];
-            activeAttack = attack;
+            activeAttack = attackDict[attackName];
 
             // reset list of rigidbodies hit by attack
             hitRigidBodies = new HashSet<Rigidbody>();
 
             // turn on hitbox colliders
-            foreach (Collider hitbox in attack.hitboxes)
+            foreach (Collider hitbox in activeAttack.hitboxes)
             {
                 hitbox.enabled = true;
             }
