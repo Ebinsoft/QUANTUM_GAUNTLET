@@ -8,4 +8,7 @@ public class AttackInfo : ScriptableObject
     public float hitlagTime;
     public float stunTime;
     public string[] hitboxNames;
+
+    [HideInInspector]
+    public Collider[] hitboxes;
 }

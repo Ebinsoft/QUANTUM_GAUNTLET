@@ -15,7 +15,7 @@ public class PlayerAttackHandler : MonoBehaviour
     private AttackInfo activeAttack = null;
 
     // tracks the distinct players hit during an active attack window
-    private List<Rigidbody> hitRigidBodies;
+    private HashSet<Rigidbody> hitRigidBodies;
 
     // references to external components
     public Animator anim;
@@ -26,9 +26,6 @@ public class PlayerAttackHandler : MonoBehaviour
         // load particle effects player
         effects = GetComponent<PlayerParticleEffects>();
 
-        // load list of attacks into dictionary for better lookup
-        attackDict = attacks.ToDictionary(a => a.name, a => a);
-
         // cache player's atached hitboxes
         LoadPlayerHitboxes();
 
@@ -36,6 +33,32 @@ public class PlayerAttackHandler : MonoBehaviour
         foreach (var hitbox in playerHitboxes.Values)
         {
             hitbox.enabled = false;
+        }
+
+        // load list of attacks into dictionary for better lookup
+        attackDict = attacks.ToDictionary(
+            a => a.name,
+            a => UnityEngine.Object.Instantiate(a)
+        );
+
+        // populate each attack's hitbox fields
+        foreach (AttackInfo atk in attackDict.Values)
+        {
+            atk.hitboxes = new Collider[atk.hitboxNames.Length];
+            for (int i = 0; i < atk.hitboxes.Length; i++)
+            {
+                try
+                {
+                    atk.hitboxes[i] = playerHitboxes[atk.hitboxNames[i]];
+                }
+                catch (KeyNotFoundException)
+                {
+                    Debug.LogErrorFormat(
+                        "Hitbox named %s does not exist (specified in %s attack info).",
+                        atk.hitboxNames[i],
+                        atk.attackName);
+                }
+            }
         }
     }
 
@@ -115,19 +138,12 @@ public class PlayerAttackHandler : MonoBehaviour
             activeAttack = attack;
 
             // reset list of rigidbodies hit by attack
-            hitRigidBodies = new List<Rigidbody>();
+            hitRigidBodies = new HashSet<Rigidbody>();
 
             // turn on hitbox colliders
-            foreach (string hitboxName in attack.hitboxNames)
+            foreach (Collider hitbox in attack.hitboxes)
             {
-                try
-                {
-                    playerHitboxes[hitboxName].enabled = true;
-                }
-                catch (KeyNotFoundException)
-                {
-                    Debug.LogError("Hitbox does not exist: " + hitboxName);
-                }
+                hitbox.enabled = true;
             }
         }
         catch (KeyNotFoundException)
@@ -141,17 +157,9 @@ public class PlayerAttackHandler : MonoBehaviour
         if (activeAttack == null) return;
 
         // turn off hitbox colliders
-        foreach (string hitboxName in activeAttack.hitboxNames)
+        foreach (Collider hitbox in activeAttack.hitboxes)
         {
-            try
-            {
-                playerHitboxes[hitboxName].enabled = false;
-            }
-            catch (KeyNotFoundException)
-            {
-                Debug.LogError("Hitbox does not exist: " + hitboxName);
-
-            }
+            hitbox.enabled = false;
         }
 
         // reset active attack

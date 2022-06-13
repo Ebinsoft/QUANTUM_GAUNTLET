@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Jab
   damage: 1
-  hitlagTime: 0.15
-  stunTime: 0.15
+  hitlagTime: 0.1
+  stunTime: 0.1
   hitboxNames:
   - Hand.L.Hitbox
   - Forearm.L.Hitbox
