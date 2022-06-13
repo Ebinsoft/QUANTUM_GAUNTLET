@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    // Player's stats
+    public PlayerStats stats;
     public PlayerBaseState currentState;
 
     // One for each concrete state

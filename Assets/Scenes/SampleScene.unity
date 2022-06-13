@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!95 &92658886 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8965930900459420404, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+  m_PrefabInstance: {fileID: 1069045351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &705111069 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8965930901073386840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
@@ -359,6 +364,10 @@ PrefabInstance:
       propertyPath: attacks.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 2d4995aa0e074364396c6a9300c649db, type: 2}
+    - target: {fileID: 5111736333847167740, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 92658886}
     - target: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Name
       value: Player
@@ -407,6 +416,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8965930901073386840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 79378ddc78cb73663aeca295db06efd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
 --- !u!1 &1085799634
