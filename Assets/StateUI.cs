@@ -12,19 +12,17 @@ public class StateUI : MonoBehaviour
     {
         stateText.text = "NULL";
     }
+    string GetUIString()
+    {
+        string name = player.transform.name;
+        string hp = player.stats.health.ToString();
+        string state = player.currentState.ToString();
 
+        return name + "\n" + hp + "\n" + state;
+    }
     // Update is called once per frame
     void Update()
     {
         stateText.text = GetUIString();
-
-        string GetUIString()
-        {
-            string name = player.transform.name;
-            string hp = player.stats.health.ToString();
-            string state = player.currentState.ToString();
-
-            return name + "\n" + hp + "\n" + state;
-        }
     }
 }
