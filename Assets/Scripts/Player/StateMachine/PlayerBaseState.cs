@@ -36,7 +36,7 @@ public abstract class PlayerBaseState
         // not sure if this is best place to put this, ask tyler
         player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
 
-        CheckStateUpdate();
+        anyStateUpdate();
         UpdateState();
     }
 
@@ -46,6 +46,20 @@ public abstract class PlayerBaseState
         player.currentMovement.z = player.playerSpeed * player.inputMovement.y;
 
         player.anim.SetFloat("MoveSpeed", player.inputMovement.magnitude);
+    }
+
+    // High priority state transitions that all states share.
+    private void anyStateUpdate()
+    {
+        if (player.triggerHit)
+        {
+            SwitchState(player.HitState);
+        }
+
+        else
+        {
+            CheckStateUpdate();
+        }
     }
 
     private void Setup()

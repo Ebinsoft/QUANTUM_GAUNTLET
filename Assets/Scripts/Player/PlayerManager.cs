@@ -89,6 +89,7 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
+    public bool triggerHit = false;
     public bool isHit = false;
 
     // gravity variables
