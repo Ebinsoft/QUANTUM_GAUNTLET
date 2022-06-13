@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    // Player's stats
+    public PlayerStats stats;
     public PlayerBaseState currentState;
 
     // One for each concrete state
@@ -15,9 +18,11 @@ public class PlayerManager : MonoBehaviour
     public PlayerLandingState LandingState;
     public PlayerDashingState DashingState;
     public PlayerNormalAttackState NormalAttackState;
+    public PlayerHitState HitState;
 
     // Other Stuff
     public Animator anim;
+    public AnimatorEffects animEffects;
     private PlayerInput playerInput;
     public CharacterController characterController;
 
@@ -87,6 +92,10 @@ public class PlayerManager : MonoBehaviour
     public float dashLength = 2.5f;
     public float dashesLeft;
 
+    // hit variables
+    public bool triggerHit = false;
+    public bool isHit = false;
+
     // gravity variables
     private float gravity;
     public float gravityMultiplier = 1.0f;
@@ -108,6 +117,7 @@ public class PlayerManager : MonoBehaviour
         LandingState = new PlayerLandingState(this);
         NormalAttackState = new PlayerNormalAttackState(this);
         DashingState = new PlayerDashingState(this);
+        HitState = new PlayerHitState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();

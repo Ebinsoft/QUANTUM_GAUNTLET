@@ -9,6 +9,7 @@ public class PlayerNormalAttackState : PlayerBaseState
         player = psm;
         canMove = false;
     }
+
     public override void EnterState()
     {
         player.isAttacking = true;
@@ -25,6 +26,9 @@ public class PlayerNormalAttackState : PlayerBaseState
     public override void ExitState()
     {
         player.isAttacking = false;
+
+        // this will usually be redundant except for cases where an attack is interrupted
+        player.gameObject.GetComponent<PlayerAttackHandler>().FinishAttack();
     }
 
     public override void CheckStateUpdate()
