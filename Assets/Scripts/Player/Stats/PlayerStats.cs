@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
 
     private Status _currentStatus;
     public bool canTakeDamage { get; private set; }
-    public bool canGetHit { get; private set; }
+    public bool canGiveRecoil { get; private set; }
     public bool canGetStunned { get; private set; }
 
     public enum Status
@@ -30,22 +30,22 @@ public class PlayerStats : MonoBehaviour
             {
                 case Status.normal:
                     canTakeDamage = true;
-                    canGetHit = true;
+                    canGiveRecoil = true;
                     canGetStunned = true;
                     break;
                 case Status.intangible:
                     canTakeDamage = false;
-                    canGetHit = false;
+                    canGiveRecoil = false;
                     canGetStunned = false;
                     break;
                 case Status.armored:
                     canTakeDamage = true;
-                    canGetHit = true;
+                    canGiveRecoil = true;
                     canGetStunned = false;
                     break;
                 case Status.invulnerable:
                     canTakeDamage = false;
-                    canGetHit = true;
+                    canGiveRecoil = true;
                     canGetStunned = false;
                     break;
                 default:
@@ -55,6 +55,11 @@ public class PlayerStats : MonoBehaviour
         }
 
     }
-
+    void Awake()
+    {
+        canTakeDamage = true;
+        canGetStunned = true;
+        canGiveRecoil = true;
+    }
 
 }

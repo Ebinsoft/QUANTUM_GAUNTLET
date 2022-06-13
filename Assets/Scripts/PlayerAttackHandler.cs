@@ -18,7 +18,7 @@ public class PlayerAttackHandler : MonoBehaviour
     private HashSet<Rigidbody> hitRigidBodies;
 
     // references to external components
-    public Animator anim;
+    public AnimatorEffects animEffects;
     private PlayerParticleEffects effects;
 
     void Start()
@@ -100,34 +100,16 @@ public class PlayerAttackHandler : MonoBehaviour
     {
         if (activeAttack == null) return;
 
-        // do hitlag for attacking player
-        StartCoroutine(HitLag(activeAttack.hitlagTime));
+        if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
+        {
+            // do hitlag for attacking player
+            StartCoroutine(animEffects.HitLag(activeAttack.hitlagTime));
 
-        // play hit particle effect at contact point
-        effects.PlayHitEffectAt(hitPoint);
-
-        // make opponent play TakeHit animation (temporary until we have an actual state for this)
-        playerObj.GetComponentInChildren<Animator>().SetTrigger("TakeHit");
-        // also make them hitlag
-        StartCoroutine(playerObj.GetComponentInChildren<PlayerAttackHandler>().HitLag(activeAttack.hitlagTime));
-
-        // deal damage
-        playerObj.GetComponent<DummyHealth>().currentHealth -= activeAttack.damage;
+            // play hit particle effect at contact point
+            effects.PlayHitEffectAt(hitPoint);
+        }
     }
 
-    IEnumerator HitLag(float duration)
-    {
-        // pause animator
-        anim.speed = 0;
-        yield return new WaitForSeconds(duration);
-
-        // play animator at 2x speed for same duration to catch up
-        anim.speed = 2;
-        yield return new WaitForSeconds(duration);
-
-        // return to normal speed
-        anim.speed = 1;
-    }
 
     public void InitiateAttack(string attackName)
     {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acac2b080495ebf8ab93ea744423adc, type: 3}
   m_Name: Edmond
   m_EditorClassIdentifier: 
-  baseHealth: 0
-  baseMana: 0
+  baseHealth: 100
+  baseMana: 100

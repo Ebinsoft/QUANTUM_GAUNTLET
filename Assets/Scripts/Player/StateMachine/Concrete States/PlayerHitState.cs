@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHitState : PlayerBaseState
 {
     private PlayerManager player;
+
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -13,8 +14,8 @@ public class PlayerHitState : PlayerBaseState
     public override void EnterState()
     {
         player.isHit = true;
-        //player.anim.Play("Take Hit");
-        player.anim.SetTrigger("TakeHit");
+        player.triggerHit = false;
+        player.anim.Play("Take Hit");
     }
 
     public override void UpdateState()

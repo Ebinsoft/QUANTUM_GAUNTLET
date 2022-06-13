@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
 
     // Other Stuff
     public Animator anim;
+    public AnimatorEffects animEffects;
     private PlayerInput playerInput;
     public CharacterController characterController;
 
