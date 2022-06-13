@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerLandingState LandingState;
     public PlayerDashingState DashingState;
     public PlayerNormalAttackState NormalAttackState;
+    public PlayerHitState HitState;
 
     // Other Stuff
     public Animator anim;
@@ -87,6 +88,9 @@ public class PlayerManager : MonoBehaviour
     public float dashLength = 2.5f;
     public float dashesLeft;
 
+    // hit variables
+    public bool isHit = false;
+
     // gravity variables
     private float gravity;
     public float gravityMultiplier = 1.0f;
@@ -108,6 +112,7 @@ public class PlayerManager : MonoBehaviour
         LandingState = new PlayerLandingState(this);
         NormalAttackState = new PlayerNormalAttackState(this);
         DashingState = new PlayerDashingState(this);
+        HitState = new PlayerHitState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
