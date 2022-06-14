@@ -110,6 +110,7 @@ public class PlayerManager : MonoBehaviour
     public int attacksLeft = 3;
 
     // death variables
+    public bool triggerDead = false;
     public bool isDead = false;
 
     // respawn variables
