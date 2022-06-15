@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Uppercut
   m_EditorClassIdentifier: 
   attackName: Uppercut
-  damage: 2
+  damage: 50
   hitlagTime: 0.2
   stunTime: 0.2
   hitboxNames:
   - Hand.L.Hitbox
   - Forearm.L.Hitbox
+  hitboxes: []

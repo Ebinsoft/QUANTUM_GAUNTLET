@@ -19,6 +19,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerNormalAttackState NormalAttackState;
     public PlayerHitState HitState;
+    public PlayerDeadState DeadState;
+    public PlayerRespawningState RespawnState;
 
     // Other Stuff
     public Animator anim;
@@ -107,6 +109,14 @@ public class PlayerManager : MonoBehaviour
     public int maxAttackChain = 3;
     public int attacksLeft = 3;
 
+    // death variables
+    public bool triggerDead = false;
+    public bool canDie = true;
+    public bool isDead = false;
+
+    // respawn variables
+    public bool isRespawning = false;
+
     void Awake()
     {
         // initialize each concrete state
@@ -118,6 +128,8 @@ public class PlayerManager : MonoBehaviour
         NormalAttackState = new PlayerNormalAttackState(this);
         DashingState = new PlayerDashingState(this);
         HitState = new PlayerHitState(this);
+        DeadState = new PlayerDeadState(this);
+        RespawnState = new PlayerRespawningState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
@@ -139,6 +151,12 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for if we died
+        if (canDie && stats.health <= 0)
+        {
+            canDie = false;
+            triggerDead = true;
+        }
         handleRotation();
         currentState.Update();
 
