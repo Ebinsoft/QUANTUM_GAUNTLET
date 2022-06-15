@@ -50,7 +50,7 @@ public abstract class PlayerBaseState
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
-        if (player.triggerDead && player.currentState != player.DeadState)
+        if (player.triggerDead)
         {
             player.triggerHit = false;
             SwitchState(player.DeadState);
