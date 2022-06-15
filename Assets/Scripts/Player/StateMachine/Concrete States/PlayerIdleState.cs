@@ -43,7 +43,12 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(player.FallingState);
         }
 
-        else if (player.isLightAttackTriggered && player.attacksLeft > 0)
+        else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.HeavyAttackState);
+        }
+
+        else if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
         {
             SwitchState(player.LightAttackState);
         }

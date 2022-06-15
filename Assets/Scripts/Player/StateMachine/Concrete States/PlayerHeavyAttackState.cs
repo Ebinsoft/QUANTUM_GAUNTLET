@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerLightAttackState : PlayerBaseState
+public class PlayerHeavyAttackState : PlayerBaseState
 {
 
     private PlayerManager player;
-    public PlayerLightAttackState(PlayerManager psm) : base(psm)
+    public PlayerHeavyAttackState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = false;
@@ -12,11 +12,11 @@ public class PlayerLightAttackState : PlayerBaseState
 
     public override void EnterState()
     {
-        player.isLightAttackTriggered = false;
+        player.isHeavyAttackTriggered = false;
         player.isAttacking = true;
-        player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
+        player.anim.SetTrigger("HeavyAttack");
 
-        player.lightAttacksLeft--;
+        player.heavyAttacksLeft--;
     }
 
     public override void UpdateState()
@@ -37,17 +37,12 @@ public class PlayerLightAttackState : PlayerBaseState
         if (!player.anim.GetBool("InMelee"))
         {
             SwitchState(player.IdleState);
-            player.lightAttacksLeft = player.maxLightAttackChain;
+            player.heavyAttacksLeft = player.maxHeavyAttackChain;
         }
 
         else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
         {
             SwitchState(player.HeavyAttackState);
-        }
-
-        else if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
-        {
-            SwitchState(player.LightAttackState);
         }
     }
 }
