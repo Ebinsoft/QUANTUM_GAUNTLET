@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerNormalAttackState : PlayerBaseState
+public class PlayerLightAttackState : PlayerBaseState
 {
 
     private PlayerManager player;
-    public PlayerNormalAttackState(PlayerManager psm) : base(psm)
+    public PlayerLightAttackState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = false;
@@ -13,7 +13,7 @@ public class PlayerNormalAttackState : PlayerBaseState
     public override void EnterState()
     {
         player.isAttacking = true;
-        player.anim.SetTrigger("NormalAttack");     // triggers the start of an attack
+        player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
         // player.anim.SetBool("InMelee", true);   // true until animator leaves melee state machine
         player.isLightAttackTriggered = false;
         player.attacksLeft--;
@@ -42,7 +42,7 @@ public class PlayerNormalAttackState : PlayerBaseState
 
         else if (player.attacksLeft > 0 && player.isLightAttackTriggered)
         {
-            SwitchState(player.NormalAttackState);
+            SwitchState(player.LightAttackState);
         }
     }
 }
