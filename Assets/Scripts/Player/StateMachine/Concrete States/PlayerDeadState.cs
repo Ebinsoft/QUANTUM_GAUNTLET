@@ -12,10 +12,10 @@ public class PlayerDeadState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Dead");
         player.triggerDead = false;
         player.isDead = true;
-        player.transform.Find("Model").gameObject.SetActive(false);
+        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(false);
+        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(false);
         // do animation stuff
     }
 
@@ -26,9 +26,9 @@ public class PlayerDeadState : PlayerBaseState
 
     public override void ExitState()
     {
-        Debug.Log("Exit Dead");
         player.isDead = false;
-        player.transform.Find("Model").gameObject.SetActive(true);
+        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(true);
+        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(true);
     }
 
     public override void CheckStateUpdate()

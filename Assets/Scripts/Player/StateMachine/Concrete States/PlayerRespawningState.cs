@@ -13,10 +13,8 @@ public class PlayerRespawningState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Respawn");
         player.isRespawning = true;
-        // player.characterController.Move(new Vector3(0.0f, 5.0f, 0.0f));
-        // player.currentMovement = 
+        player.characterController.Move(new Vector3(0.0f, 5.0f, 0.0f));
         player.stats.resetStats();
         // do animation stuff
     }
@@ -27,7 +25,6 @@ public class PlayerRespawningState : PlayerBaseState
 
     public override void ExitState()
     {
-        Debug.Log("Exit Respawn");
         player.isRespawning = false;
         player.canDie = true;
     }

@@ -604,6 +604,10 @@ PrefabInstance:
       propertyPath: baseStats
       value: 
       objectReference: {fileID: 11400000, guid: 79378ddc78cb73663aeca295db06efd3, type: 2}
+    - target: {fileID: 2146181670338103245, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5704862707593501057, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -613,9 +617,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7695769704339744672, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695769704339744672, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a76d002712e342242a4c764f98d61ab1, type: 2}
+    - target: {fileID: 8411749507793919642, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Name
       value: DummyPlayer
