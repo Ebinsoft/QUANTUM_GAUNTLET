@@ -35,7 +35,6 @@ public abstract class PlayerBaseState
 
         // not sure if this is best place to put this, ask tyler
         player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
-        ;
         anyStateUpdate();
         UpdateState();
     }
