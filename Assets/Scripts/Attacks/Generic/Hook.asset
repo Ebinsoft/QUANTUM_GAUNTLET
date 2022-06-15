@@ -18,4 +18,5 @@ MonoBehaviour:
   stunTime: 0.1
   hitboxNames:
   - Hand.R.Hitbox
-  - Forearm.R.Hitbox
+  - Elbow.R.Hitbox
+  hitboxes: []
