@@ -43,6 +43,7 @@ public class PlayerLightAttackState : PlayerBaseState
         else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
         {
             SwitchState(player.HeavyAttackState);
+            player.lightAttacksLeft = player.maxLightAttackChain;
         }
 
         else if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
