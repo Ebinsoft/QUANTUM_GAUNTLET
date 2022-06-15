@@ -92,7 +92,7 @@ public class PlayerAttackHandler : MonoBehaviour
         }
         else
         {
-            Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
+            // Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
         }
     }
 

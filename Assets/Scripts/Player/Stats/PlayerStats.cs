@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    private PlayerBaseState baseStats;
+    public PlayerBaseStats baseStats;
     public int health = 100;
+    public int mana = 100;
+    public int lives = 3;
 
     public bool canTakeDamage { get; private set; }
     public bool canGiveRecoil { get; private set; }
@@ -54,11 +56,18 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+
     void Awake()
     {
         canTakeDamage = true;
         canGetStunned = true;
         canGiveRecoil = true;
+    }
+
+    public void resetStats()
+    {
+        health = baseStats.baseHealth;
+        mana = baseStats.baseMana;
     }
 
 }

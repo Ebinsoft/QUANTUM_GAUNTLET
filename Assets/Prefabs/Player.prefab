@@ -19779,6 +19779,10 @@ MonoBehaviour:
   isAttacking: 0
   maxAttackChain: 3
   attacksLeft: 3
+  triggerDead: 0
+  canDie: 1
+  isDead: 0
+  isRespawning: 0
 --- !u!114 &1866671546389507605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19824,7 +19828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3c16f81efc273d7a9efbc0f116c224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animEffects: {fileID: 3638962109576255577}
   player: {fileID: 0}
 --- !u!114 &752210786
 MonoBehaviour:
@@ -19838,7 +19841,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2ec7fa590661232801ecda709ec54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: 79378ddc78cb73663aeca295db06efd3, type: 2}
   health: 100
+  mana: 100
+  lives: 3
 --- !u!1 &8965930902334167631
 GameObject:
   m_ObjectHideFlags: 0

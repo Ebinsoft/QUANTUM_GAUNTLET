@@ -111,6 +111,7 @@ public class PlayerManager : MonoBehaviour
 
     // death variables
     public bool triggerDead = false;
+    public bool canDie = true;
     public bool isDead = false;
 
     // respawn variables
@@ -150,6 +151,12 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for if we died
+        if (canDie && stats.health <= 0)
+        {
+            canDie = false;
+            triggerDead = true;
+        }
         handleRotation();
         currentState.Update();
 

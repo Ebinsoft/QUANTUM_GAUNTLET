@@ -35,7 +35,7 @@ public abstract class PlayerBaseState
 
         // not sure if this is best place to put this, ask tyler
         player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
-
+        ;
         anyStateUpdate();
         UpdateState();
     }
@@ -51,8 +51,9 @@ public abstract class PlayerBaseState
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
-        if (player.triggerDead)
+        if (player.triggerDead && player.currentState != player.DeadState)
         {
+            player.triggerHit = false;
             SwitchState(player.DeadState);
         }
         else if (player.triggerHit)

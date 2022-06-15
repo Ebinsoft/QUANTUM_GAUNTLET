@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHitHandler : MonoBehaviour
 {
-    public PlayerManager player;
+    private PlayerManager player;
 
     void Awake()
     {
