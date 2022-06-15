@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StateUI : MonoBehaviour
+public class PlayerUI : MonoBehaviour
 {
     public Text stateText;
     public PlayerManager player;
