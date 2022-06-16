@@ -44,5 +44,9 @@ public class MeleeStateMachine : StateMachineBehaviour
     override public void OnStateMachineExit(Animator animator, int stateMachinePathHash)
     {
         animator.SetBool("InMelee", false);
+
+        // reset any unused attack triggers
+        animator.ResetTrigger("LightAttack");
+        animator.ResetTrigger("HeavyAttack");
     }
 }
