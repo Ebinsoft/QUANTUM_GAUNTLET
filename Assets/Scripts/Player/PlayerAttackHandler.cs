@@ -103,7 +103,7 @@ public class PlayerAttackHandler : MonoBehaviour
         if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
         {
             // do hitlag for attacking player
-            animEffects.PlayHitlag(activeAttack.hitlagTime);
+            animEffects.PlayRecoilLag(activeAttack.hitlagTime);
 
             // play hit particle effect at contact point
             effects.PlayHitEffectAt(hitPoint);

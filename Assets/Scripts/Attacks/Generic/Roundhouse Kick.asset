@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Roundhouse Kick
   m_EditorClassIdentifier: 
   attackName: Roundhouse Kick
-  damage: 8
-  hitlagTime: 0.17
-  stunTime: 0.17
+  damage: 9
+  hitlagTime: 0.13333334
+  stunTime: 0
   hitboxNames:
   - Knee.R.Hitbox
   - Foot.R.Hitbox

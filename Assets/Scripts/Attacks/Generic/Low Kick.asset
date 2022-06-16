@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Low Kick
   m_EditorClassIdentifier: 
   attackName: Low Kick
-  damage: 5
-  hitlagTime: 0.13
-  stunTime: 0.13
+  damage: 8
+  hitlagTime: 0.13333334
+  stunTime: 0
   hitboxNames:
   - Knee.R.Hitbox
   - Foot.R.Hitbox

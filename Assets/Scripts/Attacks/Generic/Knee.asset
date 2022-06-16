@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Knee
   m_EditorClassIdentifier: 
   attackName: Knee
-  damage: 5
-  hitlagTime: 0.15
-  stunTime: 0.15
+  damage: 7
+  hitlagTime: 0.13333334
+  stunTime: 0
   hitboxNames:
   - Knee.R.Hitbox
   hitboxes: []

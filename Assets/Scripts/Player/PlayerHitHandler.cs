@@ -21,7 +21,7 @@ public class PlayerHitHandler : MonoBehaviour
         if (player.stats.canGetStunned)
         {
             player.triggerHit = true;
-            player.animEffects.PlayHitlag(attack.hitlagTime);
+            player.animEffects.PlayHitLag(attack.hitlagTime);
         }
 
         return player.stats.canGiveRecoil;
