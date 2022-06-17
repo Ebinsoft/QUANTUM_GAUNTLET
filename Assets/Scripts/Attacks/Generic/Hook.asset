@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Hook
   m_EditorClassIdentifier: 
   attackName: Hook
-  damage: 1
-  hitlagTime: 0.1
-  stunTime: 0.1
+  damage: 4
+  hitlagTime: 0.06666667
+  stunTime: 0
   hitboxNames:
   - Hand.R.Hitbox
-  - Forearm.R.Hitbox
+  - Elbow.R.Hitbox
+  hitboxes: []

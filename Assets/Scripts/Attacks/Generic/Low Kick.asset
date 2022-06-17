@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a73b62693ef35024ca70d7c41223d0bf, type: 3}
-  m_Name: Uppercut
+  m_Name: Low Kick
   m_EditorClassIdentifier: 
-  attackName: Uppercut
-  damage: 50
-  hitlagTime: 0.2
-  stunTime: 0.2
+  attackName: Low Kick
+  damage: 8
+  hitlagTime: 0.13333334
+  stunTime: 0
   hitboxNames:
-  - Hand.L.Hitbox
-  - Elbow.L.Hitbox
+  - Knee.R.Hitbox
+  - Foot.R.Hitbox
   hitboxes: []

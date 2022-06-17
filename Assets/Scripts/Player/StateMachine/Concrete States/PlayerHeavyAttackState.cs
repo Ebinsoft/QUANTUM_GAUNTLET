@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerNormalAttackState : PlayerBaseState
+public class PlayerHeavyAttackState : PlayerBaseState
 {
 
     private PlayerManager player;
-    public PlayerNormalAttackState(PlayerManager psm) : base(psm)
+    public PlayerHeavyAttackState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = false;
@@ -12,11 +12,11 @@ public class PlayerNormalAttackState : PlayerBaseState
 
     public override void EnterState()
     {
+        player.isHeavyAttackTriggered = false;
         player.isAttacking = true;
-        player.anim.SetTrigger("NormalAttack");     // triggers the start of an attack
-        // player.anim.SetBool("InMelee", true);   // true until animator leaves melee state machine
-        player.isLightAttackTriggered = false;
-        player.attacksLeft--;
+        player.anim.SetTrigger("HeavyAttack");
+
+        player.heavyAttacksLeft--;
     }
 
     public override void UpdateState()
@@ -33,16 +33,16 @@ public class PlayerNormalAttackState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        // animator should set IsAttacking to false after exiting melee state machine
+        // InMelee stays true until animator leaves the melee sub-state machine
         if (!player.anim.GetBool("InMelee"))
         {
             SwitchState(player.IdleState);
-            player.attacksLeft = player.maxAttackChain;
+            player.heavyAttacksLeft = player.maxHeavyAttackChain;
         }
 
-        else if (player.attacksLeft > 0 && player.isLightAttackTriggered)
+        else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
         {
-            SwitchState(player.NormalAttackState);
+            SwitchState(player.HeavyAttackState);
         }
     }
 }

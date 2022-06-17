@@ -17,7 +17,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerFallingState FallingState;
     public PlayerLandingState LandingState;
     public PlayerDashingState DashingState;
-    public PlayerNormalAttackState NormalAttackState;
+    public PlayerLightAttackState LightAttackState;
+    public PlayerHeavyAttackState HeavyAttackState;
     public PlayerHitState HitState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
@@ -106,8 +107,10 @@ public class PlayerManager : MonoBehaviour
 
     // normal-attack variables
     public bool isAttacking = false;
-    public int maxAttackChain = 3;
-    public int attacksLeft = 3;
+    public int maxLightAttackChain = 3;
+    public int lightAttacksLeft = 3;
+    public int maxHeavyAttackChain = 1;
+    public int heavyAttacksLeft = 1;
 
     // death variables
     public bool triggerDead = false;
@@ -125,7 +128,8 @@ public class PlayerManager : MonoBehaviour
         JumpingState = new PlayerJumpingState(this);
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
-        NormalAttackState = new PlayerNormalAttackState(this);
+        LightAttackState = new PlayerLightAttackState(this);
+        HeavyAttackState = new PlayerHeavyAttackState(this);
         DashingState = new PlayerDashingState(this);
         HitState = new PlayerHitState(this);
         DeadState = new PlayerDeadState(this);

@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
 
     private void onHeavyAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Heavy Attack");
         player.isHeavyAttackPressed = context.ReadValueAsButton();
         player.isHeavyAttackTriggered = context.ReadValueAsButton();
     }
