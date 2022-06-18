@@ -22,8 +22,8 @@ public abstract class PlayerBaseState
     {
         player.currentState.ExitState();
         Cleanup();
-        Setup();
         player.currentState = newState;
+        newState.Setup();
         newState.EnterState();
     }
     public void Update()
@@ -80,11 +80,6 @@ public abstract class PlayerBaseState
 
     private void Setup()
     {
-
-    }
-
-    private void Cleanup()
-    {
         if (canMove)
         {
             player.isMoving = false;
@@ -92,6 +87,10 @@ public abstract class PlayerBaseState
             player.currentMovement.z = 0.0f;
             player.anim.SetFloat("MoveSpeed", 0);
         }
+    }
+
+    private void Cleanup()
+    {
     }
 
 }

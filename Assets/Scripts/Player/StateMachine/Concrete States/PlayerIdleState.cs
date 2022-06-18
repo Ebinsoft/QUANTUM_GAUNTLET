@@ -6,7 +6,7 @@ public class PlayerIdleState : PlayerBaseState
     public PlayerIdleState(PlayerManager psm) : base(psm)
     {
         player = psm;
-        // canMove = true;
+        canMove = true;
     }
     public override void EnterState()
     {

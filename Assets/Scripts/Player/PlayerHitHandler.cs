@@ -27,7 +27,7 @@ public class PlayerHitHandler : MonoBehaviour
                 Vector3 knockbackDirection = (transform.position - attackerTransform.position).normalized;
                 player.rotationTarget.x = -knockbackDirection.x;
                 player.rotationTarget.y = -knockbackDirection.z;
-                player.currentMovement += knockbackDirection * attack.knockback;
+                player.currentMovement = knockbackDirection * attack.knockback;
             }
 
             player.animEffects.PlayHitLag(attack.hitlagTime);
