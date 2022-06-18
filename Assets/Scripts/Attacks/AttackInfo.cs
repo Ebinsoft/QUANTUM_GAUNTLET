@@ -7,4 +7,6 @@ public class AttackInfo : ScriptableObject
     public int damage;
     public float hitlagTime;
     public float stunTime;
+    public float knockback;
+    public float knockup;
 }
