@@ -14,9 +14,6 @@ public class PlayerAttackHandler : MonoBehaviour
         public Vector3 scale;
     }
 
-    public AttackInfo[] attacks;
-    private Dictionary<String, AttackInfo> attackDict;
-
     // cached set of all hitboxes attached to player
     private List<ColliderWithDefault> playerHitboxes;
 
@@ -42,12 +39,6 @@ public class PlayerAttackHandler : MonoBehaviour
         {
             hitbox.collider.enabled = false;
         }
-
-        // load list of attacks into dictionary for better lookup
-        attackDict = attacks.ToDictionary(
-            a => a.name,
-            a => UnityEngine.Object.Instantiate(a)
-        );
     }
 
     // populate playerHitboxes with all uniquely-named colliders on the hitbox layer
@@ -68,14 +59,16 @@ public class PlayerAttackHandler : MonoBehaviour
         playerHitboxes = hitboxes.Select(c => new ColliderWithDefault()
         {
             collider = c,
-            position = c.transform.position,
-            rotation = c.transform.rotation,
+            position = c.transform.localPosition,
+            rotation = c.transform.localRotation,
             scale = c.transform.localScale
         }).ToList();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (activeAttack == null) return;
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox"))
         {
             if (!hitRigidBodies.Contains(other.attachedRigidbody))
@@ -92,8 +85,6 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
-        if (activeAttack == null) return;
-
         if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
         {
             // do hitlag for attacking player
@@ -127,8 +118,8 @@ public class PlayerAttackHandler : MonoBehaviour
         foreach (var hitbox in playerHitboxes)
         {
             hitbox.collider.enabled = false;
-            hitbox.collider.transform.position = hitbox.position;
-            hitbox.collider.transform.rotation = hitbox.rotation;
+            hitbox.collider.transform.localPosition = hitbox.position;
+            hitbox.collider.transform.localRotation = hitbox.rotation;
             hitbox.collider.transform.localScale = hitbox.scale;
         }
     }
