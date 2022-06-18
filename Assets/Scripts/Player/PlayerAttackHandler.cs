@@ -85,7 +85,7 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
-        if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
+        if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack, transform))
         {
             // do hitlag for attacking player
             animEffects.PlayRecoilLag(activeAttack.hitlagTime);
