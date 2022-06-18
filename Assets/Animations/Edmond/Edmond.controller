@@ -310,7 +310,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Knee
+  m_Name: Roundhouse Kick
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -325,7 +325,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 49fe06aefac664440982f7ebbb8d7122, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4af9db5eecfd35042931c0dd00c3f2b6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5739435fd3df56b4d88bc1a7a0998401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 11400000, guid: 755875082fe00cf428fbd5ed18831aa8, type: 2}
+  attack: {fileID: 11400000, guid: 3932db413c39a434e81190fcdc5b90b1, type: 2}
 --- !u!1102 &-2936707285373977859
 AnimatorState:
   serializedVersion: 6
@@ -1410,7 +1410,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Roundhouse Kick
+  m_Name: Knee
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1425,7 +1425,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4af9db5eecfd35042931c0dd00c3f2b6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 49fe06aefac664440982f7ebbb8d7122, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5739435fd3df56b4d88bc1a7a0998401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 11400000, guid: 3932db413c39a434e81190fcdc5b90b1, type: 2}
+  attack: {fileID: 11400000, guid: 755875082fe00cf428fbd5ed18831aa8, type: 2}
 --- !u!1109 &8891864291438817170
 AnimatorTransition:
   m_ObjectHideFlags: 1

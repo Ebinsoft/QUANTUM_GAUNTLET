@@ -351,38 +351,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 314010840, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 671866395, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 699335074, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 714752027, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 763112452, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113220723, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1594772343, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1908576488, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       propertyPath: m_Name
       value: Player
