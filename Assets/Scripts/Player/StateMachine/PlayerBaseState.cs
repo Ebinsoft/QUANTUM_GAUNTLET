@@ -7,6 +7,7 @@ public abstract class PlayerBaseState
     // Behavior booleans - concrete states can override these to easily modify common behaviors
     // allows X/Z movement during state
     protected bool canMove = false;
+    protected bool canRotate = false;
     public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
@@ -33,6 +34,11 @@ public abstract class PlayerBaseState
             Move();
         }
 
+        if (canRotate && player.isMovePressed)
+        {
+            Rotate();
+        }
+
         // not sure if this is best place to put this, ask tyler
         player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
         anyStateUpdate();
@@ -45,6 +51,12 @@ public abstract class PlayerBaseState
         player.currentMovement.z = player.playerSpeed * player.inputMovement.y;
 
         player.anim.SetFloat("MoveSpeed", player.inputMovement.magnitude);
+    }
+
+    private void Rotate()
+    {
+        player.rotationTarget.x = player.inputMovement.x;
+        player.rotationTarget.y = player.inputMovement.y;
     }
 
     // High priority state transitions that all states share.

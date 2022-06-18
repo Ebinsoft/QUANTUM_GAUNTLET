@@ -8,6 +8,7 @@ public class PlayerJumpingState : PlayerBaseState
     {
         player = psm;
         canMove = true;
+        canRotate = true;
     }
     public override void EnterState()
     {

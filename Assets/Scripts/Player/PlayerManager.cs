@@ -31,6 +31,8 @@ public class PlayerManager : MonoBehaviour
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    // Current XZ target direction to rotate towards
+    public Vector2 rotationTarget;
 
     /********** input variables **********/
     // Left Stick
@@ -139,6 +141,7 @@ public class PlayerManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
+        rotationTarget = transform.forward;
         setupJumpVariables();
         jumpsLeft = maxJumps;
         dashesLeft = maxDashes;
@@ -184,11 +187,11 @@ public class PlayerManager : MonoBehaviour
     void handleRotation()
     {
         Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.x = rotationTarget.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
-        // rotation
-        if (positionToLookAt.magnitude > 0)
+        positionToLookAt.z = rotationTarget.y;
+
+        if ((transform.forward - positionToLookAt.normalized).magnitude > 0.001f)
         {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
