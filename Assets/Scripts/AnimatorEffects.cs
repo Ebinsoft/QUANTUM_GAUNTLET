@@ -18,7 +18,8 @@ public class AnimatorEffects : MonoBehaviour
 
     public void PlayHitLag(float duration)
     {
-        StartCoroutine(Shake(duration, 0.1f, 50f));
+        // StartCoroutine(Shake(duration, 0.1f, 75f));
+        StartCoroutine(Shake(duration, duration, 75f));
         StartCoroutine(AnimatorLag(duration));
     }
 
