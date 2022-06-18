@@ -7,10 +7,10 @@ public class AnimationEventHandler : MonoBehaviour
     public PlayerAttackHandler attackHandler;
     public PlayerParticleEffects effects;
 
-    public void InitiateAttack(string attackName)
-    {
-        attackHandler.InitiateAttack(attackName);
-    }
+    // public void InitiateAttack(string attackName)
+    // {
+    //     attackHandler.InitiateAttack(attackName);
+    // }
 
     public void FinishAttack()
     {
