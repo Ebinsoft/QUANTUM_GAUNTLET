@@ -64,10 +64,10 @@ public abstract class PlayerBaseState
     {
         if (player.triggerDead)
         {
-            player.triggerHit = false;
+            player.triggerHit = null;
             SwitchState(player.DeadState);
         }
-        else if (player.triggerHit)
+        else if (player.triggerHit.HasValue)
         {
             SwitchState(player.HitState);
         }

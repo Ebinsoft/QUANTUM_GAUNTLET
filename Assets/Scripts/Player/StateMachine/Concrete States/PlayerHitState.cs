@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayerHitState : PlayerBaseState
 {
     private PlayerManager player;
+    private HitData hitAttack;
 
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
@@ -14,7 +16,8 @@ public class PlayerHitState : PlayerBaseState
     public override void EnterState()
     {
         player.isHit = true;
-        player.triggerHit = false;
+        hitAttack = player.triggerHit.Value;
+        player.triggerHit = null;
 
         // force the animator to ignore its current transition rules and play the stun animation
         player.anim.Play("Take Hit");

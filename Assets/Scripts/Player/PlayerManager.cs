@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,7 +99,8 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
-    public bool triggerHit = false;
+    // public bool triggerHit = false;
+    public HitData? triggerHit = null;
     public bool isHit = false;
 
     // gravity variables
