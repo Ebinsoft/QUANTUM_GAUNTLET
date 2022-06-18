@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class PlayerAttackHandler : MonoBehaviour
 {
-    public AttackInfo[] attacks;
-    private Dictionary<String, AttackInfo> attackDict;
+    private struct ColliderWithDefault
+    {
+        public Collider collider;
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
+    }
 
     // cached set of all hitboxes attached to player
-    private Dictionary<String, Collider> playerHitboxes;
+    private List<ColliderWithDefault> playerHitboxes;
 
     private AttackInfo activeAttack = null;
 
@@ -30,35 +35,9 @@ public class PlayerAttackHandler : MonoBehaviour
         LoadPlayerHitboxes();
 
         // disable all hitboxes by default
-        foreach (var hitbox in playerHitboxes.Values)
+        foreach (var hitbox in playerHitboxes)
         {
-            hitbox.enabled = false;
-        }
-
-        // load list of attacks into dictionary for better lookup
-        attackDict = attacks.ToDictionary(
-            a => a.name,
-            a => UnityEngine.Object.Instantiate(a)
-        );
-
-        // populate each attack's hitbox fields
-        foreach (AttackInfo atk in attackDict.Values)
-        {
-            atk.hitboxes = new Collider[atk.hitboxNames.Length];
-            for (int i = 0; i < atk.hitboxes.Length; i++)
-            {
-                try
-                {
-                    atk.hitboxes[i] = playerHitboxes[atk.hitboxNames[i]];
-                }
-                catch (KeyNotFoundException)
-                {
-                    Debug.LogErrorFormat(
-                        "Hitbox named %s does not exist (specified in %s attack info).",
-                        atk.hitboxNames[i],
-                        atk.attackName);
-                }
-            }
+            hitbox.collider.enabled = false;
         }
     }
 
@@ -76,12 +55,20 @@ public class PlayerAttackHandler : MonoBehaviour
             .Select(g => g.First()).ToList()
             .ForEach(c => Debug.LogError("Duplicate hitbox name found: " + c));
 
-        // map hitbox names to collider components
-        playerHitboxes = hitboxes.ToDictionary(c => c.gameObject.name, c => c);
+        // Store colliders with a copy of their transform values
+        playerHitboxes = hitboxes.Select(c => new ColliderWithDefault()
+        {
+            collider = c,
+            position = c.transform.localPosition,
+            rotation = c.transform.localRotation,
+            scale = c.transform.localScale
+        }).ToList();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (activeAttack == null) return;
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox"))
         {
             if (!hitRigidBodies.Contains(other.attachedRigidbody))
@@ -98,8 +85,6 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
-        if (activeAttack == null) return;
-
         if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
         {
             // do hitlag for attacking player
@@ -110,39 +95,32 @@ public class PlayerAttackHandler : MonoBehaviour
         }
     }
 
-    public void InitiateAttack(string attackName)
+    public void InitiateAttack(AttackInfo attack)
     {
-        try
-        {
-            // search for attack in dict and set as active attack
-            activeAttack = attackDict[attackName];
+        activeAttack = attack;
 
-            // reset list of rigidbodies hit by attack
-            hitRigidBodies = new HashSet<Rigidbody>();
-
-            // turn on hitbox colliders
-            foreach (Collider hitbox in activeAttack.hitboxes)
-            {
-                hitbox.enabled = true;
-            }
-        }
-        catch (KeyNotFoundException)
-        {
-            Debug.LogError("Attack does not exist: " + attackName);
-        }
+        // reset list of rigidbodies hit by attack
+        hitRigidBodies = new HashSet<Rigidbody>();
     }
 
     public void FinishAttack()
     {
         if (activeAttack == null) return;
 
-        // turn off hitbox colliders
-        foreach (Collider hitbox in activeAttack.hitboxes)
-        {
-            hitbox.enabled = false;
-        }
+        CleanupHitboxes();
 
         // reset active attack
         activeAttack = null;
+    }
+
+    private void CleanupHitboxes()
+    {
+        foreach (var hitbox in playerHitboxes)
+        {
+            hitbox.collider.enabled = false;
+            hitbox.collider.transform.localPosition = hitbox.position;
+            hitbox.collider.transform.localRotation = hitbox.rotation;
+            hitbox.collider.transform.localScale = hitbox.scale;
+        }
     }
 }
