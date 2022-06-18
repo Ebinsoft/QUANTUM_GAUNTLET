@@ -26,9 +26,6 @@ public class PlayerLightAttackState : PlayerBaseState
     public override void ExitState()
     {
         player.isAttacking = false;
-
-        // this will usually be redundant except for cases where an attack is interrupted
-        player.gameObject.GetComponent<PlayerAttackHandler>().FinishAttack();
     }
 
     public override void CheckStateUpdate()
