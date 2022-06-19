@@ -81,31 +81,48 @@ public class PlayerHitState : PlayerBaseState
     {
         if (!player.isHitLagging)
         {
-            if (!knocbackCalculated)
+            if (!knocbackCalculated && hitAttack.attack.knockback > 0)
             {
                 CalculateKnockbackVariables();
+                if (hitAttack.attack.stunTime > 0 && hitAttack.attack.knockup > 0)
+                {
+                    // do knockup stuff
+                    applyKnockup();
+                }
             }
 
-            if (hitAttack.attack.stunTime > 0)
+            if (hitAttack.attack.stunTime > 0 && hitAttack.attack.knockback > 0)
             {
-                if (Time.time < startTime + fullSpeedTime)
-                {
-                    player.currentMovement.x = knockbackDirection.x * fullSpeed;
-                    player.currentMovement.z = knockbackDirection.z * fullSpeed;
-                }
-                else
-                {
-                    float timeDecelerating = Time.time - (startTime + fullSpeedTime);
-                    float currentSpeed = Mathf.Clamp((1 - timeDecelerating / decelTime), 0, 1) * fullSpeed;
-
-                    float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
-
-                    player.currentMovement.x = verletSpeed * knockbackDirection.x;
-                    player.currentMovement.z = verletSpeed * knockbackDirection.z;
-
-                    prevFrameSpeed = currentSpeed;
-                }
+                updateKnockback();
             }
+
+        }
+    }
+
+    private void applyKnockup()
+    {
+        // regular air-gravity version
+        float knockupVelocity = (2 * hitAttack.attack.knockup) / (player.maxJumpTime / 2);
+        player.currentMovement.y = knockupVelocity;
+    }
+    private void updateKnockback()
+    {
+        if (Time.time < startTime + fullSpeedTime)
+        {
+            player.currentMovement.x = knockbackDirection.x * fullSpeed;
+            player.currentMovement.z = knockbackDirection.z * fullSpeed;
+        }
+        else
+        {
+            float timeDecelerating = Time.time - (startTime + fullSpeedTime);
+            float currentSpeed = Mathf.Clamp((1 - timeDecelerating / decelTime), 0, 1) * fullSpeed;
+
+            float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
+
+            player.currentMovement.x = verletSpeed * knockbackDirection.x;
+            player.currentMovement.z = verletSpeed * knockbackDirection.z;
+
+            prevFrameSpeed = currentSpeed;
         }
     }
 
@@ -126,7 +143,7 @@ public class PlayerHitState : PlayerBaseState
 
         else if (!player.anim.GetBool("InHit") && !player.characterController.isGrounded)
         {
-            SwitchState(player.JumpingState);
+            SwitchState(player.FallingState);
         }
     }
 }
