@@ -99,13 +99,13 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
-    // public bool triggerHit = false;
     public HitData? triggerHit = null;
     public bool isHit = false;
     public bool isHitLagging = false;
 
     // gravity variables
-    private float gravity;
+    public float gravity;
+    public float jumpGravity;
     public float gravityMultiplier = 1.0f;
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
@@ -146,6 +146,7 @@ public class PlayerManager : MonoBehaviour
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
+        gravity = jumpGravity;
         jumpsLeft = maxJumps;
         dashesLeft = maxDashes;
     }
@@ -182,7 +183,7 @@ public class PlayerManager : MonoBehaviour
     {
         // setting gravity and our jump velocity in terms of jump height and jump time
         float timeToApex = maxJumpTime / 2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 

@@ -46,6 +46,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     private void Jump()
     {
+        player.gravity = player.jumpGravity;
         player.currentMovement.y = player.initialJumpVelocity;
         player.jumpsLeft--;
         player.isJumpTriggered = false;
