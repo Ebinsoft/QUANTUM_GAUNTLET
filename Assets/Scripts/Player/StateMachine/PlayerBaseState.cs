@@ -80,17 +80,26 @@ public abstract class PlayerBaseState
 
     private void Setup()
     {
-        if (canMove)
+        if (player.currentState.canMove)
         {
-            player.isMoving = false;
-            player.currentMovement.x = 0.0f;
-            player.currentMovement.z = 0.0f;
-            player.anim.SetFloat("MoveSpeed", 0);
+            EndMomentum();
         }
     }
 
     private void Cleanup()
     {
+        if (player.currentState.canMove)
+        {
+            EndMomentum();
+        }
+    }
+
+    private void EndMomentum()
+    {
+        player.isMoving = false;
+        player.currentMovement.x = 0.0f;
+        player.currentMovement.z = 0.0f;
+        player.anim.SetFloat("MoveSpeed", 0);
     }
 
 }
