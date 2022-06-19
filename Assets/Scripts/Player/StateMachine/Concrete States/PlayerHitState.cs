@@ -92,8 +92,6 @@ public class PlayerHitState : PlayerBaseState
     {
         if (Time.time - startTime < stunTime) return;
 
-        player.currentMovement.x = 0;
-        player.currentMovement.z = 0;
 
         if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
         {
