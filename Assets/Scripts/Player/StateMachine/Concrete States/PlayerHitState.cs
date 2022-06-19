@@ -9,7 +9,7 @@ public class PlayerHitState : PlayerBaseState
     private HitData hitAttack;
 
     // computed as the direction from attacker to me
-    private Vector3 knockbackDirection;
+    private Vector3 attackDirection;
 
     // how far into the stuntime we begin decelerating
     private float percentAtFullSpeed = 0.5f;
@@ -17,7 +17,7 @@ public class PlayerHitState : PlayerBaseState
     private float startTime;
 
     // KNOCKBACK VARIABLES
-    private bool knocbackCalculated;
+    private bool knockbackTriggered;
     private float stunTime, knockbackDist;
     private float fullSpeedTime, decelTime;
     private float fullSpeedDist, decelDist;
@@ -35,14 +35,27 @@ public class PlayerHitState : PlayerBaseState
     {
         player.isHit = true;
 
+        // force the animator to ignore its current transition rules and play the stun animation
+        player.anim.Play("Take Hit");
+
         // pull out hitData and reset the trigger
         hitAttack = player.triggerHit.Value;
         player.triggerHit = null;
 
-        knocbackCalculated = false;
+        // pull out stun time for easier access
+        stunTime = hitAttack.attack.stunTime;
 
-        // force the animator to ignore its current transition rules and play the stun animation
-        player.anim.Play("Take Hit");
+        knockbackTriggered = false;
+
+        // compute the directional vector of the attack
+        attackDirection = (player.transform.position - hitAttack.origin.position).normalized;
+
+        // if there is knockback, turn the player towards the attacker
+        if (hitAttack.attack.knockback > 0)
+        {
+            player.rotationTarget.x = -attackDirection.x;
+            player.rotationTarget.y = -attackDirection.z;
+        }
     }
 
     private void CalculateKnockbackVariables()
@@ -51,7 +64,6 @@ public class PlayerHitState : PlayerBaseState
         startTime = Time.time;
 
         knockbackDist = hitAttack.attack.knockback;
-        stunTime = hitAttack.attack.stunTime;
 
         // calculate time ratios
         fullSpeedTime = percentAtFullSpeed * stunTime;
@@ -66,51 +78,49 @@ public class PlayerHitState : PlayerBaseState
 
         // reset verlet previous frame speed to full speed
         prevFrameSpeed = fullSpeed;
-
-        // calculate knockback direction
-        knockbackDirection = (player.transform.position - hitAttack.origin.position).normalized;
-
-        // point player towards the attacker
-        player.rotationTarget.x = -knockbackDirection.x;
-        player.rotationTarget.y = -knockbackDirection.z;
-
-        knocbackCalculated = true;
     }
 
     public override void UpdateState()
     {
         if (!player.isHitLagging)
         {
-            if (!knocbackCalculated && hitAttack.attack.knockback > 0)
+            // this whole block should only run once after hitlag stops
+            if (stunTime > 0 && !knockbackTriggered)
             {
-                CalculateKnockbackVariables();
-                if (hitAttack.attack.stunTime > 0 && hitAttack.attack.knockup > 0)
+                if (hitAttack.attack.knockback > 0)
                 {
-                    // do knockup stuff
+                    CalculateKnockbackVariables();
+                }
+
+                if (hitAttack.attack.knockup > 0)
+                {
                     applyKnockup();
                 }
+
+                knockbackTriggered = true;
             }
 
-            if (hitAttack.attack.stunTime > 0 && hitAttack.attack.knockback > 0)
+            if (stunTime > 0 && hitAttack.attack.knockback > 0)
             {
                 updateKnockback();
             }
-
         }
     }
 
     private void applyKnockup()
     {
-        // regular air-gravity version
-        float knockupVelocity = (2 * hitAttack.attack.knockup) / (player.maxJumpTime / 2);
+        float timeToApex = stunTime / 2;
+        player.gravity = (-2 * hitAttack.attack.knockup) / Mathf.Pow(timeToApex, 2);
+        float knockupVelocity = (2 * hitAttack.attack.knockup) / timeToApex;
         player.currentMovement.y = knockupVelocity;
     }
+
     private void updateKnockback()
     {
         if (Time.time < startTime + fullSpeedTime)
         {
-            player.currentMovement.x = knockbackDirection.x * fullSpeed;
-            player.currentMovement.z = knockbackDirection.z * fullSpeed;
+            player.currentMovement.x = attackDirection.x * fullSpeed;
+            player.currentMovement.z = attackDirection.z * fullSpeed;
         }
         else
         {
@@ -119,8 +129,8 @@ public class PlayerHitState : PlayerBaseState
 
             float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
 
-            player.currentMovement.x = verletSpeed * knockbackDirection.x;
-            player.currentMovement.z = verletSpeed * knockbackDirection.z;
+            player.currentMovement.x = verletSpeed * attackDirection.x;
+            player.currentMovement.z = verletSpeed * attackDirection.z;
 
             prevFrameSpeed = currentSpeed;
         }
@@ -134,7 +144,6 @@ public class PlayerHitState : PlayerBaseState
     public override void CheckStateUpdate()
     {
         if (Time.time - startTime < stunTime) return;
-
 
         if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
         {
