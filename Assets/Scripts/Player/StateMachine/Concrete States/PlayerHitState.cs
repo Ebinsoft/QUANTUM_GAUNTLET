@@ -8,6 +8,18 @@ public class PlayerHitState : PlayerBaseState
     private PlayerManager player;
     private HitData hitAttack;
 
+    private Vector3 knockbackDirection;
+
+    private float percentAtFullSpeed = 0.5f;
+
+    private float startTime;
+
+    private float stunTime, knockbackDist;
+    private float fullSpeedTime, decelTime;
+    private float fullSpeedDist, decelDist;
+    private float fullSpeed;
+    private float decelRate;
+
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -19,12 +31,44 @@ public class PlayerHitState : PlayerBaseState
         hitAttack = player.triggerHit.Value;
         player.triggerHit = null;
 
+        knockbackDist = hitAttack.attack.knockback;
+        stunTime = hitAttack.attack.stunTime;
+
+        // calculate time ratios
+        fullSpeedTime = percentAtFullSpeed * stunTime;
+        decelTime = (1 - percentAtFullSpeed) * stunTime;
+
+        // calculate distance ratios
+        decelDist = (decelTime / 2) * knockbackDist;
+        fullSpeedDist = knockbackDist - decelDist;
+
+        fullSpeed = fullSpeedDist / fullSpeedTime;
+
+        // calculate knockback direction
+        knockbackDirection = (player.transform.position - hitAttack.origin.position).normalized;
+
+        player.rotationTarget.x = -knockbackDirection.x;
+        player.rotationTarget.y = -knockbackDirection.z;
+
         // force the animator to ignore its current transition rules and play the stun animation
         player.anim.Play("Take Hit");
+
+        startTime = Time.time;
     }
 
     public override void UpdateState()
     {
+        if (Time.time < startTime + fullSpeedTime)
+        {
+            player.currentMovement.x = knockbackDirection.x * fullSpeed;
+            player.currentMovement.z = knockbackDirection.z * fullSpeed;
+        }
+        else
+        {
+            float timeDecelerating = Time.time - (startTime + fullSpeedTime);
+            player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
+            player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
+        }
     }
 
     public override void ExitState()
@@ -34,6 +78,11 @@ public class PlayerHitState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
+        if (Time.time - startTime < stunTime) return;
+
+        player.currentMovement.x = 0;
+        player.currentMovement.z = 0;
+
         if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
         {
             SwitchState(player.IdleState);
