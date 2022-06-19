@@ -52,8 +52,9 @@ public class PlayerHitState : PlayerBaseState
         // calculate time ratios
         fullSpeedTime = percentAtFullSpeed * stunTime;
         decelTime = (1 - percentAtFullSpeed) * stunTime;
+
         // calculate distance ratios
-        decelDist = ((1 - percentAtFullSpeed) / 2) * knockbackDist;
+        decelDist = (decelTime / (2 * fullSpeedTime + decelTime)) * knockbackDist;
         fullSpeedDist = knockbackDist - decelDist;
 
         fullSpeed = fullSpeedDist / fullSpeedTime;
