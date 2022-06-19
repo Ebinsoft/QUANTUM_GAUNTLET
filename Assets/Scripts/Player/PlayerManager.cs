@@ -143,7 +143,7 @@ public class PlayerManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
-        rotationTarget = transform.forward;
+        rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
         jumpsLeft = maxJumps;
         dashesLeft = maxDashes;
