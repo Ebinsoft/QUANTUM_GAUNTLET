@@ -15,6 +15,6 @@ MonoBehaviour:
   attackName: Knee
   damage: 7
   hitlagTime: 0.13333334
-  stunTime: 0
+  stunTime: 0.2
   knockback: 1
   knockup: 1

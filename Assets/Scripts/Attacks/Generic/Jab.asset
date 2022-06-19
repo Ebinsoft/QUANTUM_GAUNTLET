@@ -15,8 +15,6 @@ MonoBehaviour:
   attackName: Jab
   damage: 3
   hitlagTime: 0.06666667
-  stunTime: 0
-  hitboxNames:
-  - Hand.L.Hitbox
-  - Elbow.L.Hitbox
-  hitboxes: []
+  stunTime: 0.1
+  knockback: 0
+  knockup: 0
