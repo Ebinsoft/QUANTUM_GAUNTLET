@@ -78,15 +78,18 @@ public class PlayerHitState : PlayerBaseState
             else
             {
                 // velocity verlet integration
-                float currentDecTime = Time.time - (startTime + fullSpeedTime);
-                float timeDecelerating = (currentDecTime + prevDecTime) / 2f;
+                // float currentDecTime = Time.time - (startTime + fullSpeedTime);
+                // float timeDecelerating = (currentDecTime + prevDecTime) / 2f;
+                // player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
+                // player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
+                // prevDecTime = currentDecTime;
+
+                // deceleration calc without verlet
+                float timeDecelerating = Time.time - (startTime + fullSpeedTime);
                 player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
                 player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
-                prevDecTime = currentDecTime;
             }
-            Debug.Log(player.currentMovement.magnitude);
         }
-
     }
 
     public override void ExitState()
