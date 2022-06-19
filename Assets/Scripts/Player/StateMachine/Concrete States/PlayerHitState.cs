@@ -31,6 +31,19 @@ public class PlayerHitState : PlayerBaseState
         hitAttack = player.triggerHit.Value;
         player.triggerHit = null;
 
+        if (hitAttack.attack.stunTime > 0)
+        {
+            initiateStun();
+        }
+
+        // force the animator to ignore its current transition rules and play the stun animation
+        player.anim.Play("Take Hit");
+
+        startTime = Time.time;
+    }
+
+    private void initiateStun()
+    {
         knockbackDist = hitAttack.attack.knockback;
         stunTime = hitAttack.attack.stunTime;
 
@@ -49,26 +62,25 @@ public class PlayerHitState : PlayerBaseState
 
         player.rotationTarget.x = -knockbackDirection.x;
         player.rotationTarget.y = -knockbackDirection.z;
-
-        // force the animator to ignore its current transition rules and play the stun animation
-        player.anim.Play("Take Hit");
-
-        startTime = Time.time;
     }
 
     public override void UpdateState()
     {
-        if (Time.time < startTime + fullSpeedTime)
+        if (hitAttack.attack.stunTime > 0)
         {
-            player.currentMovement.x = knockbackDirection.x * fullSpeed;
-            player.currentMovement.z = knockbackDirection.z * fullSpeed;
+            if (Time.time < startTime + fullSpeedTime)
+            {
+                player.currentMovement.x = knockbackDirection.x * fullSpeed;
+                player.currentMovement.z = knockbackDirection.z * fullSpeed;
+            }
+            else
+            {
+                float timeDecelerating = Time.time - (startTime + fullSpeedTime);
+                player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
+                player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
+            }
         }
-        else
-        {
-            float timeDecelerating = Time.time - (startTime + fullSpeedTime);
-            player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
-            player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
-        }
+
     }
 
     public override void ExitState()

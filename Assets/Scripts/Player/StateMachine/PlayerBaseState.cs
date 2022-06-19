@@ -21,10 +21,10 @@ public abstract class PlayerBaseState
     public void SwitchState(PlayerBaseState newState)
     {
         player.currentState.ExitState();
-        Cleanup();
+        player.currentState.Cleanup();
         player.currentState = newState;
-        newState.Setup();
-        newState.EnterState();
+        player.currentState.Setup();
+        player.currentState.EnterState();
     }
     public void Update()
     {

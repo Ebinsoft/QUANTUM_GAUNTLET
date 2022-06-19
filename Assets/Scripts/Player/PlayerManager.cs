@@ -168,7 +168,6 @@ public class PlayerManager : MonoBehaviour
         }
         handleRotation();
         currentState.Update();
-
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
