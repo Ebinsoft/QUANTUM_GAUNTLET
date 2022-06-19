@@ -109,7 +109,8 @@ public class PlayerHitState : PlayerBaseState
 
     private void applyKnockup()
     {
-        float timeToApex = stunTime / 2;
+        float timeToApex = hitAttack.attack.knockupTime / 2;
+
         player.gravity = (-2 * hitAttack.attack.knockup) / Mathf.Pow(timeToApex, 2);
         float knockupVelocity = (2 * hitAttack.attack.knockup) / timeToApex;
         player.currentMovement.y = knockupVelocity;
