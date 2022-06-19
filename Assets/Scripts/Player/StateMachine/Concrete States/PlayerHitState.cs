@@ -17,6 +17,7 @@ public class PlayerHitState : PlayerBaseState
     private float startTime;
 
     // KNOCKBACK VARIABLES
+    private bool knocbackCalculated;
     private float stunTime, knockbackDist;
     private float fullSpeedTime, decelTime;
     private float fullSpeedDist, decelDist;
@@ -38,20 +39,17 @@ public class PlayerHitState : PlayerBaseState
         hitAttack = player.triggerHit.Value;
         player.triggerHit = null;
 
-        if (hitAttack.attack.stunTime > 0)
-        {
-            initiateStun();
-        }
+        knocbackCalculated = false;
 
         // force the animator to ignore its current transition rules and play the stun animation
         player.anim.Play("Take Hit");
-
-        // begin stun timer
-        startTime = Time.time;
     }
 
-    private void initiateStun()
+    private void CalculateKnockbackVariables()
     {
+        // begin stun timer
+        startTime = Time.time;
+
         knockbackDist = hitAttack.attack.knockback;
         stunTime = hitAttack.attack.stunTime;
 
@@ -75,35 +73,38 @@ public class PlayerHitState : PlayerBaseState
         // point player towards the attacker
         player.rotationTarget.x = -knockbackDirection.x;
         player.rotationTarget.y = -knockbackDirection.z;
+
+        knocbackCalculated = true;
     }
 
     public override void UpdateState()
     {
-        if (hitAttack.attack.stunTime > 0)
+        if (!player.isHitLagging)
         {
-            if (Time.time < startTime + fullSpeedTime)
+            if (!knocbackCalculated)
             {
-                player.currentMovement.x = knockbackDirection.x * fullSpeed;
-                player.currentMovement.z = knockbackDirection.z * fullSpeed;
+                CalculateKnockbackVariables();
             }
-            else
+
+            if (hitAttack.attack.stunTime > 0)
             {
-                // velocity verlet integration
-                // float currentDecTime = Time.time - (startTime + fullSpeedTime);
-                // float timeDecelerating = (currentDecTime + prevDecTime) / 2f;
-                // player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
-                // player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
-                // prevDecTime = currentDecTime;
+                if (Time.time < startTime + fullSpeedTime)
+                {
+                    player.currentMovement.x = knockbackDirection.x * fullSpeed;
+                    player.currentMovement.z = knockbackDirection.z * fullSpeed;
+                }
+                else
+                {
+                    float timeDecelerating = Time.time - (startTime + fullSpeedTime);
+                    float currentSpeed = Mathf.Clamp((1 - timeDecelerating / decelTime), 0, 1) * fullSpeed;
 
-                float timeDecelerating = Time.time - (startTime + fullSpeedTime);
-                float currentSpeed = Mathf.Clamp((1 - timeDecelerating / decelTime),0,1) * fullSpeed;
+                    float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
 
-                float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
+                    player.currentMovement.x = verletSpeed * knockbackDirection.x;
+                    player.currentMovement.z = verletSpeed * knockbackDirection.z;
 
-                player.currentMovement.x = verletSpeed * knockbackDirection.x;
-                player.currentMovement.z = verletSpeed * knockbackDirection.z;
-
-                prevFrameSpeed = currentSpeed;
+                    prevFrameSpeed = currentSpeed;
+                }
             }
         }
     }

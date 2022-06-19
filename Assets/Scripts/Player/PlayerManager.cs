@@ -102,6 +102,7 @@ public class PlayerManager : MonoBehaviour
     // public bool triggerHit = false;
     public HitData? triggerHit = null;
     public bool isHit = false;
+    public bool isHitLagging = false;
 
     // gravity variables
     private float gravity;
