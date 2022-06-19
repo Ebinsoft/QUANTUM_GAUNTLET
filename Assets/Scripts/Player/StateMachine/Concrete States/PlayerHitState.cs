@@ -50,9 +50,8 @@ public class PlayerHitState : PlayerBaseState
         // calculate time ratios
         fullSpeedTime = percentAtFullSpeed * stunTime;
         decelTime = (1 - percentAtFullSpeed) * stunTime;
-
         // calculate distance ratios
-        decelDist = (decelTime / 2) * knockbackDist;
+        decelDist = ((1 - percentAtFullSpeed) / 2) * knockbackDist;
         fullSpeedDist = knockbackDist - decelDist;
 
         fullSpeed = fullSpeedDist / fullSpeedTime;
@@ -79,6 +78,7 @@ public class PlayerHitState : PlayerBaseState
                 player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
                 player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
             }
+            Debug.Log(player.currentMovement.magnitude);
         }
 
     }
