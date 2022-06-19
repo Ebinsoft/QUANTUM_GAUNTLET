@@ -19,6 +19,7 @@ public class PlayerHitState : PlayerBaseState
     private float fullSpeedDist, decelDist;
     private float fullSpeed;
     private float decelRate;
+    private float prevDecTime;
 
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
@@ -40,6 +41,7 @@ public class PlayerHitState : PlayerBaseState
         player.anim.Play("Take Hit");
 
         startTime = Time.time;
+        prevDecTime = startTime + fullSpeedTime;
     }
 
     private void initiateStun()
@@ -74,9 +76,12 @@ public class PlayerHitState : PlayerBaseState
             }
             else
             {
-                float timeDecelerating = Time.time - (startTime + fullSpeedTime);
+                // velocity verlet integration
+                float currentDecTime = Time.time - (startTime + fullSpeedTime);
+                float timeDecelerating = (currentDecTime + prevDecTime) / 2f;
                 player.currentMovement.x = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.x;
                 player.currentMovement.z = (1 - timeDecelerating / decelTime) * fullSpeed * knockbackDirection.z;
+                prevDecTime = currentDecTime;
             }
             Debug.Log(player.currentMovement.magnitude);
         }
