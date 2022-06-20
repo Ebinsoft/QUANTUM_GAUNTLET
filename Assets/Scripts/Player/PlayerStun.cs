@@ -13,6 +13,7 @@ public class PlayerStun : MonoBehaviour
         startTime = Time.time;
         stunDuration = duration;
         player.isStunned = true;
+        player.anim.SetBool("IsStunned", true);
     }
 
     void Start()
@@ -25,6 +26,7 @@ public class PlayerStun : MonoBehaviour
         if (player.isStunned && Time.time >= startTime + stunDuration)
         {
             player.isStunned = false;
+            player.anim.SetBool("IsStunned", false);
         }
     }
 }
