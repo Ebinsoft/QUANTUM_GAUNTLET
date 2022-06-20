@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
     public PlayerHeavyAttackState HeavyAttackState;
-    public PlayerStunState HitState;
+    public PlayerStunState StunState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
     public PlayerTumblingState TumblingState;
@@ -147,7 +147,7 @@ public class PlayerManager : MonoBehaviour
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
         DashingState = new PlayerDashingState(this);
-        HitState = new PlayerStunState(this);
+        StunState = new PlayerStunState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
         TumblingState = new PlayerTumblingState(this);

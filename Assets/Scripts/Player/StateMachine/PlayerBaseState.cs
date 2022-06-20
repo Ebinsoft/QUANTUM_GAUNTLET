@@ -69,7 +69,7 @@ public abstract class PlayerBaseState
         }
         else if (player.triggerHit)
         {
-            SwitchState(player.HitState);
+            SwitchState(player.StunState);
         }
 
         else
