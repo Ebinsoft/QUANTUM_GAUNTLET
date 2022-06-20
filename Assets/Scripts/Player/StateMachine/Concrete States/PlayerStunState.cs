@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHitState : PlayerBaseState
+public class PlayerStunState : PlayerBaseState
 {
     private PlayerManager player;
 
-    public PlayerHitState(PlayerManager psm) : base(psm)
+    public PlayerStunState(PlayerManager psm) : base(psm)
     {
         player = psm;
     }
