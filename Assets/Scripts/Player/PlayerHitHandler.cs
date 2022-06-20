@@ -25,8 +25,15 @@ public class PlayerHitHandler : MonoBehaviour
 
             Action stunAndKnockback = () =>
             {
-                player.playerStun.ApplyStun(hitData.attack.stunTime);
-                player.playerKnockback.ApplyKnockback(hitData, hitData.attack.stunTime);
+                if (attack.stunTime > 0)
+                {
+                    player.playerStun.ApplyStun(hitData.attack.stunTime);
+                }
+
+                if (attack.knockbackMagnitude > 0)
+                {
+                    player.playerKnockback.ApplyKnockback(hitData, hitData.attack.stunTime);
+                }
             };
 
             player.animEffects.PlayHitLag(attack.hitlagTime,
