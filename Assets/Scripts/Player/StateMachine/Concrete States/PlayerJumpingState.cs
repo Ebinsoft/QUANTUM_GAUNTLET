@@ -8,6 +8,7 @@ public class PlayerJumpingState : PlayerBaseState
     {
         player = psm;
         canMove = true;
+        canRotate = true;
     }
     public override void EnterState()
     {
@@ -45,6 +46,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     private void Jump()
     {
+        player.gravity = player.jumpGravity;
         player.currentMovement.y = player.initialJumpVelocity;
         player.jumpsLeft--;
         player.isJumpTriggered = false;

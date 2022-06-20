@@ -7,6 +7,7 @@ public abstract class PlayerBaseState
     // Behavior booleans - concrete states can override these to easily modify common behaviors
     // allows X/Z movement during state
     protected bool canMove = false;
+    protected bool canRotate = false;
     public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
@@ -20,10 +21,10 @@ public abstract class PlayerBaseState
     public void SwitchState(PlayerBaseState newState)
     {
         player.currentState.ExitState();
-        Cleanup();
-        Setup();
+        player.currentState.Cleanup();
         player.currentState = newState;
-        newState.EnterState();
+        player.currentState.Setup();
+        player.currentState.EnterState();
     }
     public void Update()
     {
@@ -33,10 +34,15 @@ public abstract class PlayerBaseState
             Move();
         }
 
+        if (canRotate && player.isMovePressed)
+        {
+            Rotate();
+        }
+
         // not sure if this is best place to put this, ask tyler
         player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
-        anyStateUpdate();
-        UpdateState();
+        player.currentState.anyStateUpdate();
+        player.currentState.UpdateState();
     }
 
     private void Move()
@@ -47,15 +53,21 @@ public abstract class PlayerBaseState
         player.anim.SetFloat("MoveSpeed", player.inputMovement.magnitude);
     }
 
+    private void Rotate()
+    {
+        player.rotationTarget.x = player.inputMovement.x;
+        player.rotationTarget.y = player.inputMovement.y;
+    }
+
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
         if (player.triggerDead)
         {
-            player.triggerHit = false;
+            player.triggerHit = null;
             SwitchState(player.DeadState);
         }
-        else if (player.triggerHit)
+        else if (player.triggerHit.HasValue)
         {
             SwitchState(player.HitState);
         }
@@ -68,18 +80,26 @@ public abstract class PlayerBaseState
 
     private void Setup()
     {
-
+        if (player.currentState.canMove)
+        {
+            EndMomentum();
+        }
     }
 
     private void Cleanup()
     {
-        if (canMove)
+        if (player.currentState.canMove)
         {
-            player.isMoving = false;
-            player.currentMovement.x = 0.0f;
-            player.currentMovement.z = 0.0f;
-            player.anim.SetFloat("MoveSpeed", 0);
+            EndMomentum();
         }
+    }
+
+    private void EndMomentum()
+    {
+        player.isMoving = false;
+        player.currentMovement.x = 0.0f;
+        player.currentMovement.z = 0.0f;
+        player.anim.SetFloat("MoveSpeed", 0);
     }
 
 }

@@ -11,8 +11,10 @@ public class PlayerHitHandler : MonoBehaviour
         player = GetComponent<PlayerManager>();
     }
 
-    public bool handleHit(AttackInfo attack)
+    public bool handleHit(HitData hitData)
     {
+        AttackInfo attack = hitData.attack;
+
         if (player.stats.canTakeDamage)
         {
             player.stats.health -= attack.damage;
@@ -20,7 +22,16 @@ public class PlayerHitHandler : MonoBehaviour
 
         if (player.stats.canGetStunned)
         {
-            player.triggerHit = true;
+            player.triggerHit = hitData;
+
+            // if (attack.knockback > 0)
+            // {
+            //     Vector3 knockbackDirection = (transform.position - attackerTransform.position).normalized;
+            //     player.rotationTarget.x = -knockbackDirection.x;
+            //     player.rotationTarget.y = -knockbackDirection.z;
+            //     player.currentMovement = knockbackDirection * attack.knockback;
+            // }
+
             player.animEffects.PlayHitLag(attack.hitlagTime);
         }
 

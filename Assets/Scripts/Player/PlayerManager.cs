@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class PlayerManager : MonoBehaviour
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    // Current XZ target direction to rotate towards
+    public Vector2 rotationTarget;
 
     /********** input variables **********/
     // Left Stick
@@ -96,11 +99,13 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
-    public bool triggerHit = false;
+    public HitData? triggerHit = null;
     public bool isHit = false;
+    public bool isHitLagging = false;
 
     // gravity variables
-    private float gravity;
+    public float gravity;
+    public float jumpGravity;
     public float gravityMultiplier = 1.0f;
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
@@ -139,7 +144,9 @@ public class PlayerManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
+        rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
+        gravity = jumpGravity;
         jumpsLeft = maxJumps;
         dashesLeft = maxDashes;
     }
@@ -163,7 +170,6 @@ public class PlayerManager : MonoBehaviour
         }
         handleRotation();
         currentState.Update();
-
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
@@ -177,18 +183,18 @@ public class PlayerManager : MonoBehaviour
     {
         // setting gravity and our jump velocity in terms of jump height and jump time
         float timeToApex = maxJumpTime / 2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
     void handleRotation()
     {
         Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.x = rotationTarget.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
-        // rotation
-        if (positionToLookAt.magnitude > 0)
+        positionToLookAt.z = rotationTarget.y;
+
+        if ((transform.forward - positionToLookAt.normalized).magnitude > 0.001f)
         {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);

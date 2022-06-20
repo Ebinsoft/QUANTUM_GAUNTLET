@@ -13,17 +13,17 @@ public class AnimatorEffects : MonoBehaviour
 
     public void PlayRecoilLag(float duration)
     {
-        StartCoroutine(AnimatorLag(duration));
+        StartCoroutine(AnimatorLag(duration, false));
     }
 
     public void PlayHitLag(float duration)
     {
-        // StartCoroutine(Shake(duration, 0.1f, 75f));
+        transform.root.GetComponent<PlayerManager>().isHitLagging = true;
         StartCoroutine(Shake(duration, duration, 75f));
-        StartCoroutine(AnimatorLag(duration));
+        StartCoroutine(AnimatorLag(duration, true));
     }
 
-    private IEnumerator AnimatorLag(float duration)
+    private IEnumerator AnimatorLag(float duration, bool resetHitlagFlag)
     {
         // pause animator
         anim.speed = 0;
@@ -31,6 +31,11 @@ public class AnimatorEffects : MonoBehaviour
 
         // return to normal speed
         anim.speed = 1;
+
+        if (resetHitlagFlag)
+        {
+            transform.root.GetComponent<PlayerManager>().isHitLagging = false;
+        }
     }
 
     private IEnumerator Shake(float duration, float magnitude, float speed)
