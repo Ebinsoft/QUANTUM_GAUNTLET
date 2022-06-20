@@ -15,8 +15,7 @@ MonoBehaviour:
   attackName: Uppercut
   damage: 50
   hitlagTime: 0.2
-  stunTime: 0.2
-  hitboxNames:
-  - Hand.L.Hitbox
-  - Elbow.L.Hitbox
-  hitboxes: []
+  knockbackAngle: 0
+  knockbackMagnitude: 0
+  stunCalculation: 0
+  baseStun: 0

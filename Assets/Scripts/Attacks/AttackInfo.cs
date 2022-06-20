@@ -129,5 +129,7 @@ public class AttackInfoEditor : Editor
             }
             EditorGUILayout.FloatField("Total Stun", obj.stunTime);
         }
+
+        EditorUtility.SetDirty(obj);
     }
 }
