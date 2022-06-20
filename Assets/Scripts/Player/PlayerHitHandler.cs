@@ -23,13 +23,13 @@ public class PlayerHitHandler : MonoBehaviour
         {
             player.triggerHit = true;
 
-            Action stunAndKnockback = () =>
+            if (attack.stunTime > 0)
             {
-                if (attack.stunTime > 0)
-                {
-                    player.playerStun.ApplyStun(hitData.attack.stunTime);
-                }
+                player.playerStun.ApplyStun(attack.stunTime + attack.hitlagTime);
+            }
 
+            Action applyPlayerKnockback = () =>
+            {
                 if (attack.knockbackMagnitude > 0)
                 {
                     player.playerKnockback.ApplyKnockback(hitData, hitData.attack.stunTime);
@@ -37,7 +37,7 @@ public class PlayerHitHandler : MonoBehaviour
             };
 
             player.animEffects.PlayHitLag(attack.hitlagTime,
-                onComplete: stunAndKnockback);
+                onComplete: applyPlayerKnockback);
         }
 
         return player.stats.canGiveRecoil;
