@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,14 +17,14 @@ public class AnimatorEffects : MonoBehaviour
         StartCoroutine(AnimatorLag(duration, false));
     }
 
-    public void PlayHitLag(float duration)
+    public void PlayHitLag(float duration, Action onComplete = null)
     {
         transform.root.GetComponent<PlayerManager>().isHitLagging = true;
         StartCoroutine(Shake(duration, duration, 75f));
-        StartCoroutine(AnimatorLag(duration, true));
+        StartCoroutine(AnimatorLag(duration, true, onComplete: onComplete));
     }
 
-    private IEnumerator AnimatorLag(float duration, bool resetHitlagFlag)
+    private IEnumerator AnimatorLag(float duration, bool resetHitlagFlag, Action onComplete = null)
     {
         // pause animator
         anim.speed = 0;
@@ -35,6 +36,11 @@ public class AnimatorEffects : MonoBehaviour
         if (resetHitlagFlag)
         {
             transform.root.GetComponent<PlayerManager>().isHitLagging = false;
+        }
+
+        if (onComplete != null)
+        {
+            onComplete();
         }
     }
 

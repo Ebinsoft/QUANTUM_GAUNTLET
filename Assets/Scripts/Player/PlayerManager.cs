@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     // Other Stuff
     public Animator anim;
     public AnimatorEffects animEffects;
+    public PlayerStun playerStun;
     public PlayerKnockback playerKnockback;
     private PlayerInput playerInput;
     public CharacterController characterController;
@@ -100,7 +101,8 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
-    public HitData? triggerHit = null;
+    public bool triggerHit = false;
+    public bool isStunned = false;
     public bool isHit = false;
     public bool isHitLagging = false;
 
@@ -143,6 +145,7 @@ public class PlayerManager : MonoBehaviour
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        playerStun = GetComponent<PlayerStun>();
         playerKnockback = GetComponent<PlayerKnockback>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);

@@ -17,8 +17,9 @@ public class PlayerKnockback : MonoBehaviour
     private float startTime;
 
     // KNOCKBACK VARIABLES
+    private float knockbackDuration;
     private bool knockbackTriggered;
-    private float stunTime, knockbackDist;
+    private float knockbackDist;
     private float fullSpeedTime, decelTime;
     private float fullSpeedDist, decelDist;
     private float fullSpeed;
@@ -32,12 +33,10 @@ public class PlayerKnockback : MonoBehaviour
         player = GetComponent<PlayerManager>();
     }
 
-    public void ApplyKnockback(HitData hitData)
+    public void ApplyKnockback(HitData hitData, float duration)
     {
         activeHit = hitData;
-
-        // pull out stun time for easier access
-        stunTime = hitData.attack.stunTime;
+        knockbackDuration = duration;
 
         // compute the directional vector of the attack
         attackDirection = (player.transform.position - hitData.origin.position).normalized;
@@ -66,8 +65,8 @@ public class PlayerKnockback : MonoBehaviour
         knockbackDist = activeHit.Value.attack.knockback.x;
 
         // calculate time ratios
-        fullSpeedTime = percentAtFullSpeed * stunTime;
-        decelTime = (1 - percentAtFullSpeed) * stunTime;
+        fullSpeedTime = percentAtFullSpeed * knockbackDuration;
+        decelTime = (1 - percentAtFullSpeed) * knockbackDuration;
 
         // calculate distance ratios
         decelDist = (decelTime / (2 * fullSpeedTime + decelTime)) * knockbackDist;
@@ -93,7 +92,13 @@ public class PlayerKnockback : MonoBehaviour
     {
         if (!activeHit.HasValue) return;
 
-        if (stunTime > 0 && activeHit.Value.attack.knockback.x > 0)
+        if (Time.time >= startTime + knockbackDuration)
+        {
+            activeHit = null;
+            return;
+        }
+
+        if (activeHit.Value.attack.knockback.x > 0)
         {
             updateKnockback();
         }

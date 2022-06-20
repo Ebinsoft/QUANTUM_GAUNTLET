@@ -6,11 +6,6 @@ using UnityEngine;
 public class PlayerHitState : PlayerBaseState
 {
     private PlayerManager player;
-    private HitData hitAttack;
-
-    private float startTime;
-    private float stunTime;
-    private bool knockbackTriggered;
 
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
@@ -21,32 +16,14 @@ public class PlayerHitState : PlayerBaseState
     {
         player.isHit = true;
 
+        player.triggerHit = false;
+
         // force the animator to ignore its current transition rules and play the stun animation
         player.anim.Play("Take Hit");
-
-        // pull out hitData and reset the trigger
-        hitAttack = player.triggerHit.Value;
-        player.triggerHit = null;
-
-        // pull out stun time for easier access
-        stunTime = hitAttack.attack.stunTime;
-
-        knockbackTriggered = false;
     }
-
 
     public override void UpdateState()
     {
-        if (!player.isHitLagging)
-        {
-            // this whole block should only run once after hitlag stops
-            if (stunTime > 0 && !knockbackTriggered)
-            {
-                player.playerKnockback.ApplyKnockback(hitAttack);
-
-                knockbackTriggered = true;
-            }
-        }
     }
 
     public override void ExitState()
@@ -56,7 +33,7 @@ public class PlayerHitState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (Time.time - startTime < stunTime) return;
+        if (player.isStunned) return;
 
         if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
         {
