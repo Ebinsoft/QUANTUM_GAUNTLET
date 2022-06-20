@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerStunState HitState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
+    public PlayerTumblingState TumblingState;
+    public PlayerCrashingState CrashingState;
 
     // Other Stuff
     public Animator anim;
@@ -106,6 +108,12 @@ public class PlayerManager : MonoBehaviour
     public bool isHit = false;
     public bool isHitLagging = false;
 
+    // tumbling variables
+    public bool isTumbling = false;
+
+    // crashing variables
+    public bool isCrashing = false;
+
     // gravity variables
     public float gravity;
     public float jumpGravity;
@@ -142,6 +150,8 @@ public class PlayerManager : MonoBehaviour
         HitState = new PlayerStunState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
+        TumblingState = new PlayerTumblingState(this);
+        CrashingState = new PlayerCrashingState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
