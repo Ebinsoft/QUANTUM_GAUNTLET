@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
     // Other Stuff
     public Animator anim;
     public AnimatorEffects animEffects;
+    public PlayerKnockback playerKnockback;
     private PlayerInput playerInput;
     public CharacterController characterController;
 
@@ -142,6 +143,7 @@ public class PlayerManager : MonoBehaviour
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        playerKnockback = GetComponent<PlayerKnockback>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);

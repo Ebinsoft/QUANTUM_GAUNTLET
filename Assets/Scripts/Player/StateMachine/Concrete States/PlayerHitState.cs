@@ -42,7 +42,7 @@ public class PlayerHitState : PlayerBaseState
             // this whole block should only run once after hitlag stops
             if (stunTime > 0 && !knockbackTriggered)
             {
-                player.gameObject.GetComponent<PlayerKnockback>().ApplyKnockback(hitAttack);
+                player.playerKnockback.ApplyKnockback(hitAttack);
 
                 knockbackTriggered = true;
             }
@@ -61,6 +61,7 @@ public class PlayerHitState : PlayerBaseState
         if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
         {
             SwitchState(player.IdleState);
+            player.playerKnockback.StopKnockback();
         }
 
         else if (!player.anim.GetBool("InHit") && !player.characterController.isGrounded)

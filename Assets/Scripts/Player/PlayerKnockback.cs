@@ -6,7 +6,7 @@ public class PlayerKnockback : MonoBehaviour
 {
     private PlayerManager player;
 
-    private HitData activeHit;
+    private HitData? activeHit;
 
     // computed as the direction from attacker to me
     private Vector3 attackDirection;
@@ -49,16 +49,21 @@ public class PlayerKnockback : MonoBehaviour
             player.rotationTarget.y = -attackDirection.z;
         }
 
-        InitializeHorizontalKnockback();
-        applyKnockup();
+        SetupKnockback();
+        ApplyKnockup();
     }
 
-    private void InitializeHorizontalKnockback()
+    public void StopKnockback()
+    {
+        activeHit = null;
+    }
+
+    private void SetupKnockback()
     {
         // begin stun timer
         startTime = Time.time;
 
-        knockbackDist = activeHit.attack.knockback.x;
+        knockbackDist = activeHit.Value.attack.knockback.x;
 
         // calculate time ratios
         fullSpeedTime = percentAtFullSpeed * stunTime;
@@ -75,18 +80,20 @@ public class PlayerKnockback : MonoBehaviour
         prevFrameSpeed = fullSpeed;
     }
 
-    private void applyKnockup()
+    private void ApplyKnockup()
     {
         player.gravity = -51;
-        float timeToApex = Mathf.Sqrt((-2f / player.gravity) * activeHit.attack.knockback.y);
-        float knockupVelocity = (2 * activeHit.attack.knockback.y) / timeToApex;
+        float timeToApex = Mathf.Sqrt((-2f / player.gravity) * activeHit.Value.attack.knockback.y);
+        float knockupVelocity = (2 * activeHit.Value.attack.knockback.y) / timeToApex;
 
         player.currentMovement.y = knockupVelocity;
     }
 
     void Update()
     {
-        if (stunTime > 0 && activeHit.attack.knockback.x > 0)
+        if (!activeHit.HasValue) return;
+
+        if (stunTime > 0 && activeHit.Value.attack.knockback.x > 0)
         {
             updateKnockback();
         }
