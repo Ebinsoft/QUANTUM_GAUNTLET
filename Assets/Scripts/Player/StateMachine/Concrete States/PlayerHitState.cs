@@ -8,23 +8,9 @@ public class PlayerHitState : PlayerBaseState
     private PlayerManager player;
     private HitData hitAttack;
 
-    // computed as the direction from attacker to me
-    private Vector3 attackDirection;
-
-    // how far into the stuntime we begin decelerating
-    private float percentAtFullSpeed = 0.5f;
-
     private float startTime;
-
-    // KNOCKBACK VARIABLES
+    private float stunTime;
     private bool knockbackTriggered;
-    private float stunTime, knockbackDist;
-    private float fullSpeedTime, decelTime;
-    private float fullSpeedDist, decelDist;
-    private float fullSpeed;
-
-    // tracks previous frame's speed for verlet calculation
-    private float prevFrameSpeed;
 
     public PlayerHitState(PlayerManager psm) : base(psm)
     {
@@ -46,39 +32,8 @@ public class PlayerHitState : PlayerBaseState
         stunTime = hitAttack.attack.stunTime;
 
         knockbackTriggered = false;
-
-        // compute the directional vector of the attack
-        attackDirection = (player.transform.position - hitAttack.origin.position).normalized;
-
-        // if there is knockback, turn the player towards the attacker
-        if (hitAttack.attack.knockbackMagnitude > 0)
-        {
-            player.rotationTarget.x = -attackDirection.x;
-            player.rotationTarget.y = -attackDirection.z;
-        }
     }
 
-    private void CalculateKnockbackVariables()
-    {
-        // begin stun timer
-        startTime = Time.time;
-
-        knockbackDist = hitAttack.attack.knockback.x;
-
-        // calculate time ratios
-        fullSpeedTime = percentAtFullSpeed * stunTime;
-        decelTime = (1 - percentAtFullSpeed) * stunTime;
-
-        // calculate distance ratios
-        decelDist = (decelTime / (2 * fullSpeedTime + decelTime)) * knockbackDist;
-        fullSpeedDist = knockbackDist - decelDist;
-
-        // calculate initial knockback speed
-        fullSpeed = fullSpeedDist / fullSpeedTime;
-
-        // reset verlet previous frame speed to full speed
-        prevFrameSpeed = fullSpeed;
-    }
 
     public override void UpdateState()
     {
@@ -87,53 +42,10 @@ public class PlayerHitState : PlayerBaseState
             // this whole block should only run once after hitlag stops
             if (stunTime > 0 && !knockbackTriggered)
             {
-                if (hitAttack.attack.knockback.x > 0)
-                {
-                    CalculateKnockbackVariables();
-                }
-
-                if (hitAttack.attack.knockback.y > 0)
-                {
-                    applyKnockup();
-                }
+                player.gameObject.GetComponent<PlayerKnockback>().ApplyKnockback(hitAttack);
 
                 knockbackTriggered = true;
             }
-
-            if (stunTime > 0 && hitAttack.attack.knockback.x > 0)
-            {
-                updateKnockback();
-            }
-        }
-    }
-
-    private void applyKnockup()
-    {
-        player.gravity = -51;
-        float timeToApex = Mathf.Sqrt((-2f / player.gravity) * hitAttack.attack.knockback.y);
-        float knockupVelocity = (2 * hitAttack.attack.knockback.y) / timeToApex;
-
-        player.currentMovement.y = knockupVelocity;
-    }
-
-    private void updateKnockback()
-    {
-        if (Time.time < startTime + fullSpeedTime)
-        {
-            player.currentMovement.x = attackDirection.x * fullSpeed;
-            player.currentMovement.z = attackDirection.z * fullSpeed;
-        }
-        else
-        {
-            float timeDecelerating = Time.time - (startTime + fullSpeedTime);
-            float currentSpeed = Mathf.Clamp((1 - timeDecelerating / decelTime), 0, 1) * fullSpeed;
-
-            float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
-
-            player.currentMovement.x = verletSpeed * attackDirection.x;
-            player.currentMovement.z = verletSpeed * attackDirection.z;
-
-            prevFrameSpeed = currentSpeed;
         }
     }
 
