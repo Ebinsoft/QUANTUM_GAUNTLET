@@ -23,6 +23,10 @@ public abstract class PlayerBaseState
         player.currentState.ExitState();
         player.currentState.Cleanup();
         player.currentState = newState;
+        // if (player.gameObject.name == "DummyPlayer")
+        // {
+        //     Debug.Log(player.currentState);
+        // }
         player.currentState.Setup();
         player.currentState.EnterState();
     }
@@ -69,7 +73,16 @@ public abstract class PlayerBaseState
         }
         else if (player.triggerHit)
         {
-            SwitchState(player.StunState);
+            if (player.characterController.isGrounded)
+            {
+                SwitchState(player.StunState);
+            }
+
+            else
+            {
+                SwitchState(player.TumblingState);
+            }
+
         }
 
         else

@@ -33,17 +33,16 @@ public class PlayerStunState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.isStunned) return;
-
-        if (!player.anim.GetBool("InHit") && player.characterController.isGrounded)
+        if (!player.characterController.isGrounded)
         {
-            SwitchState(player.IdleState);
+            SwitchState(player.TumblingState);
+        }
+
+        else if (!player.isStunned)
+        {
             player.playerKnockback.StopKnockback();
+            SwitchState(player.IdleState);
         }
 
-        else if (!player.anim.GetBool("InHit") && !player.characterController.isGrounded)
-        {
-            SwitchState(player.FallingState);
-        }
     }
 }
