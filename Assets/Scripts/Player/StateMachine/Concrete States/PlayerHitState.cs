@@ -51,7 +51,7 @@ public class PlayerHitState : PlayerBaseState
         attackDirection = (player.transform.position - hitAttack.origin.position).normalized;
 
         // if there is knockback, turn the player towards the attacker
-        if (hitAttack.attack.knockback > 0)
+        if (hitAttack.attack.knockbackMagnitude > 0)
         {
             player.rotationTarget.x = -attackDirection.x;
             player.rotationTarget.y = -attackDirection.z;
@@ -63,7 +63,7 @@ public class PlayerHitState : PlayerBaseState
         // begin stun timer
         startTime = Time.time;
 
-        knockbackDist = hitAttack.attack.knockback;
+        knockbackDist = hitAttack.attack.knockback.x;
 
         // calculate time ratios
         fullSpeedTime = percentAtFullSpeed * stunTime;
@@ -87,12 +87,12 @@ public class PlayerHitState : PlayerBaseState
             // this whole block should only run once after hitlag stops
             if (stunTime > 0 && !knockbackTriggered)
             {
-                if (hitAttack.attack.knockback > 0)
+                if (hitAttack.attack.knockback.x > 0)
                 {
                     CalculateKnockbackVariables();
                 }
 
-                if (hitAttack.attack.knockup > 0)
+                if (hitAttack.attack.knockback.y > 0)
                 {
                     applyKnockup();
                 }
@@ -100,7 +100,7 @@ public class PlayerHitState : PlayerBaseState
                 knockbackTriggered = true;
             }
 
-            if (stunTime > 0 && hitAttack.attack.knockback > 0)
+            if (stunTime > 0 && hitAttack.attack.knockback.x > 0)
             {
                 updateKnockback();
             }
@@ -109,10 +109,10 @@ public class PlayerHitState : PlayerBaseState
 
     private void applyKnockup()
     {
-        float timeToApex = hitAttack.attack.knockupTime / 2;
+        player.gravity = -51;
+        float timeToApex = Mathf.Sqrt((-2f / player.gravity) * hitAttack.attack.knockback.y);
+        float knockupVelocity = (2 * hitAttack.attack.knockback.y) / timeToApex;
 
-        player.gravity = (-2 * hitAttack.attack.knockup) / Mathf.Pow(timeToApex, 2);
-        float knockupVelocity = (2 * hitAttack.attack.knockup) / timeToApex;
         player.currentMovement.y = knockupVelocity;
     }
 
