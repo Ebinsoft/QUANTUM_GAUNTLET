@@ -49,12 +49,18 @@ public class PlayerKnockback : MonoBehaviour
         }
 
         SetupKnockback();
-        ApplyKnockup();
+        if (hitData.attack.knockback.y > 0)
+        {
+            ApplyKnockup();
+        }
+
     }
 
     public void StopKnockback()
     {
         activeHit = null;
+        player.currentMovement.x = 0.0f;
+        player.currentMovement.z = 0.0f;
     }
 
     private void SetupKnockback()
