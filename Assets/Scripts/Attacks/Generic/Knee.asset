@@ -18,4 +18,4 @@ MonoBehaviour:
   knockbackAngle: 30
   knockbackMagnitude: 2
   stunCalculation: 0
-  baseStun: 0.1
+  baseStun: 0.5

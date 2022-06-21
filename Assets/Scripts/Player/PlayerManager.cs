@@ -20,13 +20,17 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
     public PlayerHeavyAttackState HeavyAttackState;
-    public PlayerHitState HitState;
+    public PlayerStunState StunState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
+    public PlayerTumblingState TumblingState;
+    public PlayerCrashingState CrashingState;
 
     // Other Stuff
     public Animator anim;
     public AnimatorEffects animEffects;
+    public PlayerStun playerStun;
+    public PlayerKnockback playerKnockback;
     private PlayerInput playerInput;
     public CharacterController characterController;
 
@@ -99,9 +103,16 @@ public class PlayerManager : MonoBehaviour
     public float dashesLeft;
 
     // hit variables
-    public HitData? triggerHit = null;
+    public bool triggerHit = false;
+    public bool isStunned = false;
     public bool isHit = false;
     public bool isHitLagging = false;
+
+    // tumbling variables
+    public bool isTumbling = false;
+
+    // crashing variables
+    public bool isCrashing = false;
 
     // gravity variables
     public float gravity;
@@ -136,12 +147,16 @@ public class PlayerManager : MonoBehaviour
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
         DashingState = new PlayerDashingState(this);
-        HitState = new PlayerHitState(this);
+        StunState = new PlayerStunState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
+        TumblingState = new PlayerTumblingState(this);
+        CrashingState = new PlayerCrashingState(this);
 
         playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        playerStun = GetComponent<PlayerStun>();
+        playerKnockback = GetComponent<PlayerKnockback>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
@@ -207,7 +222,7 @@ public class PlayerManager : MonoBehaviour
         // this will handle early falling if you release the jump button
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && currentMovement.y < 0)
         {
             currentMovement.y = groundedGravity;
         }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerHitHandler : MonoBehaviour
@@ -22,17 +21,23 @@ public class PlayerHitHandler : MonoBehaviour
 
         if (player.stats.canGetStunned)
         {
-            player.triggerHit = hitData;
+            player.triggerHit = true;
 
-            // if (attack.knockback > 0)
-            // {
-            //     Vector3 knockbackDirection = (transform.position - attackerTransform.position).normalized;
-            //     player.rotationTarget.x = -knockbackDirection.x;
-            //     player.rotationTarget.y = -knockbackDirection.z;
-            //     player.currentMovement = knockbackDirection * attack.knockback;
-            // }
+            if (attack.stunTime > 0)
+            {
+                player.playerStun.ApplyStun(attack.stunTime + attack.hitlagTime);
+            }
 
-            player.animEffects.PlayHitLag(attack.hitlagTime);
+            Action applyPlayerKnockback = () =>
+            {
+                if (attack.knockbackMagnitude > 0)
+                {
+                    player.playerKnockback.ApplyKnockback(hitData, hitData.attack.stunTime);
+                }
+            };
+
+            player.animEffects.PlayHitLag(attack.hitlagTime,
+                onComplete: applyPlayerKnockback);
         }
 
         return player.stats.canGiveRecoil;

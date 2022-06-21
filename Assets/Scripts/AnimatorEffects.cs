@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class AnimatorEffects : MonoBehaviour
 {
     private Animator anim;
 
+    private IEnumerator ShakeRoutine;
+    private IEnumerator AnimatorLagRoutine;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -13,17 +17,24 @@ public class AnimatorEffects : MonoBehaviour
 
     public void PlayRecoilLag(float duration)
     {
-        StartCoroutine(AnimatorLag(duration, false));
+        StartCoroutine(AnimatorLag(duration));
     }
 
-    public void PlayHitLag(float duration)
+    public void PlayHitLag(float duration, Action onComplete = null)
     {
-        transform.root.GetComponent<PlayerManager>().isHitLagging = true;
-        StartCoroutine(Shake(duration, duration, 75f));
-        StartCoroutine(AnimatorLag(duration, true));
+        // stop any currently running coroutines
+        if (ShakeRoutine != null) StopCoroutine(ShakeRoutine);
+        if (AnimatorLagRoutine != null) StopCoroutine(AnimatorLagRoutine);
+
+        // reinitalize and run new coroutines
+        ShakeRoutine = Shake(duration, duration, 75f);
+        StartCoroutine(ShakeRoutine);
+
+        AnimatorLagRoutine = AnimatorLag(duration, onComplete: onComplete);
+        StartCoroutine(AnimatorLagRoutine);
     }
 
-    private IEnumerator AnimatorLag(float duration, bool resetHitlagFlag)
+    private IEnumerator AnimatorLag(float duration, Action onComplete = null)
     {
         // pause animator
         anim.speed = 0;
@@ -32,9 +43,9 @@ public class AnimatorEffects : MonoBehaviour
         // return to normal speed
         anim.speed = 1;
 
-        if (resetHitlagFlag)
+        if (onComplete != null)
         {
-            transform.root.GetComponent<PlayerManager>().isHitLagging = false;
+            onComplete();
         }
     }
 
