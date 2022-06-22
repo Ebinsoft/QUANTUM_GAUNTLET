@@ -31,7 +31,6 @@ public class PlayerManager : MonoBehaviour
     public AnimatorEffects animEffects;
     public PlayerStun playerStun;
     public PlayerKnockback playerKnockback;
-    private PlayerInput playerInput;
     public CharacterController characterController;
 
     // Handles all movmement once per frame with cc.Move
@@ -153,7 +152,6 @@ public class PlayerManager : MonoBehaviour
         TumblingState = new PlayerTumblingState(this);
         CrashingState = new PlayerCrashingState(this);
 
-        playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();
         playerKnockback = GetComponent<PlayerKnockback>();

@@ -19994,7 +19994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: cbc3728fd5fccaf77952b48152bb1a9a, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -20005,9 +20005,53 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe2116f6-3c4d-457c-b9f2-4acd252b35e1
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Gamepad/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 41e1dea5-6f28-4175-a4d6-e105ed189979
+    m_ActionName: Player/Jump[/Keyboard/space,/Gamepad/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6a8eee6-dc84-496b-94f2-bc9ca7ef2e29
+    m_ActionName: Player/LightAttack[/Keyboard/e,/Gamepad/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bfb0eeda-a29c-4a7c-90e7-abee356347cb
+    m_ActionName: Player/HeavyAttack[/Keyboard/r,/Gamepad/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7ee82e56-a7a2-47cc-b142-9d637f068738
+    m_ActionName: Player/UtilityAttack[/Keyboard/q,/Gamepad/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b92eb78-e60d-43e9-811f-aa38b29666ac
+    m_ActionName: Player/Special1[/Gamepad/rightShoulder,/Gamepad/buttonWest,/Keyboard/backquote,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 00c7d3ca-c550-4cd7-adc1-a77a0e42ba01
+    m_ActionName: Player/Special2[/Gamepad/rightShoulder,/Gamepad/buttonNorth,/Keyboard/backquote,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1862ab3a-ade5-4379-857d-21da57a50895
+    m_ActionName: Player/Special3[/Gamepad/rightShoulder,/Gamepad/buttonEast,/Keyboard/backquote,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fa6559c1-105c-4e29-97b7-904c33915a16
+    m_ActionName: Player/Block[/Keyboard/ctrl,/Gamepad/leftShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 22504b3e-b80f-4ca9-9f32-fdeb33a08f4d
+    m_ActionName: Player/Start[/Gamepad/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7e86a42-8d2d-4f2f-846d-9f151cf828a3
+    m_ActionName: Player/Select[/Gamepad/select]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
