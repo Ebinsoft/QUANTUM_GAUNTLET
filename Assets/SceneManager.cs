@@ -15,13 +15,14 @@ public class SceneManager : MonoBehaviour
         GameManager.instance.numPlayers = 2;
         for (int i = 0; i < GameManager.instance.numPlayers; i++)
         {
+            player.name = "Player " + i;
             SpawnCharacter(c);
         }
     }
 
     void SpawnCharacter(CharacterData c)
     {
-        playerInputManager.playerPrefab = c.characterPrefab;
+        playerInputManager.playerPrefab = player;
         playerInputManager.JoinPlayer();
     }
 }
