@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roster: {fileID: 1506229658}
-  numPlayers: 0
+  numPlayers: 2
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0

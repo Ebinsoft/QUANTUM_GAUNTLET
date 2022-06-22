@@ -12,10 +12,11 @@ public class SceneManager : MonoBehaviour
     {
         CharacterData c = GameManager.instance.roster.GetCharacter("Edmond");
         player = c.characterPrefab;
-        GameManager.instance.numPlayers = 2;
         for (int i = 0; i < GameManager.instance.numPlayers; i++)
         {
             player.name = "Player " + i;
+            player.tag = "Team " + (i + 1);
+            player.transform.position = new Vector3(i, 0.5f, i);
             SpawnCharacter(c);
         }
     }
