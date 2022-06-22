@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     public bool canTakeDamage { get; private set; }
     public bool canGiveRecoil { get; private set; }
     public bool canGetStunned { get; private set; }
+
+    private ShaderEffects shaderEffects;
 
     public enum Status
     {
@@ -53,9 +56,16 @@ public class PlayerStats : MonoBehaviour
                     Debug.LogError("Incorrectly set stat.Status");
                     break;
             }
+            _currentStatus = value;
+            shaderEffects.ApplyStatusFlicker(_currentStatus);
         }
     }
 
+    public void SubscribeToStatusChanges(Action<Status> callback)
+    {
+
+
+    }
 
     void Awake()
     {
@@ -63,6 +73,8 @@ public class PlayerStats : MonoBehaviour
         canGetStunned = true;
         canGiveRecoil = true;
         resetStats();
+
+        shaderEffects = GetComponentInChildren<ShaderEffects>();
     }
 
     public void resetStats()

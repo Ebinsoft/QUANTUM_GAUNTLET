@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EdmondAlt_mat
-  m_Shader: {fileID: -6465566751694194690, guid: 52d38db4de9f44346a580e0727df2cad, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b272b79b0849811469732ba3540452f2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -88,6 +88,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_96dbbe7eba9a4fd4bf5afcc71d990330: 0
     - Vector1_4a37eea7311d414d8c9b0af60662086a: 1
     - Vector1_4f2087eb82254a4db8e24345dd7248db: 1
     - Vector1_9a61eae6694145c78968380a116b4e70: 1
@@ -95,6 +96,7 @@ Material:
     - Vector1_cfe9375606514501a39db7fc3b802450: 1
     - Vector1_d836ee95d4254c808391543d36d22a96: 128
     - Vector1_e3b7f8f6aa6647788b7a2298278bda33: 10
+    - Vector1_e6ea5cf696db43668685df90edcb2b22: 4
     - Vector1_f18c67acf1d64dde9bade33db2b5c754: 5
     - Vector1_f54f51ef7aab46589d2bcc11bf5b0644: 1.9
     - Vector1_f68f232d6b814c5d9ac57aa7c7efe469: 0.9
@@ -111,6 +113,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FlickerEnabled: 0
+    - _FlickerSpeed: 8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -135,6 +139,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_64c23c8461534406927eb37381f7618f: {r: 0, g: 0.1006711, b: 1, a: 0}
     - Color_a43ed3969f5f431aa2e35e1f40137722: {r: 0, g: 0, b: 0, a: 0}
     - Color_a874bc1c6a204665b37932fa712a3d2b: {r: 1, g: 1, b: 1, a: 0}
     - Color_dc1280af2e4a4cfeafc81f861773bde9: {r: 1, g: 0, b: 0, a: 0}
@@ -142,6 +147,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlickerColor: {r: 0, g: 0.1006711, b: 1, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

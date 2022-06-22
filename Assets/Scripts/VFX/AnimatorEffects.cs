@@ -10,16 +10,19 @@ public class AnimatorEffects : MonoBehaviour
     private IEnumerator ShakeRoutine;
     private IEnumerator AnimatorLagRoutine;
 
-    void Awake()
+    void Start()
     {
         anim = GetComponent<Animator>();
     }
 
+    // Freezes the player's animator for a set duration
     public void PlayRecoilLag(float duration)
     {
         StartCoroutine(AnimatorLag(duration));
     }
 
+    // Freezes the player's animator and shakes him around for a set duration
+    // If provided, onComplete will be run after the hitlag terminates
     public void PlayHitLag(float duration, Action onComplete = null)
     {
         // stop any currently running coroutines
@@ -65,3 +68,4 @@ public class AnimatorEffects : MonoBehaviour
         anim.gameObject.transform.localPosition = originalPos;
     }
 }
+
