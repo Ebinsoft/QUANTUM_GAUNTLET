@@ -12,20 +12,16 @@ public class VersusSceneManager : MonoBehaviour
     {
         var versusInfo = GameManager.instance.versusInfo;
         int numPlayers = versusInfo.numPlayers;
-        CharacterData c = GameManager.instance.roster.GetCharacter("Edmond");
-        player = c.characterPrefab;
-        for (int i = 0; i < numPlayers; i++)
-        {
-            player.name = "Player " + i;
-            player.tag = "Team " + (i + 1);
-            player.transform.position = new Vector3(i, 0.5f, i);
-            SpawnCharacter(c);
-        }
-    }
 
-    void SpawnCharacter(CharacterData c)
-    {
-        playerInputManager.playerPrefab = player;
-        playerInputManager.JoinPlayer();
+        foreach (PlayerSettings ps in versusInfo.playerSettings)
+        {
+            CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
+            player = c.characterPrefab;
+            player.name = ps.playerName;
+            player.tag = ps.team;
+            player.transform.position = new Vector3(ps.playerIndex, 0.5f, ps.playerIndex);
+            playerInputManager.playerPrefab = player;
+            playerInputManager.JoinPlayer();
+        }
     }
 }
