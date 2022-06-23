@@ -12,10 +12,10 @@ public class FireballFlurry : SpecialAttackBehavior
     int numProjectiles = 5;
 
     // distance away from player's XZ position to spawn projectiles
-    float spawnDistance = 0.95f;
+    float spawnDistance = 0.75f;
 
     // distance above player's Y position to spawn projectiles
-    float spawnHeight = 0.6f;
+    float spawnHeight = 0.75f;
 
     List<Vector2> projectileDirections;
 
@@ -52,7 +52,7 @@ public class FireballFlurry : SpecialAttackBehavior
         Vector3 spawnPoint = player.transform.position + dir3 * spawnDistance;
         spawnPoint.y += spawnHeight;
 
-        Object.Instantiate(fireballPrefab, spawnPoint, Quaternion.LookRotation(dir3, Vector3.up));
+        SpawnProjectile(fireballPrefab, spawnPoint, Quaternion.LookRotation(dir3, Vector3.up));
     }
 
     private static Vector2 Rotate(Vector2 v, float degrees)

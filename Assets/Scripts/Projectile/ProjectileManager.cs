@@ -69,10 +69,11 @@ public class ProjectileManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // TODO: make sure player hit is on a different team
+        bool isHurtbox = other.gameObject.layer == LayerMask.NameToLayer("Hurtbox");
+        bool isOpponent = other.attachedRigidbody.tag != this.tag;
+        bool wasAlreadyHit = hitRigidbodies.Contains(other.attachedRigidbody);
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox")
-            && !hitRigidbodies.Contains(other.attachedRigidbody))
+        if (isHurtbox && isOpponent && !wasAlreadyHit)
         {
             GameObject playerHit = other.attachedRigidbody.gameObject;
             HitData hitData = new HitData() { attack = attack, origin = transform };

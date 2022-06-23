@@ -78,24 +78,22 @@ public class PlayerAttackHandler : MonoBehaviour
     {
         if (activeAttack == null) return;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox"))
+        bool isHurtbox = other.gameObject.layer == LayerMask.NameToLayer("Hurtbox");
+        bool isOpponent = other.attachedRigidbody.tag != this.tag;
+        bool wasAlreadyHit = hitRigidBodies.Contains(other.attachedRigidbody);
+
+        if (isHurtbox && isOpponent && !wasAlreadyHit)
         {
-            if (!hitRigidBodies.Contains(other.attachedRigidbody))
-            {
-                hitRigidBodies.Add(other.attachedRigidbody);
-                HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
-            }
-        }
-        else
-        {
-            // Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
+            hitRigidBodies.Add(other.attachedRigidbody);
+            HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
         }
     }
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
         HitData hitData = new HitData() { attack = activeAttack, origin = transform };
-        if (playerObj.GetComponent<PlayerHitHandler>().handleHit(hitData))
+        bool hitResolved = playerObj.GetComponent<PlayerHitHandler>().handleHit(hitData);
+        if (hitResolved)
         {
             // do hitlag for attacking player
             animEffects.PlayRecoilLag(activeAttack.hitlagTime);
