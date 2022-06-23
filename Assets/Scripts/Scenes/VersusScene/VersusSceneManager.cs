@@ -18,7 +18,7 @@ public class VersusSceneManager : MonoBehaviour
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             player = c.characterPrefab;
             playerInputManager.playerPrefab = player;
-            playerInputManager.JoinPlayer();
+            playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
         }
     }
 }
