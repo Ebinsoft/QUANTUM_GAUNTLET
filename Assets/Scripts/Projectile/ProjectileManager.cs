@@ -3,11 +3,12 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 public class ProjectileManager : MonoBehaviour
 {
     // behavior and attack information
-    public Type behaviorType;
+    public SerializedClass behaviorType;
     public ProjectileBehavior behavior;
     public AttackInfo attack;
 
@@ -31,8 +32,7 @@ public class ProjectileManager : MonoBehaviour
 
         rotationTargetDirection = transform.forward;
 
-        // Type behaviorType = Type.GetType(behaviorName);
-        behavior = (ProjectileBehavior)Activator.CreateInstance(behaviorType);
+        behavior = (ProjectileBehavior)behaviorType.CreateInstance();
         behavior.projectile = this;
         behavior.OnSpawn();
     }
@@ -98,6 +98,11 @@ public class ProjectileManager : MonoBehaviour
 [CustomEditor(typeof(ProjectileManager))]
 public class ProjectileManagerEditor : Editor
 {
+    SerializedProperty m_behaviorType;
+    SerializedProperty m_attack;
+    SerializedProperty m_movementSpeed;
+    SerializedProperty m_rotationSpeed;
+
     public override void OnInspectorGUI()
     {
         ProjectileManager obj = target as ProjectileManager;
@@ -112,6 +117,9 @@ public class ProjectileManagerEditor : Editor
         obj.movementSpeed = EditorGUILayout.FloatField("Movement Speed", obj.movementSpeed);
         obj.rotationSpeed = EditorGUILayout.FloatField("Rotation Speed", obj.rotationSpeed);
 
-        EditorUtility.SetDirty(obj);
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(obj);
+        }
     }
 }

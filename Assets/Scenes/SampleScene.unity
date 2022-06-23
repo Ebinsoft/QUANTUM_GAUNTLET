@@ -758,12 +758,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1032307531, guid: 448f03bd451772a4fbbd08226d85dbf5, type: 3}
-      propertyPath: behaviorName
+      propertyPath: movementSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032307531, guid: 448f03bd451772a4fbbd08226d85dbf5, type: 3}
+      propertyPath: behaviorType.className
       value: FireballBehavior
       objectReference: {fileID: 0}
     - target: {fileID: 1032307531, guid: 448f03bd451772a4fbbd08226d85dbf5, type: 3}
-      propertyPath: movementSpeed
-      value: 7
+      propertyPath: behaviorType.qualifiedName
+      value: FireballBehavior, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
       objectReference: {fileID: 0}
     - target: {fileID: 3479739096749663073, guid: 448f03bd451772a4fbbd08226d85dbf5, type: 3}
       propertyPath: ShapeModule.type

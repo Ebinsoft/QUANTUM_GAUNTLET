@@ -9731,9 +9731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0cb7764f21d5e40b9c9ab4976a904e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviorName: FireballBehavior
   attack: {fileID: 11400000, guid: 418e210b1ed60bb4495807d5326a96e2, type: 2}
-  movementSpeed: 10
+  movementSpeed: 7
   rotationSpeed: 10
   rotationTargetDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &4471906737837383579
