@@ -108,9 +108,11 @@ public class PlayerAttackHandler : MonoBehaviour
     public void InitiateAttack(AttackInfo attack)
     {
         activeAttack = attack;
-        if (attack.specialBehavior != null)
+        if (attack.hasSpecialBehavior)
         {
             activeSpecialBehavior = (SpecialAttackBehavior)attack.specialBehavior.CreateInstance();
+            activeSpecialBehavior.player = GetComponent<PlayerManager>();
+            activeSpecialBehavior.OnEnter();
         }
 
         // reset list of rigidbodies hit by attack

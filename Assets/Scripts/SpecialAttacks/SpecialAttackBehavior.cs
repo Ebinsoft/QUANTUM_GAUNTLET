@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class SpecialAttackBehavior
 {
+    public PlayerManager player;
+
     // called once after special attack activates
     public abstract void OnEnter();
 
