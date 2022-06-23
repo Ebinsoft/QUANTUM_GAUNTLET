@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SceneManager : MonoBehaviour
+public class VersusSceneManager : MonoBehaviour
 {
     public GameObject player;
     public PlayerInputManager playerInputManager;

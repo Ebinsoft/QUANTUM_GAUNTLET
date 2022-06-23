@@ -65,6 +65,12 @@ public enum StunCalculation
     knockbackOnly,
 }
 
+public struct HitData
+{
+    public AttackInfo attack;
+    public Transform origin;
+}
+
 [CustomEditor(typeof(AttackInfo))]
 public class AttackInfoEditor : Editor
 {

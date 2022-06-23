@@ -20,3 +20,10 @@ public class Roster : MonoBehaviour
         return null;
     }
 }
+
+[System.Serializable]
+public class CharacterData
+{
+    public string characterName;
+    public GameObject characterPrefab;
+}
