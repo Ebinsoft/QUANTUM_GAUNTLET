@@ -16,6 +16,10 @@ MonoBehaviour:
   damage: 15
   hitlagTime: 0.13333334
   knockbackAngle: 70
-  knockbackMagnitude: 2
+  knockbackMagnitude: 5
   stunCalculation: 0
   baseStun: 0.5
+  hasSpecialBehavior: 0
+  specialBehavior:
+    className: 
+    qualifiedName: 

@@ -19,3 +19,7 @@ MonoBehaviour:
   knockbackMagnitude: 0
   stunCalculation: 1
   baseStun: 0.3
+  hasSpecialBehavior: 0
+  specialBehavior:
+    className: 
+    qualifiedName: 
