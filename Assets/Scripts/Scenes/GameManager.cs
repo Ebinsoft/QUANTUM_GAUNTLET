@@ -7,10 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public Roster roster;
     public VersusInfo versusInfo;
-    private GameManager()
-    {
-
-    }
 
     void Awake()
     {
