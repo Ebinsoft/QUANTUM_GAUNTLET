@@ -11,10 +11,12 @@ public class PlayerSetup : MonoBehaviour
 
     private PlayerInput playerInput;
     private PlayerSetting playerSetting;
+    private CharacterController characterController;
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -46,11 +48,14 @@ public class PlayerSetup : MonoBehaviour
 
         else
         {
+            Debug.Log(playerSetting.playerIndex);
             // Update our player with their versusInfo settings
             gameObject.name = playerSetting.playerName;
             gameObject.tag = playerSetting.team;
             // lazily put characters in spots
+            characterController.enabled = false;
             transform.position = new Vector3(playerSetting.playerIndex, 0.5f, playerSetting.playerIndex);
+            characterController.enabled = true;
         }
     }
 
