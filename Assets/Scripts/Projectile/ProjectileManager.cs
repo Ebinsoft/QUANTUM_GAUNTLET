@@ -98,11 +98,6 @@ public class ProjectileManager : MonoBehaviour
 [CustomEditor(typeof(ProjectileManager))]
 public class ProjectileManagerEditor : Editor
 {
-    SerializedProperty m_behaviorType;
-    SerializedProperty m_attack;
-    SerializedProperty m_movementSpeed;
-    SerializedProperty m_rotationSpeed;
-
     public override void OnInspectorGUI()
     {
         ProjectileManager obj = target as ProjectileManager;
