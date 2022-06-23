@@ -9,11 +9,11 @@ public class VersusInfo
     public string stage;
     public string gameType = "FFA";
     public int numLives = 3;
-    public List<PlayerSettings> playerSettings;
+    public List<PlayerSetting> playerSettings;
 }
 
 [System.Serializable]
-public class PlayerSettings
+public class PlayerSetting
 {
     public string playerName = "";
     public string playerType;
