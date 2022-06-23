@@ -18,6 +18,7 @@ public class PlayerAttackHandler : MonoBehaviour
     private List<ColliderWithDefault> playerHitboxes;
 
     private AttackInfo activeAttack = null;
+    public SpecialAttackBehavior activeSpecialBehavior { get; private set; }
 
     // tracks the distinct players hit during an active attack window
     private HashSet<Rigidbody> hitRigidBodies;
@@ -38,6 +39,14 @@ public class PlayerAttackHandler : MonoBehaviour
         foreach (var hitbox in playerHitboxes)
         {
             hitbox.collider.enabled = false;
+        }
+    }
+
+    void Update()
+    {
+        if (activeSpecialBehavior != null)
+        {
+            activeSpecialBehavior.Update();
         }
     }
 
@@ -99,6 +108,12 @@ public class PlayerAttackHandler : MonoBehaviour
     public void InitiateAttack(AttackInfo attack)
     {
         activeAttack = attack;
+        if (attack.hasSpecialBehavior)
+        {
+            activeSpecialBehavior = (SpecialAttackBehavior)attack.specialBehavior.CreateInstance();
+            activeSpecialBehavior.player = GetComponent<PlayerManager>();
+            activeSpecialBehavior.OnEnter();
+        }
 
         // reset list of rigidbodies hit by attack
         hitRigidBodies = new HashSet<Rigidbody>();
@@ -112,6 +127,12 @@ public class PlayerAttackHandler : MonoBehaviour
 
         // reset active attack
         activeAttack = null;
+
+        if (activeSpecialBehavior != null)
+        {
+            activeSpecialBehavior.OnExit();
+            activeSpecialBehavior = null;
+        }
     }
 
     private void CleanupHitboxes()

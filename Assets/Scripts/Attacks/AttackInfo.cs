@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 
@@ -51,6 +52,10 @@ public class AttackInfo : ScriptableObject
             }
         }
     }
+
+
+    public bool hasSpecialBehavior = false;
+    public SerializedClass specialBehavior = null;
 }
 
 public enum StunCalculation
@@ -128,6 +133,21 @@ public class AttackInfoEditor : Editor
                 EditorGUILayout.FloatField("Knockback Stun", obj.knockbackStun);
             }
             EditorGUILayout.FloatField("Total Stun", obj.stunTime);
+        }
+
+        EditorGUILayout.Space();
+
+        // Special Behavior
+        obj.hasSpecialBehavior = EditorGUILayout.Toggle("Is Special Attack", obj.hasSpecialBehavior);
+        if (obj.hasSpecialBehavior)
+        {
+            EditorGUI.indentLevel++;
+            obj.specialBehavior = SubclassSelector.Dropdown<SpecialAttackBehavior>("Special Behavior", obj.specialBehavior);
+            EditorGUI.indentLevel--;
+        }
+        else
+        {
+            obj.specialBehavior = null;
         }
 
         EditorUtility.SetDirty(obj);

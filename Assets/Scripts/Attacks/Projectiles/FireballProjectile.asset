@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a73b62693ef35024ca70d7c41223d0bf, type: 3}
-  m_Name: Low Kick
+  m_Name: FireballProjectile
   m_EditorClassIdentifier: 
-  attackName: Low Kick
-  damage: 8
+  attackName: Fireball
+  damage: 15
   hitlagTime: 0.13333334
-  knockbackAngle: 90
-  knockbackMagnitude: 1
+  knockbackAngle: 70
+  knockbackMagnitude: 5
   stunCalculation: 0
-  baseStun: 0.1
+  baseStun: 0.5
   hasSpecialBehavior: 0
   specialBehavior:
     className: 
