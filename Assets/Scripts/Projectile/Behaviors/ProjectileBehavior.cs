@@ -19,14 +19,4 @@ public abstract class ProjectileBehavior
 
     // called every frame
     public abstract void Update();
-
-
-    // helper for ProjectileManager's custom inspector
-    public static List<Type> GetAllProjectileBehaviors()
-    {
-        return typeof(ProjectileBehavior).Assembly.GetTypes()
-            .Where(type => type.IsSubclassOf(typeof(ProjectileBehavior)))
-            .ToList();
-    }
-
 }

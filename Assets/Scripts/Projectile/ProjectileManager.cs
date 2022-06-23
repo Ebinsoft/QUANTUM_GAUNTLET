@@ -7,7 +7,7 @@ using UnityEditor;
 public class ProjectileManager : MonoBehaviour
 {
     // behavior and attack information
-    public string behaviorName;
+    public Type behaviorType;
     public ProjectileBehavior behavior;
     public AttackInfo attack;
 
@@ -31,7 +31,7 @@ public class ProjectileManager : MonoBehaviour
 
         rotationTargetDirection = transform.forward;
 
-        Type behaviorType = Type.GetType(behaviorName);
+        // Type behaviorType = Type.GetType(behaviorName);
         behavior = (ProjectileBehavior)Activator.CreateInstance(behaviorType);
         behavior.projectile = this;
         behavior.OnSpawn();
@@ -103,12 +103,7 @@ public class ProjectileManagerEditor : Editor
         ProjectileManager obj = target as ProjectileManager;
 
         // projectile behavior selector
-        var behaviors = ProjectileBehavior.GetAllProjectileBehaviors();
-        string[] behaviorNames = behaviors.Select(b => b.ToString()).ToArray();
-        int behaviorIdx = Math.Max(0, Array.IndexOf(behaviorNames, obj.behaviorName));
-
-        behaviorIdx = EditorGUILayout.Popup("Behavior", behaviorIdx, behaviorNames);
-        obj.behaviorName = behaviorNames[behaviorIdx];
+        obj.behaviorType = SubclassSelector.Dropdown<ProjectileBehavior>("Behavior", obj.behaviorType);
 
         // attack info
         obj.attack = (AttackInfo)EditorGUILayout.ObjectField("Attack", obj.attack, typeof(AttackInfo), false);
