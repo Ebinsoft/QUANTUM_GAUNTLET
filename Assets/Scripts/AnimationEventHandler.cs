@@ -11,4 +11,12 @@ public class AnimationEventHandler : MonoBehaviour
     {
         effects.PlayLandingEffect();
     }
+
+    public void TriggerSpecialAttackAction(int actionID)
+    {
+        if (attackHandler.activeSpecialBehavior != null)
+        {
+            attackHandler.activeSpecialBehavior.TriggerAction(actionID);
+        }
+    }
 }
