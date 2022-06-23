@@ -12,12 +12,16 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         player = GetComponent<PlayerManager>();
-        playerInput = new PlayerInput();
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    void Start()
+    {
     }
 
     private void onMove(InputAction.CallbackContext context)
     {
-        player.inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
+        player.inputMovement = playerInput.actions["Move"].ReadValue<Vector2>();
         player.isMovePressed = player.inputMovement.magnitude > 0;
     }
 
@@ -92,85 +96,83 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.Enable();
 
         // subscribe to events
 
-        playerInput.Player.Move.started += onMove;
-        playerInput.Player.Move.performed += onMove;
-        playerInput.Player.Move.canceled += onMove;
+        playerInput.actions["Move"].started += onMove;
+        playerInput.actions["Move"].performed += onMove;
+        playerInput.actions["Move"].canceled += onMove;
 
-        playerInput.Player.Jump.started += onJump;
-        playerInput.Player.Jump.canceled += onJump;
+        playerInput.actions["Jump"].started += onJump;
+        playerInput.actions["Jump"].canceled += onJump;
 
-        playerInput.Player.LightAttack.started += onLightAttack;
-        playerInput.Player.LightAttack.canceled += onLightAttack;
+        playerInput.actions["LightAttack"].started += onLightAttack;
+        playerInput.actions["LightAttack"].canceled += onLightAttack;
 
-        playerInput.Player.HeavyAttack.started += onHeavyAttack;
-        playerInput.Player.HeavyAttack.canceled += onHeavyAttack;
+        playerInput.actions["HeavyAttack"].started += onHeavyAttack;
+        playerInput.actions["HeavyAttack"].canceled += onHeavyAttack;
 
-        playerInput.Player.UtilityAttack.started += onUtilityAttack;
-        playerInput.Player.UtilityAttack.canceled += onUtilityAttack;
+        playerInput.actions["UtilityAttack"].started += onUtilityAttack;
+        playerInput.actions["UtilityAttack"].canceled += onUtilityAttack;
 
-        playerInput.Player.Special1.started += onSpecial1;
-        playerInput.Player.Special1.canceled += onSpecial1;
+        playerInput.actions["Special1"].started += onSpecial1;
+        playerInput.actions["Special1"].canceled += onSpecial1;
 
-        playerInput.Player.Special2.started += onSpecial2;
-        playerInput.Player.Special2.canceled += onSpecial2;
+        playerInput.actions["Special2"].started += onSpecial2;
+        playerInput.actions["Special2"].canceled += onSpecial2;
 
-        playerInput.Player.Special3.started += onSpecial3;
-        playerInput.Player.Special3.canceled += onSpecial3;
+        playerInput.actions["Special3"].started += onSpecial3;
+        playerInput.actions["Special3"].canceled += onSpecial3;
 
-        playerInput.Player.Block.started += onBlock;
-        playerInput.Player.Block.canceled += onBlock;
+        playerInput.actions["Block"].started += onBlock;
+        playerInput.actions["Block"].canceled += onBlock;
 
-        playerInput.Player.Start.started += onStart;
-        playerInput.Player.Start.canceled += onStart;
+        playerInput.actions["Start"].started += onStart;
+        playerInput.actions["Start"].canceled += onStart;
 
-        playerInput.Player.Select.started += onSelect;
-        playerInput.Player.Select.canceled += onSelect;
+        playerInput.actions["Select"].started += onSelect;
+        playerInput.actions["Select"].canceled += onSelect;
 
 
     }
 
     private void OnDisable()
     {
-        playerInput.Disable();
 
         // unsubscribe to events
 
-        playerInput.Player.Move.started -= onMove;
-        playerInput.Player.Move.performed -= onMove;
-        playerInput.Player.Move.canceled -= onMove;
+        playerInput.actions["Move"].started -= onMove;
+        playerInput.actions["Move"].performed -= onMove;
+        playerInput.actions["Move"].canceled -= onMove;
 
-        playerInput.Player.Jump.started -= onJump;
-        playerInput.Player.Jump.canceled -= onJump;
+        playerInput.actions["Jump"].started -= onJump;
+        playerInput.actions["Jump"].canceled -= onJump;
 
-        playerInput.Player.LightAttack.started -= onLightAttack;
-        playerInput.Player.LightAttack.canceled -= onLightAttack;
+        playerInput.actions["LightAttack"].started -= onLightAttack;
+        playerInput.actions["LightAttack"].canceled -= onLightAttack;
 
-        playerInput.Player.HeavyAttack.started -= onHeavyAttack;
-        playerInput.Player.HeavyAttack.canceled -= onHeavyAttack;
+        playerInput.actions["HeavyAttack"].started -= onHeavyAttack;
+        playerInput.actions["HeavyAttack"].canceled -= onHeavyAttack;
 
-        playerInput.Player.UtilityAttack.started -= onUtilityAttack;
-        playerInput.Player.UtilityAttack.canceled -= onUtilityAttack;
+        playerInput.actions["UtilityAttack"].started -= onUtilityAttack;
+        playerInput.actions["UtilityAttack"].canceled -= onUtilityAttack;
 
-        playerInput.Player.Special1.started -= onSpecial1;
-        playerInput.Player.Special1.canceled -= onSpecial1;
+        playerInput.actions["Special1"].started -= onSpecial1;
+        playerInput.actions["Special1"].canceled -= onSpecial1;
 
-        playerInput.Player.Special2.started -= onSpecial2;
-        playerInput.Player.Special2.canceled -= onSpecial2;
+        playerInput.actions["Special2"].started -= onSpecial2;
+        playerInput.actions["Special2"].canceled -= onSpecial2;
 
-        playerInput.Player.Special3.started -= onSpecial3;
-        playerInput.Player.Special3.canceled -= onSpecial3;
+        playerInput.actions["Special3"].started -= onSpecial3;
+        playerInput.actions["Special3"].canceled -= onSpecial3;
 
-        playerInput.Player.Block.started -= onBlock;
-        playerInput.Player.Block.canceled -= onBlock;
+        playerInput.actions["Block"].started -= onBlock;
+        playerInput.actions["Block"].canceled -= onBlock;
 
-        playerInput.Player.Start.started -= onStart;
-        playerInput.Player.Start.canceled -= onStart;
+        playerInput.actions["Start"].started -= onStart;
+        playerInput.actions["Start"].canceled -= onStart;
 
-        playerInput.Player.Select.started -= onSelect;
-        playerInput.Player.Select.canceled -= onSelect;
+        playerInput.actions["Select"].started -= onSelect;
+        playerInput.actions["Select"].canceled -= onSelect;
     }
 }
