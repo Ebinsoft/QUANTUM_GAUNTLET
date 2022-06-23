@@ -15,6 +15,10 @@ public class PlayerSetup : MonoBehaviour
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+    }
+
+    void Start()
+    {
         Setup();
     }
 
