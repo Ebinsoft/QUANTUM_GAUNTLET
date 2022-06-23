@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 1506229660}
   - component: {fileID: 1506229659}
   - component: {fileID: 1506229658}
+  - component: {fileID: 1506229661}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -657,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roster: {fileID: 1506229658}
-  numPlayers: 2
+  versusInfo: {fileID: 1506229661}
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0
@@ -672,6 +673,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1506229661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506229657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f4ff18ca70012c8b63240bc7a93e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numPlayers: 2
+  stage: 
+  type: 
+  numLives: 0
 --- !u!1 &1804042838
 GameObject:
   m_ObjectHideFlags: 0

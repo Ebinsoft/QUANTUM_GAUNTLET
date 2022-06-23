@@ -10,9 +10,11 @@ public class VersusSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var versusInfo = GameManager.instance.versusInfo;
+        int numPlayers = versusInfo.numPlayers;
         CharacterData c = GameManager.instance.roster.GetCharacter("Edmond");
         player = c.characterPrefab;
-        for (int i = 0; i < GameManager.instance.numPlayers; i++)
+        for (int i = 0; i < numPlayers; i++)
         {
             player.name = "Player " + i;
             player.tag = "Team " + (i + 1);
