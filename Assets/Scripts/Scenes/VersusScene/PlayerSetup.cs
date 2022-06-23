@@ -48,7 +48,7 @@ public class PlayerSetup : MonoBehaviour
 
         else
         {
-            Debug.Log(playerSetting.playerIndex);
+            // TODO: Update skin once we know how to do that
             // Update our player with their versusInfo settings
             gameObject.name = playerSetting.playerName;
             gameObject.tag = playerSetting.team;
