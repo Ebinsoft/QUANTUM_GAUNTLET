@@ -658,7 +658,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roster: {fileID: 1506229658}
-  versusInfo: {fileID: 1506229661}
+  versusInfo:
+    numPlayers: 0
+    stage: 
+    gameType: FFA
+    numLives: 3
+    playerSettings:
+    - playerName: Player1
+      playerType: Human
+      playerIndex: 0
+      team: Team1
+      characterName: Edmond
+    - playerName: Player2
+      playerType: Human
+      playerIndex: 1
+      team: Team2
+      characterName: Edmond
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0
@@ -686,9 +701,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPlayers: 2
-  stage: 
-  type: 
-  numLives: 0
+  stage: TEST
+  gameType: FFA
+  numLives: 3
+  playerSettings:
+  - playerName: Player1
+    playerType: Human
+    playerIndex: 0
+    team: Team1
+    characterName: Edmond
+  - playerName: Player2
+    playerType: Human
+    playerIndex: 1
+    team: Team2
+    characterName: Edmond
 --- !u!1 &1804042838
 GameObject:
   m_ObjectHideFlags: 0

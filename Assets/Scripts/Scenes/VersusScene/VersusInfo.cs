@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 [System.Serializable]
-public class VersusInfo : MonoBehaviour
+public class VersusInfo
 {
     public int numPlayers;
     public string stage;
@@ -18,7 +18,8 @@ public class PlayerSettings
     public string playerName = "";
     public string playerType;
     public int playerIndex;
-    private InputDevice device;
+    public InputDevice device;
+    public string deviceString;
     public string team;
     public string characterName;
 }
