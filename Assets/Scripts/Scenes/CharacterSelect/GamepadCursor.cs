@@ -17,6 +17,13 @@ public class GamepadCursor : MonoBehaviour
     private bool previousMouseState;
 
 
+    private void Awake()
+    {
+        var mainCanvas = GameObject.Find("CharacterSelectScreen");
+        canvas = mainCanvas.GetComponent<Canvas>();
+        canvasRectTransform = mainCanvas.GetComponent<RectTransform>();
+    }
+
     private void Start()
     {
         cursorPadding = cursorTransorm.sizeDelta[0] / 2.5f;
@@ -24,6 +31,7 @@ public class GamepadCursor : MonoBehaviour
     private void OnEnable()
     {
         mainCamera = Camera.main;
+        playerInput.camera = Camera.main;
 
         if (virtualMouse == null)
         {
