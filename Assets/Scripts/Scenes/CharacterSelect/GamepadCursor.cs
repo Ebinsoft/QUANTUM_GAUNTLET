@@ -11,10 +11,16 @@ public class GamepadCursor : MonoBehaviour
     public RectTransform canvasRectTransform;
     public Camera mainCamera;
     public Canvas canvas;
+    private float cursorPadding;
 
     private Mouse virtualMouse;
     private bool previousMouseState;
 
+
+    private void Start()
+    {
+        cursorPadding = cursorTransorm.sizeDelta[0] / 2.5f;
+    }
     private void OnEnable()
     {
         mainCamera = Camera.main;
@@ -56,8 +62,8 @@ public class GamepadCursor : MonoBehaviour
 
 
         // clamp to screen
-        newPosition.x = Mathf.Clamp(newPosition.x, 0f, Screen.width);
-        newPosition.y = Mathf.Clamp(newPosition.y, 0f, Screen.height);
+        newPosition.x = Mathf.Clamp(newPosition.x, cursorPadding, Screen.width - cursorPadding);
+        newPosition.y = Mathf.Clamp(newPosition.y, cursorPadding, Screen.height - cursorPadding);
 
         InputState.Change(virtualMouse.position, newPosition);
         InputState.Change(virtualMouse.delta, deltaValue);
