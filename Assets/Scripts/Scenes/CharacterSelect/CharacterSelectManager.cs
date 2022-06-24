@@ -31,7 +31,7 @@ public class CharacterSelectManager : MonoBehaviour
         versusInfo.numPlayers++;
         PlayerSetting ps = new PlayerSetting
         {
-            playerName = "Player " + playerInput.playerIndex + 1,
+            playerName = "Player " + (playerInput.playerIndex + 1),
             playerIndex = playerInput.playerIndex,
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
