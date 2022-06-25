@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DragonPunch
   m_EditorClassIdentifier: 
   attackName: DragonPunch
-  damage: 25
+  damage: 10
   hitlagTime: 0.2
-  knockbackAngle: 85
-  knockbackMagnitude: 20
+  knockbackAngle: 90
+  knockbackMagnitude: 0
   stunCalculation: 0
   baseStun: 0.15
   hasSpecialBehavior: 1
