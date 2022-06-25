@@ -304,55 +304,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &389528919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1328818935613083292, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-  m_PrefabInstance: {fileID: 1270140847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &389528923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389528919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c76374ea8e7e144b911de96d7f72799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
-  cursorSpeed: 1000
---- !u!114 &389528924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389528919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 21f8b788cdbf8d011baa676573b5a6ce, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: CharacterSelectCursor
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &473077739
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +355,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473077739}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
@@ -430,7 +381,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 5949078004677788320, guid: 21f8b788cdbf8d011baa676573b5a6ce, type: 3}
+    m_Reference: {fileID: -3398920860709655529, guid: 21f8b788cdbf8d011baa676573b5a6ce, type: 3}
   m_PlayerPrefab: {fileID: 1328818935692252799, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -562,69 +513,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143409729}
   m_CullTransparentMesh: 1
---- !u!1001 &1270140847
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 890.18933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 174.8754
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -50.74891
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252792, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818935692252799, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_Name
-      value: GamepadCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 1328818937277469341, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1328818935692252793, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-    - {fileID: 1328818935692252798, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 4581cb4b9813cab3a909b9661b957357, type: 3}
 --- !u!114 &1280150485
 MonoBehaviour:
   m_ObjectHideFlags: 0
