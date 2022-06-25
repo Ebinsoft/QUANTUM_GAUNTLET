@@ -45,6 +45,8 @@ public class SimpleCursor : MonoBehaviour
 
     private void ChangeState(GameObject go)
     {
+        // have to re-grab this or sometimes the reference dies
+        GetPlayerSetting();
         CharacterBox characterBox = go.GetComponent<CharacterBox>();
         if (characterBox != null)
         {
@@ -64,6 +66,13 @@ public class SimpleCursor : MonoBehaviour
             Debug.Log("Team Button");
             playerSetting.team = stb.teamName;
         }
+
+        VersusStart vs = go.GetComponent<VersusStart>();
+        if (vs != null)
+        {
+            Debug.Log("VERSUS START");
+            vs.StartVersusMatch();
+        }
     }
 
     private void onStart(InputAction.CallbackContext context)
@@ -73,6 +82,8 @@ public class SimpleCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("PS: " + playerSetting.playerIndex);
+        Debug.Log("Team: " + playerSetting.team);
         if (isMovePressed)
         {
             updateCursor();
