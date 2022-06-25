@@ -38,7 +38,7 @@ public class SimpleCursor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.forward, out hit))
         {
-            Debug.Log("Character Box Hit");
+            Debug.Log("Collider Hit");
             ChangeState(hit.collider.gameObject);
         }
     }
@@ -50,6 +50,13 @@ public class SimpleCursor : MonoBehaviour
         {
             // update our chosen character string
             playerSetting.characterName = characterBox.GetCharacterName();
+        }
+
+        GameTypeToggle gtt = go.transform.parent.gameObject.GetComponent<GameTypeToggle>();
+        if (gtt != null)
+        {
+            Debug.Log("Hit Toggle");
+            gtt.ToggleMode();
         }
     }
 
