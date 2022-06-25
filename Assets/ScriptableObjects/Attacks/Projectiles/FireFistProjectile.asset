@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a73b62693ef35024ca70d7c41223d0bf, type: 3}
-  m_Name: FireConeProjectile
+  m_Name: FireFistProjectile
   m_EditorClassIdentifier: 
-  attackName: FireConeProjectile
+  attackName: FireFistProjectile
   damage: 15
   hitlagTime: 0.2
-  knockbackAngle: 70
-  knockbackMagnitude: 5
+  knockbackAngle: 90
+  knockbackMagnitude: 2
   stunCalculation: 0
-  baseStun: 0.5
+  baseStun: 0.2
   hasSpecialBehavior: 0
   specialBehavior:
     className: 

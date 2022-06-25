@@ -9,14 +9,20 @@ public class FireFistBehavior : ProjectileBehavior
     private float chargePercent;
     private float baseRange = 1f;
 
-    private float damageScaling = 1.5f;
-    private float knockbackScaling = 2f;
+    private float damageScaling = 2f;
+    private float knockbackScaling = 2.5f;
     private float sizeScaling = 2f;
     private float rangeScaling = 1.5f;
 
     public override void OnSpawn()
     {
         chargePercent = (float)projectile.extraParams["ChargePercent"];
+
+        float damageMultiplier = Mathf.Lerp(1, damageScaling, chargePercent);
+        projectile.attack.damage = (int)(projectile.attack.damage * damageMultiplier);
+
+        float knockbackMultiplier = Mathf.Lerp(1, knockbackScaling, chargePercent);
+        projectile.attack.knockbackMagnitude *= knockbackMultiplier;
 
         float scaleMultiplier = Mathf.Lerp(1, sizeScaling, chargePercent);
         projectile.gameObject.transform.localScale *= scaleMultiplier;

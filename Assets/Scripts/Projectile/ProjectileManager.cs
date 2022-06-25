@@ -37,6 +37,9 @@ public class ProjectileManager : MonoBehaviour
         rotationTargetDirection = transform.forward;
         originPosition = transform.position;
 
+        // make a copy of the AttackInfo so that we can modify it if we want
+        attack = Instantiate(attack);
+
         behavior = (ProjectileBehavior)behaviorType.CreateInstance();
         behavior.projectile = this;
         behavior.OnSpawn();
