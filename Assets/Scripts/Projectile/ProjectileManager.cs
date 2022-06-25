@@ -19,6 +19,7 @@ public class ProjectileManager : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
     public Vector3 rotationTargetDirection;
+    public Vector3 originPosition;
 
     // rigidbodies
     private Rigidbody projectileRigidbody;
@@ -34,6 +35,7 @@ public class ProjectileManager : MonoBehaviour
         hitRigidbodies = new HashSet<Rigidbody>();
 
         rotationTargetDirection = transform.forward;
+        originPosition = transform.position;
 
         behavior = (ProjectileBehavior)behaviorType.CreateInstance();
         behavior.projectile = this;
@@ -78,8 +80,10 @@ public class ProjectileManager : MonoBehaviour
 
         if (isHurtbox && isOpponent && !wasAlreadyHit)
         {
+            Vector3 direction = other.transform.position - originPosition;
+            HitData hitData = new HitData() { attack = attack, direction = direction };
+
             GameObject playerHit = other.attachedRigidbody.gameObject;
-            HitData hitData = new HitData() { attack = attack, origin = transform };
             bool hitResolved = playerHit.GetComponent<PlayerHitHandler>().handleHit(hitData);
 
             if (hitResolved)
