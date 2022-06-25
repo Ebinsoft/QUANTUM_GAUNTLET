@@ -12,6 +12,9 @@ public class ProjectileManager : MonoBehaviour
     public ProjectileBehavior behavior;
     public AttackInfo attack;
 
+    // custom parameters for projectile behaviors, should always be set before Start is called
+    public Dictionary<String, object> extraParams;
+
     // movement variables
     public float movementSpeed;
     public float rotationSpeed;

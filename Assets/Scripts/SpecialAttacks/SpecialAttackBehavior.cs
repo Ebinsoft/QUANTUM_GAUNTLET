@@ -19,10 +19,11 @@ public abstract class SpecialAttackBehavior
     // exposed so that animations can trigger frame-specific actions
     public abstract void TriggerAction(int actionID);
 
-    public GameObject SpawnProjectile(UnityEngine.Object prefab, Vector3 spawnPoint, Quaternion rotation)
+    public GameObject SpawnProjectile(UnityEngine.Object prefab, Vector3 spawnPoint, Quaternion rotation, Dictionary<String, object> extraParams = null)
     {
         GameObject obj = GameObject.Instantiate(prefab, spawnPoint, rotation) as GameObject;
         obj.tag = player.tag;
+        obj.GetComponent<ProjectileManager>().extraParams = extraParams;
         return obj;
     }
 }
