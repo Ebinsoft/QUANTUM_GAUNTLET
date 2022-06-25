@@ -10,6 +10,14 @@ public class VersusInfo
     public string gameType = "FFA";
     public int numLives = 3;
     public List<PlayerSetting> playerSettings;
+
+    public void ResetPlayerTeams()
+    {
+        foreach (PlayerSetting ps in playerSettings)
+        {
+            ps.team = "Team " + (ps.playerIndex + 1);
+        }
+    }
 }
 
 [System.Serializable]

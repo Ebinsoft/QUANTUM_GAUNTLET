@@ -58,6 +58,12 @@ public class SimpleCursor : MonoBehaviour
             Debug.Log("Hit Toggle");
             gtt.ToggleMode();
         }
+        SetTeamButton stb = go.GetComponent<SetTeamButton>();
+        if (stb != null)
+        {
+            Debug.Log("Team Button");
+            playerSetting.team = stb.teamName;
+        }
     }
 
     private void onStart(InputAction.CallbackContext context)
