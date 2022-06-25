@@ -36,7 +36,7 @@ public class CharacterSelectManager : MonoBehaviour
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
             playerType = "Human",
-            team = "FFA"
+            team = "Team " + (playerInput.playerIndex + 1)
         };
         versusInfo.playerSettings.Add(ps);
     }
