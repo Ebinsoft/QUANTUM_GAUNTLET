@@ -37,9 +37,19 @@ public class CheckVersusReady : MonoBehaviour
             int uniqueTeams = playerSettings.Select(c => c.team)
             .Distinct()
             .Count();
+            Debug.Log("U: " + uniqueTeams);
             if (uniqueTeams >= 2)
             {
                 // also need to check that everyone has a character selected
+                foreach (PlayerSetting ps in playerSettings)
+                {
+                    if (string.IsNullOrEmpty(ps.characterName))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+
             }
 
 

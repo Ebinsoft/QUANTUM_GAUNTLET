@@ -82,8 +82,6 @@ public class SimpleCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("PS: " + playerSetting.playerIndex);
-        Debug.Log("Team: " + playerSetting.team);
         if (isMovePressed)
         {
             updateCursor();
