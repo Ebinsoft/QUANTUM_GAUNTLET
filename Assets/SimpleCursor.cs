@@ -12,11 +12,13 @@ public class SimpleCursor : MonoBehaviour
     private Vector2 currentMovement;
     private bool isMovePressed;
     private PlayerSetting playerSetting;
+    private SpriteRenderer sprite;
 
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        sprite = GetComponent<SpriteRenderer>();
     }
     // Start is called before the first frame update
     void Start()
@@ -64,7 +66,8 @@ public class SimpleCursor : MonoBehaviour
         if (stb != null)
         {
             Debug.Log("Team Button");
-            playerSetting.team = stb.teamName;
+            playerSetting.team.teamName = stb.teamName;
+            sprite.color = playerSetting.team.teamColor;
         }
 
         VersusStart vs = go.GetComponent<VersusStart>();
@@ -82,10 +85,17 @@ public class SimpleCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateCursorColor();
         if (isMovePressed)
         {
             updateCursor();
         }
+    }
+
+    private void UpdateCursorColor()
+    {
+        GetPlayerSetting();
+        sprite.color = playerSetting.team.teamColor;
     }
 
     private void GetPlayerSetting()

@@ -34,7 +34,7 @@ public class CheckVersusReady : MonoBehaviour
         List<PlayerSetting> playerSettings = vi.playerSettings;
         if (vi.numPlayers >= 2)
         {
-            int uniqueTeams = playerSettings.Select(c => c.team)
+            int uniqueTeams = playerSettings.Select(c => c.team.teamName)
             .Distinct()
             .Count();
             Debug.Log("U: " + uniqueTeams);

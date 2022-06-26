@@ -51,7 +51,7 @@ public class PlayerSetup : MonoBehaviour
             // TODO: Update skin once we know how to do that
             // Update our player with their versusInfo settings
             gameObject.name = playerSetting.playerName;
-            gameObject.tag = playerSetting.team;
+            gameObject.tag = playerSetting.team.teamName;
             // lazily put characters in spots
             characterController.enabled = false;
             transform.position = new Vector3(playerSetting.playerIndex, 0.5f, playerSetting.playerIndex);

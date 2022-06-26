@@ -15,7 +15,7 @@ public class VersusInfo
     {
         foreach (PlayerSetting ps in playerSettings)
         {
-            ps.team = "Team " + (ps.playerIndex + 1);
+            ps.team.teamName = "Team " + (ps.playerIndex + 1);
         }
     }
 }
@@ -28,6 +28,6 @@ public class PlayerSetting
     public int playerIndex;
     public InputDevice device;
     public string deviceString;
-    public string team;
+    public Team team;
     public string characterName;
 }
