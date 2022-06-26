@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackActivator : StateMachineBehaviour
+public class AttackActivatorState : StateMachineBehaviour
 {
     public AttackInfo attack;
     private PlayerAttackHandler handler;

@@ -8,9 +8,6 @@ public class PlayerKnockback : MonoBehaviour
 
     private HitData? activeHit;
 
-    // computed as the direction from attacker to me
-    private Vector3 attackDirection;
-
     // how far into the stuntime we begin decelerating
     private float percentAtFullSpeed = 0.5f;
 
@@ -38,14 +35,11 @@ public class PlayerKnockback : MonoBehaviour
         activeHit = hitData;
         knockbackDuration = duration;
 
-        // compute the directional vector of the attack
-        attackDirection = (player.transform.position - hitData.origin.position).normalized;
-
         // if there is knockback, turn the player towards the attacker
         if (hitData.attack.knockbackMagnitude > 0)
         {
-            player.rotationTarget.x = -attackDirection.x;
-            player.rotationTarget.y = -attackDirection.z;
+            player.rotationTarget.x = -hitData.direction.x;
+            player.rotationTarget.y = -hitData.direction.z;
         }
 
         SetupKnockback();
@@ -114,8 +108,8 @@ public class PlayerKnockback : MonoBehaviour
     {
         if (Time.time < startTime + fullSpeedTime)
         {
-            player.currentMovement.x = attackDirection.x * fullSpeed;
-            player.currentMovement.z = attackDirection.z * fullSpeed;
+            player.currentMovement.x = activeHit.Value.direction.x * fullSpeed;
+            player.currentMovement.z = activeHit.Value.direction.z * fullSpeed;
         }
         else
         {
@@ -124,8 +118,8 @@ public class PlayerKnockback : MonoBehaviour
 
             float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
 
-            player.currentMovement.x = verletSpeed * attackDirection.x;
-            player.currentMovement.z = verletSpeed * attackDirection.z;
+            player.currentMovement.x = verletSpeed * activeHit.Value.direction.x;
+            player.currentMovement.z = verletSpeed * activeHit.Value.direction.z;
 
             prevFrameSpeed = currentSpeed;
         }

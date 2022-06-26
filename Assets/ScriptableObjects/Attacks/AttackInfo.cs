@@ -68,7 +68,17 @@ public enum StunCalculation
 public struct HitData
 {
     public AttackInfo attack;
-    public Transform origin;
+
+    private Vector3 _direction;
+    public Vector3 direction
+    {
+        get { return _direction; }
+        set
+        {
+            value.y = 0;
+            _direction = value.normalized;
+        }
+    }
 }
 
 [CustomEditor(typeof(AttackInfo))]

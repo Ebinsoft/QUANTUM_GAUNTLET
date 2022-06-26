@@ -81,6 +81,12 @@ ModelImporter:
   - first:
       74: -1970126598166674407
     second: Armature|FireballFlurry
+  - first:
+      74: -5697249163409455608
+    second: Armature|DragonPunchCharge
+  - first:
+      74: -3796126574927857698
+    second: Armature|DragonPunchRelease
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -724,6 +730,64 @@ ModelImporter:
       internalID: 0
       firstFrame: 0
       lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|DragonPunchCharge
+      takeName: Armature|DragonPunchCharge
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|DragonPunchRelease
+      takeName: Armature|DragonPunchRelease
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 47
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
