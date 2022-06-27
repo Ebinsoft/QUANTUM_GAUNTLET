@@ -84,6 +84,7 @@ public class PlayerAttackHandler : MonoBehaviour
 
         if (isHurtbox && isOpponent && !wasAlreadyHit)
         {
+            if (activeSpecialBehavior != null) activeSpecialBehavior.OnHit(other);
             hitRigidBodies.Add(other.attachedRigidbody);
             HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
         }
