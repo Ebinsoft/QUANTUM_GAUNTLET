@@ -91,7 +91,9 @@ public class PlayerAttackHandler : MonoBehaviour
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
-        HitData hitData = new HitData() { attack = activeAttack, origin = transform };
+        Vector3 direction = hitPoint - transform.position;
+        HitData hitData = new HitData() { attack = activeAttack, direction = direction };
+
         bool hitResolved = playerObj.GetComponent<PlayerHitHandler>().handleHit(hitData);
         if (hitResolved)
         {

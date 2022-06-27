@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a73b62693ef35024ca70d7c41223d0bf, type: 3}
-  m_Name: FireballProjectile
+  m_Name: DragonPunch
   m_EditorClassIdentifier: 
-  attackName: FireballProjectile
-  damage: 15
-  hitlagTime: 0.13333334
-  knockbackAngle: 70
-  knockbackMagnitude: 5
+  attackName: DragonPunch
+  damage: 10
+  hitlagTime: 0.2
+  knockbackAngle: 90
+  knockbackMagnitude: 0
   stunCalculation: 0
-  baseStun: 0.5
-  hasSpecialBehavior: 0
+  baseStun: 0.15
+  hasSpecialBehavior: 1
   specialBehavior:
-    className: 
-    qualifiedName: 
+    className: DragonPunch
+    qualifiedName: DragonPunch, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
