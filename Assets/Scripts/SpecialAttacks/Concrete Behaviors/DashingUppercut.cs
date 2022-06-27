@@ -75,6 +75,12 @@ public class DashingUppercut : SpecialAttackBehavior
             // stop all dashing movement on hit confirm
             player.currentMovement.x = 0;
             player.currentMovement.z = 0;
+
+            // turn player towards opponent so that second hit connects
+            Vector3 opponentPosition = other.attachedRigidbody.gameObject.transform.position;
+            Vector3 opponentDirection = opponentPosition - player.transform.position;
+            player.rotationTarget.x = opponentDirection.x;
+            player.rotationTarget.y = opponentDirection.z;
         }
     }
 
