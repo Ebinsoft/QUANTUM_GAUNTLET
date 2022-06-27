@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roster : MonoBehaviour
+[System.Serializable]
+public class Roster
 {
     public CharacterData[] roster;
 
