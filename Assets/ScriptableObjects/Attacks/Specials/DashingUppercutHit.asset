@@ -18,7 +18,7 @@ MonoBehaviour:
   knockbackAngle: 0
   knockbackMagnitude: 4
   stunCalculation: 0
-  baseStun: 0.3
+  baseStun: 1
   hasSpecialBehavior: 0
   specialBehavior:
     className: 
