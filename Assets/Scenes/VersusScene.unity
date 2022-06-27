@@ -661,13 +661,15 @@ MonoBehaviour:
       playerType: Human
       playerIndex: 0
       deviceString: 
-      team: Team 1
+      team:
+        teamName: Team 1
       characterName: Edmond
     - playerName: Player2
       playerType: Human
       playerIndex: 1
       deviceString: 
-      team: Team 2
+      team:
+        teamName: Team 2
       characterName: Edmond
 --- !u!4 &1506229660
 Transform:
