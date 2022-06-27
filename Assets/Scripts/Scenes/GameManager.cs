@@ -6,11 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public Roster roster;
-    public int numPlayers;
-    private GameManager()
-    {
-
-    }
+    public VersusInfo versusInfo;
 
     void Awake()
     {
