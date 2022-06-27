@@ -16,7 +16,6 @@ public class PlayerPanel : MonoBehaviour
     void Update()
     {
         PlayerSetting ps = GameManager.instance.versusInfo.playerSettings[playerIndex];
-        Debug.Log(ps.playerName);
         string characterField = string.IsNullOrEmpty(ps.characterName) ? "CHOOSE CHARACTER" : ps.characterName;
         text.text = ps.playerName + "\n" + characterField + "\n" + ps.playerType;
         text.color = ps.team.teamColor;
