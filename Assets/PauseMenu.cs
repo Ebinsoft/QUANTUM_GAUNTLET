@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void ToggleMenu()
@@ -33,11 +32,12 @@ public class PauseMenu : MonoBehaviour
         {
             DisableGameOver();
         }
-        isEnabled = !isEnabled;
     }
 
     public void EnableGameOver()
     {
+
+        isEnabled = true;
         Time.timeScale = 0f;
         pauseMenuPane.SetActive(true);
 
@@ -49,6 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void DisableGameOver()
     {
+        isEnabled = false;
         Time.timeScale = 1f;
         pauseMenuPane.SetActive(false);
     }
