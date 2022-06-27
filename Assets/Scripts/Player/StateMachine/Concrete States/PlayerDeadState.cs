@@ -34,11 +34,18 @@ public class PlayerDeadState : PlayerBaseState
     public override void CheckStateUpdate()
     {
 
-        if (!player.anim.GetBool("InDeath") && player.stats.lives > 1)
+        if (!player.anim.GetBool("InDeath"))
         {
-
-            player.stats.lives--;
-            SwitchState(player.RespawnState);
+            if (player.stats.lives > 1)
+            {
+                SwitchState(player.RespawnState);
+            }
+            if (player.stats.lives > 0)
+            {
+                {
+                    player.stats.lives--;
+                }
+            }
         }
     }
 }
