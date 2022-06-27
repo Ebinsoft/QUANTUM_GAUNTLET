@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class VersusSceneManager : MonoBehaviour
 {
-    private GameObject player;
     public PlayerInputManager playerInputManager;
     // Start is called before the first frame update
     void Start()
@@ -16,8 +15,7 @@ public class VersusSceneManager : MonoBehaviour
         foreach (PlayerSetting ps in versusInfo.playerSettings)
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
-            player = c.characterPrefab;
-            playerInputManager.playerPrefab = player;
+            playerInputManager.playerPrefab = c.characterPrefab;
             playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
         }
     }
