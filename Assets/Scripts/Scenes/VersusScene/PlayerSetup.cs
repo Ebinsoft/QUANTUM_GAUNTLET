@@ -17,11 +17,13 @@ public class PlayerSetup : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         characterController = GetComponent<CharacterController>();
+
+        Setup();
     }
 
     void Start()
     {
-        Setup();
+
     }
 
     private void Setup()
