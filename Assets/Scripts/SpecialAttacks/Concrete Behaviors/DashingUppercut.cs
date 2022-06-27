@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DashingUppercut : SpecialAttackBehavior
 {
+
     public override void OnEnter() { }
 
     public override void Update() { }
@@ -11,5 +12,17 @@ public class DashingUppercut : SpecialAttackBehavior
 
     public override void OnHit(Collider other) { }
 
-    public override void TriggerAction(int actionID) { }
+    public override void TriggerAction(int actionID)
+    {
+        switch (actionID)
+        {
+            case 0:
+                // start dashing
+                break;
+
+            default:
+                Debug.LogError("Invalid actionID: " + actionID);
+                break;
+        }
+    }
 }
