@@ -2,27 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerUI : MonoBehaviour
 {
-    public Text stateText;
+    public Text nameText;
     public PlayerManager player;
     // Start is called before the first frame update
     void Start()
     {
-        stateText.text = "NULL";
-    }
-    string GetUIString()
-    {
-        string name = player.transform.name;
-        string hp = player.stats.health.ToString();
-        string state = player.currentState.ToString();
-
-        return name + "\n" + hp + "\n" + state;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        stateText.text = GetUIString();
+        nameText.text = player.gameObject.name;
+        int playerIndex = player.GetComponent<PlayerInput>().playerIndex;
+        Vector3 startingPosition = transform.position;
+        // extremely lazy offset TODO: Make this better.
+        startingPosition.x += (300 * playerIndex);
+        transform.position = startingPosition;
     }
 }
