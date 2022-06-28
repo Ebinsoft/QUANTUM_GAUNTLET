@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf65412235a9f3cc58f2e314f90a0b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateText: {fileID: 1085799637}
+  nameText: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1085799637
 MonoBehaviour:
@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf65412235a9f3cc58f2e314f90a0b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateText: {fileID: 1240850749}
+  nameText: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1240850749
 MonoBehaviour:
