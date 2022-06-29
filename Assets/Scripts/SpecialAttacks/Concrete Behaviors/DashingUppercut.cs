@@ -5,15 +5,17 @@ public class DashingUppercut : SpecialAttackBehavior
 {
 
     // maximum distance and time spent dashing before the attack whiffs
-    private float dashMaxDistance = 3f;
-    private float dashMaxTime = 0.2f;
+    private float dashMaxDistance = 4f;
+    private float dashMaxTime = 0.3f;
 
-    // distance and time while decelerating after whiff
-    private float whiffTravelDistance = 0.3f;
-    private float whiffTravelTime = 0.3f;
+    // distance moved while decelerating after whiff
+    private float whiffTravelDistance = 0.5f;
 
-    private float dashSpeed, prevFrameSpeed;
+    private float dashSpeed, decelerationRate, prevFrameSpeed;
     private float timer;
+
+    // VFX stuff
+    PlayerParticleEffects particleEffects;
 
     private enum Phase
     {
@@ -30,6 +32,9 @@ public class DashingUppercut : SpecialAttackBehavior
 
         dashSpeed = dashMaxDistance / dashMaxTime;
         prevFrameSpeed = dashSpeed;
+        decelerationRate = Mathf.Pow(dashSpeed, 2) / (2 * whiffTravelDistance);
+
+        InitializeVFX();
     }
 
     public override void Update()
@@ -42,20 +47,25 @@ public class DashingUppercut : SpecialAttackBehavior
                 if (timer >= dashMaxTime)
                 {
                     currentPhase = Phase.Whiff;
+                    HideVFX();
                     player.anim.SetTrigger("UppercutWhiff");
                 }
                 break;
 
             case Phase.Whiff:
-                float timeDecelerating = timer - dashMaxTime;
+                // decelerate velocity
+                float currFrameSpeed = Mathf.Sqrt(
+                    Mathf.Pow(player.currentMovement.x, 2) +
+                    Mathf.Pow(player.currentMovement.z, 2)
+                );
+                currFrameSpeed = Mathf.Max(0, currFrameSpeed - decelerationRate * Time.deltaTime);
 
-                float currentSpeed = Mathf.Clamp((1 - timeDecelerating / whiffTravelTime), 0, 1) * dashSpeed;
-                float verletSpeed = (currentSpeed + prevFrameSpeed) / 2;
+                float verletSpeed = (currFrameSpeed + prevFrameSpeed) / 2;
+                prevFrameSpeed = currFrameSpeed;
 
-                player.currentMovement.x = verletSpeed * player.transform.forward.x;
-                player.currentMovement.z = verletSpeed * player.transform.forward.z;
+                player.currentMovement.x = player.transform.forward.x * verletSpeed;
+                player.currentMovement.z = player.transform.forward.z * verletSpeed;
 
-                prevFrameSpeed = currentSpeed;
                 break;
 
             case Phase.Hit:
@@ -63,12 +73,16 @@ public class DashingUppercut : SpecialAttackBehavior
         }
     }
 
-    public override void OnExit() { }
+    public override void OnExit()
+    {
+    }
 
     public override void OnHit(Collider other)
     {
         if (currentPhase == Phase.Dashing)
         {
+            HideVFX();
+
             currentPhase = Phase.Hit;
             player.anim.SetTrigger("UppercutHit");
 
@@ -90,6 +104,7 @@ public class DashingUppercut : SpecialAttackBehavior
         {
             case 0:
                 StartDashing();
+                ShowVFX();
                 break;
 
             default:
@@ -105,5 +120,20 @@ public class DashingUppercut : SpecialAttackBehavior
         player.currentMovement.z = velocity.z;
 
         timer = 0;
+    }
+
+    private void InitializeVFX()
+    {
+        particleEffects = player.GetComponent<PlayerParticleEffects>();
+    }
+
+    private void ShowVFX()
+    {
+        particleEffects.StartFireDashingEffect();
+    }
+
+    private void HideVFX()
+    {
+        particleEffects.StopFireDashingEffect();
     }
 }

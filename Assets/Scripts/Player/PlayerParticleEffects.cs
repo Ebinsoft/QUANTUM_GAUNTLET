@@ -6,16 +6,18 @@ public class PlayerParticleEffects : MonoBehaviour
 {
     PlayerManager player;
 
-    public ParticleSystem landParticles;
-    public ParticleSystem dashParticles;
+    public ParticleSystem dustBurst;
+    public ParticleSystem dustTrail;
+    public ParticleSystem smokeTrail;
+    public ParticleSystem fireTrail;
 
     public ParticleSystem hitParticles;
 
-    public ParticleSystem fireParticles;
+    public ParticleSystem fireBurst;
 
     public void PlayLandingEffect()
     {
-        landParticles.Play();
+        dustBurst.Play();
     }
 
     public void PlayHitEffectAt(Vector3 pos)
@@ -26,17 +28,29 @@ public class PlayerParticleEffects : MonoBehaviour
 
     public void PlayFireBurstAt(Vector3 pos)
     {
-        fireParticles.transform.position = pos;
-        fireParticles.Play();
+        fireBurst.transform.position = pos;
+        fireBurst.Play();
     }
 
     public void StartDashingEffect()
     {
-        dashParticles.Play();
+        dustTrail.Play();
     }
 
     public void StopDashingEffect()
     {
-        dashParticles.Stop();
+        dustTrail.Stop();
+    }
+
+    public void StartFireDashingEffect()
+    {
+        fireTrail.Play();
+        smokeTrail.Play();
+    }
+
+    public void StopFireDashingEffect()
+    {
+        fireTrail.Stop();
+        smokeTrail.Stop();
     }
 }
