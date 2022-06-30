@@ -18,11 +18,11 @@ public class ManaBar : MonoBehaviour
 
     private void Update()
     {
-        UpdateHealthBar();
+        UpdateManaBar();
 
     }
 
-    public void UpdateHealthBar()
+    public void UpdateManaBar()
     {
         slider.value = Mathf.Max(0, player.stats.mana);
         fill.color = manaGradient.Evaluate(slider.normalizedValue);
