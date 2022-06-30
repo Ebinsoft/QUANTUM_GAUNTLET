@@ -25,7 +25,7 @@ public abstract class PlayerBaseState
         player.currentState = newState;
         // if (player.gameObject.name == "DummyPlayer")
         // {
-        //     Debug.Log(player.currentState);
+            // Debug.Log(player.currentState);
         // }
         player.currentState.Setup();
         player.currentState.EnterState();
@@ -33,12 +33,12 @@ public abstract class PlayerBaseState
     public void Update()
     {
 
-        if (canMove && player.isMovePressed)
+        if (player.currentState.canMove && player.isMovePressed)
         {
             Move();
         }
 
-        if (canRotate && player.isMovePressed)
+        if (player.currentState.canRotate && player.isMovePressed)
         {
             Rotate();
         }

@@ -12,20 +12,23 @@ public class PlayerLightAttackState : PlayerBaseState
 
     public override void EnterState()
     {
-        player.isLightAttackTriggered = false;
         player.isAttacking = true;
-        player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
 
-        player.lightAttacksLeft--;
+        TriggerHit();
     }
 
     public override void UpdateState()
     {
+        if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
+        {
+            TriggerHit();
+        }
     }
 
     public override void ExitState()
     {
         player.isAttacking = false;
+        player.lightAttacksLeft = player.maxLightAttackChain;
     }
 
     public override void CheckStateUpdate()
@@ -34,18 +37,21 @@ public class PlayerLightAttackState : PlayerBaseState
         if (!player.anim.GetBool("InMelee"))
         {
             SwitchState(player.IdleState);
-            player.lightAttacksLeft = player.maxLightAttackChain;
         }
 
-        else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
+        else if (player.isHeavyAttackTriggered)
         {
             SwitchState(player.HeavyAttackState);
-            player.lightAttacksLeft = player.maxLightAttackChain;
         }
+    }
 
-        else if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
+    void TriggerHit()
+    {
+        if (player.lightAttacksLeft > 0)
         {
-            SwitchState(player.LightAttackState);
+            player.isLightAttackTriggered = false;
+            player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
+            player.lightAttacksLeft--;
         }
     }
 }

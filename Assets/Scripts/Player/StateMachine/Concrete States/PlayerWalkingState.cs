@@ -47,6 +47,30 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.FallingState);
         }
 
+        else if (player.isSpecial1Triggered)
+        {
+            SwitchState(player.Special1State);
+        }
+
+        else if (player.isSpecial2Triggered)
+        {
+            SwitchState(player.Special2State);
+        }
+
+        else if (player.isSpecial3Triggered)
+        {
+            SwitchState(player.Special3State);
+        }
+
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.HeavyAttackState);
+        }
+
+        else if (player.isLightAttackTriggered)
+        {
+            SwitchState(player.LightAttackState);
+        }
     }
 
 }

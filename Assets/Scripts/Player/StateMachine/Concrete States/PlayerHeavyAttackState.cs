@@ -12,20 +12,23 @@ public class PlayerHeavyAttackState : PlayerBaseState
 
     public override void EnterState()
     {
-        player.isHeavyAttackTriggered = false;
         player.isAttacking = true;
-        player.anim.SetTrigger("HeavyAttack");
 
-        player.heavyAttacksLeft--;
+        TriggerHit();
     }
 
     public override void UpdateState()
     {
+        if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
+        {
+            TriggerHit();
+        }
     }
 
     public override void ExitState()
     {
         player.isAttacking = false;
+        player.heavyAttacksLeft = player.maxHeavyAttackChain;
     }
 
     public override void CheckStateUpdate()
@@ -34,12 +37,16 @@ public class PlayerHeavyAttackState : PlayerBaseState
         if (!player.anim.GetBool("InMelee"))
         {
             SwitchState(player.IdleState);
-            player.heavyAttacksLeft = player.maxHeavyAttackChain;
         }
+    }
 
-        else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
+    void TriggerHit()
+    {
+        if (player.heavyAttacksLeft > 0)
         {
-            SwitchState(player.HeavyAttackState);
+            player.isHeavyAttackTriggered = false;
+            player.anim.SetTrigger("HeavyAttack");     // triggers the start of an attack
+            player.heavyAttacksLeft--;
         }
     }
 }
