@@ -52,6 +52,8 @@ public class DragonPunch : SpecialAttackBehavior
 
     public override void OnExit() { }
 
+    public override void OnHit(Collider other) { }
+
     public override void TriggerAction(int actionID)
     {
         switch (actionID)
