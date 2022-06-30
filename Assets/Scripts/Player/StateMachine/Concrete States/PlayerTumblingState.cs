@@ -37,7 +37,7 @@ public class PlayerTumblingState : PlayerBaseState
             SwitchState(player.FallingState);
         }
 
-        else if (player.characterController.isGrounded)
+        else if (player.isGrounded)
         {
             player.playerKnockback.StopKnockback();
             SwitchState(player.CrashingState);

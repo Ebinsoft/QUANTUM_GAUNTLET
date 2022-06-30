@@ -40,6 +40,8 @@ public class PlayerManager : MonoBehaviour
     public Vector3 currentMovement;
     // Current XZ target direction to rotate towards
     public Vector2 rotationTarget;
+    // Our updated version of isGrounded that checks a spherecast
+    public bool isGrounded;
 
     /********** input variables **********/
     // Left Stick
@@ -187,6 +189,14 @@ public class PlayerManager : MonoBehaviour
             canDie = false;
             triggerDead = true;
         }
+
+
+        // calculate our fancy isGrounded
+        isGrounded = characterController.isGrounded;
+
+        // update animator's isGrounded to sync with code's
+        anim.SetBool("IsGrounded", isGrounded);
+
         handleRotation();
         currentState.Update();
         characterController.Move(currentMovement * Time.deltaTime);

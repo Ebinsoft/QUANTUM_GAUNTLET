@@ -36,7 +36,7 @@ public class PlayerStunState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (!player.characterController.isGrounded)
+        if (!player.isGrounded)
         {
             SwitchState(player.TumblingState);
         }

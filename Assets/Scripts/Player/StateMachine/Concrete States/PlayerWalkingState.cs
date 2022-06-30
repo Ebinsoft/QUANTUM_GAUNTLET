@@ -43,7 +43,7 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.DashingState);
         }
 
-        else if (!player.characterController.isGrounded)
+        else if (!player.isGrounded)
         {
             SwitchState(player.FallingState);
         }

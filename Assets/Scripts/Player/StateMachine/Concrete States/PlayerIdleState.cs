@@ -40,7 +40,7 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(player.WalkingState);
         }
 
-        else if (!player.characterController.isGrounded)
+        else if (!player.isGrounded)
         {
             SwitchState(player.FallingState);
         }
