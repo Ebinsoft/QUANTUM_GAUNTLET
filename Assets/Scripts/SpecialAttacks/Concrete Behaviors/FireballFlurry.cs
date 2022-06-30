@@ -17,23 +17,7 @@ public class FireballFlurry : SpecialAttackBehavior
     // distance above player's Y position to spawn projectiles
     float spawnHeight = 0.75f;
 
-    List<Vector2> projectileDirections;
-
-    public override void OnEnter()
-    {
-        // Compute the trajectory directions for all fireballs
-        float deltaAngle = spreadAngle / (numProjectiles - 1);
-
-        Vector2 front = new Vector2(player.transform.forward.x, player.transform.forward.z);
-        Vector2 leftMost = Rotate(front, -spreadAngle / 2);
-
-        projectileDirections = new List<Vector2>();
-        for (int i = 0; i < numProjectiles; i++)
-        {
-            Vector2 dir = Rotate(leftMost, deltaAngle * i);
-            projectileDirections.Add(dir);
-        }
-    }
+    public override void OnEnter() { }
 
     public override void Update() { }
 
@@ -43,13 +27,19 @@ public class FireballFlurry : SpecialAttackBehavior
 
     public override void TriggerAction(int actionID)
     {
-        if (actionID > projectileDirections.Count - 1)
+        if (actionID > numProjectiles - 1)
         {
             Debug.LogError("Invalid actionID: " + actionID);
             return;
         }
 
-        Vector2 dir2 = projectileDirections[actionID];
+        // Compute the trajectory for current fireball
+        float deltaAngle = spreadAngle / (numProjectiles - 1);
+
+        Vector2 front = new Vector2(player.transform.forward.x, player.transform.forward.z);
+        Vector2 leftMost = Rotate(front, -spreadAngle / 2);
+        Vector2 dir2 = Rotate(leftMost, deltaAngle * actionID);
+
         Vector3 dir3 = new Vector3(dir2.x, 0, dir2.y);
         Vector3 spawnPoint = player.transform.position + dir3 * spawnDistance;
         spawnPoint.y += spawnHeight;
