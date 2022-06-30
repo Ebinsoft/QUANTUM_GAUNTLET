@@ -79,6 +79,7 @@ public class PlayerAttackHandler : MonoBehaviour
         if (activeAttack == null) return;
 
         bool isHurtbox = other.gameObject.layer == LayerMask.NameToLayer("Hurtbox");
+        if (!isHurtbox) return;
         bool isOpponent = other.attachedRigidbody.tag != this.tag;
         bool wasAlreadyHit = hitRigidBodies.Contains(other.attachedRigidbody);
 
