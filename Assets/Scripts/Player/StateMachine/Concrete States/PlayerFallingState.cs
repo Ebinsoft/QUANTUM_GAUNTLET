@@ -8,6 +8,7 @@ public class PlayerFallingState : PlayerBaseState
         player = psm;
         canMove = true;
         canRotate = true;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {

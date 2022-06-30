@@ -7,6 +7,7 @@ public class PlayerIdleState : PlayerBaseState
     {
         player = psm;
         canMove = true;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {

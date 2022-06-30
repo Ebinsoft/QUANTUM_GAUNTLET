@@ -8,6 +8,7 @@ public abstract class PlayerBaseState
     // allows X/Z movement during state
     protected bool canMove = false;
     protected bool canRotate = false;
+    protected bool cancelMomentum = false;
     public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
@@ -25,7 +26,7 @@ public abstract class PlayerBaseState
         player.currentState = newState;
         // if (player.gameObject.name == "DummyPlayer")
         // {
-            // Debug.Log(player.currentState);
+        // Debug.Log(player.currentState);
         // }
         player.currentState.Setup();
         player.currentState.EnterState();
@@ -93,7 +94,7 @@ public abstract class PlayerBaseState
 
     private void Setup()
     {
-        if (player.currentState.canMove)
+        if (player.currentState.cancelMomentum)
         {
             EndMomentum();
         }
@@ -101,7 +102,7 @@ public abstract class PlayerBaseState
 
     private void Cleanup()
     {
-        if (player.currentState.canMove)
+        if (player.currentState.cancelMomentum)
         {
             EndMomentum();
         }

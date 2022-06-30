@@ -8,6 +8,9 @@ public class PlayerDeadState : PlayerBaseState
     public PlayerDeadState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = false;
+        canRotate = false;
+        cancelMomentum = true;
     }
 
     public override void EnterState()

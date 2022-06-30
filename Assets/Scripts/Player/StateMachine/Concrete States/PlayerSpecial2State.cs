@@ -8,6 +8,8 @@ public class PlayerSpecial2State : PlayerBaseState
     {
         player = psm;
         canMove = false;
+        canRotate = false;
+        cancelMomentum = true;
     }
 
     public override void EnterState()

@@ -11,6 +11,10 @@ public class PlayerDashingState : PlayerBaseState
     public PlayerDashingState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = false;
+        canRotate = false;
+        cancelMomentum = true;
+
         effects = player.gameObject.GetComponent<PlayerParticleEffects>();
 
         // calculate dashing speed

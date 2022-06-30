@@ -67,5 +67,11 @@ public class AnimatorEffects : MonoBehaviour
         }
         anim.gameObject.transform.localPosition = originalPos;
     }
+
+    public void CancelHit()
+    {
+        StopAllCoroutines();
+        anim.speed = 1;
+    }
 }
 
