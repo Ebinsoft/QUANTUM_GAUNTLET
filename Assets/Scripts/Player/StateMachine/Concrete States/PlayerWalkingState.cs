@@ -62,12 +62,12 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.Special3State);
         }
 
-        else if (player.heavyAttacksLeft > 0 && player.isHeavyAttackTriggered)
+        else if (player.isHeavyAttackTriggered)
         {
             SwitchState(player.HeavyAttackState);
         }
 
-        else if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
+        else if (player.isLightAttackTriggered)
         {
             SwitchState(player.LightAttackState);
         }
