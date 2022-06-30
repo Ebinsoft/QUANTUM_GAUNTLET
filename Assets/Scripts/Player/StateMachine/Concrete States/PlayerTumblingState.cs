@@ -10,6 +10,9 @@ public class PlayerTumblingState : PlayerBaseState
     public PlayerTumblingState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = false;
+        canRotate = false;
+        cancelMomentum = false;
     }
 
     public override void EnterState()

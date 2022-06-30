@@ -12,6 +12,9 @@ public class PlayerCrashingState : PlayerBaseState
     public PlayerCrashingState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = false;
+        canRotate = false;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {
