@@ -23,6 +23,7 @@ public class PlayerRespawningState : PlayerBaseState
 
         player.stats.resetStats();
         // do animation stuff
+        player.anim.Play("Idle");
     }
 
     public override void UpdateState()
