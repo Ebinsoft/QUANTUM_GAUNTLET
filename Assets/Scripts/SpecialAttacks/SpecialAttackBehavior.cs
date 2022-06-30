@@ -16,6 +16,9 @@ public abstract class SpecialAttackBehavior
     // called once after special attack finishes
     public abstract void OnExit();
 
+    // called by PlayerAttackHandler when a player is hit during the special attack
+    public abstract void OnHit(Collider other);
+
     // exposed so that animations can trigger frame-specific actions
     public abstract void TriggerAction(int actionID);
 
