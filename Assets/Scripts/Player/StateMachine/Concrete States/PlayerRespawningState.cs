@@ -14,7 +14,13 @@ public class PlayerRespawningState : PlayerBaseState
     public override void EnterState()
     {
         player.isRespawning = true;
-        player.characterController.Move(new Vector3(0.0f, 5.0f, 0.0f));
+        // player.characterController.Move(new Vector3(0.0f, 5.0f, 0.0f));
+        // TODO: Add in proper respawning once we have spawn points
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = new Vector3(0f, 5f, 0f);
+        player.GetComponent<CharacterController>().enabled = true;
+
+
         player.stats.resetStats();
         // do animation stuff
     }
