@@ -25,7 +25,7 @@ public abstract class PlayerBaseState
         player.currentState = newState;
         // if (player.gameObject.name == "DummyPlayer")
         // {
-        //     Debug.Log(player.currentState);
+            // Debug.Log(player.currentState);
         // }
         player.currentState.Setup();
         player.currentState.EnterState();

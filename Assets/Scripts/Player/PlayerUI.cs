@@ -11,11 +11,16 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nameText.text = player.gameObject.name;
+        // nameText.text = player.gameObject.name;
         int playerIndex = player.GetComponent<PlayerInput>().playerIndex;
         Vector3 startingPosition = transform.position;
         // extremely lazy offset TODO: Make this better.
         startingPosition.x += (300 * playerIndex);
         transform.position = startingPosition;
+    }
+
+    void Update()
+    {
+        nameText.text = player.currentState.ToString();
     }
 }
