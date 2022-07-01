@@ -192,7 +192,7 @@ public class PlayerManager : MonoBehaviour
 
 
         // calculate our fancy isGrounded
-        isGrounded = characterController.isGrounded;
+        CalculateIsGrounded();
 
         // update animator's isGrounded to sync with code's
         anim.SetBool("IsGrounded", isGrounded);
@@ -202,6 +202,23 @@ public class PlayerManager : MonoBehaviour
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
+    private void CalculateIsGrounded()
+    {
+        RaycastHit hit;
+        Vector3 p1 = transform.position + characterController.center;
+
+        float capsuleWidth = characterController.radius;
+        float centerToFloor = (characterController.height / 2) - capsuleWidth / 1.5f;
+
+        bool isSphereHit = false;
+        // cast a sphere
+        if (Physics.SphereCast(p1, capsuleWidth, Vector3.down, out hit, centerToFloor, LayerMask.GetMask("Ground")))
+        {
+            isSphereHit = true;
+        }
+        // also make sure we have negative velocity so we don't "land" when we jump up
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+    }
     void FixedUpdate()
     {
         resetJumps();
