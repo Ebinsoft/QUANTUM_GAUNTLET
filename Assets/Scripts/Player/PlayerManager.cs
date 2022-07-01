@@ -208,7 +208,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 p1 = transform.position + characterController.center;
 
         float capsuleWidth = characterController.radius;
-        float centerToFloor = (characterController.height / 2) - capsuleWidth / 1.5f;
+        float centerToFloor = (characterController.height / 2) - capsuleWidth / 2;
 
         bool isSphereHit = false;
         // cast a sphere
