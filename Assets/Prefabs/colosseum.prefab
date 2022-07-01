@@ -1,5 +1,113 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1128317818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128317819}
+  - component: {fileID: 1128317823}
+  - component: {fileID: 1128317822}
+  - component: {fileID: 1128317821}
+  - component: {fileID: 1128317820}
+  m_Layer: 6
+  m_Name: KillPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1128317819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128317818}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 50, y: 0.14999999, z: 50}
+  m_Children: []
+  m_Father: {fileID: 8757264042453467132}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1128317823
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128317818}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1128317822
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128317818}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1128317821
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128317818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1128317820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128317818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c842023fafd84715baa8cc579a50ed55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1477230359922880916
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230359922880915}
   - component: {fileID: 1477230359922880914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab.004_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1477230359937282656}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230359982308912}
   - component: {fileID: 1477230359982308927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360081302422}
   - component: {fileID: 1477230360081302421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_005_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360325797626}
   - component: {fileID: 1477230360325797625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BleacherRight_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360455164143}
   - component: {fileID: 1477230360455164142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WalkwayUpper_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360482825089}
   - component: {fileID: 1477230360482825088}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigPillar_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360509881511}
   - component: {fileID: 1477230360509881510}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BleacherLeft_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1477230360538339528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab fallen_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360682802782}
   - component: {fileID: 1477230360682802781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab.002_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360690227577}
   - component: {fileID: 1477230360690227576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab fallen_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360838123894}
   - component: {fileID: 1477230360838123893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrazierRight_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1477230360921701406}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walkway_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360959510545}
   - component: {fileID: 1477230360959510544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_004_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,7 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230360962707007}
   - component: {fileID: 1477230360962707006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigPillarBase_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1477230361018172837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: colosseum_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,7 +803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361045351478}
   - component: {fileID: 1477230361045351477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab fallen background_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361072800034}
   - component: {fileID: 1477230361072800033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_003_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361144625909}
   - component: {fileID: 1477230361144625908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab fallen top round_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361225117091}
   - component: {fileID: 1477230361225117090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarBroken_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361325278633}
   - component: {fileID: 1477230361325278632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_001_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -920,7 +1028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361339880166}
   - component: {fileID: 1477230361339880165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +1072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361354283441}
   - component: {fileID: 1477230361354283440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab fallen bottom round_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361369453056}
   - component: {fileID: 1477230361369453071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RockPile_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361440452241}
   - component: {fileID: 1477230361440452240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab.001_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361482414372}
   - component: {fileID: 1477230361482414371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_006_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361483152988}
   - component: {fileID: 1477230361483152987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WalkwayMiddle_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,7 +1297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361631995071}
   - component: {fileID: 1477230361631995070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab.005_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1234,7 +1342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361750781431}
   - component: {fileID: 1477230361750781430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_002_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1279,7 +1387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361845735932}
   - component: {fileID: 1477230361845735931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TopSlab.003_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,7 +1432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361885678210}
   - component: {fileID: 1477230361885678209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrazierLeft_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,7 +1476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1477230361946442420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pillar_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,7 +1514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477230361946831237}
   - component: {fileID: 1477230361946831236}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WalkwayPlatform_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1450,7 +1558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8757264042453467132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: colosseum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,10 +1574,11 @@ Transform:
   m_GameObject: {fileID: 3128923546340826070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.83917475, y: 4.3389735, z: 36.893913}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1372072119952930897}
   - {fileID: 1477230361018172837}
+  - {fileID: 1128317819}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1480,6 +1589,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8757264042453467132}
     m_Modifications:
+    - target: {fileID: -9072475565303552061, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1524,9 +1637,177 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8199662715601145731, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7528083632405714639, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5986800310657166200, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5769738401685627391, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5652828378335231726, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5466677476081082154, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4123749594306165890, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3846927286896186410, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3720907478713068662, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3527450261517276852, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2964023486277578184, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2815489419625390794, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -224486403880763033, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 112760935726900244, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 306333119958141046, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 727195590935922171, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 892237462017899072, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
       propertyPath: m_Name
       value: colosseum_meshes
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1075292213854408290, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1133686847628847118, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869195108002502235, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2364537189044306902, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2550463727306718371, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559209989360164260, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435455744597661283, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580466221527778169, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4698007525221520052, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5083338401782475425, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172541501954304861, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5699117853032140875, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892100060006767152, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6376133837160088872, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375087728117421088, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457141378436374876, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734022068425441886, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424177512633290483, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8436793450343198174, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649726497737639827, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803056024813078574, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949954916939609761, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057199146674024311, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082608739341797128, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602d89d95bad34e4cae8bdb0c810902e, type: 3}
