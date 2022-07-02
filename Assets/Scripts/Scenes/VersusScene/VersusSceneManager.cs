@@ -21,9 +21,13 @@ public class VersusSceneManager : MonoBehaviour
 
         foreach (PlayerSetting ps in versusInfo.playerSettings)
         {
-            CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
-            playerInputManager.playerPrefab = c.characterPrefab;
-            playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+            if (ps.playerType == "Human")
+            {
+                CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
+                playerInputManager.playerPrefab = c.characterPrefab;
+                playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+            }
+
         }
 
     }
