@@ -8,6 +8,7 @@ public class CharacterSelectManager : MonoBehaviour
     private VersusInfo versusInfo;
     public GameObject characterSelectScreen;
     private GameObject playerPanels;
+    public List<GameObject> playerList;
     private void Awake()
     {
         // reset versusInfo 
@@ -27,7 +28,18 @@ public class CharacterSelectManager : MonoBehaviour
     {
 
     }
-
+    public void DestroyCursor(int playerIndex)
+    {
+        foreach (GameObject cursor in playerList)
+        {
+            if (cursor.GetComponent<PlayerInput>().playerIndex == playerIndex)
+            {
+                versusInfo.numPlayers--;
+                playerList.Remove(cursor);
+                Destroy(cursor);
+            }
+        }
+    }
     void OnPlayerJoined(PlayerInput playerInput)
     {
         versusInfo.numPlayers++;
@@ -42,6 +54,8 @@ public class CharacterSelectManager : MonoBehaviour
         };
 
         versusInfo.playerSettings.Add(ps);
+        // add to reference of cursor objects
+        playerList.Add(playerInput.gameObject);
         // enable playerPanel
         GameObject pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).gameObject;
         if (pp != null)
