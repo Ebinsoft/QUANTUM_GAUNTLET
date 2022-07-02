@@ -18,6 +18,11 @@ public class VersusInfo
             ps.team.teamName = "Team " + (ps.playerIndex + 1);
         }
     }
+
+    public void RemovePlayer(int playerIndex)
+    {
+        playerSettings.RemoveAll(c => c.playerIndex == playerIndex);
+    }
 }
 
 [System.Serializable]
