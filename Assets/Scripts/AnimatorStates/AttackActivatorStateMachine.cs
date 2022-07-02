@@ -5,12 +5,17 @@ using UnityEngine;
 public class AttackActivatorStateMachine : StateMachineBehaviour
 {
     public AttackInfo attack;
+    public MoveType moveType;
+
     private PlayerAttackHandler handler;
 
     // OnStateMachineEnter is called when entering a state machine via its Entry Node
     override public void OnStateMachineEnter(Animator animator, int stateMachinePathHash)
     {
-        handler = animator.transform.root.gameObject.GetComponent<PlayerAttackHandler>();
+        if (handler == null)
+        {
+            handler = animator.transform.root.gameObject.GetComponent<PlayerAttackHandler>();
+        }
 
         handler.InitiateAttack(attack);
     }

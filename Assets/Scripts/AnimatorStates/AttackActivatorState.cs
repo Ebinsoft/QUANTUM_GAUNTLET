@@ -5,12 +5,17 @@ using UnityEngine;
 public class AttackActivatorState : StateMachineBehaviour
 {
     public AttackInfo attack;
+    public MoveType moveType;
+
     private PlayerAttackHandler handler;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        handler = animator.transform.root.gameObject.GetComponent<PlayerAttackHandler>();
+        if (handler == null)
+        {
+            handler = animator.transform.root.gameObject.GetComponent<PlayerAttackHandler>();
+        }
 
         handler.InitiateAttack(attack);
     }

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: DragonPunch
   damage: 10
+  manaCost: 150
+  manaGain: 0
   hitlagTime: 0.2
   knockbackAngle: 90
   knockbackMagnitude: 0

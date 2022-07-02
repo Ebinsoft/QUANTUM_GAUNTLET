@@ -7,6 +7,8 @@ public class AttackInfo : ScriptableObject
 {
     public string attackName;
     public int damage;
+    public int manaCost;
+    public int manaGain;
     public float hitlagTime;
 
     // KNOCKBACK
@@ -95,6 +97,10 @@ public class AttackInfoEditor : Editor
 
         // Damage
         obj.damage = EditorGUILayout.IntField("Damage", obj.damage);
+
+        // Mana cost and gain
+        obj.manaCost = EditorGUILayout.IntField("Mana Cost", obj.manaCost);
+        obj.manaGain = EditorGUILayout.IntField("Mana Gain Per Hit", obj.manaGain);
 
         // Hitlag Time
         obj.hitlagTime = EditorGUILayout.FloatField("Hitlag Time", obj.hitlagTime);

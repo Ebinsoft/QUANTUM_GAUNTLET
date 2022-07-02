@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Knee
   damage: 7
+  manaCost: 0
+  manaGain: 100
   hitlagTime: 0.13333334
   knockbackAngle: 30
   knockbackMagnitude: 2

@@ -11,6 +11,8 @@ public class DragonPunch : SpecialAttackBehavior
     float chargeTimer;
     float maxChargeTime = 1.0f;
 
+    float manaDrainPerSecond = 200;
+
     // distance away from player's XZ position to spawn projectile
     float spawnDistance = 0.5f;
 
@@ -29,17 +31,31 @@ public class DragonPunch : SpecialAttackBehavior
         chargeTimer += Time.deltaTime;
         if (!player.isSpecial2Pressed) buttonWasReleased = true;
 
+        // slowly drain mana over time while charging
+        if (canPunch)
+        {
+            player.stats.DrainMana(manaDrainPerSecond * Time.deltaTime);
+            if (player.stats.mana <= 0)
+            {
+                player.anim.SetTrigger("ReleasePunch");
+                ActivatePunch(chargeTimer / maxChargeTime);
+            }
+        }
+
         if (canPunch && buttonWasReleased)
         {
-            canPunch = false;
             player.anim.SetTrigger("ReleasePunch");
-
             ActivatePunch(chargeTimer / maxChargeTime);
         }
+
     }
 
     private void ActivatePunch(float chargePercent)
     {
+        canPunch = false;
+
+        chargePercent = Mathf.Min(1, chargePercent);
+
         Vector3 spawnPoint = player.transform.position + player.transform.forward * spawnDistance;
         spawnPoint.y += spawnHeight;
         Quaternion spawnRot = Quaternion.LookRotation(player.transform.forward, Vector3.up);
@@ -66,7 +82,6 @@ public class DragonPunch : SpecialAttackBehavior
 
             case 1:
                 // punch has reached its maximum charge time, forced release
-                canPunch = false;
                 ActivatePunch(1f);
                 break;
 

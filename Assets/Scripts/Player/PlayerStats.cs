@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     public PlayerBaseStats baseStats;
     public int health;
-    public int mana;
+    public float mana;
     public int lives = 3;
 
     public bool canTakeDamage { get; private set; }
@@ -61,12 +61,6 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void SubscribeToStatusChanges(Action<Status> callback)
-    {
-
-
-    }
-
     void Awake()
     {
         canTakeDamage = true;
@@ -77,10 +71,24 @@ public class PlayerStats : MonoBehaviour
         shaderEffects = GetComponentInChildren<ShaderEffects>();
     }
 
+    void Update()
+    {
+        RestoreMana(baseStats.manaRegen * Time.deltaTime);
+    }
+
     public void resetStats()
     {
         health = baseStats.baseHealth;
         mana = baseStats.baseMana;
     }
 
+    public void DrainMana(float amount)
+    {
+        mana = Mathf.Clamp(mana - amount, 0, baseStats.baseMana);
+    }
+
+    public void RestoreMana(float amount)
+    {
+        mana = Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
+    }
 }

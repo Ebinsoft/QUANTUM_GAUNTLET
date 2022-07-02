@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Hook
   damage: 4
+  manaCost: 0
+  manaGain: 50
   hitlagTime: 0.06666667
   knockbackAngle: 0
   knockbackMagnitude: 0
