@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     public AnimatorEffects animEffects;
     public PlayerStun playerStun;
     public PlayerKnockback playerKnockback;
+    public PlayerMoveset moveset;
     public CharacterController characterController;
 
     // Handles all movmement once per frame with cc.Move
@@ -161,6 +162,7 @@ public class PlayerManager : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();
         playerKnockback = GetComponent<PlayerKnockback>();
+        moveset = GetComponent<PlayerMoveset>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
@@ -245,4 +247,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // checks whether the player currently has enough mana to cast a particular move
+    public bool EnoughManaFor(MoveType moveType)
+    {
+        return moveset.TotalManaCost(moveType) <= stats.mana;
+    }
 }

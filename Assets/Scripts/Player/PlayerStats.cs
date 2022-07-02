@@ -61,12 +61,6 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void SubscribeToStatusChanges(Action<Status> callback)
-    {
-
-
-    }
-
     void Awake()
     {
         canTakeDamage = true;
@@ -83,4 +77,13 @@ public class PlayerStats : MonoBehaviour
         mana = baseStats.baseMana;
     }
 
+    public void DrainMana(int amount)
+    {
+        mana = (int)Mathf.Clamp(mana - amount, 0, baseStats.baseMana);
+    }
+
+    public void RestoreMana(int amount)
+    {
+        mana = (int)Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
+    }
 }

@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: e3c10394ebedb0045b5dc82eb85f73ef, type: 2}
+  moveType: 1
 --- !u!1102 &-7840504204799266766
 AnimatorState:
   serializedVersion: 6
@@ -413,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 6d5f6b3e94513994f85b7af87a679e06, type: 2}
+  moveType: 0
 --- !u!1107 &-6555973537791554033
 AnimatorStateMachine:
   serializedVersion: 6
@@ -561,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 6d5f6b3e94513994f85b7af87a679e06, type: 2}
+  moveType: 0
 --- !u!1109 &-5627456751250590730
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -605,6 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: aef0009667294ed44b1d372ec656a8f1, type: 2}
+  moveType: 3
 --- !u!1102 &-5319290679158368822
 AnimatorState:
   serializedVersion: 6
@@ -1668,6 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: b7586a792495f1d46b3d7555be23479f, type: 2}
+  moveType: 4
 --- !u!1102 &569628142236800857
 AnimatorState:
   serializedVersion: 6
@@ -1783,6 +1788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 3932db413c39a434e81190fcdc5b90b1, type: 2}
+  moveType: 1
 --- !u!1101 &807479239591714623
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1818,6 +1824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 3da37f2d698c6ea4180cef27fe15fd9d, type: 2}
+  moveType: 2
 --- !u!114 &1059978470790538063
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2165,6 +2172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 755875082fe00cf428fbd5ed18831aa8, type: 2}
+  moveType: 1
 --- !u!114 &2314481411745446144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2480,6 +2488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 0fff262b5c1f4ef47ab733fdc44a4e08, type: 2}
+  moveType: 4
 --- !u!1101 &5114680460570028509
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2552,6 +2561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: 321c8207ff74e0243868677eb8fad61a, type: 2}
+  moveType: 1
 --- !u!1101 &5240776993197309741
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3140,6 +3150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack: {fileID: 11400000, guid: e1b7dbed26942ad4d8ce32b9f05d53c9, type: 2}
+  moveType: 0
 --- !u!1101 &8862270476509903967
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
