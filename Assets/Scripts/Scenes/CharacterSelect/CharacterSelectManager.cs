@@ -53,6 +53,12 @@ public class CharacterSelectManager : MonoBehaviour
 
     void OnPlayerLeft(PlayerInput playerInput)
     {
-        Debug.Log("Playing Leaving: NOT poggers");
+        versusInfo.playerSettings.RemoveAll(c => c.playerIndex == playerInput.playerIndex);
+
+        GameObject pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).gameObject;
+        if (pp != null)
+        {
+            pp.SetActive(false);
+        }
     }
 }
