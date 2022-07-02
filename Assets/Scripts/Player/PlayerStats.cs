@@ -71,6 +71,11 @@ public class PlayerStats : MonoBehaviour
         shaderEffects = GetComponentInChildren<ShaderEffects>();
     }
 
+    void Update()
+    {
+        RestoreMana(baseStats.manaRegen * Time.deltaTime);
+    }
+
     public void resetStats()
     {
         health = baseStats.baseHealth;

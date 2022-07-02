@@ -5,4 +5,5 @@ public class PlayerBaseStats : ScriptableObject
 {
     public int baseHealth;
     public int baseMana;
+    public float manaRegen;
 }
