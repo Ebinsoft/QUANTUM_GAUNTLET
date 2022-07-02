@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.InputSystem;
 
 public class AIToggle : MonoBehaviour
 {
@@ -39,7 +41,12 @@ public class AIToggle : MonoBehaviour
         };
         versusInfo.AddPlayer(ps);
         // if an active character is on this slot, kill them
-        cs.DestroyCursor(playerPanel.playerIndex);
+        var activeCursor = cs.playerList.FirstOrDefault((c => c.GetComponent<PlayerInput>().playerIndex == playerPanel.playerIndex));
+        if (activeCursor != null)
+        {
+            cs.DestroyCursor(playerPanel.playerIndex);
+        }
+
 
     }
 
