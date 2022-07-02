@@ -28,7 +28,7 @@ public class AIToggle : MonoBehaviour
 
         PlayerSetting ps = new PlayerSetting
         {
-            playerName = "Player " + playerPanel.playerIndex,
+            playerName = "Player " + (playerPanel.playerIndex + 1),
             playerIndex = playerPanel.playerIndex,
             device = null,
             deviceString = "none",
