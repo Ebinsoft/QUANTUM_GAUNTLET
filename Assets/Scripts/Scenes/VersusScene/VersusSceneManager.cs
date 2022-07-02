@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using Cinemachine;
 
 public class VersusSceneManager : MonoBehaviour
 {
     public PlayerInputManager playerInputManager;
     public List<GameObject> playerList;
     public PauseMenu gameOverMenu;
+    public CinemachineTargetGroup playerTargetGroup;
     private bool isGameOver = false;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,8 @@ public class VersusSceneManager : MonoBehaviour
         // whenever a player joins, get a reference to their GameObject 
         playerInput.gameObject.name = "Player " + (playerInput.playerIndex + 1);
         playerList.Add(playerInput.gameObject);
+        // Add player to tracked objects of camera
+        playerTargetGroup.AddMember(playerInput.gameObject.transform, 1f, 2f);
     }
 
     public bool CheckIfGameOver()

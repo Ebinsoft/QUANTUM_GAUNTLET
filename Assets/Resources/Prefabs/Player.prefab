@@ -30450,7 +30450,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.8
   m_Radius: 0.35
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.00001
@@ -30561,6 +30561,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   currentMovement: {x: 0, y: 0, z: 0}
   rotationTarget: {x: 0, y: 0}
+  isGrounded: 0
   isMovePressed: 0
   isJumpPressed: 0
   isJumpTriggered: 0

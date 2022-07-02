@@ -56,7 +56,7 @@ public class PlayerDashingState : PlayerBaseState
         if (dashTimer >= dashDuration + decayDuration
             && !player.anim.GetBool("InDashRecovery"))
         {
-            if (!player.characterController.isGrounded)
+            if (!player.isGrounded)
             {
                 SwitchState(player.FallingState);
             }

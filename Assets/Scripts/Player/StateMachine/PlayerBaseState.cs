@@ -45,7 +45,6 @@ public abstract class PlayerBaseState
         }
 
         // not sure if this is best place to put this, ask tyler
-        player.anim.SetBool("IsGrounded", player.characterController.isGrounded);
         player.currentState.anyStateUpdate();
         player.currentState.UpdateState();
     }
@@ -74,7 +73,7 @@ public abstract class PlayerBaseState
         }
         else if (player.triggerHit)
         {
-            if (player.characterController.isGrounded)
+            if (player.isGrounded)
             {
                 SwitchState(player.StunState);
             }

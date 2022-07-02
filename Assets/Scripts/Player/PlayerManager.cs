@@ -40,6 +40,8 @@ public class PlayerManager : MonoBehaviour
     public Vector3 currentMovement;
     // Current XZ target direction to rotate towards
     public Vector2 rotationTarget;
+    // Our updated version of isGrounded that checks a spherecast
+    public bool isGrounded;
 
     /********** input variables **********/
     // Left Stick
@@ -187,11 +189,36 @@ public class PlayerManager : MonoBehaviour
             canDie = false;
             triggerDead = true;
         }
+
+
+        // calculate our fancy isGrounded
+        CalculateIsGrounded();
+
+        // update animator's isGrounded to sync with code's
+        anim.SetBool("IsGrounded", isGrounded);
+
         handleRotation();
         currentState.Update();
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
+    private void CalculateIsGrounded()
+    {
+        RaycastHit hit;
+        Vector3 p1 = transform.position + characterController.center;
+
+        float capsuleWidth = characterController.radius;
+        float centerToFloor = (characterController.height / 2) - capsuleWidth / 2;
+
+        bool isSphereHit = false;
+        // cast a sphere
+        if (Physics.SphereCast(p1, capsuleWidth, Vector3.down, out hit, centerToFloor, LayerMask.GetMask("Ground")))
+        {
+            isSphereHit = true;
+        }
+        // also make sure we have negative velocity so we don't "land" when we jump up
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+    }
     void FixedUpdate()
     {
         resetJumps();
