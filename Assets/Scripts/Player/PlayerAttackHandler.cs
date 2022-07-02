@@ -26,11 +26,14 @@ public class PlayerAttackHandler : MonoBehaviour
     // references to external components
     public AnimatorEffects animEffects;
     private PlayerParticleEffects effects;
+    private PlayerManager player;
 
     void Start()
     {
         // load particle effects player
         effects = GetComponent<PlayerParticleEffects>();
+
+        player = GetComponent<PlayerManager>();
 
         // cache player's atached hitboxes
         LoadPlayerHitboxes();
@@ -104,6 +107,9 @@ public class PlayerAttackHandler : MonoBehaviour
 
             // play hit particle effect at contact point
             effects.PlayHitEffectAt(hitPoint);
+
+            // restore mana to attacking player
+            player.stats.RestoreMana(activeAttack.manaGain);
         }
     }
 
@@ -116,6 +122,8 @@ public class PlayerAttackHandler : MonoBehaviour
             activeSpecialBehavior.player = GetComponent<PlayerManager>();
             activeSpecialBehavior.OnEnter();
         }
+
+        player.stats.DrainMana(attack.manaCost);
 
         // reset list of rigidbodies hit by attack
         hitRigidBodies = new HashSet<Rigidbody>();
