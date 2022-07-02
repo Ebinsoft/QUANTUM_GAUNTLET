@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     public PlayerBaseStats baseStats;
     public int health;
-    public int mana;
+    public float mana;
     public int lives = 3;
 
     public bool canTakeDamage { get; private set; }
@@ -77,13 +77,13 @@ public class PlayerStats : MonoBehaviour
         mana = baseStats.baseMana;
     }
 
-    public void DrainMana(int amount)
+    public void DrainMana(float amount)
     {
-        mana = (int)Mathf.Clamp(mana - amount, 0, baseStats.baseMana);
+        mana = Mathf.Clamp(mana - amount, 0, baseStats.baseMana);
     }
 
-    public void RestoreMana(int amount)
+    public void RestoreMana(float amount)
     {
-        mana = (int)Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
+        mana = Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
     }
 }
