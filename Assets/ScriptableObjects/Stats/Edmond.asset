@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Edmond
   m_EditorClassIdentifier: 
   baseHealth: 100
-  baseMana: 100
+  baseMana: 1000
