@@ -23,6 +23,13 @@ public class PlayerRespawningState : PlayerBaseState
 
         player.stats.resetStats();
         // do animation stuff
+        // foreach (var param in player.anim.parameters)
+        // {
+        //     if (param.type == AnimatorControllerParameterType.Trigger)
+        //     {
+        //         player.anim.ResetTrigger(param.name);
+        //     }
+        // }
         player.anim.Play("Idle");
     }
 

@@ -25,15 +25,4 @@ public class AttackActivatorStateMachine : StateMachineBehaviour
     {
         handler.FinishAttack();
     }
-
-    private void ResetAllTriggers(Animator animator)
-    {
-        foreach (var param in animator.parameters)
-        {
-            if (param.type == AnimatorControllerParameterType.Trigger)
-            {
-                animator.ResetTrigger(param.name);
-            }
-        }
-    }
 }
