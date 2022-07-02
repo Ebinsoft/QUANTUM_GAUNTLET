@@ -26,25 +26,34 @@ public class AIToggle : MonoBehaviour
         button.material = onMaterial;
         buttonText.text = "REMOVE AI OPPONENT";
 
-        // if an active character is on this slot, kill them
-        cs.DestroyCursor(playerPanel.playerIndex);
-
-        versusInfo.numPlayers++;
         PlayerSetting ps = new PlayerSetting
         {
             playerName = "Player " + playerPanel.playerIndex,
             playerIndex = playerPanel.playerIndex,
             device = null,
             deviceString = "none",
+            // TODO: Fix this - Hard-coding this until we can have players choose AI characters
+            characterName = "Edmond",
             playerType = "Robot",
             team = new Team("Team " + (playerPanel.playerIndex + 1))
         };
+        versusInfo.AddPlayer(ps);
+        // if an active character is on this slot, kill them
+        cs.DestroyCursor(playerPanel.playerIndex);
+
     }
 
     private void RemoveAI()
     {
+        button.material = offMaterial;
+        buttonText.text = "TURN ON AI OPPONENT";
 
+        versusInfo.RemovePlayer(playerPanel.playerIndex);
+    }
 
+    public void setDefault()
+    {
+        isAIOn = false;
         button.material = offMaterial;
         buttonText.text = "TURN ON AI OPPONENT";
     }
@@ -52,7 +61,6 @@ public class AIToggle : MonoBehaviour
     public void ToggleAI()
     {
         isAIOn = !isAIOn;
-
         if (isAIOn)
         {
             AddAI();
@@ -61,5 +69,6 @@ public class AIToggle : MonoBehaviour
         {
             RemoveAI();
         }
+
     }
 }

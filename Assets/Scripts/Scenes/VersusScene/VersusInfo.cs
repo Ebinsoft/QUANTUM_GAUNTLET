@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 [System.Serializable]
 public class VersusInfo
 {
@@ -21,7 +22,21 @@ public class VersusInfo
 
     public void RemovePlayer(int playerIndex)
     {
-        playerSettings.RemoveAll(c => c.playerIndex == playerIndex);
+        if (playerSettings.Select(c => c.playerIndex).Contains(playerIndex))
+        {
+            PlayerSetting ps = playerSettings.First(c => c.playerIndex == playerIndex);
+            playerSettings.Remove(ps);
+            numPlayers--;
+        }
+
+    }
+
+    public void AddPlayer(PlayerSetting ps)
+    {
+        // if a previous playerIndex exists, remove it
+        RemovePlayer(ps.playerIndex);
+        playerSettings.Add(ps);
+        numPlayers++;
     }
 }
 

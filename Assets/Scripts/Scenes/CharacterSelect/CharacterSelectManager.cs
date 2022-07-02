@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class CharacterSelectManager : MonoBehaviour
 {
@@ -30,19 +31,16 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void DestroyCursor(int playerIndex)
     {
-        foreach (GameObject cursor in playerList)
-        {
-            if (cursor.GetComponent<PlayerInput>().playerIndex == playerIndex)
-            {
-                versusInfo.numPlayers--;
-                playerList.Remove(cursor);
-                Destroy(cursor);
-            }
-        }
+        GameObject cursor = playerList.First(c => c.GetComponent<PlayerInput>().playerIndex == playerIndex);
+        playerList.Remove(cursor);
+        Destroy(cursor);
     }
     void OnPlayerJoined(PlayerInput playerInput)
     {
-        versusInfo.numPlayers++;
+        // set his PlayerPanel to default values in case of re-joining
+        PlayerPanel pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).GetComponent<PlayerPanel>();
+        pp.transform.Find("AI Toggle").GetComponent<AIToggle>().setDefault();
+
         PlayerSetting ps = new PlayerSetting
         {
             playerName = "Player " + (playerInput.playerIndex + 1),
@@ -53,26 +51,15 @@ public class CharacterSelectManager : MonoBehaviour
             team = new Team("Team " + (playerInput.playerIndex + 1))
         };
 
-        versusInfo.playerSettings.Add(ps);
+        versusInfo.AddPlayer(ps);
         // add to reference of cursor objects
         playerList.Add(playerInput.gameObject);
-        // enable playerPanel
-        GameObject pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).gameObject;
-        if (pp != null)
-        {
-            pp.SetActive(true);
-        }
+
 
     }
 
     void OnPlayerLeft(PlayerInput playerInput)
     {
-        versusInfo.playerSettings.RemoveAll(c => c.playerIndex == playerInput.playerIndex);
-
-        GameObject pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).gameObject;
-        if (pp != null)
-        {
-            pp.SetActive(false);
-        }
+        // versusInfo.RemovePlayer(playerInput.playerIndex);
     }
 }
