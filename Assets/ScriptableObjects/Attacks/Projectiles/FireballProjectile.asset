@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: FireballProjectile
   damage: 15
+  manaCost: 0
+  manaGain: 0
   hitlagTime: 0.13333334
   knockbackAngle: 70
   knockbackMagnitude: 5
