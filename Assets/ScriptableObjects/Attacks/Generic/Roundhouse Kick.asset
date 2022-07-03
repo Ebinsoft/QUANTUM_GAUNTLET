@@ -25,3 +25,5 @@ MonoBehaviour:
   specialBehavior:
     className: 
     qualifiedName: 
+  hasImpactSound: 1
+  impactSound: 1

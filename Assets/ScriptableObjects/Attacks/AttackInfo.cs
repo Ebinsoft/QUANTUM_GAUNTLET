@@ -55,9 +55,13 @@ public class AttackInfo : ScriptableObject
         }
     }
 
-
+    // Special attack behavior
     public bool hasSpecialBehavior = false;
     public SerializedClass specialBehavior = null;
+
+    // Sound effects
+    public bool hasImpactSound = false;
+    public ImpactSound impactSound;
 }
 
 public enum StunCalculation
@@ -160,6 +164,7 @@ public class AttackInfoEditor : Editor
         EditorGUILayout.Space();
 
         // Special Behavior
+        EditorGUILayout.LabelField("Special Attack Behavior", EditorStyles.boldLabel);
         obj.hasSpecialBehavior = EditorGUILayout.Toggle("Is Special Attack", obj.hasSpecialBehavior);
         if (obj.hasSpecialBehavior)
         {
@@ -170,6 +175,19 @@ public class AttackInfoEditor : Editor
         else
         {
             obj.specialBehavior = null;
+        }
+
+        EditorGUILayout.Space();
+
+        // Sound Effects
+        EditorGUILayout.LabelField("Sound Effects", EditorStyles.boldLabel);
+
+        obj.hasImpactSound = EditorGUILayout.Toggle("Impact Sound", obj.hasImpactSound);
+        if (obj.hasImpactSound)
+        {
+            EditorGUI.indentLevel++;
+            obj.impactSound = (ImpactSound)EditorGUILayout.EnumPopup(obj.impactSound);
+            EditorGUI.indentLevel--;
         }
 
         EditorUtility.SetDirty(obj);
