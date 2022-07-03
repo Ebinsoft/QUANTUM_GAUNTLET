@@ -115,9 +115,15 @@ public class PlayerAttackHandler : MonoBehaviour
             player.stats.RestoreMana(activeAttack.manaGain);
 
             // play impact sound effect
-            if (activeAttack.hasImpactSound)
+            switch (activeAttack.impactSoundType)
             {
-                audioManager.PlayAt(activeAttack.impactSound, hitPoint);
+                case SoundEffectType.preset:
+                    audioManager.PlayAt(activeAttack.presetImpactSound, hitPoint);
+                    break;
+
+                case SoundEffectType.custom:
+                    audioManager.PlayAt(activeAttack.customImpactSound, hitPoint);
+                    break;
             }
         }
     }
