@@ -11,6 +11,8 @@ public class Sound
     public float volume;
 }
 
+
+
 // IMPACT SOUNDS
 public enum ImpactSound
 {
@@ -23,6 +25,20 @@ public enum ImpactSound
 public class ImpactSoundElem
 {
     public ImpactSound soundType;
+    public Sound sound;
+}
+
+
+// ATTACK BASE SOUNDS
+public enum MiscAttackSound
+{
+    WhooshLight,
+    WhooshHeavy
+}
+[System.Serializable]
+public class MiscAttackSoundElem
+{
+    public MiscAttackSound soundType;
     public Sound sound;
 }
 

@@ -360,6 +360,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fab9b76f2042c0478ea7b8f3422eb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miscAttackSounds:
+  - soundType: 0
+    sound:
+      clip: {fileID: 8300000, guid: c2cd37f8018e67540bc73b166661e23f, type: 3}
+      volume: 0.6
+  - soundType: 1
+    sound:
+      clip: {fileID: 8300000, guid: 02e426649a5c3da4380849cabecb3e3c, type: 3}
+      volume: 0.9
   impactSounds:
   - soundType: 0
     sound:
