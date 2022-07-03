@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.AI;
 
 public class AIManager : MonoBehaviour
 {
     private PlayerManager player;
     private VersusSceneManager vs;
     private GameObject target;
+    private NavMeshAgent nma;
     private float targetDist;
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<PlayerManager>();
+        nma = GetComponent<NavMeshAgent>();
         vs = VersusSceneManager.instance;
     }
 
@@ -36,6 +39,9 @@ public class AIManager : MonoBehaviour
     void Update()
     {
         FindClosestEnemy();
+        // Attempt to get NavMesh agent working with this
+        // Debug.Log("BUST");
+        // nma.SetDestination(new Vector3(0f, 0f, 0f));
 
         // THE OMEGA BASIC AI
         player.isSpecial1Triggered = true;
