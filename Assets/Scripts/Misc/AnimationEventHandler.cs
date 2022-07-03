@@ -12,10 +12,6 @@ public class AnimationEventHandler : MonoBehaviour
     void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        if (audioManager == null)
-        {
-            Debug.Log("UH OH!!!");
-        }
     }
 
     public void PlayLandingEffect()
