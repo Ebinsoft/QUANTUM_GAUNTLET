@@ -45,9 +45,11 @@ public class PlayerDeadState : PlayerBaseState
             }
             if (player.stats.lives > 0)
             {
-                {
-                    player.stats.lives--;
-                }
+                player.stats.lives--;
+            }
+            if (player.stats.lives == 0)
+            {
+                player.stats.PlayerLose();
             }
         }
     }

@@ -13,7 +13,7 @@ public class AIManager : MonoBehaviour
     void Start()
     {
         player = GetComponent<PlayerManager>();
-        vs = GameObject.Find("VersusSceneManager").GetComponent<VersusSceneManager>();
+        vs = VersusSceneManager.instance;
     }
 
     private void FindClosestEnemy()
