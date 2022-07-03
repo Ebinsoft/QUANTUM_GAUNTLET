@@ -76,6 +76,13 @@ public class SimpleCursor : MonoBehaviour
             Debug.Log("VERSUS START");
             vs.StartVersusMatch();
         }
+
+        AIToggle ai = go.transform.parent.gameObject.GetComponent<AIToggle>();
+        if (ai != null)
+        {
+            Debug.Log("AI BUTTON");
+            ai.ToggleAI();
+        }
     }
 
     private void onStart(InputAction.CallbackContext context)
