@@ -25,7 +25,17 @@ public class VersusSceneManager : MonoBehaviour
             if (ps.playerType == "Human")
             {
                 playerInputManager.playerPrefab = c.characterPrefab;
-                playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                if (ps.device != null)
+                {
+
+                    playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                }
+                else
+                {
+                    // This is for simple debugging directly from Versus scene
+                    playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
+                }
+
             }
 
             else if (ps.playerType == "Robot")
@@ -48,8 +58,8 @@ public class VersusSceneManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(playerInput.playerIndex);
         // whenever a player joins, get a reference to their GameObject 
-        playerInput.gameObject.name = "Player " + (playerInput.playerIndex + 1);
         playerList.Add(playerInput.gameObject);
         // Add player to tracked objects of camera
         playerTargetGroup.AddMember(playerInput.gameObject.transform, 1f, 2f);
