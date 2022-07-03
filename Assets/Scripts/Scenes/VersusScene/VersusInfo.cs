@@ -20,6 +20,11 @@ public class VersusInfo
         }
     }
 
+    public PlayerSetting GetPlayer(int playerIndex)
+    {
+        return playerSettings.First(c => c.playerIndex == playerIndex);
+    }
+
     public void RemovePlayer(int playerIndex)
     {
         if (playerSettings.Select(c => c.playerIndex).Contains(playerIndex))
