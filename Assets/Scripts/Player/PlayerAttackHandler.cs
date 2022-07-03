@@ -27,6 +27,7 @@ public class PlayerAttackHandler : MonoBehaviour
     public AnimatorEffects animEffects;
     private PlayerParticleEffects effects;
     private PlayerManager player;
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -34,6 +35,8 @@ public class PlayerAttackHandler : MonoBehaviour
         effects = GetComponent<PlayerParticleEffects>();
 
         player = GetComponent<PlayerManager>();
+
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         // cache player's atached hitboxes
         LoadPlayerHitboxes();
@@ -110,6 +113,12 @@ public class PlayerAttackHandler : MonoBehaviour
 
             // restore mana to attacking player
             player.stats.RestoreMana(activeAttack.manaGain);
+
+            // play impact sound effect
+            if (activeAttack.hasImpactSound)
+            {
+                audioManager.PlayAt(activeAttack.impactSound, hitPoint);
+            }
         }
     }
 
