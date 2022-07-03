@@ -1506,7 +1506,7 @@ MonoBehaviour:
       characterName: Edmond
     - playerName: Player2
       playerType: Robot
-      playerIndex: 0
+      playerIndex: 1
       deviceString: 
       team:
         teamName: Team 2
