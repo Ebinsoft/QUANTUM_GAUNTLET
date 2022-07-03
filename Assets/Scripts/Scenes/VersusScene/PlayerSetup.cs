@@ -12,6 +12,7 @@ public class PlayerSetup : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerSetting playerSetting;
     private CharacterController characterController;
+    private AIManager ai;
 
     void Awake()
     {
@@ -54,11 +55,22 @@ public class PlayerSetup : MonoBehaviour
             // Update our player with their versusInfo settings
             gameObject.name = playerSetting.playerName;
             gameObject.tag = playerSetting.team.teamName;
+
+            if (playerSetting.playerType == "Robot")
+            {
+                ChangeToAI();
+            }
+
             // lazily put characters in spots
             characterController.enabled = false;
             transform.position = new Vector3(playerSetting.playerIndex, 0.5f, playerSetting.playerIndex);
             characterController.enabled = true;
         }
+    }
+
+    private void ChangeToAI()
+    {
+        ai = gameObject.AddComponent<AIManager>();
     }
 
 }
