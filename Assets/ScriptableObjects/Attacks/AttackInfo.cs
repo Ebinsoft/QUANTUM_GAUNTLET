@@ -60,8 +60,9 @@ public class AttackInfo : ScriptableObject
     public SerializedClass specialBehavior = null;
 
     // Sound effects
-    public bool hasImpactSound = false;
-    public ImpactSound impactSound;
+    public SoundEffectType impactSoundType = SoundEffectType.none;
+    public ImpactSound presetImpactSound;
+    public Sound customImpactSound;
 }
 
 public enum StunCalculation
@@ -69,6 +70,13 @@ public enum StunCalculation
     combined,
     baseOnly,
     knockbackOnly,
+}
+
+public enum SoundEffectType
+{
+    none,
+    preset,
+    custom
 }
 
 public struct HitData
@@ -93,6 +101,7 @@ public class AttackInfoEditor : Editor
     public override void OnInspectorGUI()
     {
         AttackInfo obj = target as AttackInfo;
+        SerializedObject sObj = new SerializedObject(obj);
 
         // Attack Name
         EditorGUI.BeginDisabledGroup(true);
@@ -182,14 +191,28 @@ public class AttackInfoEditor : Editor
         // Sound Effects
         EditorGUILayout.LabelField("Sound Effects", EditorStyles.boldLabel);
 
-        obj.hasImpactSound = EditorGUILayout.Toggle("Impact Sound", obj.hasImpactSound);
-        if (obj.hasImpactSound)
+        obj.impactSoundType = (SoundEffectType)EditorGUILayout.EnumPopup("Impact Sound", obj.impactSoundType);
+        EditorGUI.indentLevel++;
+        switch (obj.impactSoundType)
         {
-            EditorGUI.indentLevel++;
-            obj.impactSound = (ImpactSound)EditorGUILayout.EnumPopup(obj.impactSound);
-            EditorGUI.indentLevel--;
-        }
+            case SoundEffectType.none:
+                obj.customImpactSound = null;
+                break;
 
+            case SoundEffectType.preset:
+                obj.presetImpactSound = (ImpactSound)EditorGUILayout.EnumPopup(obj.presetImpactSound);
+                obj.customImpactSound = null;
+                break;
+
+            case SoundEffectType.custom:
+                SerializedProperty prop = sObj.FindProperty("customImpactSound");
+                EditorGUILayout.PropertyField(prop);
+                break;
+
+        }
+        EditorGUI.indentLevel--;
+
+        sObj.ApplyModifiedProperties();
         EditorUtility.SetDirty(obj);
     }
 }
