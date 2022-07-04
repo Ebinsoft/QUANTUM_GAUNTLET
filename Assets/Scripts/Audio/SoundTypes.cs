@@ -46,8 +46,7 @@ public class MiscAttackSoundElem
 public enum MovementSound
 {
     Footstep,
-    GroundJump,
-    AirJump,
+    Dash,
     Land,
     Crash
 }
