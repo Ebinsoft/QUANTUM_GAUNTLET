@@ -14,11 +14,15 @@ public class AudioManager : MonoBehaviour
     public MovementSoundElem[] movementSounds;
     Dictionary<MovementSound, Sound> _movementSounds;
 
+    public FireSoundElem[] fireSounds;
+    Dictionary<FireSound, Sound> _fireSounds;
+
     void Start()
     {
         _miscAttackSounds = miscAttackSounds.ToDictionary(s => s.soundType, s => s.sound);
         _impactSounds = impactSounds.ToDictionary(s => s.soundType, s => s.sound);
         _movementSounds = movementSounds.ToDictionary(s => s.soundType, s => s.sound);
+        _fireSounds = fireSounds.ToDictionary(s => s.soundType, s => s.sound);
     }
 
     // play misc attack sound effect
@@ -39,6 +43,13 @@ public class AudioManager : MonoBehaviour
     public void PlayAt(MovementSound sound, Vector3 position)
     {
         Sound s = _movementSounds[sound];
+        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+    }
+
+    // play a fire sound effect
+    public void PlayAt(FireSound sound, Vector3 position)
+    {
+        Sound s = _fireSounds[sound];
         AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
     }
 

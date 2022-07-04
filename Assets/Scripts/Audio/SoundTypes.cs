@@ -29,7 +29,7 @@ public class ImpactSoundElem
 }
 
 
-// ATTACK BASE SOUNDS
+// MISC SOUNDS
 public enum MiscAttackSound
 {
     WhooshLight,
@@ -56,5 +56,20 @@ public enum MovementSound
 public class MovementSoundElem
 {
     public MovementSound soundType;
+    public Sound sound;
+}
+
+
+// FIRE SOUNDS
+public enum FireSound
+{
+    FireBurst,
+    Explosion
+}
+
+[System.Serializable]
+public class FireSoundElem
+{
+    public FireSound soundType;
     public Sound sound;
 }

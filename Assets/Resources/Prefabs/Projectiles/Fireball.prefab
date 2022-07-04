@@ -9739,6 +9739,8 @@ MonoBehaviour:
   movementSpeed: 7
   rotationSpeed: 10
   rotationTargetDirection: {x: 0, y: 0, z: 0}
+  originPosition: {x: 0, y: 0, z: 0}
+  audioManager: {fileID: 0}
 --- !u!1 &4471906737837383579
 GameObject:
   m_ObjectHideFlags: 0

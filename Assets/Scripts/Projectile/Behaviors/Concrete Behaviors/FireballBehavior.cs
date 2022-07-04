@@ -16,12 +16,15 @@ public class FireballBehavior : ProjectileBehavior
         explosion = projectile.transform.Find("Explosion").GetComponent<ParticleSystem>();
         fireTrail = projectile.transform.Find("Fire Trail").GetComponent<ParticleSystem>();
         model = projectile.transform.Find("Model").gameObject;
+
+        projectile.audioManager.PlayAt(FireSound.FireBurst, projectile.transform.position);
     }
 
     public override void OnCollision()
     {
         projectile.movementSpeed = 0;
         explosion.Play();
+        projectile.audioManager.PlayAt(FireSound.Explosion, projectile.transform.position);
         projectile.SelfDestruct(0.6f);
     }
 

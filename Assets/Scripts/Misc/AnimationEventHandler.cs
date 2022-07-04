@@ -29,6 +29,11 @@ public class AnimationEventHandler : MonoBehaviour
         audioManager.PlayAt(sound, transform.position);
     }
 
+    public void PlayFireSFX(FireSound sound)
+    {
+        audioManager.PlayAt(sound, transform.position);
+    }
+
     public void TriggerSpecialAttackAction(int actionID)
     {
         if (attackHandler.activeSpecialBehavior != null)
