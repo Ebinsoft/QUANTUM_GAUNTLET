@@ -12,6 +12,30 @@ public class Sound
 }
 
 
+public class InterruptableSound
+{
+    public GameObject gameObject;
+    public AudioSource audioSource;
+
+    ~InterruptableSound()
+    {
+        StopAndDestroy();
+    }
+
+    public void Play()
+    {
+        audioSource.Play();
+    }
+
+    public void StopAndDestroy()
+    {
+        if (gameObject == null) return;
+
+        audioSource.Stop();
+        GameObject.Destroy(gameObject);
+    }
+}
+
 
 // IMPACT SOUNDS
 public enum ImpactSound

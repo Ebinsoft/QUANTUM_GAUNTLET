@@ -16,7 +16,7 @@ public class DashingUppercut : SpecialAttackBehavior
 
     // effects stuff
     PlayerParticleEffects particleEffects;
-    AudioSource playerAudio;
+    InterruptableSound zoomSound;
 
     private enum Phase
     {
@@ -76,7 +76,7 @@ public class DashingUppercut : SpecialAttackBehavior
 
     public override void OnExit()
     {
-        playerAudio.Stop();
+        zoomSound.StopAndDestroy();
     }
 
     public override void OnHit(Collider other)
@@ -84,7 +84,7 @@ public class DashingUppercut : SpecialAttackBehavior
         if (currentPhase == Phase.Dashing)
         {
             StopEffects();
-            playerAudio.Stop();
+            zoomSound.StopAndDestroy();
             AudioManager.PlayAt(FireSound.ExplosionMedium, player.transform.position);
 
             currentPhase = Phase.Hit;
@@ -142,18 +142,15 @@ public class DashingUppercut : SpecialAttackBehavior
     private void InitializeEffects()
     {
         particleEffects = player.GetComponent<PlayerParticleEffects>();
-        playerAudio = player.GetComponentInChildren<AudioSource>();
+        Sound s = AudioManager.magicSounds[MagicSound.Zoom];
+        zoomSound = AudioManager.CreateInterruptable(s, parent: player.transform);
     }
 
     private void StartEffects()
     {
         particleEffects.StartFireDashingEffect();
 
-        Sound s = AudioManager.magicSounds[MagicSound.Zoom];
-        playerAudio.clip = s.clip;
-        playerAudio.volume = s.volume;
-        playerAudio.Play();
-
+        zoomSound.Play();
         AudioManager.PlayAt(FireSound.ExplosionSmall, player.transform.position);
     }
 

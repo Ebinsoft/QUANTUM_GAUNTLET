@@ -4,7 +4,7 @@ using UnityEngine;
 public class DragonPunch : SpecialAttackBehavior
 {
     UnityEngine.Object fireFistPrefab = Resources.Load("Prefabs/Projectiles/FireFist");
-    AudioSource playerAudioSource;
+    InterruptableSound chargingSound;
     PlayerParticleEffects particleEffects;
 
     bool buttonWasReleased;
@@ -27,12 +27,9 @@ public class DragonPunch : SpecialAttackBehavior
         canPunch = false;
         chargeTimer = 0f;
 
-        playerAudioSource = player.GetComponentInChildren<AudioSource>();
-        Sound chargeSound = AudioManager.magicSounds[MagicSound.ChargeUp];
-
-        playerAudioSource.clip = chargeSound.clip;
-        playerAudioSource.volume = chargeSound.volume;
-        playerAudioSource.Play();
+        Sound s = AudioManager.magicSounds[MagicSound.ChargeUp];
+        chargingSound = AudioManager.CreateInterruptable(s, parent: player.transform);
+        chargingSound.Play();
 
         particleEffects = player.GetComponent<PlayerParticleEffects>();
     }
@@ -75,7 +72,7 @@ public class DragonPunch : SpecialAttackBehavior
         extraParams.Add("ChargePercent", chargePercent);
 
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
-        playerAudioSource.Stop();
+        chargingSound.StopAndDestroy();
         AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
         particleEffects.StopChargingEffect();
     }
@@ -83,7 +80,7 @@ public class DragonPunch : SpecialAttackBehavior
     public override void OnExit()
     {
         // cleanup in case of interruption
-        playerAudioSource.Stop();
+        chargingSound.StopAndDestroy();
         particleEffects.StopChargingEffect();
     }
 

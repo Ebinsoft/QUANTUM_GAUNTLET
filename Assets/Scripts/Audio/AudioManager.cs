@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     // singleton instance
     [HideInInspector]
-    public AudioManager instance = null;
+    public static AudioManager instance = null;
 
     public MiscAttackSoundElem[] _miscAttackSounds;
     public static Dictionary<MiscAttackSound, Sound> miscAttackSounds;
@@ -84,6 +84,35 @@ public class AudioManager : MonoBehaviour
     public static void PlayAt(Sound sound, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(sound.clip, position, sound.volume);
+    }
+
+
+    // Create a temporary game object that plays a sound that can be interrupted
+    public static InterruptableSound CreateInterruptable(Sound sound, Vector3? position = null, Transform parent = null)
+    {
+        GameObject obj = new GameObject("Interruptable Sound");
+
+        if (parent != null)
+        {
+            obj.transform.SetParent(parent);
+        }
+
+        if (position.HasValue)
+        {
+            obj.transform.position = position.Value;
+        }
+
+        AudioSource source = obj.AddComponent<AudioSource>();
+        source.clip = sound.clip;
+        source.volume = sound.volume;
+        source.playOnAwake = false;
+
+        InterruptableSound interruptableSound = new InterruptableSound();
+        interruptableSound.gameObject = obj;
+        interruptableSound.audioSource = source;
+
+
+        return interruptableSound;
     }
 
 }
