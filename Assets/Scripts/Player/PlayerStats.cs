@@ -91,4 +91,10 @@ public class PlayerStats : MonoBehaviour
     {
         mana = Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
     }
+
+    public event Action<GameObject> onPlayerLose;
+    public void PlayerLose()
+    {
+        onPlayerLose(gameObject);
+    }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Team 2
   - Team 3
   - Team 4
+  - PlayerPanels
   layers:
   - Default
   - TransparentFX
