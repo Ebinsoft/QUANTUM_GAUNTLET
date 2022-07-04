@@ -77,6 +77,7 @@ public class DashingUppercut : SpecialAttackBehavior
     public override void OnExit()
     {
         zoomSound.StopAndDestroy();
+        StopEffects();
     }
 
     public override void OnHit(Collider other)
