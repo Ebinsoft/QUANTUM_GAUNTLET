@@ -4,6 +4,8 @@ using UnityEngine;
 public class DragonPunch : SpecialAttackBehavior
 {
     UnityEngine.Object fireFistPrefab = Resources.Load("Prefabs/Projectiles/FireFist");
+    InterruptableSound chargingSound;
+    PlayerParticleEffects particleEffects;
 
     bool buttonWasReleased;
     bool canPunch;
@@ -24,6 +26,12 @@ public class DragonPunch : SpecialAttackBehavior
         buttonWasReleased = false;
         canPunch = false;
         chargeTimer = 0f;
+
+        Sound s = AudioManager.magicSounds[MagicSound.ChargeUp];
+        chargingSound = AudioManager.CreateInterruptable(s, parent: player.transform);
+        chargingSound.Play();
+
+        particleEffects = player.GetComponent<PlayerParticleEffects>();
     }
 
     public override void Update()
@@ -64,9 +72,17 @@ public class DragonPunch : SpecialAttackBehavior
         extraParams.Add("ChargePercent", chargePercent);
 
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
+        chargingSound.StopAndDestroy();
+        AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
+        particleEffects.StopChargingEffect();
     }
 
-    public override void OnExit() { }
+    public override void OnExit()
+    {
+        // cleanup in case of interruption
+        chargingSound.StopAndDestroy();
+        particleEffects.StopChargingEffect();
+    }
 
     public override void OnHit(Collider other) { }
 
@@ -78,6 +94,7 @@ public class DragonPunch : SpecialAttackBehavior
                 // punch has reached its minimum charge time
                 canPunch = true;
                 chargeTimer = 0;
+                particleEffects.StartChargingEffectAt(player.transform.position);
                 break;
 
             case 1:

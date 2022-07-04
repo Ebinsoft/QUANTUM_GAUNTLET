@@ -26,3 +26,8 @@ MonoBehaviour:
     className: DashingUppercut
     qualifiedName: DashingUppercut, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  impactSoundType: 0
+  presetImpactSound: 0
+  customImpactSound:
+    clip: {fileID: 0}
+    volume: 0

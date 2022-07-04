@@ -14,6 +14,7 @@ public class PlayerParticleEffects : MonoBehaviour
     public ParticleSystem hitParticles;
 
     public ParticleSystem fireBurst;
+    public ParticleSystem chargingParticles;
 
     public void PlayLandingEffect()
     {
@@ -52,5 +53,16 @@ public class PlayerParticleEffects : MonoBehaviour
     {
         fireTrail.Stop();
         smokeTrail.Stop();
+    }
+
+    public void StartChargingEffectAt(Vector3 pos)
+    {
+        chargingParticles.transform.position = pos;
+        chargingParticles.Play();
+    }
+
+    public void StopChargingEffect()
+    {
+        chargingParticles.Stop();
     }
 }

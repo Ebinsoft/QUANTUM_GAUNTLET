@@ -25,3 +25,8 @@ MonoBehaviour:
   specialBehavior:
     className: 
     qualifiedName: 
+  impactSoundType: 1
+  presetImpactSound: 1
+  customImpactSound:
+    clip: {fileID: 0}
+    volume: 0

@@ -12,6 +12,21 @@ public class AnimationEventHandler : MonoBehaviour
         effects.PlayLandingEffect();
     }
 
+    public void PlayMiscAttackSFX(MiscAttackSound sound)
+    {
+        AudioManager.PlayAt(sound, transform.position);
+    }
+
+    public void PlayMovementSFX(MovementSound sound)
+    {
+        AudioManager.PlayAt(sound, transform.position);
+    }
+
+    public void PlayFireSFX(FireSound sound)
+    {
+        AudioManager.PlayAt(sound, transform.position);
+    }
+
     public void TriggerSpecialAttackAction(int actionID)
     {
         if (attackHandler.activeSpecialBehavior != null)

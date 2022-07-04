@@ -110,6 +110,18 @@ public class PlayerAttackHandler : MonoBehaviour
 
             // restore mana to attacking player
             player.stats.RestoreMana(activeAttack.manaGain);
+
+            // play impact sound effect
+            switch (activeAttack.impactSoundType)
+            {
+                case SoundEffectType.preset:
+                    AudioManager.PlayAt(activeAttack.presetImpactSound, hitPoint);
+                    break;
+
+                case SoundEffectType.custom:
+                    AudioManager.PlayAt(activeAttack.customImpactSound, hitPoint);
+                    break;
+            }
         }
     }
 

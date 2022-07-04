@@ -55,9 +55,14 @@ public class AttackInfo : ScriptableObject
         }
     }
 
-
+    // Special attack behavior
     public bool hasSpecialBehavior = false;
     public SerializedClass specialBehavior = null;
+
+    // Sound effects
+    public SoundEffectType impactSoundType = SoundEffectType.none;
+    public ImpactSound presetImpactSound;
+    public Sound customImpactSound;
 }
 
 public enum StunCalculation
@@ -65,6 +70,13 @@ public enum StunCalculation
     combined,
     baseOnly,
     knockbackOnly,
+}
+
+public enum SoundEffectType
+{
+    none,
+    preset,
+    custom
 }
 
 public struct HitData
@@ -89,6 +101,7 @@ public class AttackInfoEditor : Editor
     public override void OnInspectorGUI()
     {
         AttackInfo obj = target as AttackInfo;
+        SerializedObject sObj = new SerializedObject(obj);
 
         // Attack Name
         EditorGUI.BeginDisabledGroup(true);
@@ -160,6 +173,7 @@ public class AttackInfoEditor : Editor
         EditorGUILayout.Space();
 
         // Special Behavior
+        EditorGUILayout.LabelField("Special Attack Behavior", EditorStyles.boldLabel);
         obj.hasSpecialBehavior = EditorGUILayout.Toggle("Is Special Attack", obj.hasSpecialBehavior);
         if (obj.hasSpecialBehavior)
         {
@@ -172,6 +186,33 @@ public class AttackInfoEditor : Editor
             obj.specialBehavior = null;
         }
 
+        EditorGUILayout.Space();
+
+        // Sound Effects
+        EditorGUILayout.LabelField("Sound Effects", EditorStyles.boldLabel);
+
+        obj.impactSoundType = (SoundEffectType)EditorGUILayout.EnumPopup("Impact Sound", obj.impactSoundType);
+        EditorGUI.indentLevel++;
+        switch (obj.impactSoundType)
+        {
+            case SoundEffectType.none:
+                obj.customImpactSound = null;
+                break;
+
+            case SoundEffectType.preset:
+                obj.presetImpactSound = (ImpactSound)EditorGUILayout.EnumPopup(obj.presetImpactSound);
+                obj.customImpactSound = null;
+                break;
+
+            case SoundEffectType.custom:
+                SerializedProperty prop = sObj.FindProperty("customImpactSound");
+                EditorGUILayout.PropertyField(prop);
+                break;
+
+        }
+        EditorGUI.indentLevel--;
+
+        sObj.ApplyModifiedProperties();
         EditorUtility.SetDirty(obj);
     }
 }
