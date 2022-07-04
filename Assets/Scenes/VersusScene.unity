@@ -407,13 +407,21 @@ MonoBehaviour:
       volume: 1
   - soundType: 2
     sound:
-      clip: {fileID: 8300000, guid: d311f89d091410b43babd25f96884fcc, type: 3}
+      clip: {fileID: 8300000, guid: 9d73cc92d72f6f64bb27697cda062919, type: 3}
       volume: 1
+  - soundType: 3
+    sound:
+      clip: {fileID: 8300000, guid: d311f89d091410b43babd25f96884fcc, type: 3}
+      volume: 0.6
   _magicSounds:
   - soundType: 0
     sound:
       clip: {fileID: 8300000, guid: 5168d7f5efe3d144c9a19b0b4918e52a, type: 3}
-      volume: 0.75
+      volume: 0.5
+  - soundType: 1
+    sound:
+      clip: {fileID: 8300000, guid: 7ad4301a8060a1b4a8584026dd3f766f, type: 3}
+      volume: 0.3
 --- !u!4 &420343998
 Transform:
   m_ObjectHideFlags: 0

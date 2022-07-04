@@ -14,8 +14,9 @@ public class DashingUppercut : SpecialAttackBehavior
     private float dashSpeed, decelerationRate, prevFrameSpeed;
     private float timer;
 
-    // VFX stuff
+    // effects stuff
     PlayerParticleEffects particleEffects;
+    AudioSource playerAudio;
 
     private enum Phase
     {
@@ -34,7 +35,7 @@ public class DashingUppercut : SpecialAttackBehavior
         prevFrameSpeed = dashSpeed;
         decelerationRate = Mathf.Pow(dashSpeed, 2) / (2 * whiffTravelDistance);
 
-        InitializeVFX();
+        InitializeEffects();
     }
 
     public override void Update()
@@ -47,7 +48,7 @@ public class DashingUppercut : SpecialAttackBehavior
                 if (timer >= dashMaxTime)
                 {
                     currentPhase = Phase.Whiff;
-                    HideVFX();
+                    StopEffects();
                     player.anim.SetTrigger("UppercutWhiff");
                 }
                 break;
@@ -75,13 +76,16 @@ public class DashingUppercut : SpecialAttackBehavior
 
     public override void OnExit()
     {
+        playerAudio.Stop();
     }
 
     public override void OnHit(Collider other)
     {
         if (currentPhase == Phase.Dashing)
         {
-            HideVFX();
+            StopEffects();
+            playerAudio.Stop();
+            AudioManager.PlayAt(FireSound.ExplosionMedium, player.transform.position);
 
             currentPhase = Phase.Hit;
             player.anim.SetTrigger("UppercutHit");
@@ -117,7 +121,7 @@ public class DashingUppercut : SpecialAttackBehavior
         {
             case 0:
                 StartDashing();
-                ShowVFX();
+                StartEffects();
                 break;
 
             default:
@@ -135,17 +139,25 @@ public class DashingUppercut : SpecialAttackBehavior
         timer = 0;
     }
 
-    private void InitializeVFX()
+    private void InitializeEffects()
     {
         particleEffects = player.GetComponent<PlayerParticleEffects>();
+        playerAudio = player.GetComponentInChildren<AudioSource>();
     }
 
-    private void ShowVFX()
+    private void StartEffects()
     {
         particleEffects.StartFireDashingEffect();
+
+        Sound s = AudioManager.magicSounds[MagicSound.Zoom];
+        playerAudio.clip = s.clip;
+        playerAudio.volume = s.volume;
+        playerAudio.Play();
+
+        AudioManager.PlayAt(FireSound.ExplosionSmall, player.transform.position);
     }
 
-    private void HideVFX()
+    private void StopEffects()
     {
         particleEffects.StopFireDashingEffect();
     }

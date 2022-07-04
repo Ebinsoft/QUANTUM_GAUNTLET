@@ -65,6 +65,7 @@ public enum FireSound
 {
     FlameBurst,
     ExplosionSmall,
+    ExplosionMedium,
     ExplosionBig
 }
 
@@ -79,7 +80,8 @@ public class FireSoundElem
 // MAGIC SOUNDS
 public enum MagicSound
 {
-    ChargeUp
+    ChargeUp,
+    Zoom
 }
 
 [System.Serializable]
