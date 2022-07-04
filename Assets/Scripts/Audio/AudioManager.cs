@@ -5,56 +5,83 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public MiscAttackSoundElem[] miscAttackSounds;
-    Dictionary<MiscAttackSound, Sound> _miscAttackSounds;
+    // singleton instance
+    [HideInInspector]
+    public AudioManager instance = null;
 
-    public ImpactSoundElem[] impactSounds;
-    Dictionary<ImpactSound, Sound> _impactSounds;
+    public MiscAttackSoundElem[] _miscAttackSounds;
+    public static Dictionary<MiscAttackSound, Sound> miscAttackSounds;
 
-    public MovementSoundElem[] movementSounds;
-    Dictionary<MovementSound, Sound> _movementSounds;
+    public ImpactSoundElem[] _impactSounds;
+    public static Dictionary<ImpactSound, Sound> impactSounds;
 
-    public FireSoundElem[] fireSounds;
-    Dictionary<FireSound, Sound> _fireSounds;
+    public MovementSoundElem[] _movementSounds;
+    public static Dictionary<MovementSound, Sound> movementSounds;
+
+    public FireSoundElem[] _fireSounds;
+    public static Dictionary<FireSound, Sound> fireSounds;
+
+    public MagicSoundElem[] _magicSounds;
+    public static Dictionary<MagicSound, Sound> magicSounds;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     void Start()
     {
-        _miscAttackSounds = miscAttackSounds.ToDictionary(s => s.soundType, s => s.sound);
-        _impactSounds = impactSounds.ToDictionary(s => s.soundType, s => s.sound);
-        _movementSounds = movementSounds.ToDictionary(s => s.soundType, s => s.sound);
-        _fireSounds = fireSounds.ToDictionary(s => s.soundType, s => s.sound);
+        miscAttackSounds = _miscAttackSounds.ToDictionary(s => s.soundType, s => s.sound);
+        impactSounds = _impactSounds.ToDictionary(s => s.soundType, s => s.sound);
+        movementSounds = _movementSounds.ToDictionary(s => s.soundType, s => s.sound);
+        fireSounds = _fireSounds.ToDictionary(s => s.soundType, s => s.sound);
+        magicSounds = _magicSounds.ToDictionary(s => s.soundType, s => s.sound);
     }
 
     // play misc attack sound effect
-    public void PlayAt(MiscAttackSound sound, Vector3 position)
+    public static void PlayAt(MiscAttackSound sound, Vector3 position)
     {
-        Sound s = _miscAttackSounds[sound];
+        Sound s = miscAttackSounds[sound];
         AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
     }
 
     // play an impact sound effect
-    public void PlayAt(ImpactSound sound, Vector3 position)
+    public static void PlayAt(ImpactSound sound, Vector3 position)
     {
-        Sound s = _impactSounds[sound];
+        Sound s = impactSounds[sound];
         AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
     }
 
     // play a movement sound effect
-    public void PlayAt(MovementSound sound, Vector3 position)
+    public static void PlayAt(MovementSound sound, Vector3 position)
     {
-        Sound s = _movementSounds[sound];
+        Sound s = movementSounds[sound];
         AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
     }
 
     // play a fire sound effect
-    public void PlayAt(FireSound sound, Vector3 position)
+    public static void PlayAt(FireSound sound, Vector3 position)
     {
-        Sound s = _fireSounds[sound];
+        Sound s = fireSounds[sound];
+        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+    }
+
+    // play a magic sound effect
+    public static void PlayAt(MagicSound sound, Vector3 position)
+    {
+        Sound s = magicSounds[sound];
         AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
     }
 
     // play a custom sound effect
-    public void PlayAt(Sound sound, Vector3 position)
+    public static void PlayAt(Sound sound, Vector3 position)
     {
         AudioSource.PlayClipAtPoint(sound.clip, position, sound.volume);
     }

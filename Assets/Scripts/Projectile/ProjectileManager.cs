@@ -25,12 +25,9 @@ public class ProjectileManager : MonoBehaviour
     private Rigidbody projectileRigidbody;
     private HashSet<Rigidbody> hitRigidbodies;
 
-    public AudioManager audioManager;
-
     void Awake()
     {
         projectileRigidbody = GetComponent<Rigidbody>();
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     void Start()

@@ -7,13 +7,6 @@ public class AnimationEventHandler : MonoBehaviour
     public PlayerAttackHandler attackHandler;
     public PlayerParticleEffects effects;
 
-    private AudioManager audioManager = null;
-
-    void Start()
-    {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-    }
-
     public void PlayLandingEffect()
     {
         effects.PlayLandingEffect();
@@ -21,17 +14,17 @@ public class AnimationEventHandler : MonoBehaviour
 
     public void PlayMiscAttackSFX(MiscAttackSound sound)
     {
-        audioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, transform.position);
     }
 
     public void PlayMovementSFX(MovementSound sound)
     {
-        audioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, transform.position);
     }
 
     public void PlayFireSFX(FireSound sound)
     {
-        audioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, transform.position);
     }
 
     public void TriggerSpecialAttackAction(int actionID)
