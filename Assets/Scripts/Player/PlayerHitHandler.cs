@@ -23,6 +23,9 @@ public class PlayerHitHandler : MonoBehaviour
         {
             player.triggerHit = true;
 
+            // if player got interrupted out of an attack, make sure to clean up
+            player.GetComponent<PlayerAttackHandler>().FinishAttack();
+
             if (attack.stunTime > 0)
             {
                 player.playerStun.ApplyStun(attack.stunTime + attack.hitlagTime);
