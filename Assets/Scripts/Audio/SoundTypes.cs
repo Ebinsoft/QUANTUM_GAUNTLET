@@ -63,13 +63,28 @@ public class MovementSoundElem
 // FIRE SOUNDS
 public enum FireSound
 {
-    FireBurst,
-    Explosion
+    FlameBurst,
+    ExplosionSmall,
+    ExplosionBig
 }
 
 [System.Serializable]
 public class FireSoundElem
 {
     public FireSound soundType;
+    public Sound sound;
+}
+
+
+// MAGIC SOUNDS
+public enum MagicSound
+{
+    ChargeUp
+}
+
+[System.Serializable]
+public class MagicSoundElem
+{
+    public MagicSound soundType;
     public Sound sound;
 }

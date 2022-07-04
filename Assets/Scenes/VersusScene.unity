@@ -360,33 +360,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fab9b76f2042c0478ea7b8f3422eb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miscAttackSounds:
+  instance: {fileID: 0}
+  _miscAttackSounds:
   - soundType: 0
     sound:
       clip: {fileID: 8300000, guid: c2cd37f8018e67540bc73b166661e23f, type: 3}
-      volume: 0.5
+      volume: 1
   - soundType: 1
     sound:
       clip: {fileID: 8300000, guid: 02e426649a5c3da4380849cabecb3e3c, type: 3}
-      volume: 0.7
-  impactSounds:
+      volume: 1
+  _impactSounds:
   - soundType: 0
     sound:
       clip: {fileID: 8300000, guid: 015c401f376431e44ae289f96f5becc4, type: 3}
-      volume: 0.7
+      volume: 1
   - soundType: 1
     sound:
       clip: {fileID: 8300000, guid: 39fbee56739f4f0498c6e3e3f563aef6, type: 3}
-      volume: 0.85
+      volume: 1
   - soundType: 2
     sound:
       clip: {fileID: 8300000, guid: 1ed13209f2dd53041b241b84acb548f6, type: 3}
       volume: 1
-  movementSounds:
+  _movementSounds:
   - soundType: 0
     sound:
       clip: {fileID: 8300000, guid: 3809d059b5ad79b43891e40a9e11fd12, type: 3}
-      volume: 0.35
+      volume: 0.4
   - soundType: 3
     sound:
       clip: {fileID: 8300000, guid: ff4610360523fc745a67fd72ae5ac735, type: 3}
@@ -395,7 +396,7 @@ MonoBehaviour:
     sound:
       clip: {fileID: 8300000, guid: 624c56db724fa9a439884ec333b28217, type: 3}
       volume: 1
-  fireSounds:
+  _fireSounds:
   - soundType: 0
     sound:
       clip: {fileID: 8300000, guid: f76548b7bd325504ab569d0d87ee9d48, type: 3}
@@ -404,6 +405,15 @@ MonoBehaviour:
     sound:
       clip: {fileID: 8300000, guid: ee66ddea51e3dc847958ff31309d70d5, type: 3}
       volume: 1
+  - soundType: 2
+    sound:
+      clip: {fileID: 8300000, guid: d311f89d091410b43babd25f96884fcc, type: 3}
+      volume: 1
+  _magicSounds:
+  - soundType: 0
+    sound:
+      clip: {fileID: 8300000, guid: 5168d7f5efe3d144c9a19b0b4918e52a, type: 3}
+      volume: 0.75
 --- !u!4 &420343998
 Transform:
   m_ObjectHideFlags: 0
@@ -412,7 +422,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420343996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.195786, y: -46.115326, z: 56.72546}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

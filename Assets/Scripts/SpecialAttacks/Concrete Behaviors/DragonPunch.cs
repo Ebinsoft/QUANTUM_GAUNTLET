@@ -4,6 +4,7 @@ using UnityEngine;
 public class DragonPunch : SpecialAttackBehavior
 {
     UnityEngine.Object fireFistPrefab = Resources.Load("Prefabs/Projectiles/FireFist");
+    AudioSource playerAudioSource;
 
     bool buttonWasReleased;
     bool canPunch;
@@ -24,6 +25,12 @@ public class DragonPunch : SpecialAttackBehavior
         buttonWasReleased = false;
         canPunch = false;
         chargeTimer = 0f;
+
+        playerAudioSource = player.GetComponentInChildren<AudioSource>();
+        Sound chargeSound = AudioManager.magicSounds[MagicSound.ChargeUp];
+        playerAudioSource.clip = chargeSound.clip;
+        playerAudioSource.volume = chargeSound.volume;
+        playerAudioSource.Play();
     }
 
     public override void Update()
@@ -64,6 +71,8 @@ public class DragonPunch : SpecialAttackBehavior
         extraParams.Add("ChargePercent", chargePercent);
 
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
+        playerAudioSource.Stop();
+        AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
     }
 
     public override void OnExit() { }
