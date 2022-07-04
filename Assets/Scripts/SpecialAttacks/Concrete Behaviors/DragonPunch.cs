@@ -5,6 +5,7 @@ public class DragonPunch : SpecialAttackBehavior
 {
     UnityEngine.Object fireFistPrefab = Resources.Load("Prefabs/Projectiles/FireFist");
     AudioSource playerAudioSource;
+    PlayerParticleEffects particleEffects;
 
     bool buttonWasReleased;
     bool canPunch;
@@ -28,9 +29,12 @@ public class DragonPunch : SpecialAttackBehavior
 
         playerAudioSource = player.GetComponentInChildren<AudioSource>();
         Sound chargeSound = AudioManager.magicSounds[MagicSound.ChargeUp];
+
         playerAudioSource.clip = chargeSound.clip;
         playerAudioSource.volume = chargeSound.volume;
         playerAudioSource.Play();
+
+        particleEffects = player.GetComponent<PlayerParticleEffects>();
     }
 
     public override void Update()
@@ -73,9 +77,15 @@ public class DragonPunch : SpecialAttackBehavior
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
         playerAudioSource.Stop();
         AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
+        particleEffects.StopChargingEffect();
     }
 
-    public override void OnExit() { }
+    public override void OnExit()
+    {
+        // cleanup in case of interruption
+        playerAudioSource.Stop();
+        particleEffects.StopChargingEffect();
+    }
 
     public override void OnHit(Collider other) { }
 
@@ -87,6 +97,7 @@ public class DragonPunch : SpecialAttackBehavior
                 // punch has reached its minimum charge time
                 canPunch = true;
                 chargeTimer = 0;
+                particleEffects.StartChargingEffectAt(player.transform.position);
                 break;
 
             case 1:
