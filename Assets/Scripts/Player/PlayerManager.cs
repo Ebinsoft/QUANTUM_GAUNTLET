@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,17 +18,31 @@ public class PlayerManager : MonoBehaviour
     public PlayerFallingState FallingState;
     public PlayerLandingState LandingState;
     public PlayerDashingState DashingState;
-    public PlayerNormalAttackState NormalAttackState;
-    public PlayerHitState HitState;
+    public PlayerLightAttackState LightAttackState;
+    public PlayerHeavyAttackState HeavyAttackState;
+    public PlayerSpecial1State Special1State;
+    public PlayerSpecial2State Special2State;
+    public PlayerSpecial3State Special3State;
+    public PlayerStunState StunState;
+    public PlayerDeadState DeadState;
+    public PlayerRespawningState RespawnState;
+    public PlayerTumblingState TumblingState;
+    public PlayerCrashingState CrashingState;
 
     // Other Stuff
     public Animator anim;
     public AnimatorEffects animEffects;
-    private PlayerInput playerInput;
+    public PlayerStun playerStun;
+    public PlayerKnockback playerKnockback;
+    public PlayerMoveset moveset;
     public CharacterController characterController;
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    // Current XZ target direction to rotate towards
+    public Vector2 rotationTarget;
+    // Our updated version of isGrounded that checks a spherecast
+    public bool isGrounded;
 
     /********** input variables **********/
     // Left Stick
@@ -94,18 +109,37 @@ public class PlayerManager : MonoBehaviour
 
     // hit variables
     public bool triggerHit = false;
+    public bool isStunned = false;
     public bool isHit = false;
+    public bool isHitLagging = false;
+
+    // tumbling variables
+    public bool isTumbling = false;
+
+    // crashing variables
+    public bool isCrashing = false;
 
     // gravity variables
-    private float gravity;
+    public float gravity;
+    public float jumpGravity;
     public float gravityMultiplier = 1.0f;
     private float groundedGravity = -0.05f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
     public bool isAttacking = false;
-    public int maxAttackChain = 3;
-    public int attacksLeft = 3;
+    public int maxLightAttackChain = 3;
+    public int lightAttacksLeft = 3;
+    public int maxHeavyAttackChain = 1;
+    public int heavyAttacksLeft = 1;
+
+    // death variables
+    public bool triggerDead = false;
+    public bool canDie = true;
+    public bool isDead = false;
+
+    // respawn variables
+    public bool isRespawning = false;
 
     void Awake()
     {
@@ -115,15 +149,27 @@ public class PlayerManager : MonoBehaviour
         JumpingState = new PlayerJumpingState(this);
         FallingState = new PlayerFallingState(this);
         LandingState = new PlayerLandingState(this);
-        NormalAttackState = new PlayerNormalAttackState(this);
+        LightAttackState = new PlayerLightAttackState(this);
+        HeavyAttackState = new PlayerHeavyAttackState(this);
+        Special1State = new PlayerSpecial1State(this);
+        Special2State = new PlayerSpecial2State(this);
+        Special3State = new PlayerSpecial3State(this);
         DashingState = new PlayerDashingState(this);
-        HitState = new PlayerHitState(this);
+        StunState = new PlayerStunState(this);
+        DeadState = new PlayerDeadState(this);
+        RespawnState = new PlayerRespawningState(this);
+        TumblingState = new PlayerTumblingState(this);
+        CrashingState = new PlayerCrashingState(this);
 
-        playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        playerStun = GetComponent<PlayerStun>();
+        playerKnockback = GetComponent<PlayerKnockback>();
+        moveset = GetComponent<PlayerMoveset>();
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
+        rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
+        gravity = jumpGravity;
         jumpsLeft = maxJumps;
         dashesLeft = maxDashes;
     }
@@ -139,12 +185,42 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for if we died
+        if (canDie && stats.health <= 0)
+        {
+            canDie = false;
+            triggerDead = true;
+        }
+
+
+        // calculate our fancy isGrounded
+        CalculateIsGrounded();
+
+        // update animator's isGrounded to sync with code's
+        anim.SetBool("IsGrounded", isGrounded);
+
         handleRotation();
         currentState.Update();
-
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
+    private void CalculateIsGrounded()
+    {
+        RaycastHit hit;
+        Vector3 p1 = transform.position + characterController.center;
+
+        float capsuleWidth = characterController.radius;
+        float centerToFloor = (characterController.height / 2) - capsuleWidth / 2;
+
+        bool isSphereHit = false;
+        // cast a sphere
+        if (Physics.SphereCast(p1, capsuleWidth, Vector3.down, out hit, centerToFloor, LayerMask.GetMask("Ground")))
+        {
+            isSphereHit = true;
+        }
+        // also make sure we have negative velocity so we don't "land" when we jump up
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+    }
     void FixedUpdate()
     {
         resetJumps();
@@ -155,18 +231,18 @@ public class PlayerManager : MonoBehaviour
     {
         // setting gravity and our jump velocity in terms of jump height and jump time
         float timeToApex = maxJumpTime / 2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
     void handleRotation()
     {
         Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.x = rotationTarget.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
-        // rotation
-        if (positionToLookAt.magnitude > 0)
+        positionToLookAt.z = rotationTarget.y;
+
+        if ((transform.forward - positionToLookAt.normalized).magnitude > 0.001f)
         {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
@@ -179,7 +255,7 @@ public class PlayerManager : MonoBehaviour
         // this will handle early falling if you release the jump button
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && currentMovement.y < 0)
         {
             currentMovement.y = groundedGravity;
         }
@@ -198,4 +274,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    // checks whether the player currently has enough mana to cast a particular move
+    public bool EnoughManaFor(MoveType moveType)
+    {
+        return moveset.TotalManaCost(moveType) <= stats.mana;
+    }
 }

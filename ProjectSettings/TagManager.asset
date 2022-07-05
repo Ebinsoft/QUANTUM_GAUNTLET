@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Team 1
+  - Team 2
+  - Team 3
+  - Team 4
+  - PlayerPanels
   layers:
   - Default
   - TransparentFX
@@ -12,8 +17,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Team1
-  - Team2
+  - Player
+  - 
   - Hitbox
   - Hurtbox
   - Pushbox

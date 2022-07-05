@@ -6,13 +6,19 @@ using UnityEngine;
 
 public class PlayerAttackHandler : MonoBehaviour
 {
-    public AttackInfo[] attacks;
-    private Dictionary<String, AttackInfo> attackDict;
+    private struct ColliderWithDefault
+    {
+        public Collider collider;
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
+    }
 
     // cached set of all hitboxes attached to player
-    private Dictionary<String, Collider> playerHitboxes;
+    private List<ColliderWithDefault> playerHitboxes;
 
     private AttackInfo activeAttack = null;
+    public SpecialAttackBehavior activeSpecialBehavior { get; private set; }
 
     // tracks the distinct players hit during an active attack window
     private HashSet<Rigidbody> hitRigidBodies;
@@ -20,45 +26,30 @@ public class PlayerAttackHandler : MonoBehaviour
     // references to external components
     public AnimatorEffects animEffects;
     private PlayerParticleEffects effects;
+    private PlayerManager player;
 
     void Start()
     {
         // load particle effects player
         effects = GetComponent<PlayerParticleEffects>();
 
+        player = GetComponent<PlayerManager>();
+
         // cache player's atached hitboxes
         LoadPlayerHitboxes();
 
         // disable all hitboxes by default
-        foreach (var hitbox in playerHitboxes.Values)
+        foreach (var hitbox in playerHitboxes)
         {
-            hitbox.enabled = false;
+            hitbox.collider.enabled = false;
         }
+    }
 
-        // load list of attacks into dictionary for better lookup
-        attackDict = attacks.ToDictionary(
-            a => a.name,
-            a => UnityEngine.Object.Instantiate(a)
-        );
-
-        // populate each attack's hitbox fields
-        foreach (AttackInfo atk in attackDict.Values)
+    void Update()
+    {
+        if (activeSpecialBehavior != null)
         {
-            atk.hitboxes = new Collider[atk.hitboxNames.Length];
-            for (int i = 0; i < atk.hitboxes.Length; i++)
-            {
-                try
-                {
-                    atk.hitboxes[i] = playerHitboxes[atk.hitboxNames[i]];
-                }
-                catch (KeyNotFoundException)
-                {
-                    Debug.LogErrorFormat(
-                        "Hitbox named %s does not exist (specified in %s attack info).",
-                        atk.hitboxNames[i],
-                        atk.attackName);
-                }
-            }
+            activeSpecialBehavior.Update();
         }
     }
 
@@ -76,73 +67,104 @@ public class PlayerAttackHandler : MonoBehaviour
             .Select(g => g.First()).ToList()
             .ForEach(c => Debug.LogError("Duplicate hitbox name found: " + c));
 
-        // map hitbox names to collider components
-        playerHitboxes = hitboxes.ToDictionary(c => c.gameObject.name, c => c);
+        // Store colliders with a copy of their transform values
+        playerHitboxes = hitboxes.Select(c => new ColliderWithDefault()
+        {
+            collider = c,
+            position = c.transform.localPosition,
+            rotation = c.transform.localRotation,
+            scale = c.transform.localScale
+        }).ToList();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Hurtbox"))
+        if (activeAttack == null) return;
+
+        bool isHurtbox = other.gameObject.layer == LayerMask.NameToLayer("Hurtbox");
+        if (!isHurtbox) return;
+        bool isOpponent = other.attachedRigidbody.tag != this.tag;
+        bool wasAlreadyHit = hitRigidBodies.Contains(other.attachedRigidbody);
+
+        if (isHurtbox && isOpponent && !wasAlreadyHit)
         {
-            if (!hitRigidBodies.Contains(other.attachedRigidbody))
-            {
-                hitRigidBodies.Add(other.attachedRigidbody);
-                HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
-            }
-        }
-        else
-        {
-            Debug.Log(LayerMask.LayerToName(other.gameObject.layer));
+            if (activeSpecialBehavior != null) activeSpecialBehavior.OnHit(other);
+            hitRigidBodies.Add(other.attachedRigidbody);
+            HitPlayer(other.attachedRigidbody.gameObject, other.transform.position);
         }
     }
 
     private void HitPlayer(GameObject playerObj, Vector3 hitPoint)
     {
-        if (activeAttack == null) return;
+        Vector3 direction = hitPoint - transform.position;
+        HitData hitData = new HitData() { attack = activeAttack, direction = direction };
 
-        if (playerObj.GetComponent<PlayerHitHandler>().handleHit(activeAttack))
+        bool hitResolved = playerObj.GetComponent<PlayerHitHandler>().handleHit(hitData);
+        if (hitResolved)
         {
             // do hitlag for attacking player
-            animEffects.PlayHitlag(activeAttack.hitlagTime);
+            animEffects.PlayRecoilLag(activeAttack.hitlagTime);
 
             // play hit particle effect at contact point
             effects.PlayHitEffectAt(hitPoint);
+
+            // restore mana to attacking player
+            player.stats.RestoreMana(activeAttack.manaGain);
+
+            // play impact sound effect
+            switch (activeAttack.impactSoundType)
+            {
+                case SoundEffectType.preset:
+                    AudioManager.PlayAt(activeAttack.presetImpactSound, hitPoint);
+                    break;
+
+                case SoundEffectType.custom:
+                    AudioManager.PlayAt(activeAttack.customImpactSound, hitPoint);
+                    break;
+            }
         }
     }
 
-    public void InitiateAttack(string attackName)
+    public void InitiateAttack(AttackInfo attack)
     {
-        try
+        activeAttack = attack;
+        if (attack.hasSpecialBehavior)
         {
-            // search for attack in dict and set as active attack
-            activeAttack = attackDict[attackName];
-
-            // reset list of rigidbodies hit by attack
-            hitRigidBodies = new HashSet<Rigidbody>();
-
-            // turn on hitbox colliders
-            foreach (Collider hitbox in activeAttack.hitboxes)
-            {
-                hitbox.enabled = true;
-            }
+            activeSpecialBehavior = (SpecialAttackBehavior)attack.specialBehavior.CreateInstance();
+            activeSpecialBehavior.player = GetComponent<PlayerManager>();
+            activeSpecialBehavior.OnEnter();
         }
-        catch (KeyNotFoundException)
-        {
-            Debug.LogError("Attack does not exist: " + attackName);
-        }
+
+        player.stats.DrainMana(attack.manaCost);
+
+        // reset list of rigidbodies hit by attack
+        hitRigidBodies = new HashSet<Rigidbody>();
     }
 
     public void FinishAttack()
     {
         if (activeAttack == null) return;
 
-        // turn off hitbox colliders
-        foreach (Collider hitbox in activeAttack.hitboxes)
-        {
-            hitbox.enabled = false;
-        }
+        CleanupHitboxes();
 
         // reset active attack
         activeAttack = null;
+
+        if (activeSpecialBehavior != null)
+        {
+            activeSpecialBehavior.OnExit();
+            activeSpecialBehavior = null;
+        }
+    }
+
+    private void CleanupHitboxes()
+    {
+        foreach (var hitbox in playerHitboxes)
+        {
+            hitbox.collider.enabled = false;
+            hitbox.collider.transform.localPosition = hitbox.position;
+            hitbox.collider.transform.localRotation = hitbox.rotation;
+            hitbox.collider.transform.localScale = hitbox.scale;
+        }
     }
 }

@@ -11,6 +11,10 @@ public class PlayerDashingState : PlayerBaseState
     public PlayerDashingState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = false;
+        canRotate = false;
+        cancelMomentum = true;
+
         effects = player.gameObject.GetComponent<PlayerParticleEffects>();
 
         // calculate dashing speed
@@ -20,9 +24,6 @@ public class PlayerDashingState : PlayerBaseState
     public override void EnterState()
     {
         player.isDashing = true;
-        player.anim.SetBool("IsDashing", true);
-        effects.StartDashingEffect();
-        dashTimer = 0.0f;
         Dash();
     }
 
@@ -33,6 +34,11 @@ public class PlayerDashingState : PlayerBaseState
         {
             player.anim.SetBool("IsDashing", false);
             DecayVelocity();
+
+            if (player.dashesLeft > 0 && player.isUtilityAttackTriggered)
+            {
+                Dash();
+            }
         }
     }
 
@@ -41,8 +47,8 @@ public class PlayerDashingState : PlayerBaseState
         player.isDashing = false;
         player.anim.SetBool("IsDashing", false);
         effects.StopDashingEffect();
-        player.currentMovement.x = 0;
-        player.currentMovement.z = 0;
+
+        player.dashesLeft = player.maxDashes;
     }
 
     public override void CheckStateUpdate()
@@ -50,7 +56,7 @@ public class PlayerDashingState : PlayerBaseState
         if (dashTimer >= dashDuration + decayDuration
             && !player.anim.GetBool("InDashRecovery"))
         {
-            if (!player.characterController.isGrounded)
+            if (!player.isGrounded)
             {
                 SwitchState(player.FallingState);
             }
@@ -61,14 +67,14 @@ public class PlayerDashingState : PlayerBaseState
 
             player.dashesLeft = player.maxDashes;
         }
-        else if (player.dashesLeft > 0 && player.isUtilityAttackTriggered)
-        {
-            SwitchState(player.DashingState);
-        }
     }
 
     private void Dash()
     {
+        player.anim.SetBool("IsDashing", true);
+        effects.StartDashingEffect();
+        dashTimer = 0.0f;
+
         Vector3 playerFacing = player.transform.forward;
         player.currentMovement.x = (playerFacing.x * dashSpeed);
         player.currentMovement.z = (playerFacing.z * dashSpeed);

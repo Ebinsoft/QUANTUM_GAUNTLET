@@ -8,6 +8,8 @@ public class PlayerJumpingState : PlayerBaseState
     {
         player = psm;
         canMove = true;
+        canRotate = true;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {
@@ -27,7 +29,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.characterController.isGrounded)
+        if (player.isGrounded)
         {
             SwitchState(player.LandingState);
         }
@@ -45,6 +47,7 @@ public class PlayerJumpingState : PlayerBaseState
 
     private void Jump()
     {
+        player.gravity = player.jumpGravity;
         player.currentMovement.y = player.initialJumpVelocity;
         player.jumpsLeft--;
         player.isJumpTriggered = false;
