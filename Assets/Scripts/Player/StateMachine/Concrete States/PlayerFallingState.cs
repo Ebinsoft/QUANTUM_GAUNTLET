@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PlayerFallingState : PlayerBaseState
+public class PlayerAirborneState : PlayerBaseState
 {
     private PlayerManager player;
-    public PlayerFallingState(PlayerManager psm) : base(psm)
+    public PlayerAirborneState(PlayerManager psm) : base(psm)
     {
         player = psm;
         canMove = true;

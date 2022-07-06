@@ -36,7 +36,7 @@ public class PlayerJumpingState : PlayerBaseState
 
         else if (player.currentMovement.y < 0.0f)
         {
-            SwitchState(player.FallingState);
+            SwitchState(player.AirborneState);
         }
 
         else if (player.jumpsLeft > 0 && player.isJumpTriggered)

@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerIdleState IdleState;
     public PlayerWalkingState WalkingState;
     public PlayerJumpingState JumpingState;
-    public PlayerFallingState FallingState;
+    public PlayerAirborneState AirborneState;
     public PlayerLandingState LandingState;
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
@@ -147,7 +147,7 @@ public class PlayerManager : MonoBehaviour
         IdleState = new PlayerIdleState(this);
         WalkingState = new PlayerWalkingState(this);
         JumpingState = new PlayerJumpingState(this);
-        FallingState = new PlayerFallingState(this);
+        AirborneState = new PlayerAirborneState(this);
         LandingState = new PlayerLandingState(this);
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
