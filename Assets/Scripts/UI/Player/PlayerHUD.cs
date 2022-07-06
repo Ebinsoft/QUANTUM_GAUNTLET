@@ -16,6 +16,7 @@ public class PlayerHUD : MonoBehaviour
     Image portraitBg;
     TMPro.TextMeshProUGUI playerID;
     Image[] stockIcons;
+    Text debugText;
 
     void Awake()
     {
@@ -23,6 +24,8 @@ public class PlayerHUD : MonoBehaviour
         manaBar = transform.Find("Mana/Bar").GetComponent<Image>();
         portraitBg = transform.Find("Portrait/BG").GetComponent<Image>();
         playerID = transform.Find("Player ID/Text").GetComponent<TMPro.TextMeshProUGUI>();
+
+        debugText = transform.Find("Debug Text").GetComponent<Text>();
     }
 
     void Update()
@@ -35,7 +38,7 @@ public class PlayerHUD : MonoBehaviour
         float percentMana = player.stats.mana / player.stats.baseStats.baseMana;
         manaBar.materialForRendering.SetFloat("_FillAmount", percentMana);
 
-
+        debugText.text = player.currentState.ToString();
     }
 
     public void SetPlayer(PlayerManager playerManager, PlayerSetting playerSetting)
