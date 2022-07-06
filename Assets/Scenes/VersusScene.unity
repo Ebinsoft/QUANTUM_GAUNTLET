@@ -157,6 +157,7 @@ MonoBehaviour:
   playerList: []
   gameOverMenu: {fileID: 1652437000}
   playerTargetGroup: {fileID: 647113859}
+  playerHUDPrefab: {fileID: 4345037606483549039, guid: b6c26b1c3c1b33a4bbd92104ecd51dcf, type: 3}
 --- !u!4 &11524278
 Transform:
   m_ObjectHideFlags: 0
@@ -360,7 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fab9b76f2042c0478ea7b8f3422eb6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
   _miscAttackSounds:
   - soundType: 0
     sound:
