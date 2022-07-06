@@ -123,7 +123,7 @@ public class PlayerManager : MonoBehaviour
     public float gravity;
     public float jumpGravity;
     public float gravityMultiplier = 1.0f;
-    private float groundedGravity = -0.05f;
+    private float groundedGravity = -5f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
@@ -192,7 +192,6 @@ public class PlayerManager : MonoBehaviour
             triggerDead = true;
         }
 
-
         // calculate our fancy isGrounded
         CalculateIsGrounded();
 
@@ -210,7 +209,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 p1 = transform.position + characterController.center;
 
         float capsuleWidth = characterController.radius;
-        float centerToFloor = (characterController.height / 2) - capsuleWidth / 2;
+        float centerToFloor = (characterController.height / 2);
 
         bool isSphereHit = false;
         // cast a sphere

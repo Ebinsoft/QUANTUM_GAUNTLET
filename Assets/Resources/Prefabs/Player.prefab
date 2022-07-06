@@ -35416,7 +35416,7 @@ MonoBehaviour:
   gravity: 0
   jumpGravity: 0
   gravityMultiplier: 1
-  maxFallingSpeed: -15
+  maxFallingSpeed: -10
   isAttacking: 0
   maxLightAttackChain: 3
   lightAttacksLeft: 3
