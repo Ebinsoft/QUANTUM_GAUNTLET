@@ -15,6 +15,7 @@ public class PlayerHUD : MonoBehaviour
     Image manaBar;
     Image portraitBg;
     TMPro.TextMeshProUGUI playerID;
+    Image[] stockIcons;
 
     void Awake()
     {
@@ -30,11 +31,11 @@ public class PlayerHUD : MonoBehaviour
 
         float percentHealth = ((float)player.stats.health) / player.stats.baseStats.baseHealth;
         healthBar.materialForRendering.SetFloat("_FillAmount", percentHealth);
-        // healthBar.fillAmount = percentHealth;
 
         float percentMana = player.stats.mana / player.stats.baseStats.baseMana;
         manaBar.materialForRendering.SetFloat("_FillAmount", percentMana);
-        // manaBar.fillAmount = percentMana;
+
+
     }
 
     public void SetPlayer(PlayerManager playerManager, PlayerSetting playerSetting)
@@ -49,22 +50,64 @@ public class PlayerHUD : MonoBehaviour
         playerID.text = "P" + (playerSetting.playerIndex + 1);
         portraitBg.color = playerSetting.team.teamColor + (Color.white * 0.4f);
 
+        GenerateStockIcons();
+
+        // subscribe to player deaths
+        player.stats.onPlayerDie += onPlayerDie;
+
         ComputePositionAndScale();
     }
 
     public void ComputePositionAndScale()
     {
-
         float canvasWidth = transform.root.GetComponent<RectTransform>().rect.width;
+        float padding = canvasWidth / 64;
 
         RectTransform rectTrans = GetComponent<RectTransform>();
         rectTrans.anchoredPosition = new Vector2()
         {
-            x = (canvasWidth / 4) * playerSetting.playerIndex,
+            x = (canvasWidth / 4) * playerSetting.playerIndex + padding,
             y = 0
         };
 
-        rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, canvasWidth / 4);
+        float hudWidth = (canvasWidth / 4) - (2 * padding);
+        float hudHeight = (1f / 3) * hudWidth;
+
+        rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, hudWidth);
+        rectTrans.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, hudHeight);
     }
 
+    private void GenerateStockIcons()
+    {
+        GameObject stocksParent = transform.Find("Stock Icons").gameObject;
+
+        int numLives = GameManager.instance.versusInfo.numLives;
+        stockIcons = new Image[numLives];
+        stockIcons[0] = stocksParent.transform.Find("Stock 1").GetComponent<Image>();
+        Vector2 originalPosition = stockIcons[0].gameObject.GetComponent<RectTransform>().anchoredPosition;
+
+        for (int i = 1; i < numLives; i++)
+        {
+            GameObject stock = (GameObject)Instantiate(stockIcons[0].gameObject);
+            stock.transform.SetParent(stocksParent.transform);
+            RectTransform rectTrans = stock.GetComponent<RectTransform>();
+            rectTrans.anchoredPosition = originalPosition + new Vector2() { x = 18 * i, y = 0 };
+
+            stockIcons[i] = stock.GetComponent<Image>();
+        }
+    }
+
+    private void onPlayerDie(GameObject playerObj)
+    {
+        // update stock icons
+        int remainingLives = player.stats.lives;
+
+        for (int i = 0; i < stockIcons.Length; i++)
+        {
+            if (i >= remainingLives)
+            {
+                stockIcons[i].color = Color.gray;
+            }
+        }
+    }
 }
