@@ -57,6 +57,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
-# Ignore healthbar materials because they change every time you play
-Assets/Materials/UI/StatusBars*

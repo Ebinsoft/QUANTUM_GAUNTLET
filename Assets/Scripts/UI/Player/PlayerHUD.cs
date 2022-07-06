@@ -41,6 +41,13 @@ public class PlayerHUD : MonoBehaviour
         debugText.text = player.currentState.ToString();
     }
 
+    void OnApplicationQuit()
+    {
+        // reset materials on quit so they stop showing up in the git diff
+        healthBar.materialForRendering.SetFloat("_FillAmount", 1);
+        manaBar.materialForRendering.SetFloat("_FillAmount", 1);
+    }
+
     public void SetPlayer(PlayerManager playerManager, PlayerSetting playerSetting)
     {
         this.player = playerManager;
