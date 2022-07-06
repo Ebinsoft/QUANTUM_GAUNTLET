@@ -15,7 +15,6 @@ public class PlayerFallingState : PlayerBaseState
         player.isFalling = true;
         player.anim.SetBool("IsFalling", true);
         player.gravityMultiplier = player.fallMultiplier;
-
     }
 
     public override void UpdateState()
