@@ -76,8 +76,8 @@ public class PlayerSetup : MonoBehaviour
     {
         ai = gameObject.AddComponent<AIManager>();
         // navAgent = gameObject.AddComponent<NavMeshAgent>();
-        navAgent.speed = player.playerSpeed;
-        navAgent.angularSpeed = player.rotationSpeed;
+        // navAgent.speed = player.playerSpeed;
+        // navAgent.angularSpeed = player.rotationSpeed;
     }
 
 }
