@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerAirborneState : PlayerBaseState
 {
     private PlayerManager player;
+    private float minTimeBeforeLanding = 0.2f;
+    private float landingTimer;
     public PlayerAirborneState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -15,10 +17,12 @@ public class PlayerAirborneState : PlayerBaseState
         player.isFalling = true;
         player.anim.SetBool("IsFalling", true);
         player.gravityMultiplier = player.fallMultiplier;
+        landingTimer = 0f;
     }
 
     public override void UpdateState()
     {
+        landingTimer += Time.deltaTime;
     }
 
     public override void ExitState()
@@ -30,9 +34,13 @@ public class PlayerAirborneState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.isGrounded)
+        if (player.isGrounded && landingTimer >= minTimeBeforeLanding)
         {
             SwitchState(player.LandingState);
+        }
+        else if (player.isGrounded)
+        {
+            SwitchState(player.IdleState);
         }
         else if (player.jumpsLeft > 0 && player.isJumpTriggered)
         {
