@@ -13,11 +13,14 @@ public class VersusSceneManager : MonoBehaviour
     public List<GameObject> playerList;
     public PauseMenu gameOverMenu;
     public CinemachineTargetGroup playerTargetGroup;
+    public UnityEngine.Object playerHUDPrefab;
     private bool isGameOver = false;
+
     void Awake()
     {
         instance = this;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,29 +31,33 @@ public class VersusSceneManager : MonoBehaviour
         foreach (PlayerSetting ps in versusInfo.playerSettings.OrderBy(c => c.playerIndex))
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
+            PlayerManager playerManager = null;
+
             if (ps.playerType == "Human")
             {
                 playerInputManager.playerPrefab = c.characterPrefab;
                 if (ps.device != null)
                 {
 
-                    playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
                 else
                 {
                     // This is for simple debugging directly from Versus scene
-                    playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
+                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
+                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
 
             }
 
             else if (ps.playerType == "Robot")
             {
-                Instantiate(c.characterPrefab);
+                playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
             }
 
+            CreatePlayerHUD(playerManager, ps);
         }
-
     }
 
     private void Update()
@@ -94,5 +101,15 @@ public class VersusSceneManager : MonoBehaviour
     {
         playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
+    }
+
+    private void CreatePlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
+    {
+        GameObject hudObj = (GameObject)Instantiate(playerHUDPrefab);
+        GameObject canvas = GameObject.Find("Canvas");
+        hudObj.transform.SetParent(canvas.transform);
+
+        PlayerHUD hud = hudObj.GetComponent<PlayerHUD>();
+        hud.SetPlayer(playerManager, playerSetting);
     }
 }
