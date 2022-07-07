@@ -1616,7 +1616,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1372812089, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: Mute
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372812089, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2913951985953123365, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: m_RootOrder
