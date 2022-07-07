@@ -55,6 +55,11 @@ public class AttackInfo : ScriptableObject
         }
     }
 
+    // Aim assist
+    public bool hasAimAssist = false;
+    public float aimAssistDistance;
+    public float aimAssistAngle;
+
     // Special attack behavior
     public bool hasSpecialBehavior = false;
     public SerializedClass specialBehavior = null;
@@ -168,6 +173,19 @@ public class AttackInfoEditor : Editor
                 EditorGUILayout.FloatField("Knockback Stun", obj.knockbackStun);
             }
             EditorGUILayout.FloatField("Total Stun", obj.stunTime);
+        }
+
+        EditorGUILayout.Space();
+
+        // Aim assist
+        EditorGUILayout.LabelField("Aim Assist", EditorStyles.boldLabel);
+        obj.hasAimAssist = EditorGUILayout.Toggle("Aim Assist", obj.hasAimAssist);
+        if (obj.hasAimAssist) {
+            EditorGUILayout.LabelField("Projects a cone out from the player's forward direction");
+            EditorGUI.indentLevel++;
+            obj.aimAssistAngle = EditorGUILayout.FloatField("Angle", obj.aimAssistAngle);
+            obj.aimAssistDistance = EditorGUILayout.FloatField("Distance", obj.aimAssistDistance);
+            EditorGUI.indentLevel--;
         }
 
         EditorGUILayout.Space();
