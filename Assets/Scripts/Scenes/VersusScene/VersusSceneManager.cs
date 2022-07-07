@@ -28,8 +28,12 @@ public class VersusSceneManager : MonoBehaviour
         int numPlayers = versusInfo.numPlayers;
         isGameOver = false;
 
-        foreach (PlayerSetting ps in versusInfo.playerSettings.OrderBy(c => c.playerIndex))
+        for (int i = 0; i < versusInfo.playerSettings.Count; i++)
         {
+            PlayerSetting ps = versusInfo.playerSettings[i];
+            // TODO: Remove the need to ever gather playerIndex and just generate it here
+            ps.playerIndex = i;
+
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
 
@@ -39,13 +43,13 @@ public class VersusSceneManager : MonoBehaviour
                 if (ps.device != null)
                 {
 
-                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                    var playerInput = playerInputManager.JoinPlayer(i, -1, null, ps.device);
                     playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
                 else
                 {
                     // This is for simple debugging directly from Versus scene
-                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
+                    var playerInput = playerInputManager.JoinPlayer(i, -1, null);
                     playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
 
