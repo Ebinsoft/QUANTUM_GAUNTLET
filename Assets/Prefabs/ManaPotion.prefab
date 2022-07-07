@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  manaRestored: 200
+  manaRestored: 500
 --- !u!1001 &7792040219335464817
 PrefabInstance:
   m_ObjectHideFlags: 0
