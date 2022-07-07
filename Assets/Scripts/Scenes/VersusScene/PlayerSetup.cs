@@ -60,7 +60,7 @@ public class PlayerSetup : MonoBehaviour
             gameObject.name = playerSetting.playerName;
             gameObject.tag = playerSetting.team.teamName;
 
-            if (playerSetting.playerType == "Robot")
+            if (playerSetting.playerType == PlayerType.Robot)
             {
                 ChangeToAI();
             }

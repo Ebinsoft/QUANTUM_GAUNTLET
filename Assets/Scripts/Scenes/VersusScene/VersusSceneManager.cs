@@ -27,7 +27,8 @@ public class VersusSceneManager : MonoBehaviour
         var versusInfo = GameManager.instance.versusInfo;
         int numPlayers = versusInfo.numPlayers;
         isGameOver = false;
-
+        // order Humans first so that we don't have Robot instantiation gobbling up PlayerIndexes
+        versusInfo.playerSettings = versusInfo.playerSettings.OrderBy(c => c.playerType).ToList<PlayerSetting>();
         for (int i = 0; i < versusInfo.playerSettings.Count; i++)
         {
             PlayerSetting ps = versusInfo.playerSettings[i];
@@ -37,7 +38,7 @@ public class VersusSceneManager : MonoBehaviour
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
 
-            if (ps.playerType == "Human")
+            if (ps.playerType == PlayerType.Human)
             {
                 playerInputManager.playerPrefab = c.characterPrefab;
                 if (ps.device != null)
@@ -55,7 +56,7 @@ public class VersusSceneManager : MonoBehaviour
 
             }
 
-            else if (ps.playerType == "Robot")
+            else if (ps.playerType == PlayerType.Robot)
             {
                 playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
             }

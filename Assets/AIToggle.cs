@@ -36,7 +36,7 @@ public class AIToggle : MonoBehaviour
             deviceString = "none",
             // TODO: Fix this - Hard-coding this until we can have players choose AI characters
             characterName = "Edmond",
-            playerType = "Robot",
+            playerType = PlayerType.Robot,
             team = new Team("Team " + (playerPanel.playerIndex + 1))
         };
         versusInfo.AddPlayer(ps);
