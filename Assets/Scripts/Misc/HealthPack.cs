@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class HealthPack : MonoBehaviour
+public class HealthPack : InteractableItem
 {
 
     public int healthRestored;
@@ -32,20 +32,21 @@ public class HealthPack : MonoBehaviour
         if(stats != null) {
             stats.RestoreHealth(healthRestored);
             Debug.Log("Health Restored: " + healthRestored);
-            CleanupHealthpack();
+            Cleanup();
         } else {
             Debug.Log("Unable to find reference to PlayerStats from PlayerManager.");
         }
     }
 
     // Destroy this GameObject. Signal the PickupSpawner.
-    private void CleanupHealthpack() {
+    public override void Cleanup() {
         Destroy(gameObject);
-        Debug.Log("Destroyed.");
+        spawner.ItemTaken();
+        Debug.Log("Destroyed");
     }
 
     // Handle collisions
-    private void OnTriggerEnter(Collider other) {
+    public override void OnTriggerEnter(Collider other) {
         go = other.gameObject;
         pm = go.GetComponent<PlayerManager>();
 
