@@ -49,10 +49,15 @@ public class VersusInfo
 public class PlayerSetting
 {
     public string playerName = "";
-    public string playerType;
+    public PlayerType playerType;
     public int playerIndex;
     public InputDevice device;
     public string deviceString;
     public Team team;
     public string characterName;
+}
+public enum PlayerType
+{
+    Human,
+    Robot
 }

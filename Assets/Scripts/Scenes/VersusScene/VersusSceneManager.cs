@@ -37,7 +37,7 @@ public class VersusSceneManager : MonoBehaviour
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
 
-            if (ps.playerType == "Human")
+            if (ps.playerType == PlayerType.Human)
             {
                 playerInputManager.playerPrefab = c.characterPrefab;
                 if (ps.device != null)
@@ -55,7 +55,7 @@ public class VersusSceneManager : MonoBehaviour
 
             }
 
-            else if (ps.playerType == "Robot")
+            else if (ps.playerType == PlayerType.Robot)
             {
                 playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
             }
