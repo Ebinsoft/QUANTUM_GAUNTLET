@@ -21,11 +21,21 @@ public class DragonPunch : SpecialAttackBehavior
     // distance above player's Y position to spawn projectile
     float spawnHeight = 0.4f;
 
+    float oldSpeed;
+    float oldRotation;
+
     public override void OnEnter()
     {
         buttonWasReleased = false;
         canPunch = false;
         chargeTimer = 0f;
+
+        player.currentState.canRotate = true;
+        player.currentState.canMove = true;
+        oldSpeed = player.playerSpeed;
+        oldRotation = player.rotationSpeed;
+        player.playerSpeed = 2.0f;
+        player.rotationSpeed = 2f;
 
         Sound s = AudioManager.magicSounds[MagicSound.ChargeUp];
         chargingSound = AudioManager.CreateInterruptable(s, parent: player.transform);
@@ -80,6 +90,10 @@ public class DragonPunch : SpecialAttackBehavior
     public override void OnExit()
     {
         // cleanup in case of interruption
+        player.currentState.canRotate = false;
+        player.currentState.canMove = false;
+        player.playerSpeed = oldSpeed;
+        player.rotationSpeed = oldRotation;
         chargingSound.StopAndDestroy();
         particleEffects.StopChargingEffect();
     }

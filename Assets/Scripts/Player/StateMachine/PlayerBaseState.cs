@@ -6,9 +6,9 @@ public abstract class PlayerBaseState
 
     // Behavior booleans - concrete states can override these to easily modify common behaviors
     // allows X/Z movement during state
-    protected bool canMove = false;
-    protected bool canRotate = false;
-    protected bool cancelMomentum = false;
+    public bool canMove = false;
+    public bool canRotate = false;
+    public bool cancelMomentum = false;
     public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
