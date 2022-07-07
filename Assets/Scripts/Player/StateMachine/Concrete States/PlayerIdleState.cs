@@ -42,7 +42,7 @@ public class PlayerIdleState : PlayerBaseState
 
         else if (!player.isGrounded)
         {
-            SwitchState(player.FallingState);
+            SwitchState(player.AirborneState);
         }
 
         else if (player.isSpecial1Triggered && player.EnoughManaFor(MoveType.Special1))

@@ -34,7 +34,7 @@ public class PlayerTumblingState : PlayerBaseState
         if (!player.isStunned)
         {
             player.playerKnockback.StopKnockback();
-            SwitchState(player.FallingState);
+            SwitchState(player.AirborneState);
         }
 
         else if (player.isGrounded)

@@ -157,6 +157,7 @@ MonoBehaviour:
   playerList: []
   gameOverMenu: {fileID: 1652437000}
   playerTargetGroup: {fileID: 647113859}
+  playerHUDPrefab: {fileID: 4345037606483549039, guid: b6c26b1c3c1b33a4bbd92104ecd51dcf, type: 3}
 --- !u!4 &11524278
 Transform:
   m_ObjectHideFlags: 0

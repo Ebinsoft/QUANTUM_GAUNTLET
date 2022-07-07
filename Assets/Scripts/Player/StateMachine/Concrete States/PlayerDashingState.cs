@@ -58,7 +58,7 @@ public class PlayerDashingState : PlayerBaseState
         {
             if (!player.isGrounded)
             {
-                SwitchState(player.FallingState);
+                SwitchState(player.AirborneState);
             }
             else
             {

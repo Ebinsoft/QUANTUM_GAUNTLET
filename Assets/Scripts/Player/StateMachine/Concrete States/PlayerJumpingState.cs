@@ -29,14 +29,9 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.isGrounded)
+        if (player.currentMovement.y < 0.0f)
         {
-            SwitchState(player.LandingState);
-        }
-
-        else if (player.currentMovement.y < 0.0f)
-        {
-            SwitchState(player.FallingState);
+            SwitchState(player.AirborneState);
         }
 
         else if (player.jumpsLeft > 0 && player.isJumpTriggered)

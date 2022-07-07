@@ -107,4 +107,10 @@ public class PlayerStats : MonoBehaviour
     {
         onPlayerLose(gameObject);
     }
+
+    public event Action<GameObject> onPlayerDie;
+    public void PlayerDie()
+    {
+        onPlayerDie(gameObject);
+    }
 }
