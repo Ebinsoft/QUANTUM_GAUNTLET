@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9084867536721104412}
   - component: {fileID: 9084867536721104414}
   - component: {fileID: 9084867536721104415}
+  - component: {fileID: 6626634337029988267}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -60,6 +61,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   healthRestored: 50
+--- !u!95 &6626634337029988267
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084867536721104413}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f66d4adb6df13adce9ca7706cc938a57, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &9084867538424488456
 PrefabInstance:
   m_ObjectHideFlags: 0
