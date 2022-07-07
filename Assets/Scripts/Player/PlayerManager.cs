@@ -36,6 +36,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerKnockback playerKnockback;
     public PlayerMoveset moveset;
     public CharacterController characterController;
+    public GameObject gameOverMenu;
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
@@ -166,6 +167,8 @@ public class PlayerManager : MonoBehaviour
         playerKnockback = GetComponent<PlayerKnockback>();
         moveset = GetComponent<PlayerMoveset>();
 
+        gameOverMenu = GameObject.Find("Canvas/GameOverMenu");
+
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
@@ -190,6 +193,12 @@ public class PlayerManager : MonoBehaviour
         {
             canDie = false;
             triggerDead = true;
+        }
+
+        if (isStartTriggered)
+        {
+            gameOverMenu.GetComponent<PauseMenu>().ToggleMenu();
+            isStartTriggered = false;
         }
 
         // calculate our fancy isGrounded
