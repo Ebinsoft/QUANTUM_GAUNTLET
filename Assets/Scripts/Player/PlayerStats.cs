@@ -82,6 +82,16 @@ public class PlayerStats : MonoBehaviour
         mana = baseStats.baseMana;
     }
 
+    public void DrainHealth(int amount)
+    {
+        health = Mathf.Clamp(health - amount, 0, baseStats.baseHealth);
+    }
+
+    public void RestoreHealth(int amount)
+    {
+        health = Mathf.Clamp(health + amount, 0, baseStats.baseHealth);
+    }
+
     public void DrainMana(float amount)
     {
         mana = Mathf.Clamp(mana - amount, 0, baseStats.baseMana);
