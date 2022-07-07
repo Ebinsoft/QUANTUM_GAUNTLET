@@ -1309,14 +1309,14 @@ MonoBehaviour:
     numLives: 3
     playerSettings:
     - playerName: Player1
-      playerType: Human
+      playerType: 0
       playerIndex: 0
       deviceString: 
       team:
         teamName: Team 1
       characterName: Edmond
     - playerName: Player2
-      playerType: Robot
+      playerType: 0
       playerIndex: 1
       deviceString: 
       team:
@@ -1614,6 +1614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1372812089, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: Mute
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2913951985953123365, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: m_RootOrder
       value: 1

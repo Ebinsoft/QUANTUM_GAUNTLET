@@ -27,6 +27,7 @@ public class PlayerAttackHandler : MonoBehaviour
     public AnimatorEffects animEffects;
     private PlayerParticleEffects effects;
     private PlayerManager player;
+    private PlayerAimAssist aimAssist;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class PlayerAttackHandler : MonoBehaviour
         effects = GetComponent<PlayerParticleEffects>();
 
         player = GetComponent<PlayerManager>();
+        aimAssist = GetComponent<PlayerAimAssist>();
 
         // cache player's atached hitboxes
         LoadPlayerHitboxes();
@@ -133,6 +135,10 @@ public class PlayerAttackHandler : MonoBehaviour
             activeSpecialBehavior = (SpecialAttackBehavior)attack.specialBehavior.CreateInstance();
             activeSpecialBehavior.player = GetComponent<PlayerManager>();
             activeSpecialBehavior.OnEnter();
+        }
+
+        if (attack.hasAimAssist) {
+            aimAssist.TrackNearestOpponent(attack.aimAssistDistance, attack.aimAssistAngle);
         }
 
         player.stats.DrainMana(attack.manaCost);

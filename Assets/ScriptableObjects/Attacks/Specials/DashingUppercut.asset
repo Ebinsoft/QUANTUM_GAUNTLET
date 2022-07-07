@@ -21,6 +21,9 @@ MonoBehaviour:
   knockbackMagnitude: 0
   stunCalculation: 1
   baseStun: 0.3
+  hasAimAssist: 1
+  aimAssistDistance: 6
+  aimAssistAngle: 90
   hasSpecialBehavior: 1
   specialBehavior:
     className: DashingUppercut
