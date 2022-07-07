@@ -21,6 +21,9 @@ MonoBehaviour:
   knockbackMagnitude: 6
   stunCalculation: 0
   baseStun: 1
+  hasAimAssist: 0
+  aimAssistDistance: 0
+  aimAssistAngle: 0
   hasSpecialBehavior: 0
   specialBehavior:
     className: 
