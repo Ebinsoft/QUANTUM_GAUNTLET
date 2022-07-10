@@ -13,13 +13,12 @@ public class PlayerIcon : MonoBehaviour
     void Awake()
     {
         textMesh = GetComponent<TextMesh>();
-        playerIndex = player.GetComponent<PlayerInput>().playerIndex;
-        playerSetting = GameManager.instance.versusInfo.GetPlayer(playerIndex);
+        playerSetting = GameManager.instance.versusInfo.GetPlayer(player.playerID);
 
     }
     void Start()
     {
-        textMesh.text = (playerSetting.playerType == PlayerType.Human ? "P" : "CPU") + (playerIndex + 1);
+        textMesh.text = (playerSetting.playerType == PlayerType.Human ? "P" : "CPU") + (playerSetting.playerID + 1);
         textMesh.color = playerSetting.team.teamColor;
     }
 
