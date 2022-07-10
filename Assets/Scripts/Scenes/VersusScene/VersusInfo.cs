@@ -12,6 +12,14 @@ public class VersusInfo
     public int numLives = 3;
     public PlayerSetting[] playerSettings;
 
+
+    public void ResetPlayers()
+    {
+        foreach (PlayerSetting ps in playerSettings)
+        {
+            ps.playerType = PlayerType.None;
+        }
+    }
     public void ResetPlayerTeams()
     {
         foreach (PlayerSetting ps in playerSettings)
