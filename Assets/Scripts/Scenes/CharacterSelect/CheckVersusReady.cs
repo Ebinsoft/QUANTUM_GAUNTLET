@@ -34,16 +34,15 @@ public class CheckVersusReady : MonoBehaviour
         PlayerSetting[] playerSettings = vi.playerSettings;
         if (vi.numPlayers >= 2)
         {
-
-            int uniqueTeams = playerSettings.Where(c => c.playerType != PlayerType.None)
+            IEnumerable<PlayerSetting> activePlayers = vi.GetActivePlayers();
+            int uniqueTeams = activePlayers
             .Select(c => c.team.teamName)
             .Distinct()
             .Count();
-            Debug.Log(uniqueTeams);
             if (uniqueTeams >= 2)
             {
                 // also need to check that everyone has a character selected
-                foreach (PlayerSetting ps in playerSettings.Where(c => c.playerType != PlayerType.None))
+                foreach (PlayerSetting ps in activePlayers)
                 {
                     if (string.IsNullOrEmpty(ps.characterName))
                     {

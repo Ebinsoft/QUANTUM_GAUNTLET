@@ -3653,39 +3653,7 @@ MonoBehaviour:
     stage: TEST
     gameType: FFA
     numLives: 3
-    playerSettings:
-    - playerID: 0
-      playerName: 
-      playerType: 1
-      playerIndex: 0
-      deviceString: 
-      team:
-        teamName: 
-      characterName: 
-    - playerID: 1
-      playerName: 
-      playerType: 0
-      playerIndex: 0
-      deviceString: 
-      team:
-        teamName: 
-      characterName: 
-    - playerID: 2
-      playerName: 
-      playerType: 0
-      playerIndex: 0
-      deviceString: 
-      team:
-        teamName: 
-      characterName: 
-    - playerID: 3
-      playerName: 
-      playerType: 0
-      playerIndex: 0
-      deviceString: 
-      team:
-        teamName: 
-      characterName: 
+    playerSettings: []
 --- !u!4 &1898516094
 Transform:
   m_ObjectHideFlags: 0
