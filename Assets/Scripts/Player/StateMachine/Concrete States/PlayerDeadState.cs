@@ -19,6 +19,7 @@ public class PlayerDeadState : PlayerBaseState
         player.isDead = true;
         player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(false);
         player.transform.Find("Model/Edmond/Body").gameObject.SetActive(false);
+        player.transform.Find("PlayerIcon").gameObject.SetActive(false);
         // do animation stuff
     }
 
@@ -32,6 +33,7 @@ public class PlayerDeadState : PlayerBaseState
         player.isDead = false;
         player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(true);
         player.transform.Find("Model/Edmond/Body").gameObject.SetActive(true);
+        player.transform.Find("PlayerIcon").gameObject.SetActive(true);
     }
 
     public override void CheckStateUpdate()
