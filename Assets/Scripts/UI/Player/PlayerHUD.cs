@@ -54,8 +54,8 @@ public class PlayerHUD : MonoBehaviour
         this.playerSetting = playerSetting;
 
         // annoying workaround because Unity doesn't instance materials for UI images
-        healthBar.material = healthBarMaterials[playerSetting.playerIndex];
-        manaBar.material = manaBarMaterials[playerSetting.playerIndex];
+        healthBar.material = healthBarMaterials[playerSetting.playerID];
+        manaBar.material = manaBarMaterials[playerSetting.playerID];
 
         playerID.text = "P" + (playerSetting.playerIndex + 1);
         portraitBg.color = playerSetting.team.teamColor + (Color.white * 0.4f);
