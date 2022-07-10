@@ -31,16 +31,19 @@ public class CheckVersusReady : MonoBehaviour
     private bool IsGameReady()
     {
         VersusInfo vi = GameManager.instance.versusInfo;
-        List<PlayerSetting> playerSettings = vi.playerSettings;
+        PlayerSetting[] playerSettings = vi.playerSettings;
         if (vi.numPlayers >= 2)
         {
-            int uniqueTeams = playerSettings.Select(c => c.team.teamName)
+
+            int uniqueTeams = playerSettings.Where(c => c.playerType != PlayerType.None)
+            .Select(c => c.team.teamName)
             .Distinct()
             .Count();
+            Debug.Log(uniqueTeams);
             if (uniqueTeams >= 2)
             {
                 // also need to check that everyone has a character selected
-                foreach (PlayerSetting ps in playerSettings)
+                foreach (PlayerSetting ps in playerSettings.Where(c => c.playerType != PlayerType.None))
                 {
                     if (string.IsNullOrEmpty(ps.characterName))
                     {
@@ -48,10 +51,7 @@ public class CheckVersusReady : MonoBehaviour
                     }
                 }
                 return true;
-
             }
-
-
         }
         return false;
     }

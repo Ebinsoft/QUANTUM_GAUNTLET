@@ -21,7 +21,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         versusInfo = GameManager.instance.versusInfo;
         versusInfo.numPlayers = 0;
-        versusInfo.playerSettings = new List<PlayerSetting>();
+        versusInfo.playerSettings = new PlayerSetting[4];
     }
 
     // Update is called once per frame
@@ -43,12 +43,13 @@ public class CharacterSelectManager : MonoBehaviour
 
         PlayerSetting ps = new PlayerSetting
         {
-            playerName = "Player " + (playerInput.playerIndex + 1),
+            playerID = pp.playerID,
+            playerName = "Player " + (pp.playerID + 1),
             playerIndex = playerInput.playerIndex,
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
             playerType = PlayerType.Human,
-            team = new Team("Team " + (playerInput.playerIndex + 1))
+            team = new Team("Team " + (pp.playerID + 1))
         };
 
         versusInfo.AddPlayer(ps);

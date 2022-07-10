@@ -10,37 +10,45 @@ public class VersusInfo
     public string stage;
     public string gameType = "FFA";
     public int numLives = 3;
-    public List<PlayerSetting> playerSettings;
+    public PlayerSetting[] playerSettings;
 
     public void ResetPlayerTeams()
     {
         foreach (PlayerSetting ps in playerSettings)
         {
-            ps.team.teamName = "Team " + (ps.playerIndex + 1);
+            ps.team.teamName = "Team " + (ps.playerID + 1);
         }
     }
 
-    public PlayerSetting GetPlayer(int playerIndex)
+    public PlayerSetting GetPlayer(int playerID)
     {
-        return playerSettings.First(c => c.playerIndex == playerIndex);
+        return playerSettings[playerID];
     }
 
     public void RemovePlayer(int playerIndex)
     {
-        if (playerSettings.Select(c => c.playerIndex).Contains(playerIndex))
+        if (playerSettings[playerIndex].playerType != PlayerType.None)
         {
-            PlayerSetting ps = playerSettings.First(c => c.playerIndex == playerIndex);
-            playerSettings.Remove(ps);
+            PlayerSetting ps = playerSettings[playerIndex];
+            ps.playerName = "";
+            ps.playerType = PlayerType.None;
+            ps.playerIndex = -1;
+            ps.device = null;
+            ps.deviceString = "";
+            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.characterName = "";
             numPlayers--;
         }
-
     }
+
+
 
     public void AddPlayer(PlayerSetting ps)
     {
         // if a previous playerIndex exists, remove it
-        RemovePlayer(ps.playerIndex);
-        playerSettings.Add(ps);
+        RemovePlayer(ps.playerID);
+        // playerSettings.Add(ps);
+        playerSettings[ps.playerID] = ps;
         numPlayers++;
     }
 }
@@ -48,6 +56,7 @@ public class VersusInfo
 [System.Serializable]
 public class PlayerSetting
 {
+    public int playerID;
     public string playerName = "";
     public PlayerType playerType;
     public int playerIndex;
@@ -58,6 +67,7 @@ public class PlayerSetting
 }
 public enum PlayerType
 {
+    None,
     Human,
     Robot
 }

@@ -109,7 +109,7 @@ public class SimpleCursor : MonoBehaviour
     {
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.playerSettings)
         {
-            if (ps.playerIndex == playerInput.playerIndex)
+            if (ps.playerID == playerInput.playerIndex)
             {
                 playerSetting = ps;
                 break;
