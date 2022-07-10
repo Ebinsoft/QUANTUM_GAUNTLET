@@ -1308,15 +1308,17 @@ MonoBehaviour:
     gameType: FFA
     numLives: 3
     playerSettings:
-    - playerName: Player1
-      playerType: 0
+    - playerID: 0
+      playerName: Player1
+      playerType: 1
       playerIndex: 0
       deviceString: 
       team:
         teamName: Team 1
       characterName: Edmond
-    - playerName: Player2
-      playerType: 0
+    - playerID: 1
+      playerName: Player2
+      playerType: 2
       playerIndex: 1
       deviceString: 
       team:
