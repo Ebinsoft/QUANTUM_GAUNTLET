@@ -33,9 +33,11 @@ public class VersusSceneManager : MonoBehaviour
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
-
+            // set player ID
+            c.characterPrefab.GetComponent<PlayerManager>().playerID = ps.playerID;
             if (ps.playerType == PlayerType.Human)
             {
+
                 playerInputManager.playerPrefab = c.characterPrefab;
                 if (ps.device != null)
                 {
@@ -58,6 +60,7 @@ public class VersusSceneManager : MonoBehaviour
             }
 
             CreatePlayerHUD(playerManager, ps);
+            c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
         }
     }
 
