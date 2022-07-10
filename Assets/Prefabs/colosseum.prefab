@@ -159,7 +159,7 @@ AudioSource:
   m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -1245,8 +1245,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2590852, y: 1, z: 3.2228777}
-  m_Center: {x: -0.6295453, y: 0, z: -1.1114404}
+  m_Size: {x: 1.1148441, y: 1, z: 1.5967462}
+  m_Center: {x: -0.07776643, y: 0, z: -0.3083568}
 --- !u!1 &6750306279349851770
 GameObject:
   m_ObjectHideFlags: 0
