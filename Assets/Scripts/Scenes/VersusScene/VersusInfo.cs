@@ -28,6 +28,11 @@ public class VersusInfo
         }
     }
 
+    public IEnumerable<PlayerSetting> GetActivePlayers()
+    {
+        return playerSettings.Where(c => c != null && c.playerType != PlayerType.None).Select(c => c);
+    }
+
     public PlayerSetting GetPlayer(int playerID)
     {
         return playerSettings[playerID];
@@ -35,9 +40,9 @@ public class VersusInfo
 
     public void RemovePlayer(int playerIndex)
     {
-        if (playerSettings[playerIndex].playerType != PlayerType.None)
+        PlayerSetting ps = playerSettings[playerIndex];
+        if (ps != null && ps.playerType != PlayerType.None)
         {
-            PlayerSetting ps = playerSettings[playerIndex];
             ps.playerName = "";
             ps.playerType = PlayerType.None;
             ps.playerIndex = -1;
@@ -48,7 +53,6 @@ public class VersusInfo
             numPlayers--;
         }
     }
-
 
 
     public void AddPlayer(PlayerSetting ps)
