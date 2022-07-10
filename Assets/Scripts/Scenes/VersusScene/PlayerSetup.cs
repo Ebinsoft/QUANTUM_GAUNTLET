@@ -40,7 +40,7 @@ public class PlayerSetup : MonoBehaviour
     {
         // Look up ourselves in the versus player settings
         VersusInfo versusInfo = GameManager.instance.versusInfo;
-        PlayerSetting ps = versusInfo.GetPlayer(playerInput.playerIndex);
+        PlayerSetting ps = versusInfo.GetPlayer(player.playerID);
         // TODO: Update skin once we know how to do that
         // Update our player with their versusInfo settings
         gameObject.name = ps.playerName;
