@@ -29,7 +29,7 @@ public class VersusSceneManager : MonoBehaviour
         isGameOver = false;
         // order Humans first so that we don't have Robot instantiation gobbling up PlayerIndexes
         // versusInfo.playerSettings = versusInfo.playerSettings.OrderBy(c => c.playerType).ToList<PlayerSetting>();
-        foreach (PlayerSetting ps in versusInfo.playerSettings.Where(c => c.playerType != PlayerType.None))
+        foreach (PlayerSetting ps in versusInfo.playerSettings.Where(c => c.playerType != PlayerType.None).OrderBy(c => c.playerType))
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
