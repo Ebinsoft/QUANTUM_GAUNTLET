@@ -21,7 +21,7 @@ public class CharacterSelectManager : MonoBehaviour
     {
         versusInfo = GameManager.instance.versusInfo;
         versusInfo.numPlayers = 0;
-        versusInfo.ResetPlayers();
+        versusInfo.playerSettings = new PlayerSetting[4];
     }
 
     // Update is called once per frame
