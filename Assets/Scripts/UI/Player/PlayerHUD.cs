@@ -57,7 +57,7 @@ public class PlayerHUD : MonoBehaviour
         healthBar.material = healthBarMaterials[playerSetting.playerID];
         manaBar.material = manaBarMaterials[playerSetting.playerID];
 
-        playerID.text = "P" + (playerSetting.playerIndex + 1);
+        playerID.text = "P" + (playerSetting.playerID + 1);
         portraitBg.color = playerSetting.team.teamColor + (Color.white * 0.4f);
 
         GenerateStockIcons();
@@ -76,7 +76,7 @@ public class PlayerHUD : MonoBehaviour
         RectTransform rectTrans = GetComponent<RectTransform>();
         rectTrans.anchoredPosition = new Vector2()
         {
-            x = (canvasWidth / 4) * playerSetting.playerIndex + padding,
+            x = (canvasWidth / 4) * playerSetting.playerID + padding,
             y = 0
         };
 

@@ -42,13 +42,13 @@ public class VersusSceneManager : MonoBehaviour
                 if (ps.device != null)
                 {
 
-                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null, ps.device);
+                    var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
                     playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
                 else
                 {
                     // This is for simple debugging directly from Versus scene
-                    var playerInput = playerInputManager.JoinPlayer(ps.playerIndex, -1, null);
+                    var playerInput = playerInputManager.JoinPlayer();
                     playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
                 }
 

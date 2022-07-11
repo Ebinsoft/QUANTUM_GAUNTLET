@@ -7,7 +7,6 @@ public class PlayerIcon : MonoBehaviour
 {
     public PlayerManager player;
     private TextMesh textMesh;
-    private int playerIndex;
     private PlayerSetting playerSetting;
     // Start is called before the first frame update
     void Awake()

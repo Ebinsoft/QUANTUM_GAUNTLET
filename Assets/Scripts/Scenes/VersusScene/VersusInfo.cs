@@ -57,7 +57,7 @@ public class VersusInfo
 
     public void AddPlayer(PlayerSetting ps)
     {
-        // if a previous playerIndex exists, remove it
+        // if a previous playerID exists, remove it
         RemovePlayer(ps.playerID);
         // playerSettings.Add(ps);
         playerSettings[ps.playerID] = ps;
