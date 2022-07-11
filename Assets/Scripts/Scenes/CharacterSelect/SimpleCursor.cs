@@ -75,6 +75,12 @@ public class SimpleCursor : MonoBehaviour
             tb.Click();
         }
 
+        StockButton sb = go.GetComponent<StockButton>();
+        if (sb != null)
+        {
+            sb.Click();
+        }
+
         StartGameButton sgb = go.GetComponent<StartGameButton>();
         if (sgb != null)
         {
