@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public PlayerBaseStats baseStats;
     public int health;
     public float mana;
-    public int lives = 3;
+    public int lives;
 
     public bool canTakeDamage { get; private set; }
     public bool canGiveRecoil { get; private set; }
@@ -66,9 +66,14 @@ public class PlayerStats : MonoBehaviour
         canTakeDamage = true;
         canGetStunned = true;
         canGiveRecoil = true;
-        resetStats();
+        ResetStats();
 
         shaderEffects = GetComponentInChildren<ShaderEffects>();
+    }
+
+    void Start()
+    {
+        PlayerSpawn();
     }
 
     void Update()
@@ -76,7 +81,7 @@ public class PlayerStats : MonoBehaviour
         RestoreMana(baseStats.manaRegen * Time.deltaTime);
     }
 
-    public void resetStats()
+    public void ResetStats()
     {
         health = baseStats.baseHealth;
         mana = baseStats.baseMana;
@@ -100,6 +105,12 @@ public class PlayerStats : MonoBehaviour
     public void RestoreMana(float amount)
     {
         mana = Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
+    }
+
+    public event Action<GameObject> onPlayerSpawn;
+    public void PlayerSpawn()
+    {
+        onPlayerSpawn(gameObject);
     }
 
     public event Action<GameObject> onPlayerLose;

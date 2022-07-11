@@ -25,7 +25,7 @@ public class PlayerRespawningState : PlayerBaseState
         player.GetComponent<CharacterController>().enabled = true;
 
 
-        player.stats.resetStats();
+        player.stats.ResetStats();
         // do animation stuff
         // foreach (var param in player.anim.parameters)
         // {
