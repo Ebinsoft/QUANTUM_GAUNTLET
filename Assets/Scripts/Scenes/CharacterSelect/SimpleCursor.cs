@@ -13,6 +13,7 @@ public class SimpleCursor : MonoBehaviour
     private bool isMovePressed;
     private PlayerSetting playerSetting;
     private SpriteRenderer sprite;
+    private float cursorPadding = .25f;
 
 
     void Awake()
@@ -127,7 +128,19 @@ public class SimpleCursor : MonoBehaviour
         Vector2 moveVector = new Vector2();
         moveVector.x = transform.position.x + currentMovement.x * cursorSpeed * Time.deltaTime;
         moveVector.y = transform.position.y + currentMovement.y * cursorSpeed * Time.deltaTime;
+        moveVector = LimitCursorToCamera(moveVector.x, moveVector.y);
+
         transform.position = new Vector3(moveVector.x, moveVector.y, transform.position.z);
+    }
+
+    private Vector2 LimitCursorToCamera(float x, float y)
+    {
+        var bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        var topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
+        // keep on screen
+        x = Mathf.Clamp(x, bottomLeft.x + cursorPadding, topRight.x - cursorPadding);
+        y = Mathf.Clamp(y, bottomLeft.y + cursorPadding, topRight.y - cursorPadding);
+        return new Vector2(x, y);
     }
 
     private void OnEnable()
