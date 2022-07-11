@@ -32,7 +32,6 @@ public class AIToggle : MonoBehaviour
         {
             playerID = playerPanel.playerID,
             playerName = "CPU " + (playerPanel.playerID + 1),
-            playerIndex = playerPanel.playerID,
             device = null,
             deviceString = "none",
             // TODO: Fix this - Hard-coding this until we can have players choose AI characters

@@ -45,7 +45,6 @@ public class CharacterSelectManager : MonoBehaviour
         {
             playerID = pp.playerID,
             playerName = "Player " + (pp.playerID + 1),
-            playerIndex = playerInput.playerIndex,
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
             playerType = PlayerType.Human,

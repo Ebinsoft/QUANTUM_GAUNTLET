@@ -45,7 +45,6 @@ public class VersusInfo
         {
             ps.playerName = "";
             ps.playerType = PlayerType.None;
-            ps.playerIndex = -1;
             ps.device = null;
             ps.deviceString = "";
             ps.team.teamName = "Team " + (ps.playerID + 1);
@@ -71,7 +70,6 @@ public class PlayerSetting
     public int playerID;
     public string playerName = "";
     public PlayerType playerType;
-    public int playerIndex;
     public InputDevice device;
     public string deviceString;
     public Team team;

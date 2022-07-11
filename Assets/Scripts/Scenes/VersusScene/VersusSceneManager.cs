@@ -27,7 +27,7 @@ public class VersusSceneManager : MonoBehaviour
         var versusInfo = GameManager.instance.versusInfo;
         int numPlayers = versusInfo.numPlayers;
         isGameOver = false;
-        // order Humans first so that we don't have Robot instantiation gobbling up PlayerIndexes
+        // order Humans first so that we don't have Robot instantiation gobbling up PlayerIDs
 
         foreach (PlayerSetting ps in versusInfo.GetActivePlayers().OrderBy(c => c.playerType))
         {
@@ -58,7 +58,7 @@ public class VersusSceneManager : MonoBehaviour
             {
                 playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
             }
-
+            HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
         }
@@ -73,15 +73,14 @@ public class VersusSceneManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerJoined(PlayerInput playerInput)
+    public void HookUpPlayer(GameObject playerObject)
     {
-        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(playerInput.playerIndex);
         // whenever a player joins, get a reference to their GameObject 
-        playerList.Add(playerInput.gameObject);
+        playerList.Add(playerObject);
         // subscribe to player's event for their death for removal from list
-        playerInput.gameObject.GetComponent<PlayerStats>().onPlayerLose += onPlayerLose;
+        playerObject.GetComponent<PlayerStats>().onPlayerLose += onPlayerLose;
         // Add player to tracked objects of camera
-        playerTargetGroup.AddMember(playerInput.gameObject.transform, 1f, 2f);
+        playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
 
     public bool CheckIfGameOver()
