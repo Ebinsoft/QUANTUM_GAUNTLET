@@ -15,14 +15,14 @@ public class VersusInfo
 
     public void ResetPlayers()
     {
-        foreach (PlayerSetting ps in playerSettings)
+        foreach (PlayerSetting ps in GetActivePlayers())
         {
             ps.playerType = PlayerType.None;
         }
     }
     public void ResetPlayerTeams()
     {
-        foreach (PlayerSetting ps in playerSettings)
+        foreach (PlayerSetting ps in GetActivePlayers())
         {
             ps.team.teamName = "Team " + (ps.playerID + 1);
         }
@@ -38,9 +38,9 @@ public class VersusInfo
         return playerSettings[playerID];
     }
 
-    public void RemovePlayer(int playerIndex)
+    public void RemovePlayer(int playerID)
     {
-        PlayerSetting ps = playerSettings[playerIndex];
+        PlayerSetting ps = GetPlayer(playerID);
         if (ps != null && ps.playerType != PlayerType.None)
         {
             ps.playerName = "";
