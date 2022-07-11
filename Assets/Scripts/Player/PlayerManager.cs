@@ -80,6 +80,10 @@ public class PlayerManager : MonoBehaviour
     public bool isSelectTriggered;
 
     /***************************************/
+
+    // PLAYER ID - set up before instantiation
+    public int playerID;
+
     // idle variables
     public bool isIdle = false;
 

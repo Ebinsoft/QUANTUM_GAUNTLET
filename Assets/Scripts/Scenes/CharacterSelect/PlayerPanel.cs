@@ -6,7 +6,7 @@ using System.Linq;
 public class PlayerPanel : MonoBehaviour
 {
     private TextMesh text;
-    public int playerIndex;
+    public int playerID;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +16,10 @@ public class PlayerPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.versusInfo.playerSettings.Select(c => c.playerIndex).Contains(playerIndex))
+        PlayerSetting ps = GameManager.instance.versusInfo.playerSettings[playerID];
+        if (ps != null && ps.playerType != PlayerType.None)
         {
-            PlayerSetting ps = GameManager.instance.versusInfo.playerSettings.First(c => c.playerIndex == playerIndex);
-            string characterField = string.IsNullOrEmpty(ps.characterName) ? "CHOOSE CHARACTER" : ps.characterName;
+            string characterField = ps.character == Character.None ? "CHOOSE CHARACTER" : ps.character.ToString();
             text.text = ps.playerName + "\n" + characterField + "\n" + ps.playerType;
             text.color = ps.team.teamColor;
         }
