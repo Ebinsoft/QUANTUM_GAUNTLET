@@ -24,39 +24,33 @@ public class VersusSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var versusInfo = GameManager.instance.versusInfo;
-        int numPlayers = versusInfo.numPlayers;
         isGameOver = false;
-        // order Humans first so that we don't have Robot instantiation gobbling up PlayerIDs
-
-        foreach (PlayerSetting ps in versusInfo.GetActivePlayers())
+        foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
-            PlayerManager playerManager = null;
+            playerInputManager.playerPrefab = c.characterPrefab;
             // set player ID
             c.characterPrefab.GetComponent<PlayerManager>().playerID = ps.playerID;
-            if (ps.playerType == PlayerType.Human)
+
+            PlayerManager playerManager = null;
+            switch (ps.playerType)
             {
-
-                playerInputManager.playerPrefab = c.characterPrefab;
-                if (ps.device != null)
-                {
-
-                    var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
-                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                }
-                else
-                {
-                    // This is for simple debugging directly from Versus scene
-                    var playerInput = playerInputManager.JoinPlayer();
-                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                }
-
-            }
-
-            else if (ps.playerType == PlayerType.Robot)
-            {
-                playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
+                case PlayerType.Human:
+                    if (ps.device != null)
+                    {
+                        var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
+                        playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                    }
+                    else
+                    {
+                        // This is for simple debugging directly from Versus scene
+                        var playerInput = playerInputManager.JoinPlayer();
+                        playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                    }
+                    break;
+                case PlayerType.Robot:
+                    playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
+                    break;
             }
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
@@ -97,7 +91,6 @@ public class VersusSceneManager : MonoBehaviour
         {
             return true;
         }
-
     }
 
     public void onPlayerLose(GameObject player)
