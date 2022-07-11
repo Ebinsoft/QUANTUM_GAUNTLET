@@ -1322,20 +1322,6 @@ MonoBehaviour:
       team:
         teamName: Team 2
       character: 0
-    - playerID: 2
-      playerName: Player3
-      playerType: 2
-      deviceString: 
-      team:
-        teamName: Team 3
-      character: 0
-    - playerID: 3
-      playerName: Player4
-      playerType: 1
-      deviceString: 
-      team:
-        teamName: Team 4
-      character: 0
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0
