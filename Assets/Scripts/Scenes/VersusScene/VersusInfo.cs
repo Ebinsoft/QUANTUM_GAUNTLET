@@ -8,7 +8,7 @@ public class VersusInfo
 {
     public int numPlayers;
     public string stage;
-    public string gameType = "FFA";
+    public GameMode gameType = GameMode.FFA;
     public int numLives = 3;
     public PlayerSetting[] playerSettings;
 
@@ -62,6 +62,12 @@ public class VersusInfo
         playerSettings[ps.playerID] = ps;
         numPlayers++;
     }
+}
+
+public enum GameMode 
+{
+    FFA,
+    Team
 }
 
 [System.Serializable]

@@ -61,8 +61,8 @@ public class AIToggle : MonoBehaviour
     public void setDefault()
     {
         isAIOn = false;
-        button.material = offMaterial;
-        buttonText.text = "TURN ON AI OPPONENT";
+        // button.material = offMaterial;
+        // buttonText.text = "TURN ON AI OPPONENT";
     }
 
     public void ToggleAI()

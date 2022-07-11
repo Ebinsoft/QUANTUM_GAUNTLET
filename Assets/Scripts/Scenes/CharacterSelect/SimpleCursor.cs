@@ -36,12 +36,18 @@ public class SimpleCursor : MonoBehaviour
 
     private void onClick(InputAction.CallbackContext context)
     {
-        Debug.Log("CLICK");
+        // RaycastHit hit;
+        // if (Physics.Raycast(transform.position, Vector3.forward, out hit))
+        // {
+        //     Debug.Log("Collider Hit");
+        //     ChangeState(hit.collider.gameObject);
+        // }
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.forward, out hit))
+        Vector2 pos2d = new Vector2(transform.position.x, transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(pos2d, Vector2.zero);
+        if (hit.collider != null)
         {
-            Debug.Log("Collider Hit");
+            Debug.Log("oohhh god I gonna click");
             ChangeState(hit.collider.gameObject);
         }
     }
@@ -57,32 +63,34 @@ public class SimpleCursor : MonoBehaviour
             playerSetting.character = characterBox.GetCharacterName();
         }
 
-        GameTypeToggle gtt = go.transform.parent.gameObject.GetComponent<GameTypeToggle>();
-        if (gtt != null)
+        GameModeButton gmb = go.GetComponent<GameModeButton>();
+        if (gmb != null)
         {
-            Debug.Log("Hit Toggle");
-            gtt.ToggleMode();
-        }
-        SetTeamButton stb = go.GetComponent<SetTeamButton>();
-        if (stb != null)
-        {
-            Debug.Log("Team Button");
-            playerSetting.team.teamID = stb.teamID;
-            sprite.color = playerSetting.team.teamColor;
+            gmb.Click();
         }
 
-        VersusStart vs = go.GetComponent<VersusStart>();
-        if (vs != null)
+        PlayerTeamButton tb = go.GetComponent<PlayerTeamButton>();
+        if (tb != null)
         {
-            Debug.Log("VERSUS START");
-            vs.StartVersusMatch();
+            tb.Click();
         }
 
-        AIToggle ai = go.transform.parent.gameObject.GetComponent<AIToggle>();
-        if (ai != null)
+        StartGameButton sgb = go.GetComponent<StartGameButton>();
+        if (sgb != null)
         {
-            Debug.Log("AI BUTTON");
-            ai.ToggleAI();
+            sgb.Click();
+        }
+
+        PlayerTypeButton ptb = go.GetComponent<PlayerTypeButton>();
+        if (ptb != null)
+        {
+            ptb.Click();
+        }
+
+        AddCpuButton acb = go.GetComponent<AddCpuButton>();
+        if (acb != null)
+        {
+            acb.Click();
         }
     }
 

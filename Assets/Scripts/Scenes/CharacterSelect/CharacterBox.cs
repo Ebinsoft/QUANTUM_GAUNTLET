@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CharacterBox : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class CharacterBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TextMesh characterText = transform.Find("Text").GetComponent<TextMesh>();
+        TextMeshPro characterText = transform.Find("Name").GetComponent<TextMeshPro>();
         characterText.text = character.ToString();
     }
 
