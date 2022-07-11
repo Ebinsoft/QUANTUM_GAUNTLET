@@ -61,6 +61,8 @@ public class PlayerSetup : MonoBehaviour
     private void ChangeToAI()
     {
         ai = gameObject.AddComponent<AIManager>();
+        // disable playerInput so we won't be controlled by auto-assigned devices
+        playerInput.enabled = false;
         // navAgent = gameObject.AddComponent<NavMeshAgent>();
         // navAgent.speed = player.playerSpeed;
         // navAgent.angularSpeed = player.rotationSpeed;
