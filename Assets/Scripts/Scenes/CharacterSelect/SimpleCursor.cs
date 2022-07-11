@@ -36,18 +36,10 @@ public class SimpleCursor : MonoBehaviour
 
     private void onClick(InputAction.CallbackContext context)
     {
-        // RaycastHit hit;
-        // if (Physics.Raycast(transform.position, Vector3.forward, out hit))
-        // {
-        //     Debug.Log("Collider Hit");
-        //     ChangeState(hit.collider.gameObject);
-        // }
-
         Vector2 pos2d = new Vector2(transform.position.x, transform.position.y);
         RaycastHit2D hit = Physics2D.Raycast(pos2d, Vector2.zero);
         if (hit.collider != null)
         {
-            Debug.Log("oohhh god I gonna click");
             ChangeState(hit.collider.gameObject);
         }
     }

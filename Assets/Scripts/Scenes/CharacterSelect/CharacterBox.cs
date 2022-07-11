@@ -6,11 +6,14 @@ using TMPro;
 public class CharacterBox : MonoBehaviour
 {
     public Character character;
-    // Start is called before the first frame update
+    private SpriteRenderer portrait;
+    
     void Start()
     {
         TextMeshPro characterText = transform.Find("Name").GetComponent<TextMeshPro>();
+        portrait = transform.Find("Portrait Mask/Portrait").GetComponent<SpriteRenderer>();
         characterText.text = character.ToString();
+        portrait.sprite = GameManager.instance.roster.GetCharacter(character).portrait;
     }
 
     public Character GetCharacterName()
