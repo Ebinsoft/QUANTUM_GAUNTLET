@@ -14,6 +14,7 @@ public class PlayerPanel : MonoBehaviour
     private GameObject teamButton;
     private VersusInfo versusInfo;
     private CharacterSelectManager cs;
+    private SpriteRenderer characterImage;
 
     public int playerID;
 
@@ -24,6 +25,7 @@ public class PlayerPanel : MonoBehaviour
         addCpuButton = transform.Find("Add CPU Button").gameObject;
         playerTypeButton = transform.Find("Player Type Button").gameObject;
         teamButton = transform.Find("Team").gameObject;
+        characterImage = transform.Find("Character Mask/Character Image").GetComponent<SpriteRenderer>();
         cs = GameObject.Find("CharacterSelectManager").GetComponent<CharacterSelectManager>();
 
         versusInfo = GameManager.instance.versusInfo;
@@ -48,6 +50,16 @@ public class PlayerPanel : MonoBehaviour
             {
                 teamButton.SetActive(false);
             }
+
+            if (ps.character != Character.None)
+            {
+                Roster roster = GameManager.instance.roster;
+                characterImage.sprite = roster.GetCharacter(ps.character).fullBody;
+            }
+            else
+            {
+                characterImage.sprite = null;
+            }
         }
         else
         {
@@ -56,6 +68,8 @@ public class PlayerPanel : MonoBehaviour
             addCpuButton.SetActive(true);
             playerTypeButton.SetActive(false);
             teamButton.SetActive(false);
+
+            characterImage.sprite = null;
         }
 
 
