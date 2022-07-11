@@ -49,10 +49,8 @@ public class StartGameButton : MonoBehaviour
 
     public void Click()
     {
-        Debug.Log("Poop");
         if (IsGameReady())
         {
-            Debug.Log("GIGGA POOP");
             SceneManager.LoadScene("VersusScene");
         }
     }
