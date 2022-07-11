@@ -7,12 +7,12 @@ public class Roster
 {
     public CharacterData[] roster;
 
-    public CharacterData GetCharacter(string characterName)
+    public CharacterData GetCharacter(Character ch)
     {
 
         foreach (var c in roster)
         {
-            if (c.characterName == characterName)
+            if (c.character == ch)
             {
                 return c;
             }
@@ -22,9 +22,15 @@ public class Roster
     }
 }
 
+public enum Character
+{
+    None = -1,
+    Edmond
+}
+
 [System.Serializable]
 public class CharacterData
 {
-    public string characterName;
+    public Character character;
     public GameObject characterPrefab;
 }

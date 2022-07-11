@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CharacterBox : MonoBehaviour
 {
-    public string characterName;
+    public Character character;
     // Start is called before the first frame update
     void Start()
     {
         TextMesh characterText = transform.Find("Text").GetComponent<TextMesh>();
-        characterName = characterText.text;
+        characterText.text = character.ToString();
     }
 
-    public string GetCharacterName()
+    public Character GetCharacterName()
     {
-        return characterName;
+        return character;
     }
 }

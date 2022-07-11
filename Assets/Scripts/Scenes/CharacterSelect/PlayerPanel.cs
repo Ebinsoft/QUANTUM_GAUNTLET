@@ -19,7 +19,7 @@ public class PlayerPanel : MonoBehaviour
         PlayerSetting ps = GameManager.instance.versusInfo.playerSettings[playerID];
         if (ps != null && ps.playerType != PlayerType.None)
         {
-            string characterField = string.IsNullOrEmpty(ps.characterName) ? "CHOOSE CHARACTER" : ps.characterName;
+            string characterField = ps.character == Character.None ? "CHOOSE CHARACTER" : ps.character.ToString();
             text.text = ps.playerName + "\n" + characterField + "\n" + ps.playerType;
             text.color = ps.team.teamColor;
         }

@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roster:
     roster:
-    - characterName: Edmond
+    - character: 0
       characterPrefab: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
   versusInfo:
     numPlayers: 2
@@ -1314,21 +1314,28 @@ MonoBehaviour:
       deviceString: 
       team:
         teamName: Team 1
-      characterName: Edmond
+      character: 0
     - playerID: 1
       playerName: CPU2
       playerType: 2
       deviceString: 
       team:
         teamName: Team 2
-      characterName: Edmond
+      character: 0
     - playerID: 2
       playerName: Player3
-      playerType: 1
+      playerType: 2
       deviceString: 
       team:
         teamName: Team 3
-      characterName: Edmond
+      character: 0
+    - playerID: 3
+      playerName: Player4
+      playerType: 1
+      deviceString: 
+      team:
+        teamName: Team 4
+      character: 0
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0

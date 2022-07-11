@@ -27,7 +27,7 @@ public class VersusSceneManager : MonoBehaviour
         isGameOver = false;
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
-            CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
+            CharacterData c = GameManager.instance.roster.GetCharacter(ps.character);
             playerInputManager.playerPrefab = c.characterPrefab;
             // set player ID
             c.characterPrefab.GetComponent<PlayerManager>().playerID = ps.playerID;

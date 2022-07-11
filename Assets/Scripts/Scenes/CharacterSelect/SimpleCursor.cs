@@ -54,7 +54,7 @@ public class SimpleCursor : MonoBehaviour
         if (characterBox != null)
         {
             // update our chosen character string
-            playerSetting.characterName = characterBox.GetCharacterName();
+            playerSetting.character = characterBox.GetCharacterName();
         }
 
         GameTypeToggle gtt = go.transform.parent.gameObject.GetComponent<GameTypeToggle>();

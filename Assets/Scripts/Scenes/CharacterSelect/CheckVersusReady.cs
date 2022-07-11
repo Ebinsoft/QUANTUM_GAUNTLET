@@ -44,7 +44,7 @@ public class CheckVersusReady : MonoBehaviour
                 // also need to check that everyone has a character selected
                 foreach (PlayerSetting ps in activePlayers)
                 {
-                    if (string.IsNullOrEmpty(ps.characterName))
+                    if (ps.character == Character.None)
                     {
                         return false;
                     }

@@ -48,7 +48,7 @@ public class VersusInfo
             ps.device = null;
             ps.deviceString = "";
             ps.team.teamName = "Team " + (ps.playerID + 1);
-            ps.characterName = "";
+            ps.character = Character.None;
             numPlayers--;
         }
     }
@@ -73,7 +73,7 @@ public class PlayerSetting
     public InputDevice device;
     public string deviceString;
     public Team team;
-    public string characterName;
+    public Character character;
 }
 public enum PlayerType
 {
