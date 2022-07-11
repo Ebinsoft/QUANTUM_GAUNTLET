@@ -4,10 +4,5 @@ using UnityEngine;
 
 public class SetTeamButton : MonoBehaviour
 {
-    public string teamName;
-
-    public string GetTeamname()
-    {
-        return teamName;
-    }
+    public TeamID teamID;
 }

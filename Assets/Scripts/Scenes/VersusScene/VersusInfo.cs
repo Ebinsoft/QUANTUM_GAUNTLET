@@ -24,7 +24,7 @@ public class VersusInfo
     {
         foreach (PlayerSetting ps in GetActivePlayers())
         {
-            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.team.teamID = (TeamID)ps.playerID;
         }
     }
 
@@ -47,7 +47,7 @@ public class VersusInfo
             ps.playerType = PlayerType.None;
             ps.device = null;
             ps.deviceString = "";
-            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.team.teamID = (TeamID) ps.playerID;
             ps.character = Character.None;
             numPlayers--;
         }

@@ -48,7 +48,7 @@ public class CharacterSelectManager : MonoBehaviour
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
             playerType = PlayerType.Human,
-            team = new Team("Team " + (pp.playerID + 1)),
+            team = new Team((TeamID)pp.playerID),
             character = Character.None
         };
 

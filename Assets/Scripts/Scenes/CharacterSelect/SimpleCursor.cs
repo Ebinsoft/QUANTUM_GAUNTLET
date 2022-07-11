@@ -67,7 +67,7 @@ public class SimpleCursor : MonoBehaviour
         if (stb != null)
         {
             Debug.Log("Team Button");
-            playerSetting.team.teamName = stb.teamName;
+            playerSetting.team.teamID = stb.teamID;
             sprite.color = playerSetting.team.teamColor;
         }
 

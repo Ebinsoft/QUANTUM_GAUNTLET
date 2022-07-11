@@ -1313,14 +1313,14 @@ MonoBehaviour:
       playerType: 1
       deviceString: 
       team:
-        teamName: Team 1
+        teamID: 0
       character: 0
     - playerID: 1
       playerName: CPU2
       playerType: 2
       deviceString: 
       team:
-        teamName: Team 2
+        teamID: 1
       character: 0
 --- !u!4 &1506229660
 Transform:

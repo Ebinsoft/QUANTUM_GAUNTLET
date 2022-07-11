@@ -811,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da71560e3c348d9ea8124536eb7f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Team 2
+  teamID: 1
 --- !u!65 &94552653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da71560e3c348d9ea8124536eb7f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Team 1
+  teamID: 0
 --- !u!1 &222053779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,7 +3396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 3
+  playerID: 1
 --- !u!23 &365878319
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5283,7 +5283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &674147515
 Transform:
   m_ObjectHideFlags: 0
@@ -5363,7 +5363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
+  playerID: 2
 --- !u!23 &692463353
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5614,7 +5614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
+  playerID: 3
 --- !u!23 &754486872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5710,7 +5710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da71560e3c348d9ea8124536eb7f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Team 4
+  teamID: 3
 --- !u!65 &779752040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8338,7 +8338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 2
+  playerID: 0
 --- !u!1 &1040661762
 GameObject:
   m_ObjectHideFlags: 0
@@ -11399,7 +11399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da71560e3c348d9ea8124536eb7f01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamName: Team 3
+  teamID: 2
 --- !u!65 &1613605273
 BoxCollider:
   m_ObjectHideFlags: 0

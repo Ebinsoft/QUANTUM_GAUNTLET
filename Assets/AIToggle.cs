@@ -35,9 +35,9 @@ public class AIToggle : MonoBehaviour
             device = null,
             deviceString = "none",
             // TODO: Fix this - Hard-coding this until we can have players choose AI characters
-            character= Character.Edmond,
+            character = Character.Edmond,
             playerType = PlayerType.Robot,
-            team = new Team("Team " + (playerPanel.playerID + 1))
+            team = new Team((TeamID)playerPanel.playerID)
         };
         versusInfo.AddPlayer(ps);
         // if an active character is on this slot, kill them
