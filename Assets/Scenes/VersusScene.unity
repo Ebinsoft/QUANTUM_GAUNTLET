@@ -1302,6 +1302,8 @@ MonoBehaviour:
     roster:
     - character: 0
       characterPrefab: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      portrait: {fileID: 21300000, guid: e02d5c3f239c59e45800e3ebc9284d94, type: 3}
+      fullBody: {fileID: 21300000, guid: a24522f81dfaa1b46a010611a28f4ebd, type: 3}
   versusInfo:
     numPlayers: 2
     stage: TEST
