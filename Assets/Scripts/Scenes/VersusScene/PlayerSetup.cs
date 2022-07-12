@@ -11,7 +11,6 @@ public class PlayerSetup : MonoBehaviour
     depending on potential future "modes" */
 
     private PlayerInput playerInput;
-    private PlayerSetting playerSetting;
     private CharacterController characterController;
     private PlayerManager player;
     private AIManager ai;
@@ -41,40 +40,30 @@ public class PlayerSetup : MonoBehaviour
     {
         // Look up ourselves in the versus player settings
         VersusInfo versusInfo = GameManager.instance.versusInfo;
-        foreach (PlayerSetting ps in versusInfo.playerSettings)
+        PlayerSetting ps = versusInfo.GetPlayer(player.playerID);
+        // TODO: Update skin once we know how to do that
+        // Update our player with their versusInfo settings
+        gameObject.name = ps.playerName;
+        gameObject.tag = ps.team.teamName;
+
+        if (ps.playerType == PlayerType.Robot)
         {
-            if (ps.playerIndex == playerInput.playerIndex)
-            {
-                playerSetting = ps;
-            }
-        }
-        if (playerSetting == null)
-        {
-            Debug.LogError("No matching playerSetting found in GameManager.versusInfo.playerSettings");
+            ChangeToAI();
         }
 
-        else
-        {
-            // TODO: Update skin once we know how to do that
-            // Update our player with their versusInfo settings
-            gameObject.name = playerSetting.playerName;
-            gameObject.tag = playerSetting.team.teamName;
+        // lazily put characters in spots
+        characterController.enabled = false;
+        transform.position = new Vector3(player.playerID, 0.5f, player.playerID);
+        characterController.enabled = true;
 
-            if (playerSetting.playerType == PlayerType.Robot)
-            {
-                ChangeToAI();
-            }
-
-            // lazily put characters in spots
-            characterController.enabled = false;
-            transform.position = new Vector3(playerSetting.playerIndex, 0.5f, playerSetting.playerIndex);
-            characterController.enabled = true;
-        }
     }
 
     private void ChangeToAI()
     {
         ai = gameObject.AddComponent<AIManager>();
+        // disable playerInput and PlayerController so we won't be controlled by auto-assigned devices
+        playerInput.enabled = false;
+        GetComponent<PlayerController>().enabled = false;
         // navAgent = gameObject.AddComponent<NavMeshAgent>();
         // navAgent.speed = player.playerSpeed;
         // navAgent.angularSpeed = player.rotationSpeed;

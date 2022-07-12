@@ -10,37 +10,56 @@ public class VersusInfo
     public string stage;
     public string gameType = "FFA";
     public int numLives = 3;
-    public List<PlayerSetting> playerSettings;
+    public PlayerSetting[] playerSettings;
 
+
+    public void ResetPlayers()
+    {
+        foreach (PlayerSetting ps in GetActivePlayers())
+        {
+            ps.playerType = PlayerType.None;
+        }
+    }
     public void ResetPlayerTeams()
     {
-        foreach (PlayerSetting ps in playerSettings)
+        foreach (PlayerSetting ps in GetActivePlayers())
         {
-            ps.team.teamName = "Team " + (ps.playerIndex + 1);
+            ps.team.teamName = "Team " + (ps.playerID + 1);
         }
     }
 
-    public PlayerSetting GetPlayer(int playerIndex)
+    public IEnumerable<PlayerSetting> GetActivePlayers()
     {
-        return playerSettings.First(c => c.playerIndex == playerIndex);
+        return playerSettings.Where(c => c != null && c.playerType != PlayerType.None).Select(c => c);
     }
 
-    public void RemovePlayer(int playerIndex)
+    public PlayerSetting GetPlayer(int playerID)
     {
-        if (playerSettings.Select(c => c.playerIndex).Contains(playerIndex))
+        return playerSettings[playerID];
+    }
+
+    public void RemovePlayer(int playerID)
+    {
+        PlayerSetting ps = GetPlayer(playerID);
+        if (ps != null && ps.playerType != PlayerType.None)
         {
-            PlayerSetting ps = playerSettings.First(c => c.playerIndex == playerIndex);
-            playerSettings.Remove(ps);
+            ps.playerName = "";
+            ps.playerType = PlayerType.None;
+            ps.device = null;
+            ps.deviceString = "";
+            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.character = Character.None;
             numPlayers--;
         }
-
     }
+
 
     public void AddPlayer(PlayerSetting ps)
     {
-        // if a previous playerIndex exists, remove it
-        RemovePlayer(ps.playerIndex);
-        playerSettings.Add(ps);
+        // if a previous playerID exists, remove it
+        RemovePlayer(ps.playerID);
+        // playerSettings.Add(ps);
+        playerSettings[ps.playerID] = ps;
         numPlayers++;
     }
 }
@@ -48,16 +67,17 @@ public class VersusInfo
 [System.Serializable]
 public class PlayerSetting
 {
+    public int playerID;
     public string playerName = "";
     public PlayerType playerType;
-    public int playerIndex;
     public InputDevice device;
     public string deviceString;
     public Team team;
-    public string characterName;
+    public Character character;
 }
 public enum PlayerType
 {
+    None,
     Human,
     Robot
 }
