@@ -12,14 +12,17 @@ public class PlayerTeamButton : MonoBehaviour
     private int playerID;
     private Animator anim;
 
-    void Start()
+    void Awake()
     {
         text = transform.Find("Text").GetComponent<TextMeshPro>();
         sprite = GetComponent<SpriteRenderer>();
         playerID = transform.parent.GetComponent<PlayerPanel>().playerID;
         versusInfo = GameManager.instance.versusInfo;
         anim = GetComponent<Animator>();
+    }
 
+    void OnEnable()
+    {
         RedrawButton();
     }
 
