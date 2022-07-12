@@ -15,12 +15,12 @@ public class SimpleCursor : MonoBehaviour
     private SpriteRenderer sprite;
     private float cursorPadding = .25f;
 
-
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,6 @@ public class SimpleCursor : MonoBehaviour
     private void onMove(InputAction.CallbackContext context)
     {
         isMovePressed = playerInput.actions["Move"].ReadValue<Vector2>().magnitude > 0;
-
     }
 
     private void onClick(InputAction.CallbackContext context)
