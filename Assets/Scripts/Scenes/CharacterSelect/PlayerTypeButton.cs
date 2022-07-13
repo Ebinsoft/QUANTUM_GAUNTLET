@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerTypeButton : MonoBehaviour
+public class PlayerTypeButton : MonoBehaviour, IBasicButton
 {
     private TextMeshPro text;
     private PlayerPanel playerPanel;
@@ -35,7 +35,7 @@ public class PlayerTypeButton : MonoBehaviour
         }
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         anim.SetTrigger("Click");
 

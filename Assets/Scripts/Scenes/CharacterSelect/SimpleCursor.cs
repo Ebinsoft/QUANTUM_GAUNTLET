@@ -9,11 +9,20 @@ public class SimpleCursor : MonoBehaviour
 {
     public PlayerInput playerInput;
     public float cursorSpeed = 1000f;
+
+    public Sprite neutralSprite;
+    public Sprite buttonHoverSprite;
+    public Sprite holdingTokenSprite;
+
+
     private Vector2 currentMovement;
     private bool isMovePressed;
     private PlayerSetting playerSetting;
     private SpriteRenderer sprite;
     private float cursorPadding = .25f;
+
+    private IBasicButton focussedButton = null;
+
 
     void Awake()
     {
@@ -43,6 +52,37 @@ public class SimpleCursor : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
+        {
+            GameObject obj = other.gameObject;
+            IBasicButton button = obj.GetComponent<IBasicButton>();
+            if (button != null)
+            {
+                focussedButton = button;
+
+                sprite.sprite = buttonHoverSprite;
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
+        {
+            GameObject obj = other.gameObject;
+            IBasicButton button = obj.GetComponent<IBasicButton>();
+            if (button != null)
+            {
+                focussedButton = null;
+
+                sprite.sprite = neutralSprite;
+            }
+        }
+    }
+
+
     private void ChangeState(GameObject go)
     {
         // have to re-grab this or sometimes the reference dies
@@ -54,40 +94,10 @@ public class SimpleCursor : MonoBehaviour
             playerSetting.character = characterBox.GetCharacterName();
         }
 
-        GameModeButton gmb = go.GetComponent<GameModeButton>();
-        if (gmb != null)
+        IBasicButton button = go.GetComponent<IBasicButton>();
+        if (button != null)
         {
-            gmb.Click();
-        }
-
-        PlayerTeamButton tb = go.GetComponent<PlayerTeamButton>();
-        if (tb != null)
-        {
-            tb.Click();
-        }
-
-        StockButton sb = go.GetComponent<StockButton>();
-        if (sb != null)
-        {
-            sb.Click();
-        }
-
-        StartGameButton sgb = go.GetComponent<StartGameButton>();
-        if (sgb != null)
-        {
-            sgb.Click();
-        }
-
-        PlayerTypeButton ptb = go.GetComponent<PlayerTypeButton>();
-        if (ptb != null)
-        {
-            ptb.Click();
-        }
-
-        AddCpuButton acb = go.GetComponent<AddCpuButton>();
-        if (acb != null)
-        {
-            acb.Click();
+            button.Click();
         }
     }
 
@@ -95,6 +105,7 @@ public class SimpleCursor : MonoBehaviour
     {
         Debug.Log("START");
     }
+
     // Update is called once per frame
     void Update()
     {

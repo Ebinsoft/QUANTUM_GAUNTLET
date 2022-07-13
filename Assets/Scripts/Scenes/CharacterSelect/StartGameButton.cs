@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGameButton : MonoBehaviour
+public class StartGameButton : MonoBehaviour, IBasicButton
 {
     Animator anim;
 
@@ -47,7 +47,7 @@ public class StartGameButton : MonoBehaviour
         return false;
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         if (IsGameReady())
         {

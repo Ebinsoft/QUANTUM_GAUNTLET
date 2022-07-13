@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AddCpuButton : MonoBehaviour
+public class AddCpuButton : MonoBehaviour, IBasicButton
 {
     private Animator anim;
     private PlayerPanel playerPanel;
@@ -13,7 +13,7 @@ public class AddCpuButton : MonoBehaviour
         versusInfo = GameManager.instance.versusInfo;
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         anim.SetTrigger("Click");
         playerPanel.SetToCPU();

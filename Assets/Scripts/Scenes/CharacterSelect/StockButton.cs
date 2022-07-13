@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class StockButton : MonoBehaviour
+public class StockButton : MonoBehaviour, IBasicButton
 {
     public enum ButtonType
     {
@@ -22,7 +22,7 @@ public class StockButton : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         anim.SetTrigger("Click");
 

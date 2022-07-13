@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerTeamButton : MonoBehaviour
+public class PlayerTeamButton : MonoBehaviour, IBasicButton
 {
     private TextMeshPro text;
     private SpriteRenderer sprite;
@@ -26,7 +26,7 @@ public class PlayerTeamButton : MonoBehaviour
         RedrawButton();
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         anim.SetTrigger("Click");
 

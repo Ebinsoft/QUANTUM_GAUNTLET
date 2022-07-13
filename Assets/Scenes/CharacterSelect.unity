@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 17628833}
   - component: {fileID: 17628835}
   - component: {fileID: 17628834}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,7 @@ GameObject:
   - component: {fileID: 124929240}
   - component: {fileID: 124929242}
   - component: {fileID: 124929241}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +745,7 @@ GameObject:
   - component: {fileID: 147176014}
   - component: {fileID: 147176016}
   - component: {fileID: 147176015}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Add CPU Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +859,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 161893668}
   - component: {fileID: 161893667}
   - component: {fileID: 161893666}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player Type Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1126,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 222053780}
   - component: {fileID: 222053782}
   - component: {fileID: 222053781}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1429,7 +1429,7 @@ GameObject:
   - component: {fileID: 271613971}
   - component: {fileID: 271613973}
   - component: {fileID: 271613972}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1632,7 +1632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306874001}
   - component: {fileID: 306874002}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Piece 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1903,7 @@ GameObject:
   - component: {fileID: 319737157}
   - component: {fileID: 319737156}
   - component: {fileID: 319737155}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player Type Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1998,7 +1998,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2767,7 +2767,7 @@ GameObject:
   - component: {fileID: 408743167}
   - component: {fileID: 408743166}
   - component: {fileID: 408743165}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2862,7 +2862,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3336,7 +3336,7 @@ GameObject:
   - component: {fileID: 445944788}
   - component: {fileID: 445944787}
   - component: {fileID: 445944786}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3450,7 +3450,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3876,7 +3876,7 @@ GameObject:
   - component: {fileID: 535818479}
   - component: {fileID: 535818480}
   - component: {fileID: 535818481}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Subtract Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3991,7 +3991,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5024,7 +5024,7 @@ GameObject:
   - component: {fileID: 851272164}
   - component: {fileID: 851272166}
   - component: {fileID: 851272165}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5194,7 +5194,7 @@ GameObject:
   - component: {fileID: 868242060}
   - component: {fileID: 868242062}
   - component: {fileID: 868242061}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5366,7 +5366,7 @@ GameObject:
   - component: {fileID: 870291582}
   - component: {fileID: 870291581}
   - component: {fileID: 870291580}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player Type Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5461,7 +5461,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5512,7 +5512,7 @@ GameObject:
   - component: {fileID: 873500247}
   - component: {fileID: 873500249}
   - component: {fileID: 873500248}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6025,7 +6025,7 @@ GameObject:
   - component: {fileID: 915453592}
   - component: {fileID: 915453594}
   - component: {fileID: 915453593}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Mode Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6277,7 +6277,7 @@ GameObject:
   - component: {fileID: 948223800}
   - component: {fileID: 948223802}
   - component: {fileID: 948223801}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6617,7 +6617,7 @@ GameObject:
   - component: {fileID: 992121809}
   - component: {fileID: 992121811}
   - component: {fileID: 992121810}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6786,7 +6786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998973504}
   - component: {fileID: 998973505}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Piece 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6869,7 +6869,7 @@ GameObject:
   - component: {fileID: 1006169951}
   - component: {fileID: 1006169953}
   - component: {fileID: 1006169952}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7217,7 +7217,7 @@ GameObject:
   - component: {fileID: 1117952203}
   - component: {fileID: 1117952205}
   - component: {fileID: 1117952204}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7557,7 +7557,7 @@ GameObject:
   - component: {fileID: 1160086624}
   - component: {fileID: 1160086626}
   - component: {fileID: 1160086625}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7728,7 +7728,7 @@ GameObject:
   - component: {fileID: 1163872110}
   - component: {fileID: 1163872111}
   - component: {fileID: 1163872112}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Start Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7793,7 +7793,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.13622499, y: -0.12649441}
@@ -8074,7 +8074,7 @@ GameObject:
   - component: {fileID: 1250740027}
   - component: {fileID: 1250740029}
   - component: {fileID: 1250740028}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Add CPU Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8188,7 +8188,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8355,7 +8355,7 @@ GameObject:
   - component: {fileID: 1312202507}
   - component: {fileID: 1312202509}
   - component: {fileID: 1312202508}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Mode Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8470,7 +8470,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8507,7 +8507,7 @@ GameObject:
   - component: {fileID: 1326746873}
   - component: {fileID: 1326746871}
   - component: {fileID: 1326746872}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8621,7 +8621,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8898,7 +8898,7 @@ GameObject:
   - component: {fileID: 1446807343}
   - component: {fileID: 1446807345}
   - component: {fileID: 1446807344}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9513,7 +9513,7 @@ GameObject:
   - component: {fileID: 1605552297}
   - component: {fileID: 1605552295}
   - component: {fileID: 1605552296}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Player Type Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9608,7 +9608,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9658,7 +9658,7 @@ GameObject:
   - component: {fileID: 1606498980}
   - component: {fileID: 1606498982}
   - component: {fileID: 1606498981}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10053,7 +10053,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a24522f81dfaa1b46a010611a28f4ebd, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -10061,7 +10061,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!95 &1676839445
@@ -10718,7 +10718,7 @@ GameObject:
   - component: {fileID: 1890810926}
   - component: {fileID: 1890810925}
   - component: {fileID: 1890810924}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10832,7 +10832,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11260,7 +11260,7 @@ GameObject:
   - component: {fileID: 1942485434}
   - component: {fileID: 1942485435}
   - component: {fileID: 1942485436}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Add Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11375,7 +11375,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11511,7 +11511,7 @@ GameObject:
   - component: {fileID: 1961391972}
   - component: {fileID: 1961391970}
   - component: {fileID: 1961391971}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Add CPU Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11625,7 +11625,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11999,7 +11999,7 @@ GameObject:
   - component: {fileID: 2099149280}
   - component: {fileID: 2099149282}
   - component: {fileID: 2099149281}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12169,7 +12169,7 @@ GameObject:
   - component: {fileID: 2105458954}
   - component: {fileID: 2105458956}
   - component: {fileID: 2105458955}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12341,7 +12341,7 @@ GameObject:
   - component: {fileID: 2109268089}
   - component: {fileID: 2109268087}
   - component: {fileID: 2109268088}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Add CPU Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12455,7 +12455,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

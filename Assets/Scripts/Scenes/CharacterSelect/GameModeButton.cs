@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameModeButton : MonoBehaviour
+public class GameModeButton : MonoBehaviour, IBasicButton
 {
     private TextMeshPro modeText;
     private VersusInfo versusInfo;
@@ -32,7 +32,7 @@ public class GameModeButton : MonoBehaviour
         }
     }
 
-    public void Click()
+    void IBasicButton.Click()
     {
         anim.SetTrigger("Click");
 
