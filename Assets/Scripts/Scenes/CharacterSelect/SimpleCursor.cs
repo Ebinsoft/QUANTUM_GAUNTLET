@@ -21,7 +21,7 @@ public class SimpleCursor : MonoBehaviour
     private SpriteRenderer sprite;
     private float cursorPadding = .25f;
 
-    private IBasicButton focussedButton = null;
+    private GameObject focussedElement = null;
 
 
     void Awake()
@@ -44,11 +44,12 @@ public class SimpleCursor : MonoBehaviour
 
     private void onClick(InputAction.CallbackContext context)
     {
-        Vector2 pos2d = new Vector2(transform.position.x, transform.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(pos2d, Vector2.zero);
-        if (hit.collider != null)
+        if (focussedElement == null) return;
+
+        IBasicButton button = focussedElement.GetComponent<IBasicButton>();
+        if (button != null)
         {
-            ChangeState(hit.collider.gameObject);
+            button.Click();
         }
     }
 
@@ -56,15 +57,8 @@ public class SimpleCursor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            GameObject obj = other.gameObject;
-            IBasicButton button = obj.GetComponent<IBasicButton>();
-            if (button != null)
-            {
-                focussedButton = button;
-                button.HoverEnter();
-
-                sprite.sprite = buttonHoverSprite;
-            }
+            focussedElement = other.gameObject;
+            sprite.sprite = buttonHoverSprite;
         }
     }
 
@@ -72,18 +66,10 @@ public class SimpleCursor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            GameObject obj = other.gameObject;
-            IBasicButton button = obj.GetComponent<IBasicButton>();
-            if (button != null)
-            {
-                focussedButton = null;
-                button.HoverExit();
-
-                sprite.sprite = neutralSprite;
-            }
+            focussedElement = null;
+            sprite.sprite = neutralSprite;
         }
     }
-
 
     private void ChangeState(GameObject go)
     {
