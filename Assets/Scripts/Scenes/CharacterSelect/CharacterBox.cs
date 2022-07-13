@@ -28,6 +28,7 @@ public class CharacterBox : MonoBehaviour
 
     public void PlaceToken(CharacterToken token)
     {
+        token.lastCharacterBox = this;
         placedTokens.Add(token);
         DistributeTokens();
     }
