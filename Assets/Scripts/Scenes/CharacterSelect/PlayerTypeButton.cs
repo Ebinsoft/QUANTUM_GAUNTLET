@@ -60,6 +60,7 @@ public class PlayerTypeButton : MonoBehaviour, IBasicButton
 
             case PlayerType.Robot:
                 versusInfo.RemovePlayer(playerID);
+                playerPanel.RemoveCPU();
                 break;
         }
     }

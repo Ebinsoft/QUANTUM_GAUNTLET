@@ -15,6 +15,8 @@ public class PlayerPanel : MonoBehaviour
     private VersusInfo versusInfo;
     private CharacterSelectManager cs;
     private SpriteRenderer characterImage;
+    public UnityEngine.Object tokenPrefab;
+    public CharacterBox startingCharacterBox;
 
     public int playerID;
 
@@ -94,6 +96,36 @@ public class PlayerPanel : MonoBehaviour
         if (activeCursor != null)
         {
             cs.DestroyCursor(playerID);
+        }
+        var activeToken = cs.tokenList
+           .FirstOrDefault((c => c.GetComponent<CharacterToken>().playerID == playerID));
+        if (activeToken != null)
+        {
+            cs.DestroyToken(playerID);
+        }
+        GenerateAIToken();
+    }
+
+    private void GenerateAIToken()
+    {
+        GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
+        CharacterToken aiToken;
+        aiToken = tokenObj.GetComponent<CharacterToken>();
+        aiToken.SetPlayer(playerID);
+        cs.AddToken(tokenObj);
+        tokenObj.transform.position = Vector3.zero;
+        aiToken.SetTarget(Vector3.zero);
+        startingCharacterBox.PlaceToken(aiToken);
+        aiToken.Show();
+    }
+
+    public void RemoveCPU()
+    {
+        var activeToken = cs.tokenList
+   .FirstOrDefault((c => c.GetComponent<CharacterToken>().playerID == playerID));
+        if (activeToken != null)
+        {
+            cs.DestroyToken(playerID);
         }
     }
 }
