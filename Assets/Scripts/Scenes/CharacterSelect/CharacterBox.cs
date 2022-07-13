@@ -31,12 +31,18 @@ public class CharacterBox : MonoBehaviour
         token.lastCharacterBox = this;
         placedTokens.Add(token);
         DistributeTokens();
+        // update the token's character-field with this box's character
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(token.playerID);
+        ps.character = character;
     }
 
     public void RemoveToken(CharacterToken token)
     {
         placedTokens.Remove(token);
         DistributeTokens();
+        // remove token's character-field back to none
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(token.playerID);
+        ps.character = Character.None;
     }
 
     private void DistributeTokens()
