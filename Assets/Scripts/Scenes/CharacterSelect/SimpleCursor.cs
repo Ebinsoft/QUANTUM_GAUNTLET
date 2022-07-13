@@ -87,7 +87,10 @@ public class SimpleCursor : MonoBehaviour
                     if (canPickUp)
                     {
                         charBox.RemoveToken(token);
-                        token.SetTarget(transform);
+                        // ignore z axis of our cursor
+                        Vector3 pos = transform.position;
+                        pos.z = token.transform.position.z;
+                        token.SetTarget(pos);
                         heldToken = token;
                     }
                 }
