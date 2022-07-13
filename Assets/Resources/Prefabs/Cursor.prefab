@@ -135,6 +135,7 @@ MonoBehaviour:
   neutralSprite: {fileID: -577436947000661451, guid: 7ddd3240896781d4c807d59ab8c8a1e2, type: 3}
   buttonHoverSprite: {fileID: 6554736390298987251, guid: 7ddd3240896781d4c807d59ab8c8a1e2, type: 3}
   holdingTokenSprite: {fileID: 8344927208098896504, guid: 7ddd3240896781d4c807d59ab8c8a1e2, type: 3}
+  tokenPrefab: {fileID: 8620406970866465994, guid: d0a86a3b29a6b514c996d31f01fc1fb2, type: 3}
 --- !u!114 &2644649997657805808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1}
+  m_Size: {x: 0.01, y: 0.01}
   m_EdgeRadius: 0
 --- !u!50 &6149898080090353191
 Rigidbody2D:

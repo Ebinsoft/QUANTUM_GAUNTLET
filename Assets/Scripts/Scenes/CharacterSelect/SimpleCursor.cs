@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
@@ -21,13 +22,18 @@ public class SimpleCursor : MonoBehaviour
     private SpriteRenderer sprite;
     private float cursorPadding = .25f;
 
-    private GameObject focussedElement = null;
+    public UnityEngine.Object tokenPrefab;
+    private CharacterToken heldToken = null;
+
+    private List<GameObject> focussedElements;
 
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
+        focussedElements = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -35,6 +41,11 @@ public class SimpleCursor : MonoBehaviour
     {
         // Look up this cursor's relevant playerSetting from the Game Manager
         GetPlayerSetting();
+
+        GameObject tokenObj = (GameObject)Instantiate(tokenPrefab, transform);
+        tokenObj.transform.localPosition = Vector3.zero;
+        heldToken = tokenObj.GetComponent<CharacterToken>();
+        heldToken.SetPlayer(playerInput.playerIndex);
     }
 
     private void onMove(InputAction.CallbackContext context)
@@ -44,21 +55,42 @@ public class SimpleCursor : MonoBehaviour
 
     private void onClick(InputAction.CallbackContext context)
     {
-        if (focussedElement == null) return;
+        if (focussedElements.Count == 0) return;
 
-        IBasicButton button = focussedElement.GetComponent<IBasicButton>();
+        IBasicButton button = GetFocussedComponent<IBasicButton>();
         if (button != null)
         {
             button.Click();
         }
     }
 
+    private T GetFocussedComponent<T>()
+    {
+        return focussedElements
+            .Select(e => e.GetComponent<T>())
+            .Where(c => c != null)
+            .FirstOrDefault();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            focussedElement = other.gameObject;
-            sprite.sprite = buttonHoverSprite;
+            focussedElements.Add(other.gameObject);
+
+            IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
+            if (button != null)
+            {
+                button.HoverEnter();
+                sprite.sprite = buttonHoverSprite;
+            }
+
+            CharacterBox charBox = other.gameObject.GetComponent<CharacterBox>();
+            if (charBox != null && heldToken != null)
+            {
+                heldToken.Show();
+                sprite.sprite = holdingTokenSprite;
+            }
         }
     }
 
@@ -66,7 +98,20 @@ public class SimpleCursor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            focussedElement = null;
+            focussedElements.Remove(other.gameObject);
+
+            IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
+            if (button != null)
+            {
+                button.HoverEnter();
+            }
+
+            CharacterBox charBox = other.gameObject.GetComponent<CharacterBox>();
+            if (charBox != null && heldToken != null)
+            {
+                heldToken.Hide();
+            }
+
             sprite.sprite = neutralSprite;
         }
     }
