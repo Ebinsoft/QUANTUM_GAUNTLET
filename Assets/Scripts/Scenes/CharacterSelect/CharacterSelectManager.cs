@@ -27,12 +27,15 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void DestroyToken(int playerID)
     {
-        GameObject token = tokenList.FirstOrDefault(c => c.GetComponent<CharacterToken>().playerID == playerID);
+        GameObject tokenObj = tokenList.FirstOrDefault(c => c.GetComponent<CharacterToken>().playerID == playerID);
 
-        if (token != null)
+
+        if (tokenObj != null)
         {
-            tokenList.Remove(token);
-            Destroy(token);
+            tokenList.Remove(tokenObj);
+            // cleanup any characterBox lists of this token so it doesn't have dead objects
+            tokenObj.GetComponent<CharacterToken>().CleanUp();
+            Destroy(tokenObj);
         }
     }
 

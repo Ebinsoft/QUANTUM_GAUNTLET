@@ -91,7 +91,7 @@ public class CharacterToken : MonoBehaviour
         label.enabled = true;
     }
 
-    private void OnDestroy()
+    public void CleanUp()
     {
         if (lastCharacterBox != null)
         {
