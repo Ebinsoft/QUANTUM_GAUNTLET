@@ -317,7 +317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 59382064}
   - component: {fileID: 59382065}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77817414}
   - component: {fileID: 77817415}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 138604115}
   - component: {fileID: 138604116}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324116505}
   - component: {fileID: 324116506}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2304,7 +2304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 362057323}
   - component: {fileID: 362057324}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,7 +2391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 364360017}
   - component: {fileID: 364360018}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2474,9 +2474,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372306177}
-  m_Layer: 0
+  - component: {fileID: 372306178}
+  m_Layer: 14
   m_Name: Character Roster
-  m_TagString: Untagged
+  m_TagString: RosterZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2503,6 +2504,32 @@ Transform:
   m_Father: {fileID: 533682641}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &372306178
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372306176}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.66839767}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.5873084, y: 3.9796042}
+  m_EdgeRadius: 0
 --- !u!1 &376094671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2513,7 +2540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 376094672}
   - component: {fileID: 376094673}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2911,7 +2938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 438289377}
   - component: {fileID: 438289378}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3164,7 +3191,7 @@ GameObject:
   - component: {fileID: 444351077}
   - component: {fileID: 444351079}
   - component: {fileID: 444351078}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4024,7 +4051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536805150}
   - component: {fileID: 536805151}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4315,7 +4342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 667290575}
   - component: {fileID: 667290576}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4599,7 +4626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784319940}
   - component: {fileID: 784319941}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4682,7 +4709,7 @@ GameObject:
   - component: {fileID: 808063610}
   - component: {fileID: 808063612}
   - component: {fileID: 808063611}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5681,7 +5708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 873557289}
   - component: {fileID: 873557290}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5768,7 +5795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 887256311}
   - component: {fileID: 887256312}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5855,7 +5882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888976473}
   - component: {fileID: 888976474}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5937,7 +5964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908537858}
   - component: {fileID: 908537859}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6194,7 +6221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927146124}
   - component: {fileID: 927146125}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6447,7 +6474,7 @@ GameObject:
   - component: {fileID: 960291061}
   - component: {fileID: 960291063}
   - component: {fileID: 960291062}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7819,7 +7846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1179595876}
   - component: {fileID: 1179595877}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7902,7 +7929,7 @@ GameObject:
   - component: {fileID: 1193795720}
   - component: {fileID: 1193795722}
   - component: {fileID: 1193795721}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8222,7 +8249,7 @@ GameObject:
   - component: {fileID: 1258150853}
   - component: {fileID: 1258150854}
   - component: {fileID: 1258150855}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8306,7 +8333,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9067,7 +9094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1459768322}
   - component: {fileID: 1459768323}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9165,7 +9192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1529897922}
   - component: {fileID: 1529897923}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9248,7 +9275,7 @@ GameObject:
   - component: {fileID: 1536845579}
   - component: {fileID: 1536845581}
   - component: {fileID: 1536845580}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10127,7 +10154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1826080749}
   - component: {fileID: 1826080750}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10380,7 +10407,7 @@ GameObject:
   - component: {fileID: 1868035313}
   - component: {fileID: 1868035315}
   - component: {fileID: 1868035314}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10631,7 +10658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885695458}
   - component: {fileID: 1885695459}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10863,7 +10890,7 @@ GameObject:
   - component: {fileID: 1894541133}
   - component: {fileID: 1894541135}
   - component: {fileID: 1894541134}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11659,7 +11686,7 @@ GameObject:
   - component: {fileID: 1987471852}
   - component: {fileID: 1987471854}
   - component: {fileID: 1987471853}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12501,7 +12528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131842545}
   - component: {fileID: 2131842546}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12583,7 +12610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2143819716}
   - component: {fileID: 2143819717}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Portrait Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

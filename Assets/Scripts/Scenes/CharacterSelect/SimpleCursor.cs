@@ -26,6 +26,7 @@ public class SimpleCursor : MonoBehaviour
     private CharacterToken heldToken = null;
 
     private List<GameObject> focussedElements;
+    private bool isOverRoster = false;
 
 
     void Awake()
@@ -62,6 +63,27 @@ public class SimpleCursor : MonoBehaviour
         {
             button.Click();
         }
+
+        CharacterBox charBox = GetFocussedComponent<CharacterBox>();
+        if (charBox != null)
+        {
+            if (heldToken == null)
+            {
+                CharacterToken token = GetFocussedComponent<CharacterToken>();
+                if (token != null)
+                {
+                    charBox.RemoveToken(token);
+                    token.transform.SetParent(transform);
+                    token.transform.localPosition = Vector3.zero;
+                    heldToken = token;
+                }
+            }
+            else
+            {
+                charBox.PlaceToken(heldToken);
+                heldToken = null;
+            }
+        }
     }
 
     private T GetFocussedComponent<T>()
@@ -82,14 +104,16 @@ public class SimpleCursor : MonoBehaviour
             if (button != null)
             {
                 button.HoverEnter();
-                sprite.sprite = buttonHoverSprite;
             }
+        }
 
-            CharacterBox charBox = other.gameObject.GetComponent<CharacterBox>();
-            if (charBox != null && heldToken != null)
+        if (other.gameObject.tag == "RosterZone")
+        {
+            Debug.Log("asdfasdfasdfasdfasd");
+            isOverRoster = true;
+            if (heldToken != null)
             {
                 heldToken.Show();
-                sprite.sprite = holdingTokenSprite;
             }
         }
     }
@@ -106,13 +130,16 @@ public class SimpleCursor : MonoBehaviour
                 button.HoverEnter();
             }
 
-            CharacterBox charBox = other.gameObject.GetComponent<CharacterBox>();
-            if (charBox != null && heldToken != null)
+            sprite.sprite = neutralSprite;
+        }
+
+        if (other.gameObject.tag == "RosterZone")
+        {
+            isOverRoster = false;
+            if (heldToken != null)
             {
                 heldToken.Hide();
             }
-
-            sprite.sprite = neutralSprite;
         }
     }
 
@@ -146,6 +173,29 @@ public class SimpleCursor : MonoBehaviour
         if (isMovePressed)
         {
             updateCursor();
+        }
+
+        if (isOverRoster)
+        {
+            if (heldToken != null)
+            {
+                sprite.sprite = holdingTokenSprite;
+            }
+            else
+            {
+                sprite.sprite = neutralSprite;
+            }
+        }
+        else
+        {
+            if (GetFocussedComponent<IBasicButton>() != null)
+            {
+                sprite.sprite = buttonHoverSprite;
+            }
+            else
+            {
+                sprite.sprite = neutralSprite;
+            }
         }
     }
 

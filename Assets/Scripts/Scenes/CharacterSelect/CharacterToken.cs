@@ -7,13 +7,13 @@ public class CharacterToken : MonoBehaviour
 {
     private int playerID;
 
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     private TextMeshPro label;
     private VersusInfo versusInfo;
 
     void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         label = transform.Find("Label").GetComponent<TextMeshPro>();
         versusInfo = GameManager.instance.versusInfo;
     }

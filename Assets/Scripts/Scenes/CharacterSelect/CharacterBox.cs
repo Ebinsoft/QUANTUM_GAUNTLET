@@ -7,17 +7,59 @@ public class CharacterBox : MonoBehaviour
 {
     public Character character;
     private SpriteRenderer portrait;
-    
+    private List<CharacterToken> placedTokens;
+    private SpriteRenderer panelSprite;
+
     void Start()
     {
         TextMeshPro characterText = transform.Find("Name").GetComponent<TextMeshPro>();
         portrait = transform.Find("Portrait Mask/Portrait").GetComponent<SpriteRenderer>();
+        panelSprite = GetComponent<SpriteRenderer>();
         characterText.text = character.ToString();
         portrait.sprite = GameManager.instance.roster.GetCharacter(character).portrait;
+
+        placedTokens = new List<CharacterToken>();
     }
 
     public Character GetCharacterName()
     {
         return character;
+    }
+
+    public void PlaceToken(CharacterToken token)
+    {
+        token.transform.SetParent(transform);
+        token.transform.localPosition = Vector3.zero;
+
+        placedTokens.Add(token);
+        DistributeTokens();
+    }
+
+    public void RemoveToken(CharacterToken token)
+    {
+        placedTokens.Remove(token);
+        DistributeTokens();
+    }
+
+    private void DistributeTokens()
+    {
+        if (placedTokens.Count == 0) return;
+
+        if (placedTokens.Count == 1)
+        {
+            placedTokens[0].transform.localPosition = Vector3.zero;
+            return;
+        }
+
+        float angleBetween = 360 / placedTokens.Count;
+        float tokenRadius = placedTokens[0].sprite.bounds.size.x / 2;
+        float distance = (panelSprite.bounds.size.x / 2) - tokenRadius;
+
+        for (int i = 0; i < placedTokens.Count; i++)
+        {
+            float rads = Mathf.Deg2Rad * (angleBetween * i);
+            Vector2 pos = new Vector2(Mathf.Cos(rads), Mathf.Sin(rads)) * distance;
+            placedTokens[i].transform.localPosition = pos;
+        }
     }
 }
