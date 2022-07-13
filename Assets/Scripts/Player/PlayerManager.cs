@@ -291,4 +291,28 @@ public class PlayerManager : MonoBehaviour
     {
         return moveset.TotalManaCost(moveType) <= stats.mana;
     }
+
+    // check if our pushbox is standing on top of another player's
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            if ((characterController.collisionFlags & CollisionFlags.Below) != 0)
+            {
+                float minHeightDiff = 1f;
+                if (hit.gameObject.transform.position.y < gameObject.transform.position.y - minHeightDiff)
+                {
+                    // move us off their head
+                    float slideSpeed = 5f;
+                    Vector3 p1 = gameObject.transform.position;
+                    Vector3 p2 = hit.gameObject.transform.position;
+                    Vector3 dir3 = (p1 - p2);
+                    Vector2 dir = new Vector2(dir3.x, dir3.z).normalized;
+
+                    currentMovement.x = dir.x * slideSpeed;
+                    currentMovement.z = dir.y * slideSpeed;
+                }
+            }
+        }
+    }
 }
