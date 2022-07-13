@@ -47,6 +47,9 @@ public class StartGameButton : MonoBehaviour, IBasicButton
         return false;
     }
 
+    void IBasicButton.HoverEnter() { }
+    void IBasicButton.HoverExit() { }
+
     void IBasicButton.Click()
     {
         if (IsGameReady())

@@ -35,6 +35,16 @@ public class PlayerTypeButton : MonoBehaviour, IBasicButton
         }
     }
 
+    void IBasicButton.HoverEnter()
+    {
+        anim.SetBool("Hovering", true);
+    }
+
+    void IBasicButton.HoverExit()
+    {
+        anim.SetBool("Hovering", false);
+    }
+
     void IBasicButton.Click()
     {
         anim.SetTrigger("Click");

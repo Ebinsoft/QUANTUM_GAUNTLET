@@ -61,6 +61,7 @@ public class SimpleCursor : MonoBehaviour
             if (button != null)
             {
                 focussedButton = button;
+                button.HoverEnter();
 
                 sprite.sprite = buttonHoverSprite;
             }
@@ -76,6 +77,7 @@ public class SimpleCursor : MonoBehaviour
             if (button != null)
             {
                 focussedButton = null;
+                button.HoverExit();
 
                 sprite.sprite = neutralSprite;
             }
