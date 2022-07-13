@@ -27,12 +27,14 @@ public class SimpleCursor : MonoBehaviour
 
     private List<GameObject> focussedElements;
     private bool isOverRoster = false;
+    private CharacterSelectManager cs;
 
 
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        cs = GameObject.Find("CharacterSelectManager").GetComponent<CharacterSelectManager>();
 
         focussedElements = new List<GameObject>();
     }
@@ -42,12 +44,18 @@ public class SimpleCursor : MonoBehaviour
     {
         // Look up this cursor's relevant playerSetting from the Game Manager
         GetPlayerSetting();
+        GeneratePlayerToken();
+    }
 
+    private void GeneratePlayerToken()
+    {
+        cs.DestroyToken(playerInput.playerIndex);
         GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
         heldToken = tokenObj.GetComponent<CharacterToken>();
         heldToken.SetPlayer(playerInput.playerIndex);
         tokenObj.transform.position = transform.position;
         heldToken.SetTarget(transform);
+        cs.AddToken(tokenObj);
     }
 
     private void onMove(InputAction.CallbackContext context)
