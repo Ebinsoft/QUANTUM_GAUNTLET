@@ -15,6 +15,7 @@ public class CharacterToken : MonoBehaviour
     private float movementSpeed = 30f;
     private Transform transformTarget;
     private Vector3? positionTarget;
+    public CharacterBox lastCharacterBox;
     private Vector3 target
     {
         get
@@ -88,5 +89,13 @@ public class CharacterToken : MonoBehaviour
     {
         sprite.enabled = true;
         label.enabled = true;
+    }
+
+    private void OnDestroy()
+    {
+        if (lastCharacterBox != null)
+        {
+            lastCharacterBox.RemoveToken(this);
+        }
     }
 }
