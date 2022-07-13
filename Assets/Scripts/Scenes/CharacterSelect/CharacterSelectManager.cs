@@ -9,6 +9,7 @@ public class CharacterSelectManager : MonoBehaviour
     private VersusInfo versusInfo;
     public GameObject playerPanels;
     public List<GameObject> playerList;
+    public List<GameObject> tokenList;
 
     void Start()
     {
@@ -22,6 +23,22 @@ public class CharacterSelectManager : MonoBehaviour
         GameObject cursor = playerList.First(c => c.GetComponent<PlayerInput>().playerIndex == playerIndex);
         playerList.Remove(cursor);
         Destroy(cursor);
+    }
+
+    public void DestroyToken(int playerID)
+    {
+        GameObject token = tokenList.FirstOrDefault(c => c.GetComponent<CharacterToken>().playerID == playerID);
+
+        if (token != null)
+        {
+            tokenList.Remove(token);
+            Destroy(token);
+        }
+    }
+
+    public void AddToken(GameObject token)
+    {
+        tokenList.Add(token);
     }
 
     void OnPlayerJoined(PlayerInput playerInput)
