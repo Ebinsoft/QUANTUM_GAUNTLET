@@ -43,10 +43,11 @@ public class SimpleCursor : MonoBehaviour
         // Look up this cursor's relevant playerSetting from the Game Manager
         GetPlayerSetting();
 
-        GameObject tokenObj = (GameObject)Instantiate(tokenPrefab, transform);
-        tokenObj.transform.localPosition = Vector3.zero;
+        GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
         heldToken = tokenObj.GetComponent<CharacterToken>();
         heldToken.SetPlayer(playerInput.playerIndex);
+        tokenObj.transform.position = transform.position;
+        heldToken.SetTarget(transform);
     }
 
     private void onMove(InputAction.CallbackContext context)
@@ -72,10 +73,15 @@ public class SimpleCursor : MonoBehaviour
                 CharacterToken token = GetFocussedComponent<CharacterToken>();
                 if (token != null)
                 {
-                    charBox.RemoveToken(token);
-                    token.transform.SetParent(transform);
-                    token.transform.localPosition = Vector3.zero;
-                    heldToken = token;
+                    bool canPickUp = token.playerType == PlayerType.Robot
+                                  || token.playerID == playerInput.playerIndex;
+
+                    if (canPickUp)
+                    {
+                        charBox.RemoveToken(token);
+                        token.SetTarget(transform);
+                        heldToken = token;
+                    }
                 }
             }
             else
@@ -109,7 +115,6 @@ public class SimpleCursor : MonoBehaviour
 
         if (other.gameObject.tag == "RosterZone")
         {
-            Debug.Log("asdfasdfasdfasdfasd");
             isOverRoster = true;
             if (heldToken != null)
             {

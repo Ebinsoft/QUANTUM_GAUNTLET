@@ -28,9 +28,6 @@ public class CharacterBox : MonoBehaviour
 
     public void PlaceToken(CharacterToken token)
     {
-        token.transform.SetParent(transform);
-        token.transform.localPosition = Vector3.zero;
-
         placedTokens.Add(token);
         DistributeTokens();
     }
@@ -47,7 +44,7 @@ public class CharacterBox : MonoBehaviour
 
         if (placedTokens.Count == 1)
         {
-            placedTokens[0].transform.localPosition = Vector3.zero;
+            placedTokens[0].SetTarget(transform.position);
             return;
         }
 
@@ -59,7 +56,9 @@ public class CharacterBox : MonoBehaviour
         {
             float rads = Mathf.Deg2Rad * (angleBetween * i);
             Vector2 pos = new Vector2(Mathf.Cos(rads), Mathf.Sin(rads)) * distance;
-            placedTokens[i].transform.localPosition = pos;
+
+            Vector3 pos3 = new Vector3(pos.x, pos.y, placedTokens[i].transform.position.z);
+            placedTokens[i].SetTarget(transform.position + pos3);
         }
     }
 }
