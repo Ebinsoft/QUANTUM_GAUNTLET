@@ -14,6 +14,7 @@ public class CharacterToken : MonoBehaviour
 
     private float movementSpeed = 30f;
     public CharacterBox lastCharacterBox;
+    private List<CharacterBox> focusedCharacters;
     private Transform transformTarget;
     private Vector2? positionTarget;
     private Vector2 target
@@ -40,6 +41,8 @@ public class CharacterToken : MonoBehaviour
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         label = transform.Find("Label").GetComponent<TextMeshPro>();
         versusInfo = GameManager.instance.versusInfo;
+
+        focusedCharacters = new List<CharacterBox>();
     }
 
     void Update()
@@ -74,6 +77,36 @@ public class CharacterToken : MonoBehaviour
         if (hide)
         {
             Hide();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        CharacterBox charBox = other.GetComponent<CharacterBox>();
+        if (charBox != null)
+        {
+            focusedCharacters.Add(charBox);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        CharacterBox charBox = other.GetComponent<CharacterBox>();
+        if (charBox != null)
+        {
+            focusedCharacters.Remove(charBox);
+        }
+    }
+
+    public Character GetFocusedCharacter()
+    {
+        if (focusedCharacters.Count < 1)
+        {
+            return Character.None;
+        }
+        else
+        {
+            return focusedCharacters[0].character;
         }
     }
 

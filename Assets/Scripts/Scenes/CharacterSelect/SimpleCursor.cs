@@ -107,15 +107,12 @@ public class SimpleCursor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
-        {
-            focusedElements.Add(other.gameObject);
+        focusedElements.Add(other.gameObject);
 
-            IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
-            if (button != null)
-            {
-                button.HoverEnter();
-            }
+        IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
+        if (button != null)
+        {
+            button.HoverEnter();
         }
 
         if (other.gameObject.tag == "RosterZone")
@@ -130,18 +127,15 @@ public class SimpleCursor : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
+        focusedElements.Remove(other.gameObject);
+
+        IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
+        if (button != null)
         {
-            focusedElements.Remove(other.gameObject);
-
-            IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
-            if (button != null)
-            {
-                button.HoverEnter();
-            }
-
-            sprite.sprite = neutralSprite;
+            button.HoverEnter();
         }
+
+        sprite.sprite = neutralSprite;
 
         if (other.gameObject.tag == "RosterZone")
         {

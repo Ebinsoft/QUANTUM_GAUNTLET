@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5635145165150605255}
   - component: {fileID: 3047686006284832023}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,8 @@ GameObject:
   - component: {fileID: 8620406970866465992}
   - component: {fileID: 7110651852433502182}
   - component: {fileID: 2702781453979690836}
-  m_Layer: 14
+  - component: {fileID: 1417895179184021144}
+  m_Layer: 15
   m_Name: Player Token
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ffe1f351a50b7489d1f124263dc3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  lastCharacterBox: {fileID: 0}
 --- !u!58 &2702781453979690836
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -144,6 +147,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.62174547
+--- !u!50 &1417895179184021144
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8620406970866465994}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8620406971139544246
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +179,7 @@ GameObject:
   - component: {fileID: 8620406971139544247}
   - component: {fileID: 8620406971139544245}
   - component: {fileID: 8620406971139544244}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}

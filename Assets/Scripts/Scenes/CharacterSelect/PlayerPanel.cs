@@ -17,6 +17,7 @@ public class PlayerPanel : MonoBehaviour
     private CharacterSelectManager cs;
     private SpriteRenderer characterImage;
     public UnityEngine.Object tokenPrefab;
+    private CharacterToken activeToken = null;
     public CharacterBox startingCharacterBox;
 
     public int playerID;
@@ -46,6 +47,11 @@ public class PlayerPanel : MonoBehaviour
             addCpuButton.SetActive(false);
             playerTypeButton.SetActive(true);
 
+            if (activeToken == null)
+            {
+                activeToken = cs.GetToken(ps.playerID);
+            }
+
             if (versusInfo.gameType == GameMode.Team)
             {
                 teamButton.SetActive(true);
@@ -55,19 +61,7 @@ public class PlayerPanel : MonoBehaviour
                 teamButton.SetActive(false);
             }
 
-            if (ps.character != Character.None)
-            {
-                if (characterImage.sprite == null)
-                {
-                    anim.SetTrigger("Select");
-                }
-                Roster roster = GameManager.instance.roster;
-                characterImage.sprite = roster.GetCharacter(ps.character).fullBody;
-            }
-            else
-            {
-                characterImage.sprite = null;
-            }
+            UpdateCharacterImage(ps);
         }
         else
         {
@@ -79,9 +73,43 @@ public class PlayerPanel : MonoBehaviour
 
             characterImage.sprite = null;
         }
-
-
     }
+
+    private void UpdateCharacterImage(PlayerSetting ps)
+    {
+        Sprite prevSprite = characterImage.sprite;
+        Color prevColor = characterImage.color;
+        Character focusedCharacter = Character.None;
+        if (activeToken != null) focusedCharacter = activeToken.GetFocusedCharacter();
+
+        if (ps.character != Character.None)
+        {
+            Roster roster = GameManager.instance.roster;
+            characterImage.sprite = roster.GetCharacter(ps.character).fullBody;
+            characterImage.color = Color.white;
+
+            if (characterImage.sprite != prevSprite || characterImage.color != prevColor)
+            {
+                anim.SetTrigger("Select");
+            }
+        }
+        else if (focusedCharacter != Character.None)
+        {
+            Roster roster = GameManager.instance.roster;
+            characterImage.sprite = roster.GetCharacter(focusedCharacter).fullBody;
+            characterImage.color = new Color(1, 1, 1, 0.5f);
+
+            if (characterImage.sprite != prevSprite || characterImage.color != prevColor)
+            {
+                anim.SetTrigger("Enter");
+            }
+        }
+        else
+        {
+            characterImage.sprite = null;
+        }
+    }
+
     public void SetToCPU()
     {
         PlayerSetting ps = new PlayerSetting
@@ -103,11 +131,11 @@ public class PlayerPanel : MonoBehaviour
         {
             cs.DestroyCursor(playerID);
         }
-        var activeToken = cs.tokenList
-           .FirstOrDefault((c => c.GetComponent<CharacterToken>().playerID == playerID));
+
         if (activeToken != null)
         {
             cs.DestroyToken(playerID);
+            activeToken = null;
         }
         GenerateAIToken();
     }
@@ -123,11 +151,10 @@ public class PlayerPanel : MonoBehaviour
 
     public void RemoveCPU()
     {
-        var activeToken = cs.tokenList
-   .FirstOrDefault((c => c.GetComponent<CharacterToken>().playerID == playerID));
         if (activeToken != null)
         {
             cs.DestroyToken(playerID);
+            activeToken = null;
         }
     }
 }
