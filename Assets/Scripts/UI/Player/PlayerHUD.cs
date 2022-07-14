@@ -58,7 +58,7 @@ public class PlayerHUD : MonoBehaviour
         manaBar.material = manaBarMaterials[playerSetting.playerID];
 
         playerID.text = "P" + (playerSetting.playerID + 1);
-        portraitBg.color = playerSetting.team.teamColor + (Color.white * 0.4f);
+        portraitBg.color = playerSetting.team.teamColor;
 
         GenerateStockIcons();
 

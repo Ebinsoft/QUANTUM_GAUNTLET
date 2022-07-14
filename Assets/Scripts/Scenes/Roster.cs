@@ -33,4 +33,6 @@ public class CharacterData
 {
     public Character character;
     public GameObject characterPrefab;
+    public Sprite portrait;
+    public Sprite fullBody;
 }

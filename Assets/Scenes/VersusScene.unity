@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 4ae6f7283b9fa7c4d8040190de7cb155, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1302,10 +1302,12 @@ MonoBehaviour:
     roster:
     - character: 0
       characterPrefab: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
+      portrait: {fileID: 21300000, guid: e02d5c3f239c59e45800e3ebc9284d94, type: 3}
+      fullBody: {fileID: 21300000, guid: a24522f81dfaa1b46a010611a28f4ebd, type: 3}
   versusInfo:
     numPlayers: 2
     stage: TEST
-    gameType: FFA
+    gameType: 0
     numLives: 3
     playerSettings:
     - playerID: 0
@@ -1313,14 +1315,14 @@ MonoBehaviour:
       playerType: 1
       deviceString: 
       team:
-        teamName: Team 1
+        teamID: 0
       character: 0
     - playerID: 1
       playerName: CPU2
       playerType: 2
       deviceString: 
       team:
-        teamName: Team 2
+        teamID: 1
       character: 0
 --- !u!4 &1506229660
 Transform:

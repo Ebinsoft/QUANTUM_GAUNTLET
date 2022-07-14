@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Team 1
-  - Team 2
-  - Team 3
-  - Team 4
   - PlayerPanels
+  - Team1
+  - Team2
+  - Team3
+  - Team4
+  - RosterZone
   layers:
   - Default
   - TransparentFX
@@ -23,9 +24,9 @@ TagManager:
   - Hurtbox
   - Pushbox
   - 
-  - 
-  - 
-  - 
+  - Cursor
+  - Button
+  - Token
   - 
   - 
   - 
