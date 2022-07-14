@@ -88,9 +88,7 @@ public class SimpleCursor : MonoBehaviour
                     {
                         charBox.RemoveToken(token);
                         // ignore z axis of our cursor
-                        Vector3 pos = transform.position;
-                        pos.z = token.transform.position.z;
-                        token.SetTarget(pos);
+                        token.SetTarget(transform);
                         heldToken = token;
                     }
                 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.07158115, g: 0.08164745, b: 0.0701501, a: 1}
+  m_IndirectSpecularColor: {r: 0.08131858, g: 0.09301459, b: 0.08642601, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1417,6 +1417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tokenPrefab: {fileID: 8620406970866465994, guid: d0a86a3b29a6b514c996d31f01fc1fb2, type: 3}
+  startingCharacterBox: {fileID: 1258150855}
   playerID: 1
 --- !u!1 &271613970
 GameObject:
@@ -3700,6 +3702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPanels: {fileID: 281332333}
   playerList: []
+  tokenList: []
 --- !u!4 &473077741
 Transform:
   m_ObjectHideFlags: 0
@@ -4229,6 +4232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tokenPrefab: {fileID: 8620406970866465994, guid: d0a86a3b29a6b514c996d31f01fc1fb2, type: 3}
+  startingCharacterBox: {fileID: 1258150855}
   playerID: 0
 --- !u!1 &578797985
 GameObject:
@@ -4331,6 +4336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tokenPrefab: {fileID: 8620406970866465994, guid: d0a86a3b29a6b514c996d31f01fc1fb2, type: 3}
+  startingCharacterBox: {fileID: 1258150855}
   playerID: 3
 --- !u!1 &667290574
 GameObject:
@@ -11524,6 +11531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497a212e08e4dd088cadc1c4940b2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tokenPrefab: {fileID: 8620406970866465994, guid: d0a86a3b29a6b514c996d31f01fc1fb2, type: 3}
+  startingCharacterBox: {fileID: 1258150855}
   playerID: 2
 --- !u!1 &1961391967
 GameObject:
