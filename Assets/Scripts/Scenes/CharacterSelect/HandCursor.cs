@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SimpleCursor : MonoBehaviour
+public class HandCursor : MonoBehaviour
 {
     public PlayerInput playerInput;
     public float cursorSpeed = 1000f;
