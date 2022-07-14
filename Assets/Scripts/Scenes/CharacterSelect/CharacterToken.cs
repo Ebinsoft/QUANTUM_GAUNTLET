@@ -13,10 +13,10 @@ public class CharacterToken : MonoBehaviour
     private VersusInfo versusInfo;
 
     private float movementSpeed = 30f;
-    private Transform transformTarget;
-    private Vector3? positionTarget;
     public CharacterBox lastCharacterBox;
-    private Vector3 target
+    private Transform transformTarget;
+    private Vector2? positionTarget;
+    private Vector2 target
     {
         get
         {
@@ -46,7 +46,9 @@ public class CharacterToken : MonoBehaviour
     {
         sprite.color = versusInfo.GetPlayer(playerID).team.teamColor;
 
-        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        // only move on the XY plane so we don't mess up the Z-layering
+        Vector2 pos2D = Vector2.MoveTowards(transform.position, target, movementSpeed * Time.deltaTime);
+        transform.position = new Vector3(pos2D.x, pos2D.y, transform.position.z);
     }
 
     public void SetPlayer(int playerID)
@@ -67,7 +69,7 @@ public class CharacterToken : MonoBehaviour
         Hide();
     }
 
-    public void SetTarget(Vector3 targetPos)
+    public void SetTarget(Vector2 targetPos)
     {
         transformTarget = null;
         positionTarget = targetPos;

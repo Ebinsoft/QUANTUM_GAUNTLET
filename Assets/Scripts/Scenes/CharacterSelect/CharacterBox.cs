@@ -64,8 +64,7 @@ public class CharacterBox : MonoBehaviour
             float rads = Mathf.Deg2Rad * (angleBetween * i);
             Vector2 pos = new Vector2(Mathf.Cos(rads), Mathf.Sin(rads)) * distance;
 
-            Vector3 pos3 = new Vector3(pos.x, pos.y, placedTokens[i].transform.position.z);
-            placedTokens[i].SetTarget(transform.position + pos3);
+            placedTokens[i].SetTarget((Vector2)transform.position + pos);
         }
     }
 }
