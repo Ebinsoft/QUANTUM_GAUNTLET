@@ -9,6 +9,7 @@ public class PlayerPanel : MonoBehaviour
 {
     private TextMeshPro text;
     private SpriteRenderer sprite;
+    private Animator anim;
     private GameObject addCpuButton;
     private GameObject playerTypeButton;
     private GameObject teamButton;
@@ -24,6 +25,7 @@ public class PlayerPanel : MonoBehaviour
     {
         text = transform.Find("Prompt Text").GetComponent<TextMeshPro>();
         sprite = GetComponent<SpriteRenderer>();
+        anim = transform.Find("Character Mask/Character Image").GetComponent<Animator>();
         addCpuButton = transform.Find("Add CPU Button").gameObject;
         playerTypeButton = transform.Find("Player Type Button").gameObject;
         teamButton = transform.Find("Team").gameObject;
@@ -55,6 +57,10 @@ public class PlayerPanel : MonoBehaviour
 
             if (ps.character != Character.None)
             {
+                if (characterImage.sprite == null)
+                {
+                    anim.SetTrigger("Select");
+                }
                 Roster roster = GameManager.instance.roster;
                 characterImage.sprite = roster.GetCharacter(ps.character).fullBody;
             }
@@ -111,12 +117,8 @@ public class PlayerPanel : MonoBehaviour
         GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
         CharacterToken aiToken;
         aiToken = tokenObj.GetComponent<CharacterToken>();
-        aiToken.SetPlayer(playerID);
-        cs.AddToken(tokenObj);
-        tokenObj.transform.position = Vector3.zero;
-        aiToken.SetTarget(Vector3.zero);
+        aiToken.Initialize(playerID, transform.position);
         startingCharacterBox.PlaceToken(aiToken);
-        aiToken.Show();
     }
 
     public void RemoveCPU()

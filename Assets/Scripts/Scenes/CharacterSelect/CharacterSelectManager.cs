@@ -44,6 +44,14 @@ public class CharacterSelectManager : MonoBehaviour
         tokenList.Add(token);
     }
 
+    public CharacterToken GetToken(int playerID)
+    {
+        return tokenList
+            .Select(obj => obj.GetComponent<CharacterToken>())
+            .Where(t => t.playerID == playerID)
+            .FirstOrDefault();
+    }
+
     void OnPlayerJoined(PlayerInput playerInput)
     {
         // set his PlayerPanel to default values in case of re-joining

@@ -51,7 +51,7 @@ public class CharacterToken : MonoBehaviour
         transform.position = new Vector3(pos2D.x, pos2D.y, transform.position.z);
     }
 
-    public void SetPlayer(int playerID)
+    public void Initialize(int playerID, Vector2 position, bool hide = false)
     {
         this.playerID = playerID;
 
@@ -66,7 +66,15 @@ public class CharacterToken : MonoBehaviour
             label.text = "P" + (playerID + 1);
         }
 
-        Hide();
+        transform.position = new Vector3(position.x, position.y, transform.position.z);
+
+        CharacterSelectManager csm = GameObject.Find("CharacterSelectManager").GetComponent<CharacterSelectManager>();
+        csm.AddToken(gameObject);
+
+        if (hide)
+        {
+            Hide();
+        }
     }
 
     public void SetTarget(Vector2 targetPos)

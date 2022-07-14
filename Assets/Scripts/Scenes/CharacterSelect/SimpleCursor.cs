@@ -51,10 +51,8 @@ public class SimpleCursor : MonoBehaviour
         cs.DestroyToken(playerInput.playerIndex);
         GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
         heldToken = tokenObj.GetComponent<CharacterToken>();
-        heldToken.SetPlayer(playerInput.playerIndex);
-        tokenObj.transform.position = transform.position;
+        heldToken.Initialize(playerInput.playerIndex, transform.position, hide: true);
         heldToken.SetTarget(transform);
-        cs.AddToken(tokenObj);
     }
 
     private void onMove(InputAction.CallbackContext context)
@@ -66,18 +64,18 @@ public class SimpleCursor : MonoBehaviour
     {
         if (focusedElements.Count == 0) return;
 
-        IBasicButton button = GetFocussedComponent<IBasicButton>();
+        IBasicButton button = GetFocusedComponent<IBasicButton>();
         if (button != null)
         {
             button.Click();
         }
 
-        CharacterBox charBox = GetFocussedComponent<CharacterBox>();
+        CharacterBox charBox = GetFocusedComponent<CharacterBox>();
         if (charBox != null)
         {
             if (heldToken == null)
             {
-                CharacterToken token = GetFocussedComponent<CharacterToken>();
+                CharacterToken token = GetFocusedComponent<CharacterToken>();
                 if (token != null)
                 {
                     bool canPickUp = token.playerType == PlayerType.Robot
@@ -99,7 +97,7 @@ public class SimpleCursor : MonoBehaviour
         }
     }
 
-    private T GetFocussedComponent<T>()
+    private T GetFocusedComponent<T>()
     {
         return focusedElements
             .Select(e => e.GetComponent<T>())
@@ -200,7 +198,7 @@ public class SimpleCursor : MonoBehaviour
         }
         else
         {
-            if (GetFocussedComponent<IBasicButton>() != null)
+            if (GetFocusedComponent<IBasicButton>() != null)
             {
                 sprite.sprite = buttonHoverSprite;
             }
