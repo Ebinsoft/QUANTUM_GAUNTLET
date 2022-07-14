@@ -25,7 +25,7 @@ public class SimpleCursor : MonoBehaviour
     public UnityEngine.Object tokenPrefab;
     private CharacterToken heldToken = null;
 
-    private List<GameObject> focussedElements;
+    private List<GameObject> focusedElements;
     private bool isOverRoster = false;
     private CharacterSelectManager cs;
 
@@ -36,10 +36,9 @@ public class SimpleCursor : MonoBehaviour
         sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         cs = GameObject.Find("CharacterSelectManager").GetComponent<CharacterSelectManager>();
 
-        focussedElements = new List<GameObject>();
+        focusedElements = new List<GameObject>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         // Look up this cursor's relevant playerSetting from the Game Manager
@@ -65,7 +64,7 @@ public class SimpleCursor : MonoBehaviour
 
     private void onClick(InputAction.CallbackContext context)
     {
-        if (focussedElements.Count == 0) return;
+        if (focusedElements.Count == 0) return;
 
         IBasicButton button = GetFocussedComponent<IBasicButton>();
         if (button != null)
@@ -87,7 +86,6 @@ public class SimpleCursor : MonoBehaviour
                     if (canPickUp)
                     {
                         charBox.RemoveToken(token);
-                        // ignore z axis of our cursor
                         token.SetTarget(transform);
                         heldToken = token;
                     }
@@ -103,7 +101,7 @@ public class SimpleCursor : MonoBehaviour
 
     private T GetFocussedComponent<T>()
     {
-        return focussedElements
+        return focusedElements
             .Select(e => e.GetComponent<T>())
             .Where(c => c != null)
             .FirstOrDefault();
@@ -113,7 +111,7 @@ public class SimpleCursor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            focussedElements.Add(other.gameObject);
+            focusedElements.Add(other.gameObject);
 
             IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
             if (button != null)
@@ -136,7 +134,7 @@ public class SimpleCursor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Button"))
         {
-            focussedElements.Remove(other.gameObject);
+            focusedElements.Remove(other.gameObject);
 
             IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
             if (button != null)
