@@ -156,24 +156,6 @@ public class HandCursor : MonoBehaviour
         }
     }
 
-    private void ChangeState(GameObject go)
-    {
-        // have to re-grab this or sometimes the reference dies
-        GetPlayerSetting();
-        CharacterBox characterBox = go.GetComponent<CharacterBox>();
-        if (characterBox != null)
-        {
-            // update our chosen character string
-            playerSetting.character = characterBox.GetCharacterName();
-        }
-
-        IBasicButton button = go.GetComponent<IBasicButton>();
-        if (button != null)
-        {
-            button.Click();
-        }
-    }
-
     private void onStart(InputAction.CallbackContext context)
     {
         Debug.Log("START");
