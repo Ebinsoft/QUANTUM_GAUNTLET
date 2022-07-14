@@ -24,9 +24,10 @@ public class HandCursor : MonoBehaviour
 
     public UnityEngine.Object tokenPrefab;
     private CharacterToken heldToken = null;
-
+    private CharacterToken myToken = null;
     private List<GameObject> focusedElements;
     private bool isOverRoster = false;
+    private bool isSummoning = false;
     private CharacterSelectManager cs;
 
 
@@ -51,6 +52,7 @@ public class HandCursor : MonoBehaviour
         cs.DestroyToken(playerInput.playerIndex);
         GameObject tokenObj = (GameObject)Instantiate(tokenPrefab);
         heldToken = tokenObj.GetComponent<CharacterToken>();
+        myToken = heldToken;
         heldToken.Initialize(playerInput.playerIndex, transform.position, hide: true);
         heldToken.SetTarget(transform);
     }
@@ -95,6 +97,13 @@ public class HandCursor : MonoBehaviour
                 heldToken = null;
             }
         }
+    }
+
+    private void onBack(InputAction.CallbackContext context)
+    {
+        if (heldToken != null) return;
+
+        isSummoning = true;
     }
 
     private T GetFocusedComponent<T>()
@@ -170,11 +179,35 @@ public class HandCursor : MonoBehaviour
         Debug.Log("START");
     }
 
+    private void Summon()
+    {
+        Vector3 p2 = myToken.transform.position;
+        Vector2 pos2D = Vector2.MoveTowards(transform.position, p2, cursorSpeed * Time.deltaTime);
+        transform.position = new Vector3(pos2D.x, pos2D.y, transform.position.z);
+
+        if (focusedElements.Contains(myToken.gameObject))
+        {
+            CharacterBox charBox = GetFocusedComponent<CharacterBox>();
+            if (charBox != null)
+            {
+                charBox.RemoveToken(myToken);
+                myToken.SetTarget(transform);
+                heldToken = myToken;
+                isSummoning = false;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         UpdateCursorColor();
-        if (isMovePressed)
+
+        if (isSummoning)
+        {
+            Summon();
+        }
+        else if (isMovePressed)
         {
             updateCursor();
         }
@@ -253,7 +286,8 @@ public class HandCursor : MonoBehaviour
         playerInput.actions["Move"].canceled += onMove;
 
         playerInput.actions["Click"].started += onClick;
-        // playerInput.actions["Click"].canceled += onClick;
+
+        playerInput.actions["Back"].started += onBack;
 
         playerInput.actions["Start"].started += onStart;
         playerInput.actions["Start"].canceled += onStart;
@@ -266,7 +300,8 @@ public class HandCursor : MonoBehaviour
         playerInput.actions["Move"].canceled -= onMove;
 
         playerInput.actions["Click"].started -= onClick;
-        // playerInput.actions["Click"].canceled -= onClick;
+
+        playerInput.actions["Back"].started -= onBack;
 
         playerInput.actions["Start"].started -= onStart;
         playerInput.actions["Start"].canceled -= onStart;
