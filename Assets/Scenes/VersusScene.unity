@@ -1618,6 +1618,10 @@ PrefabInstance:
       propertyPath: Mute
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 500872646410819609, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e0ef66ab205ea04dac248b4c4515fc0, type: 2}
     - target: {fileID: 2913951985953123365, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1662,10 +1666,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3369459697389500817, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1ba3fd35e5357b4889f27a29d0cabe2, type: 2}
     - target: {fileID: 4117579943793824251, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: m_Name
       value: colosseum
       objectReference: {fileID: 0}
+    - target: {fileID: 4797157008944641088, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e90132b4f237e3840b9b24ebbf181457, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
 --- !u!1 &1804042838
