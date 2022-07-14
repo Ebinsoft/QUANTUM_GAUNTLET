@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class HandCursor : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public float cursorSpeed = 1000f;
+    private float cursorSpeed = 15f;
 
     public Sprite neutralSprite;
     public Sprite buttonHoverSprite;
@@ -182,7 +182,8 @@ public class HandCursor : MonoBehaviour
     private void Summon()
     {
         Vector3 p2 = myToken.transform.position;
-        Vector2 pos2D = Vector2.MoveTowards(transform.position, p2, cursorSpeed * Time.deltaTime);
+        float summonMultiplier = 8f;
+        Vector2 pos2D = Vector2.MoveTowards(transform.position, p2, summonMultiplier * cursorSpeed * Time.deltaTime);
         transform.position = new Vector3(pos2D.x, pos2D.y, transform.position.z);
 
         if (focusedElements.Contains(myToken.gameObject))
