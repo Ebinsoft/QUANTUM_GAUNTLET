@@ -132,7 +132,7 @@ public class SimpleCursor : MonoBehaviour
         IBasicButton button = other.gameObject.GetComponent<IBasicButton>();
         if (button != null)
         {
-            button.HoverEnter();
+            button.HoverExit();
         }
 
         sprite.sprite = neutralSprite;
