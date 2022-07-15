@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 11524279}
   playerList: []
-  gameOverMenu: {fileID: 0}
+  gameOverMenu: {fileID: 721352993}
   playerTargetGroup: {fileID: 647113859}
   playerHUDPrefab: {fileID: 4345037606483549039, guid: b6c26b1c3c1b33a4bbd92104ecd51dcf, type: 3}
 --- !u!4 &11524278
@@ -3239,6 +3239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f647dbd238a65b90862541ff5263036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 721352993}
 --- !u!114 &2002682302
 MonoBehaviour:
   m_ObjectHideFlags: 0
