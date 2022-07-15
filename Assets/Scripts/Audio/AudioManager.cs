@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
 
     public MagicSoundElem[] _magicSounds;
     public static Dictionary<MagicSound, Sound> magicSounds;
+    public AudioMixerGroup sfxMixerGroup;
 
     void Awake()
     {
@@ -121,6 +122,7 @@ public class AudioManager : MonoBehaviour
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = sound.clip;
         source.volume = sound.volume;
+        source.outputAudioMixerGroup = AudioManager.instance.sfxMixerGroup;
         source.playOnAwake = false;
 
         InterruptableSound interruptableSound = new InterruptableSound();
