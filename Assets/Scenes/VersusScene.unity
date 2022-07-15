@@ -832,7 +832,9 @@ MonoBehaviour:
     sound:
       clip: {fileID: 8300000, guid: 7ad4301a8060a1b4a8584026dd3f766f, type: 3}
       volume: 0.1
+  masterMixer: {fileID: 24100000, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
   sfxMixerGroup: {fileID: -7543794490252263930, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
+  musicMixerGroup: {fileID: 3702411289305159271, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
 --- !u!4 &420343998
 Transform:
   m_ObjectHideFlags: 0

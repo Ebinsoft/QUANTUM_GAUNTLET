@@ -23,7 +23,9 @@ public class AudioManager : MonoBehaviour
 
     public MagicSoundElem[] _magicSounds;
     public static Dictionary<MagicSound, Sound> magicSounds;
+    public AudioMixer masterMixer;
     public AudioMixerGroup sfxMixerGroup;
+    public AudioMixerGroup musicMixerGroup;
 
     void Awake()
     {
