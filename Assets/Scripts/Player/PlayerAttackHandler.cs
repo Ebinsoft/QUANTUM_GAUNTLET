@@ -117,11 +117,11 @@ public class PlayerAttackHandler : MonoBehaviour
             switch (activeAttack.impactSoundType)
             {
                 case SoundEffectType.preset:
-                    AudioManager.PlayAt(activeAttack.presetImpactSound, hitPoint);
+                    AudioManager.PlayAt(activeAttack.presetImpactSound, gameObject);
                     break;
 
                 case SoundEffectType.custom:
-                    AudioManager.PlayAt(activeAttack.customImpactSound, hitPoint);
+                    AudioManager.PlayAt(activeAttack.customImpactSound, gameObject);
                     break;
             }
         }

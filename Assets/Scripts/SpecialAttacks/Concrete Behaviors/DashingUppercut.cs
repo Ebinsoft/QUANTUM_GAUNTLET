@@ -86,7 +86,7 @@ public class DashingUppercut : SpecialAttackBehavior
         {
             StopEffects();
             zoomSound.StopAndDestroy();
-            AudioManager.PlayAt(FireSound.ExplosionMedium, player.transform.position);
+            AudioManager.PlayAt(FireSound.ExplosionMedium, player.gameObject);
 
             currentPhase = Phase.Hit;
             player.anim.SetTrigger("UppercutHit");
@@ -152,7 +152,7 @@ public class DashingUppercut : SpecialAttackBehavior
         particleEffects.StartFireDashingEffect();
 
         zoomSound.Play();
-        AudioManager.PlayAt(FireSound.ExplosionSmall, player.transform.position);
+        AudioManager.PlayAt(FireSound.ExplosionSmall, player.gameObject);
     }
 
     private void StopEffects()

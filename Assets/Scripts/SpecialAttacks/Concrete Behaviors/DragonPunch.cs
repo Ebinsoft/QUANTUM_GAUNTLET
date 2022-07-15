@@ -83,7 +83,7 @@ public class DragonPunch : SpecialAttackBehavior
 
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
         chargingSound.StopAndDestroy();
-        AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
+        AudioManager.PlayAt(FireSound.ExplosionBig, player.gameObject);
         particleEffects.StopChargingEffect();
     }
 
