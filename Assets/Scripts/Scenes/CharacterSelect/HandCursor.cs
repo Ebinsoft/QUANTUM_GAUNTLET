@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using TMPro;
 
 public class HandCursor : MonoBehaviour
 {
     public PlayerInput playerInput;
     private float cursorSpeed = 15f;
 
-    public Sprite neutralSprite;
-    public Sprite buttonHoverSprite;
-    public Sprite holdingTokenSprite;
+    private SkinnedMeshRenderer rend;
+    private TextMeshPro label;
+    private Animator anim;
 
 
     private Vector2 currentMovement;
     private bool isMovePressed;
     private PlayerSetting playerSetting;
-    private SpriteRenderer sprite;
     private float cursorPadding = .25f;
 
     public UnityEngine.Object tokenPrefab;
@@ -34,7 +32,9 @@ public class HandCursor : MonoBehaviour
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        anim = transform.Find("Hand").GetComponent<Animator>();
+        rend = transform.Find("Hand/Model").GetComponent<SkinnedMeshRenderer>();
+        label = transform.Find("Hand/Hand/Label").GetComponent<TextMeshPro>();
         cs = GameObject.Find("CharacterSelectManager").GetComponent<CharacterSelectManager>();
 
         focusedElements = new List<GameObject>();
@@ -44,6 +44,8 @@ public class HandCursor : MonoBehaviour
     {
         // Look up this cursor's relevant playerSetting from the Game Manager
         GetPlayerSetting();
+        label.text = "P" + (playerSetting.playerID + 1);
+
         GeneratePlayerToken();
     }
 
@@ -88,12 +90,14 @@ public class HandCursor : MonoBehaviour
                         charBox.RemoveToken(token);
                         token.SetTarget(transform);
                         heldToken = token;
+                        anim.SetBool("HoldingToken", true);
                     }
                 }
             }
             else
             {
                 charBox.PlaceToken(heldToken);
+                anim.SetBool("HoldingToken", false);
                 heldToken = null;
             }
         }
@@ -122,11 +126,13 @@ public class HandCursor : MonoBehaviour
         if (button != null)
         {
             button.HoverEnter();
+            anim.SetBool("OverButton", true);
         }
 
         if (other.gameObject.tag == "RosterZone")
         {
             isOverRoster = true;
+            anim.SetBool("OverRoster", true);
             if (heldToken != null)
             {
                 heldToken.Show();
@@ -142,13 +148,18 @@ public class HandCursor : MonoBehaviour
         if (button != null)
         {
             button.HoverExit();
-        }
 
-        sprite.sprite = neutralSprite;
+            var focusedButtons = focusedElements.Where(e => e.GetComponent<IBasicButton>() != null);
+            if (focusedButtons.Count() == 0)
+            {
+                anim.SetBool("OverButton", false);
+            }
+        }
 
         if (other.gameObject.tag == "RosterZone")
         {
             isOverRoster = false;
+            anim.SetBool("OverRoster", false);
             if (heldToken != null)
             {
                 heldToken.Hide();
@@ -176,6 +187,7 @@ public class HandCursor : MonoBehaviour
                 charBox.RemoveToken(myToken);
                 myToken.SetTarget(transform);
                 heldToken = myToken;
+                anim.SetBool("HoldingToken", true);
                 isSummoning = false;
             }
         }
@@ -194,35 +206,12 @@ public class HandCursor : MonoBehaviour
         {
             updateCursor();
         }
-
-        if (isOverRoster)
-        {
-            if (heldToken != null)
-            {
-                sprite.sprite = holdingTokenSprite;
-            }
-            else
-            {
-                sprite.sprite = neutralSprite;
-            }
-        }
-        else
-        {
-            if (GetFocusedComponent<IBasicButton>() != null)
-            {
-                sprite.sprite = buttonHoverSprite;
-            }
-            else
-            {
-                sprite.sprite = neutralSprite;
-            }
-        }
     }
 
     private void UpdateCursorColor()
     {
         GetPlayerSetting();
-        sprite.color = playerSetting.team.teamColor;
+        label.color = playerSetting.team.teamColor;
     }
 
     private void GetPlayerSetting()
