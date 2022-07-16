@@ -8,7 +8,7 @@ public class VersusInfo
 {
     public int numPlayers;
     public string stage;
-    public string gameType = "FFA";
+    public GameMode gameType = GameMode.FFA;
     public int numLives = 3;
     public PlayerSetting[] playerSettings;
 
@@ -24,7 +24,7 @@ public class VersusInfo
     {
         foreach (PlayerSetting ps in GetActivePlayers())
         {
-            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.team.teamID = (TeamID)ps.playerID;
         }
     }
 
@@ -47,7 +47,7 @@ public class VersusInfo
             ps.playerType = PlayerType.None;
             ps.device = null;
             ps.deviceString = "";
-            ps.team.teamName = "Team " + (ps.playerID + 1);
+            ps.team.teamID = (TeamID) ps.playerID;
             ps.character = Character.None;
             numPlayers--;
         }
@@ -62,6 +62,12 @@ public class VersusInfo
         playerSettings[ps.playerID] = ps;
         numPlayers++;
     }
+}
+
+public enum GameMode 
+{
+    FFA,
+    Team
 }
 
 [System.Serializable]

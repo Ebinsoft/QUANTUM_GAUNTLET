@@ -7,16 +7,10 @@ using System.Linq;
 public class CharacterSelectManager : MonoBehaviour
 {
     private VersusInfo versusInfo;
-    public GameObject characterSelectScreen;
-    private GameObject playerPanels;
+    public GameObject playerPanels;
     public List<GameObject> playerList;
-    private void Awake()
-    {
-        // reset versusInfo 
-        playerPanels = characterSelectScreen.transform.Find("PlayerPanels").gameObject;
+    public List<GameObject> tokenList;
 
-    }
-    // Start is called before the first frame update
     void Start()
     {
         versusInfo = GameManager.instance.versusInfo;
@@ -24,22 +18,46 @@ public class CharacterSelectManager : MonoBehaviour
         versusInfo.playerSettings = new PlayerSetting[4];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void DestroyCursor(int playerIndex)
     {
         GameObject cursor = playerList.First(c => c.GetComponent<PlayerInput>().playerIndex == playerIndex);
         playerList.Remove(cursor);
         Destroy(cursor);
     }
+
+    public void DestroyToken(int playerID)
+    {
+        GameObject tokenObj = tokenList.FirstOrDefault(c => c.GetComponent<CharacterToken>().playerID == playerID);
+
+
+        if (tokenObj != null)
+        {
+            tokenList.Remove(tokenObj);
+            // cleanup any characterBox lists of this token so it doesn't have dead objects
+            tokenObj.GetComponent<CharacterToken>().CleanUp();
+            Destroy(tokenObj);
+        }
+    }
+
+    public void AddToken(GameObject token)
+    {
+        tokenList.Add(token);
+    }
+
+    public CharacterToken GetToken(int playerID)
+    {
+        return tokenList
+            .Select(obj => obj.GetComponent<CharacterToken>())
+            .Where(t => t.playerID == playerID)
+            .FirstOrDefault();
+    }
+
     void OnPlayerJoined(PlayerInput playerInput)
     {
         // set his PlayerPanel to default values in case of re-joining
-        PlayerPanel pp = playerPanels.transform.Find("Player" + playerInput.playerIndex).GetComponent<PlayerPanel>();
-        pp.transform.Find("AI Toggle").GetComponent<AIToggle>().setDefault();
+        PlayerPanel pp = playerPanels.transform
+            .Find("Player " + (playerInput.playerIndex + 1))
+            .GetComponent<PlayerPanel>();
 
         PlayerSetting ps = new PlayerSetting
         {
@@ -48,19 +66,12 @@ public class CharacterSelectManager : MonoBehaviour
             device = playerInput.devices[0],
             deviceString = playerInput.devices[0].ToString(),
             playerType = PlayerType.Human,
-            team = new Team("Team " + (pp.playerID + 1)),
+            team = new Team((TeamID)pp.playerID),
             character = Character.None
         };
 
         versusInfo.AddPlayer(ps);
         // add to reference of cursor objects
         playerList.Add(playerInput.gameObject);
-
-
-    }
-
-    void OnPlayerLeft(PlayerInput playerInput)
-    {
-        // versusInfo.RemovePlayer(playerInput.playerIndex);
     }
 }

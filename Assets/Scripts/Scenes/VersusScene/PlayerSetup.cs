@@ -44,7 +44,7 @@ public class PlayerSetup : MonoBehaviour
         // TODO: Update skin once we know how to do that
         // Update our player with their versusInfo settings
         gameObject.name = ps.playerName;
-        gameObject.tag = ps.team.teamName;
+        gameObject.tag = ps.team.teamID.ToString();
 
         if (ps.playerType == PlayerType.Robot)
         {

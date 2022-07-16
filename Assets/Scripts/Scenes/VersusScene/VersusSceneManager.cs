@@ -72,7 +72,9 @@ public class VersusSceneManager : MonoBehaviour
         // whenever a player joins, get a reference to their GameObject 
         playerList.Add(playerObject);
         // subscribe to player's event for their death for removal from list
-        playerObject.GetComponent<PlayerStats>().onPlayerLose += onPlayerLose;
+        PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
+        playerStats.onPlayerSpawn += onPlayerSpawn;
+        playerStats.onPlayerLose += onPlayerLose;
         // Add player to tracked objects of camera
         playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
@@ -91,6 +93,12 @@ public class VersusSceneManager : MonoBehaviour
         {
             return true;
         }
+    }
+
+    public void onPlayerSpawn(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.stats.lives = GameManager.instance.versusInfo.numLives;
     }
 
     public void onPlayerLose(GameObject player)

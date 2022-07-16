@@ -10,6 +10,10 @@ public class AIManager : MonoBehaviour
     private VersusSceneManager vs;
     private GameObject target;
     private NavMeshAgent nma;
+    private float timeSinceStartedMoving = 0f;
+    private float checkLocationInterval = 0.5f;
+    private float checkLocationTimer;
+    private Vector3 prevLocation;
     private float targetDist;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,8 @@ public class AIManager : MonoBehaviour
         player = GetComponent<PlayerManager>();
         nma = GetComponent<NavMeshAgent>();
         vs = VersusSceneManager.instance;
+        prevLocation = transform.position;
+        checkLocationTimer = checkLocationInterval;
     }
 
     private void FindClosestEnemy()
@@ -53,10 +59,28 @@ public class AIManager : MonoBehaviour
         if (targetDist < 1)
         {
             player.isLightAttackTriggered = true;
+            timeSinceStartedMoving = 0f;
+            checkLocationTimer = checkLocationInterval;
         }
 
-        else
+        // current band-aid since they just spam fireball and will jump after otherwise
+        else if (player.currentState != player.Special1State)
         {
+            timeSinceStartedMoving += Time.deltaTime;
+            checkLocationTimer -= Time.deltaTime;
+            if (checkLocationTimer <= 0)
+            {
+                Debug.Log((transform.position));
+                checkLocationTimer = checkLocationInterval;
+                Debug.Log(prevLocation);
+                if ((transform.position - prevLocation).magnitude < 1f)
+                {
+                    // maybe we're stuck so jump
+                    player.isJumpTriggered = true;
+
+                }
+                prevLocation = transform.position;
+            }
             MoveTowardsTarget();
         }
 
