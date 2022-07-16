@@ -24,8 +24,6 @@ public class Options : MonoBehaviour
     public TMP_Text resolutionLabel;
     void Start()
     {
-        ofirstSelectedButton = optionScreen.transform.Find("FullScreen").Find("FullScreenTog").gameObject;
-        pMenufirstSelectedButton = pauseMenuPane.transform.Find("Buttons").Find("Restart").gameObject;
         fullscreenTog.isOn = Screen.fullScreen;
         if( QualitySettings.vSyncCount == 0 )
         {
@@ -41,6 +39,7 @@ public class Options : MonoBehaviour
     {
         optionScreen.SetActive(true);
         pauseMenuPane.SetActive(false);
+        ofirstSelectedButton = optionScreen.transform.Find("FullScreen").Find("FullScreenTog").gameObject;
         // clear selected object
         EventSystem.current.SetSelectedGameObject(null);
         // set starting button
@@ -51,6 +50,7 @@ public class Options : MonoBehaviour
     {
         optionScreen.SetActive(false);
         pauseMenuPane.SetActive(true);
+        pMenufirstSelectedButton = pauseMenuPane.transform.Find("Buttons").Find("Restart").gameObject;
         // clear selected object
         EventSystem.current.SetSelectedGameObject(null);
         // set starting button
