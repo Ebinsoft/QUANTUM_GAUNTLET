@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a73b62693ef35024ca70d7c41223d0bf, type: 3}
-  m_Name: Knee
+  m_Name: Low Kick
   m_EditorClassIdentifier: 
-  attackName: Knee
-  damage: 7
+  attackName: Low Kick
+  damage: 8
   manaCost: 0
   manaGain: 100
   hitlagTime: 0.13333334
-  knockbackAngle: 30
-  knockbackMagnitude: 2
+  knockbackAngle: 90
+  knockbackMagnitude: 1
   stunCalculation: 0
-  baseStun: 0.5
+  baseStun: 0.1
+  hasAimAssist: 0
+  aimAssistDistance: 0
+  aimAssistAngle: 0
   hasSpecialBehavior: 0
   specialBehavior:
     className: 

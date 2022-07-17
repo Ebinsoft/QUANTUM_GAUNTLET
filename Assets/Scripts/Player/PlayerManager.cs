@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
     public PlayerHeavyAttackState HeavyAttackState;
+    public PlayerAirLightAttackState AirLightAttackState;
     public PlayerSpecial1State Special1State;
     public PlayerSpecial2State Special2State;
     public PlayerSpecial3State Special3State;
@@ -156,6 +157,7 @@ public class PlayerManager : MonoBehaviour
         LandingState = new PlayerLandingState(this);
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
+        AirLightAttackState = new PlayerAirLightAttackState(this);
         Special1State = new PlayerSpecial1State(this);
         Special2State = new PlayerSpecial2State(this);
         Special3State = new PlayerSpecial3State(this);
