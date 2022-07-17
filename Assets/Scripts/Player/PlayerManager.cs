@@ -1,33 +1,85 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class PlayerManager : MonoBehaviour
 {
+
+    // Player's stats
+    public PlayerStats stats;
     public PlayerBaseState currentState;
 
     // One for each concrete state
     public PlayerIdleState IdleState;
     public PlayerWalkingState WalkingState;
     public PlayerJumpingState JumpingState;
-    public PlayerFallingState FallingState;
+    public PlayerAirborneState AirborneState;
     public PlayerLandingState LandingState;
-    public PlayerNormalAttackState NormalAttackState;
+    public PlayerDashingState DashingState;
+    public PlayerLightAttackState LightAttackState;
+    public PlayerHeavyAttackState HeavyAttackState;
+    public PlayerSpecial1State Special1State;
+    public PlayerSpecial2State Special2State;
+    public PlayerSpecial3State Special3State;
+    public PlayerStunState StunState;
+    public PlayerDeadState DeadState;
+    public PlayerRespawningState RespawnState;
+    public PlayerTumblingState TumblingState;
+    public PlayerCrashingState CrashingState;
 
     // Other Stuff
     public Animator anim;
-    private PlayerInput playerInput;
+    public AnimatorEffects animEffects;
+    public PlayerStun playerStun;
+    public PlayerKnockback playerKnockback;
+    public PlayerMoveset moveset;
     public CharacterController characterController;
+    public GameObject gameOverMenu;
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    // Current XZ target direction to rotate towards
+    public Vector2 rotationTarget;
+    // Our updated version of isGrounded that checks a spherecast
+    public bool isGrounded;
 
-    // input variables
-    public bool isJumpPressed = false;
+    /********** input variables **********/
+    // Left Stick
     public bool isMovePressed = false;
-    public bool isNormalAttackPressed = false;
+    // Gamepad South
+    public bool isJumpPressed = false;
+    public bool isJumpTriggered = false;
+    // Gamepad West
+    public bool isLightAttackPressed = false;
+    public bool isLightAttackTriggered = false;
+    // Gamepad North
+    public bool isHeavyAttackPressed;
+    public bool isHeavyAttackTriggered;
+    // Gamepad East
+    public bool isUtilityAttackPressed;
+    public bool isUtilityAttackTriggered;
+    // RT + West
+    public bool isSpecial1Pressed;
+    public bool isSpecial1Triggered;
+    // RT + North
+    public bool isSpecial2Pressed;
+    public bool isSpecial2Triggered;
+    // RT + East
+    public bool isSpecial3Pressed;
+    public bool isSpecial3Triggered;
+    // LT
+    public bool isBlockPressed;
+    public bool isBlockTriggered;
+    // Start
+    public bool isStartPressed;
+    public bool isStartTriggered;
+    // Select
+    public bool isSelectPressed;
+    public bool isSelectTriggered;
 
+    /***************************************/
     // idle variables
     public bool isIdle = false;
 
@@ -39,8 +91,6 @@ public class PlayerManager : MonoBehaviour
 
     // jumping variables
     public bool isJumping = false;
-
-    public bool canJump = false;
     public float maxJumps = 2;
     public float maxJumpHeight = 1.0f;
     public float maxJumpTime = 0.5f;
@@ -49,19 +99,48 @@ public class PlayerManager : MonoBehaviour
 
     // falling variables
     public bool isFalling = false;
+
     public float fallMultiplier = 2.0f;
 
+    // dashing variables
+    public bool isDashing = false;
+    public int maxDashes = 1;
+    public float dashLength = 2.5f;
+    public float dashesLeft;
+
+    // hit variables
+    public bool triggerHit = false;
+    public bool isStunned = false;
+    public bool isHit = false;
+    public bool isHitLagging = false;
+
+    // tumbling variables
+    public bool isTumbling = false;
+
+    // crashing variables
+    public bool isCrashing = false;
+
     // gravity variables
-    private float gravity;
+    public float gravity;
+    public float jumpGravity;
     public float gravityMultiplier = 1.0f;
-    private float groundedGravity = -0.05f;
+    private float groundedGravity = -5f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
     public bool isAttacking = false;
-    public bool attackTriggered = false;
-    public int maxAttackChain = 3;
-    public int attacksLeft = 3;
+    public int maxLightAttackChain = 3;
+    public int lightAttacksLeft = 3;
+    public int maxHeavyAttackChain = 1;
+    public int heavyAttacksLeft = 1;
+
+    // death variables
+    public bool triggerDead = false;
+    public bool canDie = true;
+    public bool isDead = false;
+
+    // respawn variables
+    public bool isRespawning = false;
 
     void Awake()
     {
@@ -69,16 +148,33 @@ public class PlayerManager : MonoBehaviour
         IdleState = new PlayerIdleState(this);
         WalkingState = new PlayerWalkingState(this);
         JumpingState = new PlayerJumpingState(this);
-        FallingState = new PlayerFallingState(this);
+        AirborneState = new PlayerAirborneState(this);
         LandingState = new PlayerLandingState(this);
-        NormalAttackState = new PlayerNormalAttackState(this);
+        LightAttackState = new PlayerLightAttackState(this);
+        HeavyAttackState = new PlayerHeavyAttackState(this);
+        Special1State = new PlayerSpecial1State(this);
+        Special2State = new PlayerSpecial2State(this);
+        Special3State = new PlayerSpecial3State(this);
+        DashingState = new PlayerDashingState(this);
+        StunState = new PlayerStunState(this);
+        DeadState = new PlayerDeadState(this);
+        RespawnState = new PlayerRespawningState(this);
+        TumblingState = new PlayerTumblingState(this);
+        CrashingState = new PlayerCrashingState(this);
 
-        playerInput = new PlayerInput();
         characterController = GetComponent<CharacterController>();
+        playerStun = GetComponent<PlayerStun>();
+        playerKnockback = GetComponent<PlayerKnockback>();
+        moveset = GetComponent<PlayerMoveset>();
+
+        gameOverMenu = GameObject.Find("Canvas/GameOverMenu");
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
+        rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
         setupJumpVariables();
+        gravity = jumpGravity;
         jumpsLeft = maxJumps;
+        dashesLeft = maxDashes;
     }
 
     // Start is called before the first frame update
@@ -92,12 +188,47 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check for if we died
+        if (canDie && stats.health <= 0)
+        {
+            canDie = false;
+            triggerDead = true;
+        }
+
+        if (isStartTriggered)
+        {
+            gameOverMenu.GetComponent<PauseMenu>().ToggleMenu();
+            isStartTriggered = false;
+        }
+
+        // calculate our fancy isGrounded
+        CalculateIsGrounded();
+
+        // update animator's isGrounded to sync with code's
+        anim.SetBool("IsGrounded", isGrounded);
+
         handleRotation();
         currentState.Update();
-
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
+    private void CalculateIsGrounded()
+    {
+        RaycastHit hit;
+        Vector3 p1 = transform.position + characterController.center;
+
+        float capsuleWidth = characterController.radius;
+        float centerToFloor = (characterController.height / 2);
+
+        bool isSphereHit = false;
+        // cast a sphere
+        if (Physics.SphereCast(p1, capsuleWidth, Vector3.down, out hit, centerToFloor, LayerMask.GetMask("Ground")))
+        {
+            isSphereHit = true;
+        }
+        // also make sure we have negative velocity so we don't "land" when we jump up
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+    }
     void FixedUpdate()
     {
         resetJumps();
@@ -108,18 +239,18 @@ public class PlayerManager : MonoBehaviour
     {
         // setting gravity and our jump velocity in terms of jump height and jump time
         float timeToApex = maxJumpTime / 2;
-        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
 
     void handleRotation()
     {
         Vector3 positionToLookAt;
-        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.x = rotationTarget.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
-        // rotation
-        if (positionToLookAt.magnitude > 0)
+        positionToLookAt.z = rotationTarget.y;
+
+        if ((transform.forward - positionToLookAt.normalized).magnitude > 0.001f)
         {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
@@ -132,7 +263,7 @@ public class PlayerManager : MonoBehaviour
         // this will handle early falling if you release the jump button
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && currentMovement.y < 0)
         {
             currentMovement.y = groundedGravity;
         }
@@ -151,54 +282,9 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void onJump(InputAction.CallbackContext context)
+    // checks whether the player currently has enough mana to cast a particular move
+    public bool EnoughManaFor(MoveType moveType)
     {
-        isJumpPressed = context.ReadValueAsButton();
-        canJump = context.ReadValueAsButton();
-
-    }
-
-    private void onMove(InputAction.CallbackContext context)
-    {
-        inputMovement = playerInput.Player.Move.ReadValue<Vector2>();
-        isMovePressed = inputMovement.magnitude > 0;
-    }
-
-    private void onNormalAttack(InputAction.CallbackContext context)
-    {
-        isNormalAttackPressed = context.ReadValueAsButton();
-        attackTriggered = context.ReadValueAsButton();
-    }
-
-    private void OnEnable()
-    {
-        playerInput.Enable();
-
-        // subscribe to events
-        playerInput.Player.Jump.started += onJump;
-        playerInput.Player.Jump.canceled += onJump;
-
-        playerInput.Player.Move.started += onMove;
-        playerInput.Player.Move.performed += onMove;
-        playerInput.Player.Move.canceled += onMove;
-
-        playerInput.Player.NormalAttack.started += onNormalAttack;
-        playerInput.Player.NormalAttack.canceled += onNormalAttack;
-    }
-
-    private void OnDisable()
-    {
-        playerInput.Disable();
-
-        // unsubscribe to events
-        playerInput.Player.Jump.started -= onJump;
-        playerInput.Player.Jump.canceled -= onJump;
-
-        playerInput.Player.Move.started -= onMove;
-        playerInput.Player.Move.performed -= onMove;
-        playerInput.Player.Move.canceled -= onMove;
-
-        playerInput.Player.NormalAttack.started -= onNormalAttack;
-        playerInput.Player.NormalAttack.canceled -= onNormalAttack;
+        return moveset.TotalManaCost(moveType) <= stats.mana;
     }
 }

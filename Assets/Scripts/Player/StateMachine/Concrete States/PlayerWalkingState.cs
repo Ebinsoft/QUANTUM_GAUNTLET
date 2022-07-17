@@ -7,6 +7,8 @@ public class PlayerWalkingState : PlayerBaseState
     {
         player = psm;
         canMove = true;
+        canRotate = true;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {
@@ -31,16 +33,45 @@ public class PlayerWalkingState : PlayerBaseState
             SwitchState(player.IdleState);
         }
 
-        else if (player.jumpsLeft > 0 && player.canJump)
+        else if (player.jumpsLeft > 0 && player.isJumpTriggered)
         {
             SwitchState(player.JumpingState);
         }
 
-        else if (!player.characterController.isGrounded)
+        else if (player.dashesLeft > 0 && player.isUtilityAttackTriggered)
         {
-            SwitchState(player.FallingState);
+            SwitchState(player.DashingState);
         }
 
+        else if (!player.isGrounded)
+        {
+            SwitchState(player.AirborneState);
+        }
+
+        else if (player.isSpecial1Triggered && player.EnoughManaFor(MoveType.Special1))
+        {
+            SwitchState(player.Special1State);
+        }
+
+        else if (player.isSpecial2Triggered && player.EnoughManaFor(MoveType.Special2))
+        {
+            SwitchState(player.Special2State);
+        }
+
+        else if (player.isSpecial3Triggered && player.EnoughManaFor(MoveType.Special3))
+        {
+            SwitchState(player.Special3State);
+        }
+
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.HeavyAttackState);
+        }
+
+        else if (player.isLightAttackTriggered)
+        {
+            SwitchState(player.LightAttackState);
+        }
     }
 
 }

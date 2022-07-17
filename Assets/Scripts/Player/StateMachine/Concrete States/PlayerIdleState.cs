@@ -6,6 +6,8 @@ public class PlayerIdleState : PlayerBaseState
     public PlayerIdleState(PlayerManager psm) : base(psm)
     {
         player = psm;
+        canMove = true;
+        cancelMomentum = true;
     }
     public override void EnterState()
     {
@@ -23,9 +25,14 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckStateUpdate()
     {
-        if (player.jumpsLeft > 0 && player.canJump)
+        if (player.jumpsLeft > 0 && player.isJumpTriggered)
         {
             SwitchState(player.JumpingState);
+        }
+
+        else if (player.isUtilityAttackTriggered)
+        {
+            SwitchState(player.DashingState);
         }
 
         else if (player.isMovePressed)
@@ -33,14 +40,34 @@ public class PlayerIdleState : PlayerBaseState
             SwitchState(player.WalkingState);
         }
 
-        else if (!player.characterController.isGrounded)
+        else if (!player.isGrounded)
         {
-            SwitchState(player.FallingState);
+            SwitchState(player.AirborneState);
         }
 
-        else if (player.attackTriggered && player.attacksLeft > 0)
+        else if (player.isSpecial1Triggered && player.EnoughManaFor(MoveType.Special1))
         {
-            SwitchState(player.NormalAttackState);
+            SwitchState(player.Special1State);
+        }
+
+        else if (player.isSpecial2Triggered && player.EnoughManaFor(MoveType.Special2))
+        {
+            SwitchState(player.Special2State);
+        }
+
+        else if (player.isSpecial3Triggered && player.EnoughManaFor(MoveType.Special3))
+        {
+            SwitchState(player.Special3State);
+        }
+
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.HeavyAttackState);
+        }
+
+        else if (player.isLightAttackTriggered)
+        {
+            SwitchState(player.LightAttackState);
         }
     }
 }
