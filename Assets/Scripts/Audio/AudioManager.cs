@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
 
     public MagicSoundElem[] _magicSounds;
     public static Dictionary<MagicSound, Sound> magicSounds;
+    public AudioMixer masterMixer;
+    public AudioMixerGroup sfxMixerGroup;
+    public AudioMixerGroup musicMixerGroup;
 
     void Awake()
     {
@@ -46,46 +49,62 @@ public class AudioManager : MonoBehaviour
     }
 
     // play misc attack sound effect
-    public static void PlayAt(MiscAttackSound sound, Vector3 position)
+    public static void PlayAt(MiscAttackSound sound, GameObject obj)
     {
         Sound s = miscAttackSounds[sound];
-        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
     }
 
     // play an impact sound effect
-    public static void PlayAt(ImpactSound sound, Vector3 position)
+    public static void PlayAt(ImpactSound sound, GameObject obj)
     {
         Sound s = impactSounds[sound];
-        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
     }
 
     // play a movement sound effect
-    public static void PlayAt(MovementSound sound, Vector3 position)
+    public static void PlayAt(MovementSound sound, GameObject obj)
     {
         Sound s = movementSounds[sound];
-        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
     }
 
     // play a fire sound effect
-    public static void PlayAt(FireSound sound, Vector3 position)
+    public static void PlayAt(FireSound sound, GameObject obj)
     {
         Sound s = fireSounds[sound];
-        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
     }
 
     // play a magic sound effect
-    public static void PlayAt(MagicSound sound, Vector3 position)
+    public static void PlayAt(MagicSound sound, GameObject obj)
     {
         Sound s = magicSounds[sound];
-        AudioSource.PlayClipAtPoint(s.clip, position, s.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
     }
 
     // play a custom sound effect
-    public static void PlayAt(Sound sound, Vector3 position)
+    public static void PlayAt(Sound sound, GameObject obj)
     {
-        AudioSource.PlayClipAtPoint(sound.clip, position, sound.volume);
+        AudioSource source = GetAudioSource(obj);
+        source.clip = sound.clip;
+        source.Play();
     }
 
+    public static AudioSource GetAudioSource(GameObject obj)
+    {
+        return obj.GetComponent<AudioSource>();
+    }
 
     // Create a temporary game object that plays a sound that can be interrupted
     public static InterruptableSound CreateInterruptable(Sound sound, Vector3? position = null, Transform parent = null)
@@ -105,6 +124,7 @@ public class AudioManager : MonoBehaviour
         AudioSource source = obj.AddComponent<AudioSource>();
         source.clip = sound.clip;
         source.volume = sound.volume;
+        source.outputAudioMixerGroup = AudioManager.instance.sfxMixerGroup;
         source.playOnAwake = false;
 
         InterruptableSound interruptableSound = new InterruptableSound();

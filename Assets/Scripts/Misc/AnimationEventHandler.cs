@@ -14,17 +14,17 @@ public class AnimationEventHandler : MonoBehaviour
 
     public void PlayMiscAttackSFX(MiscAttackSound sound)
     {
-        AudioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, gameObject);
     }
 
     public void PlayMovementSFX(MovementSound sound)
     {
-        AudioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, gameObject);
     }
 
     public void PlayFireSFX(FireSound sound)
     {
-        AudioManager.PlayAt(sound, transform.position);
+        AudioManager.PlayAt(sound, gameObject);
     }
 
     public void TriggerSpecialAttackAction(int actionID)
