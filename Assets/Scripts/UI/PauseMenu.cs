@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
 
     public void EnableGameOver()
     {
-
+        AudioManager.instance.masterMixer.SetFloat("MusicLowPassFreq", 500f);
         isEnabled = true;
         Time.timeScale = 0f;
         pauseMenuPane.SetActive(true);
@@ -49,6 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void DisableGameOver()
     {
+        AudioManager.instance.masterMixer.SetFloat("MusicLowPassFreq", 22000f);
         isEnabled = false;
         Time.timeScale = 1f;
         pauseMenuPane.SetActive(false);
