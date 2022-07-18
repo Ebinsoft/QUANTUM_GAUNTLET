@@ -4,6 +4,7 @@ public class PlayerAirLightAttackState : PlayerBaseState
 {
 
     private PlayerManager player;
+
     public PlayerAirLightAttackState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -15,6 +16,7 @@ public class PlayerAirLightAttackState : PlayerBaseState
     public override void EnterState()
     {
         player.isAttacking = true;
+        player.anim.SetBool("InMelee", true);
 
         TriggerHit();
     }
