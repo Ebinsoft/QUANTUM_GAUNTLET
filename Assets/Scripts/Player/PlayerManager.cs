@@ -291,7 +291,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            currentMovement.y += (gravity * gravityMultiplier * Time.fixedDeltaTime);
+            currentMovement.y += (gravity * gravityMultiplier * Time.deltaTime);
             currentMovement.y = Mathf.Max(currentMovement.y, maxFallingSpeed);
         }
     }
