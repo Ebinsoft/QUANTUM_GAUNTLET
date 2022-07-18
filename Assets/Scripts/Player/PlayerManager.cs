@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
     public Vector2 rotationTarget;
     // Our updated version of isGrounded that checks a spherecast
     public bool isGrounded;
+    private bool isGravityApplied = true;
 
     /********** input variables **********/
     // Left Stick
@@ -238,7 +239,22 @@ public class PlayerManager : MonoBehaviour
     void FixedUpdate()
     {
         resetJumps();
-        handleGravity();
+        if(isGravityApplied)
+        {
+            handleGravity();
+        }
+
+    }
+
+    public void DisableGravity()
+    {
+        isGravityApplied = false;
+        currentMovement.y = 0;
+    }
+
+    public void EnableGravity()
+    {
+        isGravityApplied = true;
     }
 
     void setupJumpVariables()
@@ -275,7 +291,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            currentMovement.y += (gravity * gravityMultiplier * Time.deltaTime);
+            currentMovement.y += (gravity * gravityMultiplier * Time.fixedDeltaTime);
             currentMovement.y = Mathf.Max(currentMovement.y, maxFallingSpeed);
         }
     }
