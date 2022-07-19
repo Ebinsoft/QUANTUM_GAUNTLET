@@ -81,6 +81,7 @@ public class VersusSceneManager : MonoBehaviour
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         playerStats.onPlayerSpawn += onPlayerSpawn;
         playerStats.onPlayerLose += onPlayerLose;
+        playerStats.onPlayerDie += onPlayerDie;
         // Add player to tracked objects of camera
         playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
@@ -111,6 +112,12 @@ public class VersusSceneManager : MonoBehaviour
     {
         playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
+    }
+
+    public void onPlayerDie(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.Teleport(spawnPoints.GetSpawnPoint());
     }
 
     private void CreatePlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
