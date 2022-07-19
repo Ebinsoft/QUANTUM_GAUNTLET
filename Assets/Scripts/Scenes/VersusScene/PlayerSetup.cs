@@ -52,9 +52,7 @@ public class PlayerSetup : MonoBehaviour
         }
 
         // lazily put characters in spots
-        characterController.enabled = false;
-        transform.position = new Vector3(player.playerID, 0.5f, player.playerID);
-        characterController.enabled = true;
+        player.Teleport(new Vector3(player.playerID, 0.5f, player.playerID));
 
     }
 
