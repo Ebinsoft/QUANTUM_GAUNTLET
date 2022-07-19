@@ -51,9 +51,6 @@ public class PlayerSetup : MonoBehaviour
             ChangeToAI();
         }
 
-        // lazily put characters in spots
-        player.Teleport(new Vector3(player.playerID, 0.5f, player.playerID));
-
     }
 
     private void ChangeToAI()
