@@ -14,6 +14,8 @@ public class VersusSceneManager : MonoBehaviour
     public PauseMenu gameOverMenu;
     public CinemachineTargetGroup playerTargetGroup;
     public UnityEngine.Object playerHUDPrefab;
+    // should generate these dynamically once we add stage loading
+    public SpawnPoints spawnPoints;
     private bool isGameOver = false;
 
     void Awake()
@@ -25,6 +27,7 @@ public class VersusSceneManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.character);
@@ -40,16 +43,19 @@ public class VersusSceneManager : MonoBehaviour
                     {
                         var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
                         playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                        playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     }
                     else
                     {
                         // This is for simple debugging directly from Versus scene
                         var playerInput = playerInputManager.JoinPlayer();
                         playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                        playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     }
                     break;
                 case PlayerType.Robot:
                     playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
+                    playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     break;
             }
             HookUpPlayer(playerManager.gameObject);
