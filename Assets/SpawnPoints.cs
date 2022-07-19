@@ -12,7 +12,7 @@ public class SpawnPoints : MonoBehaviour
     public Vector3 GetSpawnPoint()
     {
         int r = Random.Range(0, spawnPoints.Count);
-        return  transform.position + spawnPoints[r].position;
+        return spawnPoints[r].position;
     }
 
     // For when you don't want people to spawn on top of each other(like game start)
@@ -21,7 +21,7 @@ public class SpawnPoints : MonoBehaviour
         Shuffle<Transform>(spawnPoints);
         List<Transform> shuffledPoints = spawnPoints.Take(numPoints).ToList();
 
-        return shuffledPoints.Select(c => transform.position + c.position).ToList();
+        return shuffledPoints.Select(c => c.position).ToList();
     }
 
     // Fisher-Yates shuffle which seems sufficiently random
