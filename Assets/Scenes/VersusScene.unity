@@ -1325,7 +1325,7 @@ MonoBehaviour:
       volume: 0.4
   - soundType: 1
     sound:
-      clip: {fileID: 8300000, guid: 5a77f1c57272d7447aaace441df43f02, type: 3}
+      clip: {fileID: 8300000, guid: b50befb41ed25644eb2660d91135894f, type: 3}
       volume: 1
   - soundType: 2
     sound:
