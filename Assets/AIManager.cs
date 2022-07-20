@@ -81,9 +81,7 @@ public class AIManager : MonoBehaviour
             checkLocationTimer -= Time.deltaTime;
             if (checkLocationTimer <= 0)
             {
-                Debug.Log((transform.position));
                 checkLocationTimer = checkLocationInterval;
-                Debug.Log(prevLocation);
                 if ((transform.position - prevLocation).magnitude < 1f)
                 {
                     // maybe we're stuck so jump
