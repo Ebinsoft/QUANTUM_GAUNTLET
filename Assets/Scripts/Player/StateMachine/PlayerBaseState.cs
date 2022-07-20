@@ -34,7 +34,7 @@ public abstract class PlayerBaseState
     public void Update()
     {
 
-        if (player.currentState.canMove && player.isMovePressed)
+        if (player.isMovementEnabled && player.currentState.canMove && player.isMovePressed)
         {
             Move();
         }

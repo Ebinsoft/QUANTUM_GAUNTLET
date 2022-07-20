@@ -41,8 +41,11 @@ public class PlayerManager : MonoBehaviour
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    public bool isMovementEnabled = true;
+
     // Current XZ target direction to rotate towards
     public Vector2 rotationTarget;
+
     // Our updated version of isGrounded that checks a spherecast
     public bool isGrounded;
     private bool isGravityApplied = true;
@@ -239,7 +242,7 @@ public class PlayerManager : MonoBehaviour
     void FixedUpdate()
     {
         resetJumps();
-        if(isGravityApplied)
+        if (isGravityApplied)
         {
             handleGravity();
         }
@@ -255,6 +258,18 @@ public class PlayerManager : MonoBehaviour
     public void EnableGravity()
     {
         isGravityApplied = true;
+    }
+
+    public void DisableMovement()
+    {
+        isMovementEnabled = false;
+        currentMovement.x = 0;
+        currentMovement.z = 0;
+    }
+
+    public void EnableMovement()
+    {
+        isMovementEnabled = true;
     }
 
     void setupJumpVariables()
