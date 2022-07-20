@@ -15,6 +15,7 @@ public class PlayerHeavyAttackState : PlayerBaseState
     public override void EnterState()
     {
         player.isAttacking = true;
+        player.anim.SetBool("InMelee", true);
 
         TriggerHit();
     }

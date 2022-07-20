@@ -5,20 +5,22 @@ using UnityEngine;
 
 public class AnimatorEffects : MonoBehaviour
 {
+    private PlayerManager player;
     private Animator anim;
 
     private IEnumerator ShakeRoutine;
-    private IEnumerator AnimatorLagRoutine;
+    private IEnumerator FreezeRoutine;
 
     void Start()
     {
+        player = transform.root.GetComponent<PlayerManager>();
         anim = GetComponent<Animator>();
     }
 
     // Freezes the player's animator for a set duration
     public void PlayRecoilLag(float duration)
     {
-        StartCoroutine(AnimatorLag(duration));
+        StartCoroutine(FreezePlayer(duration));
     }
 
     // Freezes the player's animator and shakes him around for a set duration
@@ -27,24 +29,37 @@ public class AnimatorEffects : MonoBehaviour
     {
         // stop any currently running coroutines
         if (ShakeRoutine != null) StopCoroutine(ShakeRoutine);
-        if (AnimatorLagRoutine != null) StopCoroutine(AnimatorLagRoutine);
+        if (FreezeRoutine != null) StopCoroutine(FreezeRoutine);
 
         // reinitalize and run new coroutines
         ShakeRoutine = Shake(duration, duration, 75f);
         StartCoroutine(ShakeRoutine);
 
-        AnimatorLagRoutine = AnimatorLag(duration, onComplete: onComplete);
-        StartCoroutine(AnimatorLagRoutine);
+        FreezeRoutine = FreezePlayer(duration, onComplete: onComplete);
+        StartCoroutine(FreezeRoutine);
     }
 
-    private IEnumerator AnimatorLag(float duration, Action onComplete = null)
+    private IEnumerator FreezePlayer(float duration, Action onComplete = null)
     {
         // pause animator
         anim.speed = 0;
+
+        // disable gravity
+        var yVelocity = player.currentMovement.y;
+        player.DisableGravity();
+
+        player.DisableMovement();
+
         yield return new WaitForSeconds(duration);
 
         // return to normal speed
         anim.speed = 1;
+
+        // re-enable gravity
+        player.EnableGravity();
+        player.currentMovement.y = yVelocity;
+
+        player.EnableMovement();
 
         if (onComplete != null)
         {
@@ -72,6 +87,8 @@ public class AnimatorEffects : MonoBehaviour
     {
         StopAllCoroutines();
         anim.speed = 1;
+        player.EnableGravity();
+        player.EnableMovement();
     }
 }
 

@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
     public PlayerHeavyAttackState HeavyAttackState;
+    public PlayerAirLightAttackState AirLightAttackState;
+    public PlayerAirHeavyAttackState AirHeavyAttackState;
     public PlayerSpecial1State Special1State;
     public PlayerSpecial2State Special2State;
     public PlayerSpecial3State Special3State;
@@ -40,10 +42,14 @@ public class PlayerManager : MonoBehaviour
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    public bool isMovementEnabled = true;
+
     // Current XZ target direction to rotate towards
     public Vector2 rotationTarget;
+
     // Our updated version of isGrounded that checks a spherecast
     public bool isGrounded;
+    private bool isGravityApplied = true;
 
     /********** input variables **********/
     // Left Stick
@@ -156,6 +162,8 @@ public class PlayerManager : MonoBehaviour
         LandingState = new PlayerLandingState(this);
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
+        AirLightAttackState = new PlayerAirLightAttackState(this);
+        AirHeavyAttackState = new PlayerAirHeavyAttackState(this);
         Special1State = new PlayerSpecial1State(this);
         Special2State = new PlayerSpecial2State(this);
         Special3State = new PlayerSpecial3State(this);
@@ -231,12 +239,39 @@ public class PlayerManager : MonoBehaviour
             isSphereHit = true;
         }
         // also make sure we have negative velocity so we don't "land" when we jump up
-        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y <= 0f;
     }
     void FixedUpdate()
     {
         resetJumps();
-        handleGravity();
+        if (isGravityApplied)
+        {
+            handleGravity();
+        }
+
+    }
+
+    public void DisableGravity()
+    {
+        isGravityApplied = false;
+        currentMovement.y = 0;
+    }
+
+    public void EnableGravity()
+    {
+        isGravityApplied = true;
+    }
+
+    public void DisableMovement()
+    {
+        isMovementEnabled = false;
+        currentMovement.x = 0;
+        currentMovement.z = 0;
+    }
+
+    public void EnableMovement()
+    {
+        isMovementEnabled = true;
     }
 
     void setupJumpVariables()

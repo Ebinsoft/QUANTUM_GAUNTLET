@@ -23,7 +23,8 @@ public class PlayerAirborneState : PlayerBaseState
     {
         landingTimer += Time.deltaTime;
 
-        if (landingTimer >= minTimeBeforeLanding) {
+        if (landingTimer >= minTimeBeforeLanding)
+        {
             player.anim.SetBool("IsFalling", true);
         }
     }
@@ -48,6 +49,14 @@ public class PlayerAirborneState : PlayerBaseState
         else if (player.jumpsLeft > 0 && player.isJumpTriggered)
         {
             SwitchState(player.JumpingState);
+        }
+        else if (player.isLightAttackTriggered)
+        {
+            SwitchState(player.AirLightAttackState);
+        }
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.AirHeavyAttackState);
         }
     }
 }

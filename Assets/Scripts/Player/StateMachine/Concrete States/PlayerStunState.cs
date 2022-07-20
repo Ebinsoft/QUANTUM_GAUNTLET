@@ -18,11 +18,6 @@ public class PlayerStunState : PlayerBaseState
     public override void EnterState()
     {
         player.isHit = true;
-
-        player.triggerHit = false;
-
-        // force the animator to ignore its current transition rules and play the stun animation
-        player.anim.Play("Take Hit");
     }
 
     public override void UpdateState()
