@@ -47,7 +47,6 @@ public class ItemSpawner : MonoBehaviour
         if(spawnedItem == null) {
             Debug.Log("Could not obtain reference to InteractableItem");
         } else {
-            Debug.Log("Item spawned");
             spawnedItem.spawner = this;
         }
         spawningItem = false;

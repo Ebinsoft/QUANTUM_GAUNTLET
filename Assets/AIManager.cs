@@ -55,7 +55,7 @@ public class AIManager : MonoBehaviour
     void Update()
     {
         player.isMovePressed = false;
-        if(player.currentState == player.Special1State) return;
+        if (player.currentState == player.Special1State) return;
 
         FindClosestEnemy();
         // Attempt to get NavMesh agent working with this
@@ -63,7 +63,7 @@ public class AIManager : MonoBehaviour
         // nma.SetDestination(new Vector3(0f, 0f, 0f));
 
         // THE OMEGA BASIC AI
-        if(player.stats.mana == player.stats.baseStats.baseMana)
+        if (player.stats.mana == player.stats.baseStats.baseMana)
         {
             player.isSpecial1Triggered = true;
         }
@@ -82,9 +82,7 @@ public class AIManager : MonoBehaviour
             checkLocationTimer -= Time.deltaTime;
             if (checkLocationTimer <= 0)
             {
-                Debug.Log((transform.position));
                 checkLocationTimer = checkLocationInterval;
-                Debug.Log(prevLocation);
                 if ((transform.position - prevLocation).magnitude < 1f)
                 {
                     // maybe we're stuck so jump
