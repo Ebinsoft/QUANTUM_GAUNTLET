@@ -43,21 +43,20 @@ public class VersusSceneManager : MonoBehaviour
                     {
                         var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
                         playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                        playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     }
                     else
                     {
                         // This is for simple debugging directly from Versus scene
                         var playerInput = playerInputManager.JoinPlayer();
                         playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                        playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     }
                     break;
                 case PlayerType.Robot:
                     playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
-                    playerManager.Teleport(startingSpawns[playerManager.playerID]);
                     break;
             }
+
+            playerManager.Teleport(startingSpawns[playerManager.playerID]);
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
