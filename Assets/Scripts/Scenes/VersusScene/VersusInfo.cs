@@ -7,7 +7,7 @@ using System.Linq;
 public class VersusInfo
 {
     public int numPlayers;
-    public string stage;
+    public Stage stage;
     public GameMode gameType = GameMode.FFA;
     public int numLives = 3;
     public PlayerSetting[] playerSettings;

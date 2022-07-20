@@ -108,10 +108,7 @@ public class DashingUppercut : SpecialAttackBehavior
             if (opponentDistance > maxDistance)
             {
                 Vector3 targetPosition = opponentPosition - opponentDirection.normalized * maxDistance;
-                player.characterController.enabled = false;
-
-                player.transform.position = targetPosition;
-                player.characterController.enabled = true;
+                player.Teleport(targetPosition);
             }
         }
     }

@@ -14,6 +14,8 @@ public class VersusSceneManager : MonoBehaviour
     public PauseMenu gameOverMenu;
     public CinemachineTargetGroup playerTargetGroup;
     public UnityEngine.Object playerHUDPrefab;
+    // should generate these dynamically once we add stage loading
+    public SpawnPoints spawnPoints;
     private bool isGameOver = false;
 
     void Awake()
@@ -25,6 +27,7 @@ public class VersusSceneManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
             CharacterData c = GameManager.instance.roster.GetCharacter(ps.character);
@@ -52,6 +55,8 @@ public class VersusSceneManager : MonoBehaviour
                     playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
                     break;
             }
+
+            playerManager.Teleport(startingSpawns[playerManager.playerID]);
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
@@ -75,6 +80,7 @@ public class VersusSceneManager : MonoBehaviour
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         playerStats.onPlayerSpawn += onPlayerSpawn;
         playerStats.onPlayerLose += onPlayerLose;
+        playerStats.onPlayerDie += onPlayerDie;
         // Add player to tracked objects of camera
         playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
@@ -105,6 +111,12 @@ public class VersusSceneManager : MonoBehaviour
     {
         playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
+    }
+
+    public void onPlayerDie(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.Teleport(spawnPoints.GetSpawnPoint());
     }
 
     private void CreatePlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)

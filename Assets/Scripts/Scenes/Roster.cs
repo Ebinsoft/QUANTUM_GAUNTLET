@@ -6,6 +6,8 @@ using UnityEngine;
 public class Roster
 {
     public CharacterData[] roster;
+    public StageData[] stages;
+    private static System.Random rng = new System.Random();
 
     public CharacterData GetCharacter(Character ch)
     {
@@ -20,7 +22,28 @@ public class Roster
         Debug.LogError("No character with that name found in roster");
         return null;
     }
+
+    public StageData GetStage(Stage st)
+    {
+     foreach (var s in stages)
+    {
+        if (s.stage == st)
+        {
+            return s;
+         }
+    }
+    Debug.LogError("No stage with that name found in roster");
+    return null;
+    }
+
+    public StageData GetRandomStage()
+    {
+        int r = Random.Range(0, stages.Length);
+        return stages[r];
+    }
 }
+
+
 
 public enum Character
 {
@@ -28,6 +51,12 @@ public enum Character
     Edmond
 }
 
+public enum Stage
+{
+    None = -1,
+    Random,
+    Colosseum
+}
 [System.Serializable]
 public class CharacterData
 {
@@ -35,4 +64,13 @@ public class CharacterData
     public GameObject characterPrefab;
     public Sprite portrait;
     public Sprite fullBody;
+}
+
+[System.Serializable]
+public class StageData
+{
+    public Stage stage;
+    public GameObject stagePrefab;
+    // Could maybe keep portrait and/or other stuff for stage select later
+    // public Sprite portrait;
 }

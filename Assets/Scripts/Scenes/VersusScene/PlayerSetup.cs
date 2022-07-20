@@ -51,11 +51,6 @@ public class PlayerSetup : MonoBehaviour
             ChangeToAI();
         }
 
-        // lazily put characters in spots
-        characterController.enabled = false;
-        transform.position = new Vector3(player.playerID, 0.5f, player.playerID);
-        characterController.enabled = true;
-
     }
 
     private void ChangeToAI()

@@ -297,6 +297,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Teleport(Vector3 newPosition)
+    {
+        characterController.enabled = false;
+        transform.position = newPosition;
+        characterController.enabled = true;
+    }
+
     void handleGravity()
     {
         // this will handle early falling if you release the jump button
