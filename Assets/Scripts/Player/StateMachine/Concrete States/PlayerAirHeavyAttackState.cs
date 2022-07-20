@@ -18,7 +18,6 @@ public class PlayerAirHeavyAttackState : PlayerBaseState
         player.isAttacking = true;
         player.anim.SetBool("InMelee", true);
 
-
         TriggerHit();
     }
 
@@ -33,12 +32,14 @@ public class PlayerAirHeavyAttackState : PlayerBaseState
     {
         if (!player.anim.GetBool("InMelee"))
         {
-            SwitchState(player.AirborneState);
-        }
-
-        else if (player.isGrounded)
-        {
-            SwitchState(player.LandingState);
+            if (player.isGrounded)
+            {
+                SwitchState(player.IdleState);
+            }
+            else
+            {
+                SwitchState(player.AirborneState);
+            }
         }
     }
 

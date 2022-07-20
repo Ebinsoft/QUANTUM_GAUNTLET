@@ -54,5 +54,9 @@ public class PlayerAirborneState : PlayerBaseState
         {
             SwitchState(player.AirLightAttackState);
         }
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.AirHeavyAttackState);
+        }
     }
 }
