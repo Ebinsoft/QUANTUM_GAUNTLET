@@ -309,7 +309,7 @@ public class PlayerManager : MonoBehaviour
         // this will handle early falling if you release the jump button
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if (characterController.isGrounded && currentMovement.y < 0)
+        if (isGrounded && currentMovement.y < 0)
         {
             currentMovement.y = groundedGravity;
         }
@@ -322,7 +322,7 @@ public class PlayerManager : MonoBehaviour
 
     private void resetJumps()
     {
-        if (characterController.isGrounded && jumpsLeft < maxJumps)
+        if (isGrounded && jumpsLeft < maxJumps)
         {
             jumpsLeft = maxJumps;
         }
