@@ -73,6 +73,10 @@ public abstract class PlayerBaseState
         }
         else if (player.triggerHit)
         {
+            player.triggerHit = false;
+            // force the animator to ignore its current transition rules and play the stun animation
+            player.anim.Play("Take Hit");
+
             if (player.isGrounded)
             {
                 SwitchState(player.StunState);
@@ -82,7 +86,6 @@ public abstract class PlayerBaseState
             {
                 SwitchState(player.TumblingState);
             }
-
         }
 
         else

@@ -237,7 +237,7 @@ public class PlayerManager : MonoBehaviour
             isSphereHit = true;
         }
         // also make sure we have negative velocity so we don't "land" when we jump up
-        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y <= 0f;
     }
     void FixedUpdate()
     {
