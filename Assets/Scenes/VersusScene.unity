@@ -3802,9 +3802,12 @@ MonoBehaviour:
       characterPrefab: {fileID: 8965930901073386829, guid: 76b3439ecb77aa6458715620b2930c71, type: 3}
       portrait: {fileID: 21300000, guid: e02d5c3f239c59e45800e3ebc9284d94, type: 3}
       fullBody: {fileID: 21300000, guid: a24522f81dfaa1b46a010611a28f4ebd, type: 3}
+    stages:
+    - stage: 1
+      stagePrefab: {fileID: 4117579943793824251, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
   versusInfo:
     numPlayers: 2
-    stage: TEST
+    stage: 0
     gameType: 0
     numLives: 3
     playerSettings:
@@ -3817,7 +3820,7 @@ MonoBehaviour:
       character: 0
     - playerID: 1
       playerName: CPU2
-      playerType: 1
+      playerType: 2
       deviceString: 
       team:
         teamID: 1
@@ -4555,6 +4558,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1372812089, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 482757067287909260, guid: de40f46b94ecbdb41b746c7ac10a8681, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
