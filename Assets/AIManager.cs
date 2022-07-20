@@ -15,6 +15,7 @@ public class AIManager : MonoBehaviour
     private float checkLocationTimer;
     private Vector3 prevLocation;
     private float targetDist;
+    private float targetXZDist;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,11 @@ public class AIManager : MonoBehaviour
         if (t != null)
         {
             target = t;
-            targetDist = (target.transform.position - transform.position).magnitude;
+            Vector3 d = target.transform.position - transform.position;
+            targetDist = d.magnitude;
+            d.y = 0;
+            targetXZDist = d.magnitude;
+
         }
 
     }
@@ -49,22 +54,28 @@ public class AIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player.isMovePressed = false;
+        if(player.currentState == player.Special1State) return;
+
         FindClosestEnemy();
         // Attempt to get NavMesh agent working with this
         // Debug.Log("BUST");
         // nma.SetDestination(new Vector3(0f, 0f, 0f));
 
         // THE OMEGA BASIC AI
-        player.isSpecial1Triggered = true;
-        if (targetDist < 1)
+        if(player.stats.mana == player.stats.baseStats.baseMana)
+        {
+            player.isSpecial1Triggered = true;
+        }
+
+        else if (targetDist < 1)
         {
             player.isLightAttackTriggered = true;
             timeSinceStartedMoving = 0f;
             checkLocationTimer = checkLocationInterval;
         }
 
-        // current band-aid since they just spam fireball and will jump after otherwise
-        else if (player.currentState != player.Special1State)
+        else if (targetXZDist > 1)
         {
             timeSinceStartedMoving += Time.deltaTime;
             checkLocationTimer -= Time.deltaTime;
