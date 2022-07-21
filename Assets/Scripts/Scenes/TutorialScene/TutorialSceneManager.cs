@@ -42,6 +42,7 @@ public class TutorialSceneManager : MonoBehaviour
     {
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
         spawnPoints = stage.GetComponent<SpawnPoints>();
+        playerTargetGroup.AddMember(trainingDummy.transform, .5f, 2f);
     }
 
     // hard-code a PlayerSetting for nwo for the UI
