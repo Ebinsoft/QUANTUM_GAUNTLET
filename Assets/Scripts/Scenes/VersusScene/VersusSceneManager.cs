@@ -10,7 +10,6 @@ public class VersusSceneManager : MonoBehaviour
 {
     public static VersusSceneManager instance;
     public PlayerInputManager playerInputManager;
-    public List<GameObject> playerList;
     public PauseMenu gameOverMenu;
     public CinemachineTargetGroup playerTargetGroup;
     public UnityEngine.Object playerHUDPrefab;
@@ -27,6 +26,7 @@ public class VersusSceneManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        GameManager.instance.versusInfo.playerList = new List<GameObject>();
         GameObject stage = SpawnStage();
         spawnPoints = stage.GetComponent<SpawnPoints>();
         List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
@@ -58,8 +58,7 @@ public class VersusSceneManager : MonoBehaviour
                     break;
             }
 
-            playerManager.Teleport(startingSpawns[0]);
-            startingSpawns.RemoveAt(0);
+            playerManager.Teleport(startingSpawns[playerManager.playerID]);
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
@@ -97,7 +96,7 @@ public class VersusSceneManager : MonoBehaviour
     public void HookUpPlayer(GameObject playerObject)
     {
         // whenever a player joins, get a reference to their GameObject 
-        playerList.Add(playerObject);
+        GameManager.instance.versusInfo.playerList.Add(playerObject);
         // subscribe to player's event for their death for removal from list
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         playerStats.onPlayerSpawn += onPlayerSpawn;
@@ -110,7 +109,7 @@ public class VersusSceneManager : MonoBehaviour
     public bool CheckIfGameOver()
     {
         int numUniqueTeamsStillAlive =
-            playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
+            GameManager.instance.versusInfo.playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
             .GroupBy(c => c.tag)
             .Count();
         if (numUniqueTeamsStillAlive > 1)
