@@ -23,7 +23,7 @@ public class TutorialSceneManager : MonoBehaviour
         var player = playerInput.GetComponent<PlayerManager>();
         player.Teleport(stage.GetComponent<SpawnPoints>().GetSpawnPoint());
         PlayerSetting ps = CreatePlayerSetting(player);
-        CreatePlayerHUD(player, ps);
+        CreateTutorialPlayerHUD(player, ps);
 
     }
 
@@ -51,7 +51,7 @@ public class TutorialSceneManager : MonoBehaviour
         return ps;
     }
 
-    private void CreatePlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
+    private void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
     {
         GameObject hudObj = (GameObject)Instantiate(playerHUDPrefab);
         GameObject canvas = GameObject.Find("Canvas");
