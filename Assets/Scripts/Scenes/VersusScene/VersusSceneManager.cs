@@ -14,7 +14,7 @@ public class VersusSceneManager : MonoBehaviour
     public CinemachineTargetGroup playerTargetGroup;
     public UnityEngine.Object playerHUDPrefab;
     // should generate these dynamically once we add stage loading
-    public SpawnPoints spawnPoints;
+    private SpawnPoints spawnPoints;
     private bool isGameOver = false;
 
     void Awake()
