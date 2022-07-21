@@ -20,11 +20,4 @@ public class TutorialDummy : MonoBehaviour
         Debug.Log("Le trigger");
     }
 
-    [System.Serializable]
-    public class TutorialQuest
-    {
-        public string questText;
-
-    }
-
 }
