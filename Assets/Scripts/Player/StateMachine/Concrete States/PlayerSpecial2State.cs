@@ -25,6 +25,7 @@ public class PlayerSpecial2State : PlayerBaseState
 
     public override void ExitState()
     {
+        player.anim.SetBool("InSpecialAttack", false);
     }
 
     public override void CheckStateUpdate()

@@ -26,6 +26,7 @@ public class PlayerAirLightAttackState : PlayerBaseState
     public override void ExitState()
     {
         player.isAttacking = false;
+        player.anim.SetBool("InMelee", false);
     }
 
     public override void CheckStateUpdate()

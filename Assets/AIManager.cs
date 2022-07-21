@@ -75,7 +75,6 @@ public class AIManager : MonoBehaviour
             checkLocationTimer = checkLocationInterval;
         }
 
-        // current band-aid since they just spam fireball and will jump after otherwise
         else if (targetXZDist > 1)
         {
             timeSinceStartedMoving += Time.deltaTime;
