@@ -16,6 +16,7 @@ public class PlayerAirLightAttackState : PlayerBaseState
     public override void EnterState()
     {
         player.isAttacking = true;
+        player.anim.SetBool("IsFalling", true);
         player.anim.SetBool("InMelee", true);
 
         TriggerHit();
@@ -26,6 +27,7 @@ public class PlayerAirLightAttackState : PlayerBaseState
     public override void ExitState()
     {
         player.isAttacking = false;
+        player.anim.SetBool("IsFalling", false);
         player.anim.SetBool("InMelee", false);
     }
 
