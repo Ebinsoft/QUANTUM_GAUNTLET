@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class TutorialSceneManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class TutorialSceneManager : MonoBehaviour
     private PlayerInput playerInput;
 
     public UnityEngine.Object playerHUDPrefab;
+    public CinemachineTargetGroup playerTargetGroup;
     public GameObject trainingDummy;
     private SpawnPoints spawnPoints;
     // Start is called before the first frame update
@@ -33,6 +35,7 @@ public class TutorialSceneManager : MonoBehaviour
         PlayerSetting ps = CreatePlayerSetting(player);
         CreateTutorialPlayerHUD(player, ps);
         player.gameObject.GetComponent<PlayerStats>().onPlayerDie += onPlayerDie;
+        playerTargetGroup.AddMember(player.gameObject.transform, 1f, 2f);
     }
 
     private void SceneSetup()
