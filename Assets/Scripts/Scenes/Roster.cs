@@ -25,15 +25,15 @@ public class Roster
 
     public StageData GetStage(Stage st)
     {
-     foreach (var s in stages)
-    {
-        if (s.stage == st)
+        foreach (var s in stages)
         {
-            return s;
-         }
-    }
-    Debug.LogError("No stage with that name found in roster");
-    return null;
+            if (s.stage == st)
+            {
+                return s;
+            }
+        }
+        Debug.LogError("No stage with that name found in roster");
+        return null;
     }
 
     public StageData GetRandomStage()
@@ -53,9 +53,9 @@ public enum Character
 
 public enum Stage
 {
-    None = -1,
     Random,
-    Colosseum
+    Colosseum,
+    FutureDumpSite
 }
 [System.Serializable]
 public class CharacterData
@@ -70,6 +70,7 @@ public class CharacterData
 public class StageData
 {
     public Stage stage;
+    public string stageName;
     public GameObject stagePrefab;
     // Could maybe keep portrait and/or other stuff for stage select later
     // public Sprite portrait;

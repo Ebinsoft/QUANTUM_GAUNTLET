@@ -27,6 +27,8 @@ public class VersusSceneManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
+        GameObject stage = SpawnStage();
+        spawnPoints = stage.GetComponent<SpawnPoints>();
         List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
@@ -70,6 +72,25 @@ public class VersusSceneManager : MonoBehaviour
             isGameOver = true;
             gameOverMenu.EnableGameOver();
         }
+    }
+
+    // Will load the stage from VersusInfo, handle random, and return the instantiated object
+    public GameObject SpawnStage()
+    {
+        StageData sd;
+        var vi = GameManager.instance.versusInfo;
+        if (vi.stage == Stage.Random)
+        {
+            sd = GameManager.instance.roster.GetRandomStage();
+        }
+        else
+        {
+            sd = GameManager.instance.roster.GetStage(vi.stage);
+        }
+
+        GameObject stage = Instantiate(sd.stagePrefab);
+
+        return stage;
     }
 
     public void HookUpPlayer(GameObject playerObject)

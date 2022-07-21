@@ -20,6 +20,8 @@ public class StockButton : MonoBehaviour, IBasicButton
         versusInfo = GameManager.instance.versusInfo;
         stockCount = transform.parent.Find("Stock Count").GetComponent<TextMeshPro>();
         anim = GetComponent<Animator>();
+        // update stock to our default stock numberin CS on load
+        versusInfo.numLives = int.Parse(stockCount.text);
     }
 
     void IBasicButton.HoverEnter()
