@@ -25,15 +25,15 @@ public class Roster
 
     public StageData GetStage(Stage st)
     {
-     foreach (var s in stages)
-    {
-        if (s.stage == st)
+        foreach (var s in stages)
         {
-            return s;
-         }
-    }
-    Debug.LogError("No stage with that name found in roster");
-    return null;
+            if (s.stage == st)
+            {
+                return s;
+            }
+        }
+        Debug.LogError("No stage with that name found in roster");
+        return null;
     }
 
     public StageData GetRandomStage()

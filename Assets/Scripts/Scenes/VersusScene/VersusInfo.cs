@@ -47,7 +47,7 @@ public class VersusInfo
             ps.playerType = PlayerType.None;
             ps.device = null;
             ps.deviceString = "";
-            ps.team.teamID = (TeamID) ps.playerID;
+            ps.team.teamID = (TeamID)ps.playerID;
             ps.character = Character.None;
             numPlayers--;
         }
@@ -64,7 +64,7 @@ public class VersusInfo
     }
 }
 
-public enum GameMode 
+public enum GameMode
 {
     FFA,
     Team

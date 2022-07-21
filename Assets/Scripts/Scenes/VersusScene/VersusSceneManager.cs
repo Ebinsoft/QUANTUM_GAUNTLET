@@ -79,11 +79,12 @@ public class VersusSceneManager : MonoBehaviour
     {
         StageData sd;
         var vi = GameManager.instance.versusInfo;
-        if(vi.stage == Stage.Random)
+        if (vi.stage == Stage.Random)
         {
             sd = GameManager.instance.roster.GetRandomStage();
         }
-        else{
+        else
+        {
             sd = GameManager.instance.roster.GetStage(vi.stage);
         }
 

@@ -43,7 +43,7 @@ public class StageButton : MonoBehaviour, IBasicButton
         switch (buttonType)
         {
             case StageButtonType.Next:
-                if((int)versusInfo.stage == numStages - 1)
+                if ((int)versusInfo.stage == numStages - 1)
                 {
                     versusInfo.stage = (Stage)0;
                 }
@@ -54,11 +54,12 @@ public class StageButton : MonoBehaviour, IBasicButton
                 break;
 
             case StageButtonType.Previous:
-                if(versusInfo.stage == 0)
+                if (versusInfo.stage == 0)
                 {
                     versusInfo.stage = (Stage)numStages - 1;
                 }
-                else{
+                else
+                {
                     versusInfo.stage--;
                 }
                 break;
