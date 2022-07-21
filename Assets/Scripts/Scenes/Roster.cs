@@ -55,7 +55,8 @@ public enum Stage
 {
     None = -1,
     Random,
-    Colosseum
+    Colosseum,
+    FutureDumpSite
 }
 [System.Serializable]
 public class CharacterData
@@ -70,6 +71,7 @@ public class CharacterData
 public class StageData
 {
     public Stage stage;
+    public string stageName;
     public GameObject stagePrefab;
     // Could maybe keep portrait and/or other stuff for stage select later
     // public Sprite portrait;
