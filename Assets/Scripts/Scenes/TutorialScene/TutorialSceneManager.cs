@@ -6,32 +6,35 @@ using Cinemachine;
 
 public class TutorialSceneManager : MonoBehaviour
 {
+    public static TutorialSceneManager instance;
     private PlayerInputManager playerInputManager;
     public GameObject stage;
     private PlayerInput playerInput;
 
     public UnityEngine.Object playerHUDPrefab;
     public CinemachineTargetGroup playerTargetGroup;
+    public GameObject collectible;
     public GameObject trainingDummy;
     private SpawnPoints spawnPoints;
     // Start is called before the first frame update
     void Awake()
     {
+        instance = this;
         playerInputManager = GetComponent<PlayerInputManager>();
+        spawnPoints = stage.GetComponent<SpawnPoints>();
     }
 
     void Start()
     {
         SceneSetup();
         PlayerSetup();
-
     }
 
     private void PlayerSetup()
     {
         playerInput = playerInputManager.JoinPlayer();
         var player = playerInput.GetComponent<PlayerManager>();
-        player.Teleport(spawnPoints.GetSpawnPoint());
+        player.Teleport(new Vector3(0f, 2f, 0f));
         PlayerSetting ps = CreatePlayerSetting(player);
         CreateTutorialPlayerHUD(player, ps);
         player.gameObject.GetComponent<PlayerStats>().onPlayerDie += onPlayerDie;
@@ -41,7 +44,7 @@ public class TutorialSceneManager : MonoBehaviour
     private void SceneSetup()
     {
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
-        spawnPoints = stage.GetComponent<SpawnPoints>();
+
         playerTargetGroup.AddMember(trainingDummy.transform, .5f, 2f);
     }
 
@@ -60,6 +63,15 @@ public class TutorialSceneManager : MonoBehaviour
             character = Character.None
         };
         return ps;
+    }
+
+    public void SpawnCollectibles(int num)
+    {
+        List<Vector3> points = spawnPoints.GetMututallyExclusiveSpawnPoints(num);
+        foreach (Vector3 point in points)
+        {
+            Instantiate(collectible, point, collectible.transform.rotation);
+        }
     }
 
     private void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
