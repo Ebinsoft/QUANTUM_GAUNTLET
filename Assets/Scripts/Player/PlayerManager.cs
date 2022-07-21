@@ -365,4 +365,15 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void ResetAllAnimatorTriggers()
+    {
+        foreach (var param in anim.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Trigger)
+            {
+                anim.ResetTrigger(param.name);
+            }
+        }
+    }
 }

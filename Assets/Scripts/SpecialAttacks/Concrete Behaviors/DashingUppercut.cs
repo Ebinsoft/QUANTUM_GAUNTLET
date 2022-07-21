@@ -104,7 +104,6 @@ public class DashingUppercut : SpecialAttackBehavior
             // move player closer to opponent if we're too far away
             float maxDistance = 1f;
             float opponentDistance = Vector3.Distance(player.transform.position, opponentPosition);
-            Debug.Log(opponentDistance);
             if (opponentDistance > maxDistance)
             {
                 Vector3 targetPosition = opponentPosition - opponentDirection.normalized * maxDistance;
