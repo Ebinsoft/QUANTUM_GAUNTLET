@@ -14,6 +14,7 @@ public class TutorialSceneManager : MonoBehaviour
     public UnityEngine.Object playerHUDPrefab;
     public CinemachineTargetGroup playerTargetGroup;
     public GameObject collectible;
+    public int collectiblesRemaining = 0;
     public GameObject trainingDummy;
     private SpawnPoints spawnPoints;
     // Start is called before the first frame update
@@ -67,6 +68,7 @@ public class TutorialSceneManager : MonoBehaviour
 
     public void SpawnCollectibles(int num)
     {
+        collectiblesRemaining = num;
         List<Vector3> points = spawnPoints.GetMututallyExclusiveSpawnPoints(num);
         foreach (Vector3 point in points)
         {

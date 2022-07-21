@@ -8,6 +8,7 @@ public class Collectible : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            TutorialSceneManager.instance.collectiblesRemaining--;
             Destroy(gameObject);
         }
     }
