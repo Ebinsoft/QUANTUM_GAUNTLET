@@ -53,7 +53,6 @@ public enum Character
 
 public enum Stage
 {
-    None = -1,
     Random,
     Colosseum,
     FutureDumpSite
