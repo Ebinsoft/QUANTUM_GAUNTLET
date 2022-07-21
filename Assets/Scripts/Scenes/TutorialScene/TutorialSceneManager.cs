@@ -10,6 +10,8 @@ public class TutorialSceneManager : MonoBehaviour
     private PlayerInput playerInput;
 
     public UnityEngine.Object playerHUDPrefab;
+    public GameObject trainingDummy;
+    private SpawnPoints spawnPoints;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,19 +21,24 @@ public class TutorialSceneManager : MonoBehaviour
     void Start()
     {
         SceneSetup();
+        PlayerSetup();
+
+    }
+
+    private void PlayerSetup()
+    {
         playerInput = playerInputManager.JoinPlayer();
         var player = playerInput.GetComponent<PlayerManager>();
-        player.Teleport(stage.GetComponent<SpawnPoints>().GetSpawnPoint());
+        player.Teleport(spawnPoints.GetSpawnPoint());
         PlayerSetting ps = CreatePlayerSetting(player);
         CreateTutorialPlayerHUD(player, ps);
-
+        player.gameObject.GetComponent<PlayerStats>().onPlayerDie += onPlayerDie;
     }
 
     private void SceneSetup()
     {
-        var versusInfo = GameManager.instance.versusInfo;
-        versusInfo.playerList = new List<GameObject>();
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
+        spawnPoints = stage.GetComponent<SpawnPoints>();
     }
 
     // hard-code a PlayerSetting for nwo for the UI
@@ -59,6 +66,12 @@ public class TutorialSceneManager : MonoBehaviour
 
         PlayerHUD hud = hudObj.GetComponent<PlayerHUD>();
         hud.SetPlayer(playerManager, playerSetting);
+    }
+
+    public void onPlayerDie(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.Teleport(spawnPoints.GetSpawnPoint());
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
