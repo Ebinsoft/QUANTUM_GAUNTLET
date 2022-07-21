@@ -64,6 +64,6 @@ public class StageButton : MonoBehaviour, IBasicButton
                 break;
         }
 
-        currentStage.text = versusInfo.stage.ToString();
+        currentStage.text = GameManager.instance.roster.GetStage(versusInfo.stage).stageName;
     }
 }
