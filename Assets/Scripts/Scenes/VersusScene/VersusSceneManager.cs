@@ -58,7 +58,8 @@ public class VersusSceneManager : MonoBehaviour
                     break;
             }
 
-            playerManager.Teleport(startingSpawns[playerManager.playerID]);
+            playerManager.Teleport(startingSpawns[0]);
+            startingSpawns.RemoveAt(0);
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
@@ -130,7 +131,7 @@ public class VersusSceneManager : MonoBehaviour
 
     public void onPlayerLose(GameObject player)
     {
-        playerList.Remove(player);
+        GameManager.instance.versusInfo.playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
     }
 
