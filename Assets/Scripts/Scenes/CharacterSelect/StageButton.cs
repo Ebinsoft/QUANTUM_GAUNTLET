@@ -23,6 +23,8 @@ public class StageButton : MonoBehaviour, IBasicButton
         currentStage = transform.parent.Find("Current Stage").GetComponent<TextMeshPro>();
         anim = GetComponent<Animator>();
         numStages = Enum.GetNames(typeof(Stage)).Length;
+        // reset to random on CS load
+        versusInfo.stage = Stage.Random;
         currentStage.text = versusInfo.stage.ToString();
     }
 
@@ -64,7 +66,15 @@ public class StageButton : MonoBehaviour, IBasicButton
                 }
                 break;
         }
+        // band-aid fix so we don't try to pull out a "random" stage in the stage list that doesn't exist
+        if (versusInfo.stage == Stage.Random)
+        {
+            currentStage.text = "Random";
+        }
+        else
+        {
+            currentStage.text = GameManager.instance.roster.GetStage(versusInfo.stage).stageName;
+        }
 
-        currentStage.text = GameManager.instance.roster.GetStage(versusInfo.stage).stageName;
     }
 }
