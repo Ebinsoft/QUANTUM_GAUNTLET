@@ -8,7 +8,7 @@ public class TutorialDummy : MonoBehaviour
     public int collectiblesRemaining = 0;
     void Start()
     {
-        TutorialSceneManager.instance.SpawnCollectibles(5);
+        TutorialSceneManager.instance.SpawnRandomCollectibles(5);
     }
 
     void Update()

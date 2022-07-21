@@ -66,7 +66,7 @@ public class TutorialSceneManager : MonoBehaviour
         return ps;
     }
 
-    public void SpawnCollectibles(int num)
+    public void SpawnRandomCollectibles(int num)
     {
         collectiblesRemaining = num;
         List<Vector3> points = spawnPoints.GetMututallyExclusiveSpawnPoints(num);
@@ -74,6 +74,12 @@ public class TutorialSceneManager : MonoBehaviour
         {
             Instantiate(collectible, point, collectible.transform.rotation);
         }
+    }
+
+    public void SpawnCollectibleAtPoint(Vector3 p)
+    {
+        collectiblesRemaining++;
+        Instantiate(collectible, p, collectible.transform.rotation);
     }
 
     private void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
