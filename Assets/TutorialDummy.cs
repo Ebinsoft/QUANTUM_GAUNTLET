@@ -54,42 +54,73 @@ public class TutorialDummy : MonoBehaviour
         }
         else
         {
-            ProjectileManager proj = other.gameObject.GetComponent<ProjectileManager>();
+            Debug.Log(other.gameObject);
+            ProjectileManager proj = other.transform.root.GetComponent<ProjectileManager>();
             if (proj != null)
             {
-                Debug.Log(proj.attack.attackName);
+                PlayerManager p = TutorialSceneManager.instance.player;
+                Debug.Log(p.currentState.ToString());
+                HitDummyQuest hdq = (HitDummyQuest)currentQuest;
+                if (p.currentState.ToString() == hdq.state)
+                {
+                    hdq.dummyWasHitByAttack = true;
+                }
             }
         }
     }
     public void GenerateQuests()
     {
-        questList.Add(new CollectibleQuest
+        // questList.Add(new CollectibleQuest
+        // {
+        //     questType = QuestType.RandomCollectibles,
+        //     numCollectibles = 5,
+        //     questText = "Hello, bitch. I am here to teach how to play this amazing game, use Left Stick to collect the collectibles"
+        // });
+        // Vector3 p = transform.position;
+        // p.y += 2;
+        // questList.Add(new CollectibleQuest
+        // {
+        //     questType = QuestType.SpecificCollectible,
+        //     point = p,
+        //     questText = "Haha, yes, good job you can move, now you must jump with Space Bar(keyboard) or Button South(Gamepad), collect this shit on my head."
+        // });
+        // questList.Add(new HitDummyQuest
+        // {
+        //     questType = QuestType.HitDummy,
+        //     questText = "Now, you must fight me! Press " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
+        //      + " to light attack me, THE GIANT GREEN CUBE",
+        //     state = "PlayerLightAttackState",
+        // });
+        // questList.Add(new HitDummyQuest
+        // {
+        //     questType = QuestType.HitDummy,
+        //     questText = "Now try HEAVY attacks! Press" + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
+        //     + " to HEAVY ATTACK",
+        //     state = "PlayerHeavyAttackState",
+        // });
+        questList.Add(new HitDummyQuest
         {
-            questType = QuestType.RandomCollectibles,
-            numCollectibles = 5,
-            questText = "Hello, bitch. I am here to teach how to play this amazing game, use Left Stick to collect the collectibles"
-        });
-        Vector3 p = transform.position;
-        p.y += 2;
-        questList.Add(new CollectibleQuest
-        {
-            questType = QuestType.SpecificCollectible,
-            point = p,
-            questText = "Haha, yes, good job you can move, now you must jump with Space Bar(keyboard) or Button South(Gamepad), collect this shit on my head."
+            questType = QuestType.HitDummy,
+            questText = "Next is Special attacks! These use mana! Try holding " + TutorialSceneManager.instance.GetPlayerBindingName("PowerToggle")
+            + " while pressing " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
+            + " to use your first special",
+            state = "PlayerSpecial1State",
         });
         questList.Add(new HitDummyQuest
         {
             questType = QuestType.HitDummy,
-            questText = "Now, you must fight me! Press " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
-             + " to light attack me, THE GIANT GREEN CUBE",
-            state = "PlayerLightAttackState",
+            questText = "Haha great job, now try Special 2! " + TutorialSceneManager.instance.GetPlayerBindingName("PowerToggle")
+    + " + " + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
+    + " you can even hold this one!",
+            state = "PlayerSpecial2State",
         });
         questList.Add(new HitDummyQuest
         {
             questType = QuestType.HitDummy,
-            questText = "Now try HEAVY attacks! Press" + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
-            + " to HEAVY ATTACK",
-            state = "PlayerHeavyAttackState",
+            questText = "Special 3 next you dumb bitch\n" + TutorialSceneManager.instance.GetPlayerBindingName("PowerToggle")
++ " +  " + TutorialSceneManager.instance.GetPlayerBindingName("UtilityAttack")
++ " to use your first special",
+            state = "PlayerSpecial3State",
         });
     }
 }
