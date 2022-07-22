@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TutorialDummy : MonoBehaviour
 {
@@ -22,15 +23,12 @@ public class TutorialDummy : MonoBehaviour
     void Update()
     {
         UIText.SetText(currentQuest.GetQuestText());
+        currentQuest.OnQuestUpdate();
         if (currentQuest.IsComplete())
         {
             currentQuest.OnQuestExit();
 
-            if (questIndex == questList.Count)
-            {
-                Debug.Log("Oh shit you win");
-            }
-            currentQuest = questList[++questIndex];
+            currentQuest = questList[questIndex++];
 
             if (currentQuest.GetQuestType() == QuestType.HitDummy)
             {
@@ -42,6 +40,19 @@ public class TutorialDummy : MonoBehaviour
                     p.y += 5;
                     transform.position = p;
                 }
+            }
+
+            // Final test - instantly kill the tutorial player
+            if (currentQuest.GetQuestType() == QuestType.FightEdmond)
+            {
+                CharacterData c = GameManager.instance.roster.GetCharacter(Character.Edmond);
+                c.characterPrefab.GetComponent<PlayerManager>().playerID = 1;
+                for (int i = 0; i < 10; i++)
+                {
+                    GameObject g = Instantiate(c.characterPrefab, TutorialSceneManager.instance.spawnPoints.GetSpawnPoint(), c.characterPrefab.transform.rotation);
+
+                }
+                c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
             }
 
             currentQuest.OnQuestEnter();
@@ -81,34 +92,42 @@ public class TutorialDummy : MonoBehaviour
     }
     public void GenerateQuests()
     {
-        // questList.Add(new CollectibleQuest
-        // {
-        //     questType = QuestType.RandomCollectibles,
-        //     numCollectibles = 5,
-        //     questText = "Hello, bitch. I am here to teach how to play this amazing game, use Left Stick to collect the collectibles"
-        // });
-        // Vector3 p = transform.position;
-        // p.y += 2;
-        // questList.Add(new CollectibleQuest
-        // {
-        //     questType = QuestType.SpecificCollectible,
-        //     point = p,
-        //     questText = "Haha, yes, good job you can move, now you must jump with Space Bar(keyboard) or Button South(Gamepad), collect this shit on my head."
-        // });
-        // questList.Add(new HitDummyQuest
-        // {
-        //     questType = QuestType.HitDummy,
-        //     questText = "Now, you must fight me! Press " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
-        //      + " to light attack me, THE GIANT GREEN CUBE",
-        //     state = "PlayerLightAttackState",
-        // });
-        // questList.Add(new HitDummyQuest
-        // {
-        //     questType = QuestType.HitDummy,
-        //     questText = "Now try HEAVY attacks! Press" + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
-        //     + " to HEAVY ATTACK",
-        //     state = "PlayerHeavyAttackState",
-        // });
+        questList.Add(new ListenQuest
+        {
+            questType = QuestType.Listen,
+            questText = "Hello, bitch, my name is <color=#00FF00>GIGACUBE</color>\n I am here to tell you how to play the game.",
+            timer = 5f
+        });
+        questList.Add(new CollectibleQuest
+        {
+            questType = QuestType.RandomCollectibles,
+            numCollectibles = 5,
+            questText = "Use " + TutorialSceneManager.instance.GetPlayerBindingName("Move")
+            + " to collect the cubes."
+        });
+        Vector3 p = transform.position;
+        p.y += 2;
+        questList.Add(new CollectibleQuest
+        {
+            questType = QuestType.SpecificCollectible,
+            point = p,
+            questText = "Haha, yes, good job you can move, now you must jump with " + TutorialSceneManager.instance.GetPlayerBindingName("Jump")
+            + " , collect this shit on my head."
+        });
+        questList.Add(new HitDummyQuest
+        {
+            questType = QuestType.HitDummy,
+            questText = "Now, you must fight me! Press " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
+             + " to light attack me, THE GIANT GREEN CUBE",
+            state = "PlayerLightAttackState",
+        });
+        questList.Add(new HitDummyQuest
+        {
+            questType = QuestType.HitDummy,
+            questText = "Now try HEAVY attacks! Press " + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
+            + " to HEAVY ATTACK",
+            state = "PlayerHeavyAttackState",
+        });
         questList.Add(new HitDummyQuest
         {
             questType = QuestType.HitDummy,
@@ -139,6 +158,17 @@ public class TutorialDummy : MonoBehaviour
             questText = "Now try " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
 + " after jumping for an aerial attack! Otherwise you'll never reach me CUNT",
             state = "PlayerAirLightAttackState",
+        });
+        questList.Add(new ListenQuest
+        {
+            questType = QuestType.Listen,
+            questText = "WOW you're so strong now, TIME TO DIEEEEEEEEEEEEEEEEEEEEEEE",
+            timer = 5f
+        });
+        questList.Add(new FightEdmondQuest
+        {
+            questType = QuestType.FightEdmond,
+            questText = "<color=#FF0000>REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</color>",
         });
     }
 }
@@ -230,6 +260,70 @@ public class HitDummyQuest : IQuest
     public void OnQuestUpdate()
     {
 
+    }
+}
+
+public class ListenQuest : IQuest
+{
+    public QuestType questType;
+    public string questText;
+    public float timer;
+    public QuestType GetQuestType()
+    {
+        return questType;
+    }
+
+    public string GetQuestText()
+    {
+        return questText;
+    }
+    public bool IsComplete()
+    {
+        return timer <= 0;
+    }
+    public void OnQuestEnter()
+    {
+
+    }
+    public void OnQuestExit()
+    {
+
+    }
+
+    public void OnQuestUpdate()
+    {
+        timer -= Time.deltaTime;
+    }
+}
+public class FightEdmondQuest : IQuest
+{
+    public QuestType questType;
+    public string questText;
+    public float timer;
+    public QuestType GetQuestType()
+    {
+        return questType;
+    }
+
+    public string GetQuestText()
+    {
+        return questText;
+    }
+    public bool IsComplete()
+    {
+        return false; // haha you can't win you dumb bitch
+    }
+    public void OnQuestEnter()
+    {
+    }
+    public void OnQuestExit()
+    {
+
+    }
+
+    public void OnQuestUpdate()
+    {
+        timer -= Time.deltaTime;
     }
 }
 
