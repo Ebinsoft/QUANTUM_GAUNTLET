@@ -53,6 +53,8 @@ public class PlayerDeadState : PlayerBaseState
             if (player.stats.lives == 0)
             {
                 player.stats.PlayerLose();
+                // band-aid so PlayerLose doesn't get repeatedly called
+                player.stats.lives--;
             }
         }
     }
