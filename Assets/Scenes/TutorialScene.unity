@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectible: {fileID: 4481570833659224981, guid: cd0b2b88595bd424fa759838b9e298e7, type: 3}
-  collectiblesRemaining: 0
+  UIText: {fileID: 1051248934}
 --- !u!1 &24047043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,7 +2908,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello, stupid Bitch I am the green giga cube
+  m_text: ???
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e350dff6eb70a87498925066c1da101b, type: 2}
   m_sharedMaterial: {fileID: 5099516308998336621, guid: e350dff6eb70a87498925066c1da101b, type: 2}
