@@ -16,7 +16,7 @@ public class TutorialSceneManager : MonoBehaviour
     public GameObject collectible;
     public int collectiblesRemaining = 0;
     public GameObject trainingDummy;
-    private SpawnPoints spawnPoints;
+    public SpawnPoints spawnPoints;
     public PlayerManager player;
     // Start is called before the first frame update
     void Awake()
