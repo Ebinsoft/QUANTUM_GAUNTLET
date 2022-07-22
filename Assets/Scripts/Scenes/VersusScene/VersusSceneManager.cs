@@ -58,7 +58,8 @@ public class VersusSceneManager : MonoBehaviour
                     break;
             }
 
-            playerManager.Teleport(startingSpawns[playerManager.playerID]);
+            playerManager.Teleport(startingSpawns[0]);
+            startingSpawns.RemoveAt(0);
             HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
             c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
