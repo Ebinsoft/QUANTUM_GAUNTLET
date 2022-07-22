@@ -17,6 +17,7 @@ public class TutorialSceneManager : MonoBehaviour
     public int collectiblesRemaining = 0;
     public GameObject trainingDummy;
     private SpawnPoints spawnPoints;
+    public PlayerManager player;
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,7 +35,7 @@ public class TutorialSceneManager : MonoBehaviour
     private void PlayerSetup()
     {
         playerInput = playerInputManager.JoinPlayer();
-        var player = playerInput.GetComponent<PlayerManager>();
+        player = playerInput.GetComponent<PlayerManager>();
         player.Teleport(new Vector3(0f, 2f, 0f));
         PlayerSetting ps = CreatePlayerSetting(player);
         CreateTutorialPlayerHUD(player, ps);
@@ -64,6 +65,12 @@ public class TutorialSceneManager : MonoBehaviour
             character = Character.None
         };
         return ps;
+    }
+
+    public string GetPlayerBindingName(string action)
+    {
+        string binding = playerInput.actions.FindAction(action).GetBindingDisplayString();
+        return "<color=#ff0000>" + binding + "</color>";
     }
 
     public void SpawnRandomCollectibles(int num)

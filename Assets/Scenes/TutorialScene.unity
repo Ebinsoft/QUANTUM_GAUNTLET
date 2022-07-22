@@ -766,7 +766,7 @@ MonoBehaviour:
   m_MaxDollyOut: 5000
   m_MinimumDistance: 1
   m_MaximumDistance: 5000
-  m_MinimumFOV: 3
+  m_MinimumFOV: 20
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 3
   m_MaximumOrthoSize: 20
@@ -1861,6 +1861,17 @@ MonoBehaviour:
   collectible: {fileID: 4481570833659224981, guid: cd0b2b88595bd424fa759838b9e298e7, type: 3}
   collectiblesRemaining: 0
   trainingDummy: {fileID: 20113198}
+  player: {fileID: 0}
+  inputActionAsset: {fileID: -944628639613478452, guid: cbc3728fd5fccaf77952b48152bb1a9a, type: 3}
+  inputAction:
+    m_Name: Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ab8fadfd-282e-47d5-a3e4-4de0a8513e7e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &605756597
 MonoBehaviour:
   m_ObjectHideFlags: 0

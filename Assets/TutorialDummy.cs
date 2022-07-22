@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class TutorialDummy : MonoBehaviour
 {
@@ -42,6 +43,14 @@ public class TutorialDummy : MonoBehaviour
         if (pm != null)
         {
             Debug.Log(pm.currentState.ToString());
+            if (currentQuest.GetQuestType() == QuestType.HitDummy)
+            {
+                HitDummyQuest hdq = (HitDummyQuest)currentQuest;
+                if (pm.currentState.ToString() == hdq.state)
+                {
+                    hdq.dummyWasHitByAttack = true;
+                }
+            }
         }
         else
         {
@@ -67,6 +76,20 @@ public class TutorialDummy : MonoBehaviour
             questType = QuestType.SpecificCollectible,
             point = p,
             questText = "Haha, yes, good job you can move, now you must jump with Space Bar(keyboard) or Button South(Gamepad), collect this shit on my head."
+        });
+        questList.Add(new HitDummyQuest
+        {
+            questType = QuestType.HitDummy,
+            questText = "Now, you must fight me! Press " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
+             + " to light attack me, THE GIANT GREEN CUBE",
+            state = "PlayerLightAttackState",
+        });
+        questList.Add(new HitDummyQuest
+        {
+            questType = QuestType.HitDummy,
+            questText = "Now try HEAVY attacks! Press" + TutorialSceneManager.instance.GetPlayerBindingName("HeavyAttack")
+            + " to HEAVY ATTACK",
+            state = "PlayerHeavyAttackState",
         });
     }
 }
@@ -115,6 +138,40 @@ public class CollectibleQuest : IQuest
         {
             TutorialSceneManager.instance.SpawnCollectibleAtPoint(point);
         }
+    }
+    public void OnQuestExit()
+    {
+
+    }
+
+    public void OnQuestUpdate()
+    {
+
+    }
+}
+
+public class HitDummyQuest : IQuest
+{
+    public QuestType questType;
+    public string questText;
+    public string state;
+    public bool dummyWasHitByAttack;
+    public QuestType GetQuestType()
+    {
+        return questType;
+    }
+
+    public string GetQuestText()
+    {
+        return questText;
+    }
+    public bool IsComplete()
+    {
+        return dummyWasHitByAttack;
+    }
+    public void OnQuestEnter()
+    {
+
     }
     public void OnQuestExit()
     {
