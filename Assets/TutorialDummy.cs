@@ -32,6 +32,18 @@ public class TutorialDummy : MonoBehaviour
             }
             currentQuest = questList[++questIndex];
 
+            if (currentQuest.GetQuestType() == QuestType.HitDummy)
+            {
+                HitDummyQuest hdq = (HitDummyQuest)currentQuest;
+                // raise the block for an air challenge
+                if (hdq.state == "PlayerAirLightAttackState")
+                {
+                    Vector3 p = transform.position;
+                    p.y += 5;
+                    transform.position = p;
+                }
+            }
+
             currentQuest.OnQuestEnter();
         }
     }
@@ -54,7 +66,6 @@ public class TutorialDummy : MonoBehaviour
         }
         else
         {
-            Debug.Log(other.gameObject);
             ProjectileManager proj = other.transform.root.GetComponent<ProjectileManager>();
             if (proj != null)
             {
@@ -119,8 +130,15 @@ public class TutorialDummy : MonoBehaviour
             questType = QuestType.HitDummy,
             questText = "Special 3 next you dumb bitch\n" + TutorialSceneManager.instance.GetPlayerBindingName("PowerToggle")
 + " +  " + TutorialSceneManager.instance.GetPlayerBindingName("UtilityAttack")
-+ " to use your first special",
++ " to use your third special",
             state = "PlayerSpecial3State",
+        });
+        questList.Add(new HitDummyQuest
+        {
+            questType = QuestType.HitDummy,
+            questText = "Now try " + TutorialSceneManager.instance.GetPlayerBindingName("LightAttack")
++ " after jumping for an aerial attack! Otherwise you'll never reach me CUNT",
+            state = "PlayerAirLightAttackState",
         });
     }
 }
