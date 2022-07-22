@@ -1861,17 +1861,8 @@ MonoBehaviour:
   collectible: {fileID: 4481570833659224981, guid: cd0b2b88595bd424fa759838b9e298e7, type: 3}
   collectiblesRemaining: 0
   trainingDummy: {fileID: 20113198}
+  spawnPoints: {fileID: 0}
   player: {fileID: 0}
-  inputActionAsset: {fileID: -944628639613478452, guid: cbc3728fd5fccaf77952b48152bb1a9a, type: 3}
-  inputAction:
-    m_Name: Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ab8fadfd-282e-47d5-a3e4-4de0a8513e7e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &605756597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3173,7 +3164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3967,6 +3958,13 @@ MonoBehaviour:
       deviceString: 
       team:
         teamID: 0
+      character: 0
+    - playerID: 1
+      playerName: GIGA EDMOND
+      playerType: 2
+      deviceString: 
+      team:
+        teamID: 1
       character: 0
     playerList: []
 --- !u!4 &1574625809
@@ -6045,11 +6043,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3702411289305159271, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f024cc1789b109143b21173a4f0d97b3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
