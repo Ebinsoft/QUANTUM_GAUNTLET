@@ -414,7 +414,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "497933e10b4b40bdb18bc961dfd684db",
     "m_Id": 0,
-    "m_DisplayName": "Angle Offset",
+    "m_DisplayName": "Overlapping",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
