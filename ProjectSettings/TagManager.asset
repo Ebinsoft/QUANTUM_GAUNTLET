@@ -10,6 +10,8 @@ TagManager:
   - Team3
   - Team4
   - RosterZone
+  - Team 2
+  - MainCanvas
   layers:
   - Default
   - TransparentFX
