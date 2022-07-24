@@ -7,6 +7,6 @@ public class RestartVersusButton : MonoBehaviour
 {
     public void RestartVersusMatch()
     {
-        SceneManager.LoadScene("VersusScene");
+        GameManager.instance.TransitionToScene("VersusScene");
     }
 }
