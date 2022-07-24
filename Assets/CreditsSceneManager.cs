@@ -12,6 +12,7 @@ public class CreditsSceneManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     private PlayerInput playerInput;
     private List<GameObject> players;
+    public float scrollSpeed;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,7 +21,15 @@ public class CreditsSceneManager : MonoBehaviour
     }
     void Update()
     {
+        ScrollText();
         exitText.SetText(DisplayExitText());
+    }
+
+    public void ScrollText()
+    {
+        Vector3 p = scrollingText.transform.position;
+        p.y += (Time.deltaTime * scrollSpeed);
+        scrollingText.transform.position = p;
     }
 
     public string DisplayExitText()
@@ -29,30 +38,22 @@ public class CreditsSceneManager : MonoBehaviour
         foreach (var player in players)
         {
             string inputString = player.GetComponent<PlayerInput>().actions.FindAction("Start").GetBindingDisplayString();
-            text += "Press " + inputString + " to exit(P" + (players.IndexOf(player) + 1) + ")\n";
+            text += "Press " + inputString + " to exit (P" + (players.IndexOf(player) + 1) + ")\n";
         }
         return text;
     }
-
-    public void OnPlayerJoined(PlayerInput p)
-    {
-        players.Add(p.gameObject);
-        p.actions["Start"].started += onStart;
-    }
-
     private void onStart(InputAction.CallbackContext context)
     {
         leavingSceneText.SetText("I would go to the main menu now if it existed");
     }
-
     public string GetPlayerBindingName(string action)
     {
         string binding = playerInput.actions.FindAction(action).GetBindingDisplayString();
         return binding;
     }
-
-    private void OnDisable()
+    public void OnPlayerJoined(PlayerInput p)
     {
-        playerInput.actions["Start"].started -= onStart;
+        players.Add(p.gameObject);
+        p.actions["Start"].started += onStart;
     }
 }
