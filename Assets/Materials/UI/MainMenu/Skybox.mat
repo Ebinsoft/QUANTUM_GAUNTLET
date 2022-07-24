@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Skybox
-  m_Shader: {fileID: -6465566751694194690, guid: fbcbe1f1cab50f743ae51fab27c28a81, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: abd918bf6c9b15940b537f1a021516fd, type: 3}
   m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -163,7 +163,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_422e09f021404242a180cab3e46f818e: {r: 0.145098, g: 0.227451, b: 0.3686275, a: 0}
+    - Color_6f0443434b544c7aa05a8789486f762d: {r: 0.124549024, g: 0.1381548, b: 0.15686275, a: 0}
     - Color_828fa2edb3d141d0b08c2f1860f5d867: {r: 0.10196079, g: 0.10196079, b: 0.10196079, a: 1}
+    - Color_cca51c87a335413285d46ae4cf63c29e: {r: 0, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
