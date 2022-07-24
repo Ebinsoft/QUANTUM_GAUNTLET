@@ -90,7 +90,7 @@ public class TutorialSceneManager : MonoBehaviour
         Instantiate(collectible, p, collectible.transform.rotation);
     }
 
-    private void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
+    public void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
     {
         GameObject hudObj = (GameObject)Instantiate(playerHUDPrefab);
         GameObject canvas = GameObject.Find("Canvas");

@@ -597,8 +597,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 18
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 16
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3950,7 +3950,7 @@ MonoBehaviour:
     numPlayers: 1
     stage: 0
     gameType: 0
-    numLives: 3
+    numLives: 1
     playerSettings:
     - playerID: 0
       playerName: Player1
