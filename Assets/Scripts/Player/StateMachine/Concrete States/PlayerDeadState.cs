@@ -49,6 +49,7 @@ public class PlayerDeadState : PlayerBaseState
             {
                 player.stats.lives--;
                 player.stats.PlayerDie();
+                player.stats.health = 0;
             }
             if (player.stats.lives == 0)
             {
