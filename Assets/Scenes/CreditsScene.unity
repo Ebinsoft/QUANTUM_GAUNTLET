@@ -275,62 +275,61 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Programming
 
-    
 
-    
 
-    
+
+
+
 
     Animation
 
-    
+
 
     Stage Design
 
-    
+
 
     Composer
 
-    
+
 
     Sound
     Design
 
-    
+
 
     Character Design
 
-    
 
-    
 
-    
+
+
+
 
     User Interface
 
-    
 
-    Project
-    Manager
 
-    
+    Project Manager
 
-    Game Testing Team
 
-    
 
-    
+    Game
+    Testing Team
 
-    
 
-    
 
-    
 
-    
 
-    Special
-    Thanks'
+
+
+
+
+
+
+
+
+    Special Thanks'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -514,7 +513,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1517,57 +1516,56 @@ MonoBehaviour:
 
     Jordan Reef
 
-    
 
-    Jesse
-    Holzman
-
-    
-
-    Jordan Reef
-
-    
-
-    Tyler Thurston
-
-    
-
-    Jesse
-    Holzman
-
-    
 
     Jesse Holzman
 
-    Jordan Reef
+
+
+    Jordan
+    Reef
+
+
 
     Tyler Thurston
 
-    
 
-    Sammy
-    Zhu
 
-    
+    Jesse Holzman
+
+
+
+    Jesse Holzman
+
+    Jordan
+    Reef
+
+    Tyler Thurston
+
+
+
+    Sammy Zhu
+
+
 
     De Zhong
 
-    
+
 
     Frank Roeder
 
-    Raymond Yi
+    Raymond
+    Yi
 
-    Chris
-    Leinbach
+    Chris Leinbach
 
     Joe Kain
 
     (Anybody else who wants to be on here)
 
-    
 
-    
+
+
 
     Nobutaka
     Kim'
