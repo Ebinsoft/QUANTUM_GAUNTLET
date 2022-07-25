@@ -327,6 +327,8 @@ MonoBehaviour:
 
     
 
+    
+
     Special
     Thanks'
   m_isRightToLeft: 0
@@ -600,9 +602,6 @@ MonoBehaviour:
   scrollingText: {fileID: 884793899}
   exitText: {fileID: 1487026802}
   leavingSceneText: {fileID: 1425767021}
-  playerInputManager: {fileID: 0}
-  playerInput: {fileID: 0}
-  players: []
   scrollSpeed: 75
 --- !u!4 &766684771
 Transform:
@@ -884,7 +883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nightcrawler Studios
+  m_text: 'Nightcrawler Games
 
 
     Tyler Thurston
@@ -1565,6 +1564,8 @@ MonoBehaviour:
     Joe Kain
 
     (Anybody else who wants to be on here)
+
+    
 
     
 
