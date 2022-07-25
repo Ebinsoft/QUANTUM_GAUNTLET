@@ -49,10 +49,13 @@ public class PlayerDeadState : PlayerBaseState
             {
                 player.stats.lives--;
                 player.stats.PlayerDie();
+                player.stats.health = 0;
             }
             if (player.stats.lives == 0)
             {
                 player.stats.PlayerLose();
+                // band-aid so PlayerLose doesn't get repeatedly called
+                player.stats.lives--;
             }
         }
     }

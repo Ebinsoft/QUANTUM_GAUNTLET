@@ -327,6 +327,8 @@ MonoBehaviour:
 
     
 
+    
+
     Special
     Thanks'
   m_isRightToLeft: 0
@@ -881,7 +883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nightcrawler Studios
+  m_text: 'Nightcrawler Games
 
 
     Tyler Thurston
@@ -1562,6 +1564,8 @@ MonoBehaviour:
     Joe Kain
 
     (Anybody else who wants to be on here)
+
+    
 
     
 

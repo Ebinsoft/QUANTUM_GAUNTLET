@@ -154,11 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 11524279}
-  playerList: []
   gameOverMenu: {fileID: 721352993}
   playerTargetGroup: {fileID: 647113859}
   playerHUDPrefab: {fileID: 4345037606483549039, guid: b6c26b1c3c1b33a4bbd92104ecd51dcf, type: 3}
-  spawnPoints: {fileID: 0}
 --- !u!4 &11524278
 Transform:
   m_ObjectHideFlags: 0
@@ -2490,7 +2488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753325724}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 11.471528, z: -16.383041}
+  m_LocalPosition: {x: 0, y: 12.782171, z: -15.46532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1371161492}
@@ -2807,7 +2805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 11.471528, z: -16.383041}
+  m_LocalPosition: {x: 0, y: 12.782171, z: -15.46532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3448,7 +3446,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.55
   m_CameraDistance: 20
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -3788,6 +3786,7 @@ MonoBehaviour:
       team:
         teamID: 1
       character: 0
+    playerList: []
 --- !u!4 &1506229660
 Transform:
   m_ObjectHideFlags: 0
