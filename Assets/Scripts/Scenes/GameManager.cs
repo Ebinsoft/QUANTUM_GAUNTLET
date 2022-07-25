@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -33,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     public void TransitionToScene(string sceneName)
     {
+        // disable the event system so that you can't button mash and break the game
+        EventSystem.current.enabled = false;
+
         StartCoroutine(PlaySceneTransition(sceneName));
     }
 
