@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09813338, g: 0.10894094, b: 0.12384429, a: 1}
+  m_IndirectSpecularColor: {r: 0.100498624, g: 0.11155229, b: 0.12677282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1176,7 +1176,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 679283683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1501055174}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: TransitionToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TutorialScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &679283683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2603,7 +2615,22 @@ MonoBehaviour:
     stage: 0
     gameType: 0
     numLives: 3
-    playerSettings: []
+    playerSettings:
+    - playerID: 0
+      playerName: Player1
+      playerType: 1
+      deviceString: 
+      team:
+        teamID: 0
+      character: 0
+    - playerID: 1
+      playerName: CPU2
+      playerType: 2
+      deviceString: 
+      team:
+        teamID: 1
+      character: 0
+    playerList: []
 --- !u!4 &1501055175
 Transform:
   m_ObjectHideFlags: 0

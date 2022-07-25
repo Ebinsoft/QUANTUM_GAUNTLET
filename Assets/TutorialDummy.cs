@@ -29,7 +29,10 @@ public class TutorialDummy : MonoBehaviour
         {
             currentQuest.OnQuestExit();
 
-            currentQuest = questList[questIndex++];
+            if (questIndex == questList.Count-1) {
+                GameManager.instance.TransitionToScene("MainMenu");
+            }
+            currentQuest = questList[++questIndex];
 
             if (currentQuest.GetQuestType() == QuestType.HitDummy)
             {
