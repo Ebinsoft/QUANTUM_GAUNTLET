@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerHitHandler : MonoBehaviour
+public class PlayerHitHandler : MonoBehaviour, IHitHandler
 {
     private PlayerManager player;
 

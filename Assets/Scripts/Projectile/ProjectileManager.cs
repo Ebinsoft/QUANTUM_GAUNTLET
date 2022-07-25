@@ -84,7 +84,7 @@ public class ProjectileManager : MonoBehaviour
             HitData hitData = new HitData() { attack = attack, direction = direction };
 
             GameObject playerHit = other.attachedRigidbody.gameObject;
-            bool hitResolved = playerHit.GetComponent<PlayerHitHandler>().handleHit(hitData);
+            bool hitResolved = playerHit.GetComponent<IHitHandler>().handleHit(hitData);
 
             if (hitResolved)
             {
