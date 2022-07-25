@@ -126,7 +126,7 @@ public class TutorialDummy : MonoBehaviour
             + " to collect the cubes.\n" + "This is basic movement and is very easy!"
         });
         Vector3 p = transform.position;
-        p.y += 2;
+        p.y += 1.5f;
         questList.Add(new CollectibleQuest
         {
             questType = QuestType.SpecificCollectible,
