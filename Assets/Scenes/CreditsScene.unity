@@ -273,9 +273,62 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Programming\r\n\r\n\r\n\r\nAnimation\r\n\r\nStage Design\r\n\r\nComposer\r\n\r\nSound
-    Design\r\n\r\nCharacter Design\r\n\r\n\r\n\r\nUser Interface\r\n\r\nProject Management
-    \r\n\r\nGame Testing Team\r\n\r\n\r\n\r\n\r\n\r\nSpecial Thanks"
+  m_text: 'Programming
+
+    
+
+    
+
+    
+
+    Animation
+
+    
+
+    Stage Design
+
+    
+
+    Composer
+
+    
+
+    Sound
+    Design
+
+    
+
+    Character Design
+
+    
+
+    
+
+    
+
+    User Interface
+
+    
+
+    Project
+    Manager
+
+    
+
+    Game Testing Team
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    Special
+    Thanks'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -547,7 +600,7 @@ MonoBehaviour:
   scrollingText: {fileID: 884793899}
   exitText: {fileID: 1487026802}
   leavingSceneText: {fileID: 1425767021}
-  scrollSpeed: 100
+  scrollSpeed: 75
 --- !u!4 &766684771
 Transform:
   m_ObjectHideFlags: 0
@@ -867,8 +920,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
