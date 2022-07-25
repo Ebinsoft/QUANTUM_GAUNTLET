@@ -110,18 +110,27 @@ public class PlayerStats : MonoBehaviour
     public event Action<GameObject> onPlayerSpawn;
     public void PlayerSpawn()
     {
-        onPlayerSpawn(gameObject);
+        if (onPlayerSpawn != null)
+        {
+            onPlayerSpawn(gameObject);
+        }
     }
 
     public event Action<GameObject> onPlayerLose;
     public void PlayerLose()
     {
-        onPlayerLose(gameObject);
+        if (onPlayerLose != null)
+        {
+            onPlayerLose(gameObject);
+        }
     }
 
     public event Action<GameObject> onPlayerDie;
     public void PlayerDie()
     {
-        onPlayerDie(gameObject);
+        if (onPlayerDie != null)
+        {
+            onPlayerDie(gameObject);
+        }
     }
 }

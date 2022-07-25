@@ -28,7 +28,7 @@ public class AIManager : MonoBehaviour
 
     private void FindClosestEnemy()
     {
-        var t = vs.playerList.Where(c => c.tag != tag).OrderBy(c => Vector3.Distance(c.transform.position, transform.position)).FirstOrDefault<GameObject>(c => c);
+        var t = GameManager.instance.versusInfo.playerList.Where(c => c.tag != tag).OrderBy(c => Vector3.Distance(c.transform.position, transform.position)).FirstOrDefault<GameObject>(c => c);
         if (t != null)
         {
             target = t;

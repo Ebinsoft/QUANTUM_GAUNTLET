@@ -4162,7 +4162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3702411289305159271, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6e96d0fbf694c5dbd912d98a8f6aeb53, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -12859,6 +12859,7 @@ MonoBehaviour:
     gameType: 0
     numLives: 3
     playerSettings: []
+    playerList: []
 --- !u!4 &1898516094
 Transform:
   m_ObjectHideFlags: 0

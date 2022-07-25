@@ -11,6 +11,7 @@ public class VersusInfo
     public GameMode gameType = GameMode.FFA;
     public int numLives = 3;
     public PlayerSetting[] playerSettings;
+    public List<GameObject> playerList;
 
 
     public void ResetPlayers()
