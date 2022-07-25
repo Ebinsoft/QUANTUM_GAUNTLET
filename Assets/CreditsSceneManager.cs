@@ -44,7 +44,7 @@ public class CreditsSceneManager : MonoBehaviour
     }
     private void onStart(InputAction.CallbackContext context)
     {
-        leavingSceneText.SetText("I would go to the main menu now if it existed");
+        GameManager.instance.TransitionToScene("MainMenu");
     }
     public string GetPlayerBindingName(string action)
     {

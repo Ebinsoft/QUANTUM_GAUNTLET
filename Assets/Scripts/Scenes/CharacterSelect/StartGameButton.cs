@@ -54,7 +54,7 @@ public class StartGameButton : MonoBehaviour, IBasicButton
     {
         if (IsGameReady())
         {
-            SceneManager.LoadScene("VersusScene");
+            GameManager.instance.TransitionToScene("VersusScene");
         }
     }
 }

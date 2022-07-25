@@ -93,7 +93,7 @@ public class TutorialSceneManager : MonoBehaviour
     public void CreateTutorialPlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
     {
         GameObject hudObj = (GameObject)Instantiate(playerHUDPrefab);
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.FindGameObjectWithTag("MainCanvas");
         hudObj.transform.SetParent(canvas.transform);
 
         PlayerHUD hud = hudObj.GetComponent<PlayerHUD>();

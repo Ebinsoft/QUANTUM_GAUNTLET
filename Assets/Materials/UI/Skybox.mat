@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8352812778379381143
+--- !u!114 &-4835156031519841881
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Skybox
   m_Shader: {fileID: -6465566751694194690, guid: abd918bf6c9b15940b537f1a021516fd, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -32,6 +32,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BackTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -52,12 +56,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DownTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
+    - _FrontTex:
+        m_Texture: {fileID: 2800000, guid: bdcb8de7215ae954f8a948ce55f31009, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LeftTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: bdcb8de7215ae954f8a948ce55f31009, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -72,7 +88,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RightTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UpTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -89,10 +117,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_08554ea16f944eefb56496d2ba1115bb: 0
+    - Vector1_9e12e6f0de0f426ebcbed9eb40f92066: 14.45
+    - Vector1_a0794e9519c242edaedaa0a01036d3b6: 0.05
+    - Vector1_a3d6b482b9504dd7840c18e78db942c0: 1
+    - Vector1_a8a6d8747f2945e3973639131707bc66: 0.97
+    - Vector1_be9d1fff911a47d8900c3f9c59aaf34a: -0.1
+    - Vector1_e4c6e0f364c543948b0a30fd745c6524: 2
     - _AlphaClip: 0
+    - _AtmosphereThickness: 0.98
     - _Blend: 0
-    - _Boost: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -102,26 +135,42 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Exposure: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _ImageType: 0
+    - _Layout: 0
+    - _Mapping: 1
     - _Metallic: 0
+    - _MirrorOnBack: 0
     - _OcclusionStrength: 1
+    - _Overlapping: 1.5
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Rotation: 0
     - _ScrollSpeed: 0.15
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SunDisk: 2
+    - _SunSize: 0.091
+    - _SunSizeConvergence: 2.36
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_422e09f021404242a180cab3e46f818e: {r: 0.145098, g: 0.227451, b: 0.3686275, a: 0}
+    - Color_6f0443434b544c7aa05a8789486f762d: {r: 0.124549024, g: 0.1381548, b: 0.15686275, a: 0}
+    - Color_828fa2edb3d141d0b08c2f1860f5d867: {r: 0.10196079, g: 0.10196079, b: 0.10196079, a: 1}
+    - Color_cca51c87a335413285d46ae4cf63c29e: {r: 0, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ScrollSpeed: {r: 0, g: -0.25, b: 0, a: 0}
+    - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    - _SkyTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0.5}
   m_BuildTextureStacks: []
