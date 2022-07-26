@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerSpecial2State Special2State;
     public PlayerSpecial3State Special3State;
     public PlayerStunState StunState;
+    public PlayerDyingState DyingState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
     public PlayerTumblingState TumblingState;
@@ -169,6 +170,7 @@ public class PlayerManager : MonoBehaviour
         Special3State = new PlayerSpecial3State(this);
         DashingState = new PlayerDashingState(this);
         StunState = new PlayerStunState(this);
+        DyingState = new PlayerDyingState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
         TumblingState = new PlayerTumblingState(this);

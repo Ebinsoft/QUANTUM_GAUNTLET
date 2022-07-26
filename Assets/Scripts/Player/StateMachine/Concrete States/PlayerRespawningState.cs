@@ -19,16 +19,9 @@ public class PlayerRespawningState : PlayerBaseState
         player.isRespawning = true;
         player.animEffects.CancelHit();
 
-
         player.stats.ResetStats();
-        // do animation stuff
-        // foreach (var param in player.anim.parameters)
-        // {
-        //     if (param.type == AnimatorControllerParameterType.Trigger)
-        //     {
-        //         player.anim.ResetTrigger(param.name);
-        //     }
-        // }
+        player.stats.currentStatus = PlayerStats.Status.normal;
+
         player.anim.Play("Idle");
     }
 
