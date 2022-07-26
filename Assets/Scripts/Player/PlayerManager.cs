@@ -147,6 +147,7 @@ public class PlayerManager : MonoBehaviour
 
     // death variables
     public bool triggerDead = false;
+    public bool playDeathAnimation = false;
     public bool canDie = true;
     public bool isDead = false;
 
@@ -205,8 +206,7 @@ public class PlayerManager : MonoBehaviour
         // check for if we died
         if (canDie && stats.health <= 0)
         {
-            canDie = false;
-            triggerDead = true;
+            TriggerDeath();
         }
 
         if (isStartTriggered)
@@ -274,6 +274,13 @@ public class PlayerManager : MonoBehaviour
     public void EnableMovement()
     {
         isMovementEnabled = true;
+    }
+
+    public void TriggerDeath(bool playAnimation = true)
+    {
+        canDie = false;
+        triggerDead = true;
+        playDeathAnimation = playAnimation;
     }
 
     void setupJumpVariables()

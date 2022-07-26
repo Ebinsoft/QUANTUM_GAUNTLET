@@ -69,7 +69,16 @@ public abstract class PlayerBaseState
         if (player.triggerDead)
         {
             player.triggerHit = false;
-            SwitchState(player.DyingState);
+            player.triggerDead = false;
+
+            if (player.playDeathAnimation)
+            {
+                SwitchState(player.DyingState);
+            }
+            else
+            {
+                SwitchState(player.DeadState);
+            }
         }
         else if (player.triggerHit)
         {

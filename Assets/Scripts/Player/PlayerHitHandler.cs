@@ -14,6 +14,9 @@ public class PlayerHitHandler : MonoBehaviour, IHitHandler
     {
         AttackInfo attack = hitData.attack;
 
+        // don't resolve hit if we are already dead
+        if (player.stats.health <= 0) return false;
+
         if (player.stats.canTakeDamage)
         {
             player.stats.health -= attack.damage;

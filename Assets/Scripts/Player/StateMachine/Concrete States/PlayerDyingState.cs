@@ -6,8 +6,6 @@ public class PlayerDyingState : PlayerBaseState
 {
     private PlayerManager player;
 
-    private float timer;
-
     public PlayerDyingState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -18,12 +16,9 @@ public class PlayerDyingState : PlayerBaseState
 
     public override void EnterState()
     {
-        player.triggerDead = false;
-
         player.anim.Play("Die");
         player.anim.SetBool("InDying", true);
 
-        player.stats.currentStatus = PlayerStats.Status.intangible;
         player.playerKnockback.StopKnockback();
     }
 
