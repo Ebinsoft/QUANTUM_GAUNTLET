@@ -173,7 +173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11524279
 MonoBehaviour:
@@ -4191,7 +4191,7 @@ Transform:
   m_Children:
   - {fileID: 1733329727}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1535284407
 GameObject:
@@ -5436,7 +5436,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1768727616}
   - component: {fileID: 1768727615}
-  - component: {fileID: 1768727617}
   m_Layer: 0
   m_Name: CM Backshot Camera
   m_TagString: Untagged
@@ -5494,18 +5493,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1768727617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768727614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d557ac9e60b03cc4a95fa71be2870bb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1795342857
 GameObject:
   m_ObjectHideFlags: 0
@@ -6246,7 +6233,7 @@ Transform:
   m_Children:
   - {fileID: 205044078}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &1973053119
 GameObject:
