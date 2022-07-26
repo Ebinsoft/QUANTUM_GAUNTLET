@@ -9,7 +9,7 @@ public class CharacterSelectButton : MonoBehaviour
     public void LoadCharacterSelect()
     {
         //TODO remove this and fix the real problem - bandaid for frozen CS
-        pauseMenu.DisableGameOver();
+        pauseMenu.DisablePauseMenu();
         GameManager.instance.TransitionToScene("CharacterSelect");
     }
 }

@@ -124,7 +124,7 @@ public class VersusSceneManager : MonoBehaviour
 
         if (CheckIfGameOver())
         {
-            gameOverMenu.EnableGameOver();
+            gameOverMenu.EnablePauseMenu();
         }
     }
 

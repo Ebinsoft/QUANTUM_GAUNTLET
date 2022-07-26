@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuPane = transform.Find("Pane").gameObject;
         firstSelectedButton = pauseMenuPane.transform.Find("Buttons").Find("Restart").gameObject;
         isEnabled = false;
-        DisableGameOver();
+        DisablePauseMenu();
     }
 
     // Update is called once per frame
@@ -26,15 +26,15 @@ public class PauseMenu : MonoBehaviour
     {
         if (!isEnabled)
         {
-            EnableGameOver();
+            EnablePauseMenu();
         }
         else
         {
-            DisableGameOver();
+            DisablePauseMenu();
         }
     }
 
-    public void EnableGameOver()
+    public void EnablePauseMenu()
     {
         AudioManager.instance.masterMixer.SetFloat("MusicLowPassFreq", 500f);
         isEnabled = true;
@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstSelectedButton);
     }
 
-    public void DisableGameOver()
+    public void DisablePauseMenu()
     {
         AudioManager.instance.masterMixer.SetFloat("MusicLowPassFreq", 22000f);
         isEnabled = false;
