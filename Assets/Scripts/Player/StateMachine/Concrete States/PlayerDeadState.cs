@@ -41,22 +41,21 @@ public class PlayerDeadState : PlayerBaseState
 
         if (!player.anim.GetBool("InDeath"))
         {
-            if (player.stats.lives > 1)
-            {
-                SwitchState(player.RespawnState);
-            }
             if (player.stats.lives > 0)
             {
                 player.stats.lives--;
-                player.stats.PlayerDie();
                 player.stats.health = 0;
+                player.stats.PlayerDie();
+                if (player.stats.lives == 0)
+                {
+                    player.stats.PlayerLose();
+                }
+                else
+                {
+                    SwitchState(player.RespawnState);
+                }
             }
-            if (player.stats.lives == 0)
-            {
-                player.stats.PlayerLose();
-                // band-aid so PlayerLose doesn't get repeatedly called
-                player.stats.lives--;
-            }
+
         }
     }
 }
