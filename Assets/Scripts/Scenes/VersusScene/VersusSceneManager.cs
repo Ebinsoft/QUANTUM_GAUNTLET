@@ -15,7 +15,6 @@ public class VersusSceneManager : MonoBehaviour
     public UnityEngine.Object playerHUDPrefab;
     // should generate these dynamically once we add stage loading
     private SpawnPoints spawnPoints;
-    private bool isGameOver = false;
 
     void Awake()
     {
@@ -25,7 +24,6 @@ public class VersusSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameOver = false;
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
         GameObject stage = SpawnStage();
         spawnPoints = stage.GetComponent<SpawnPoints>();
@@ -68,11 +66,7 @@ public class VersusSceneManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isGameOver && CheckIfGameOver())
-        {
-            isGameOver = true;
-            gameOverMenu.EnableGameOver();
-        }
+
     }
 
     // Will load the stage from VersusInfo, handle random, and return the instantiated object
@@ -113,14 +107,8 @@ public class VersusSceneManager : MonoBehaviour
             GameManager.instance.versusInfo.playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
             .GroupBy(c => c.tag)
             .Count();
-        if (numUniqueTeamsStillAlive > 1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+
+        return numUniqueTeamsStillAlive <= 1;
     }
 
     public void onPlayerSpawn(GameObject player)
@@ -133,6 +121,11 @@ public class VersusSceneManager : MonoBehaviour
     {
         GameManager.instance.versusInfo.playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
+
+        if (CheckIfGameOver())
+        {
+            gameOverMenu.EnableGameOver();
+        }
     }
 
     public void onPlayerDie(GameObject player)
