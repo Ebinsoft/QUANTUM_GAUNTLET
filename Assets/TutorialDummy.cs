@@ -41,7 +41,7 @@ public class TutorialDummy : MonoBehaviour
                 if (hdq.state == "PlayerAirLightAttackState")
                 {
                     Vector3 p = transform.position;
-                    p.y += 5;
+                    p.y += 4;
                     transform.position = p;
                 }
             }
