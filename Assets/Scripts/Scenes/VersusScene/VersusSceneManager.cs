@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using Cinemachine;
+using TMPro;
 using System;
 
 public class VersusSceneManager : MonoBehaviour
@@ -11,7 +12,11 @@ public class VersusSceneManager : MonoBehaviour
     public static VersusSceneManager instance;
     public PlayerInputManager playerInputManager;
     public PauseMenu gameOverMenu;
+    public GameObject GameOverSplash;
+    public GameObject WinText;
     public CinemachineTargetGroup playerTargetGroup;
+    public CinemachineVirtualCamera cinemachineCamera;
+    public CinemachineVirtualCamera gameEndCamera;
     public UnityEngine.Object playerHUDPrefab;
     // should generate these dynamically once we add stage loading
     private SpawnPoints spawnPoints;
@@ -111,6 +116,45 @@ public class VersusSceneManager : MonoBehaviour
         return numUniqueTeamsStillAlive <= 1;
     }
 
+    public void FinishGame()
+    {
+        StartCoroutine(GameOutro());
+    }
+
+    // This will immediately print game on the screen and slow the game down for a bit for cool effect
+    public IEnumerator GameOutro()
+    {
+        GameOverSplash.SetActive(true);
+        Time.timeScale = .25f;
+        yield return new WaitForSeconds(1f);
+        GameOverSplash.SetActive(false);
+        Time.timeScale = 1f;
+        // rotate camera
+
+        // get first player that's alive in the winning team so only focus on one
+        var firstPlayer = GameManager.instance.versusInfo.playerList
+        .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
+        .First(c => c);
+
+        cinemachineCamera.gameObject.SetActive(false);
+        gameEndCamera.gameObject.SetActive(true);
+        gameEndCamera.Follow = firstPlayer.transform;
+        gameEndCamera.LookAt = firstPlayer.transform;
+        // this should probably actually wait for the winning animation to finish
+        yield return new WaitForSeconds(2f);
+
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(firstPlayer.GetComponent<PlayerManager>().playerID);
+        WinText.GetComponent<TextMeshProUGUI>().color = ps.team.teamColor;
+        string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName;
+        WinText.SetActive(true);
+        WinText.GetComponent<TextMeshProUGUI>().SetText(winString + " WINS!");
+
+        yield return new WaitForSeconds(1f);
+
+        WinText.SetActive(false);
+        gameOverMenu.EnablePauseMenu();
+    }
+
     public void onPlayerSpawn(GameObject player)
     {
         PlayerManager pm = player.GetComponent<PlayerManager>();
@@ -124,7 +168,7 @@ public class VersusSceneManager : MonoBehaviour
 
         if (CheckIfGameOver())
         {
-            gameOverMenu.EnablePauseMenu();
+            FinishGame();
         }
     }
 
