@@ -149,11 +149,11 @@ public class VersusSceneManager : MonoBehaviour
 
         PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(firstPlayer.GetComponent<PlayerManager>().playerID);
         WinText.GetComponent<TextMeshProUGUI>().color = ps.team.teamColor;
-        string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName;
+        string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName + " TEAM";
         WinText.SetActive(true);
         WinText.GetComponent<TextMeshProUGUI>().SetText(winString + " WINS!");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         WinText.SetActive(false);
         gameOverMenu.EnablePauseMenu();
