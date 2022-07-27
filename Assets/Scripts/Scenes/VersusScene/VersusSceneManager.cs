@@ -149,7 +149,7 @@ public class VersusSceneManager : MonoBehaviour
         WinText.SetActive(true);
         WinText.GetComponent<TextMeshProUGUI>().SetText(winString + " WINS!");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         WinText.SetActive(false);
         gameOverMenu.EnablePauseMenu();
