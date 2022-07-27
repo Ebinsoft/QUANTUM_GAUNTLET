@@ -143,6 +143,10 @@ public class VersusSceneManager : MonoBehaviour
         // this should probably actually wait for the winning animation to finish
         yield return new WaitForSeconds(2f);
 
+        // put winning player into victory state
+        firstPlayer.GetComponent<PlayerManager>().triggerVictory = true;
+        yield return new WaitForSeconds(2f);
+
         PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(firstPlayer.GetComponent<PlayerManager>().playerID);
         WinText.GetComponent<TextMeshProUGUI>().color = ps.team.teamColor;
         string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName;
