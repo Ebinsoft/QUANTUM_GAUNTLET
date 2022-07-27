@@ -63,7 +63,7 @@ public class PlayerHUD : MonoBehaviour
         GenerateStockIcons();
 
         // subscribe to player deaths
-        player.stats.onPlayerDie += onPlayerDie;
+        player.stats.onPlayerDespawn += onPlayerDespawn;
 
         ComputePositionAndScale();
     }
@@ -107,7 +107,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    private void onPlayerDie(GameObject playerObj)
+    private void onPlayerDespawn(GameObject playerObj)
     {
         // update stock icons
         int remainingLives = player.stats.lives;
