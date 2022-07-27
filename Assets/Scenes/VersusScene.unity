@@ -4256,7 +4256,7 @@ MonoBehaviour:
     numPlayers: 2
     stage: 2
     gameType: 0
-    numLives: 1
+    numLives: 3
     playerSettings:
     - playerID: 0
       playerName: Player1
