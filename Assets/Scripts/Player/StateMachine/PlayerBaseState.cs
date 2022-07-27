@@ -78,12 +78,11 @@ public abstract class PlayerBaseState
 
             if (player.playDeathAnimation)
             {
-                SwitchState(player.DyingState);
+                player.anim.SetBool("InDying", true);
+                player.anim.Play("Die");
             }
-            else
-            {
-                SwitchState(player.DeadState);
-            }
+
+            SwitchState(player.DeadState);
         }
         else if (player.triggerHit)
         {

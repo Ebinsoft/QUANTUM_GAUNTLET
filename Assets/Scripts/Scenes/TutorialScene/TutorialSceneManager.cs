@@ -39,7 +39,7 @@ public class TutorialSceneManager : MonoBehaviour
         player.Teleport(new Vector3(0f, 2f, 0f));
         PlayerSetting ps = CreatePlayerSetting(player);
         CreateTutorialPlayerHUD(player, ps);
-        player.gameObject.GetComponent<PlayerStats>().onPlayerDie += onPlayerDie;
+        player.gameObject.GetComponent<PlayerStats>().onPlayerRespawn += onPlayerRespawn;
         player.gameObject.GetComponent<PlayerStats>().onPlayerLose += onPlayerLose;
         playerTargetGroup.AddMember(player.gameObject.transform, 1f, 2f);
     }
@@ -100,7 +100,7 @@ public class TutorialSceneManager : MonoBehaviour
         hud.SetPlayer(playerManager, playerSetting);
     }
 
-    public void onPlayerDie(GameObject player)
+    public void onPlayerRespawn(GameObject player)
     {
         PlayerManager pm = player.GetComponent<PlayerManager>();
         pm.Teleport(spawnPoints.GetSpawnPoint());

@@ -133,4 +133,22 @@ public class PlayerStats : MonoBehaviour
             onPlayerDie(gameObject);
         }
     }
+
+    public event Action<GameObject> onPlayerRespawn;
+    public void PlayerRespawn()
+    {
+        if (onPlayerRespawn != null)
+        {
+            onPlayerRespawn(gameObject);
+        }
+    }
+
+    public event Action<GameObject> onPlayerDespawn;
+    public void PlayerDespawn()
+    {
+        if (onPlayerDespawn != null)
+        {
+            onPlayerDespawn(gameObject);
+        }
+    }
 }

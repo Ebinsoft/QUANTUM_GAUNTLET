@@ -11,14 +11,17 @@ public class PlayerDeadState : PlayerBaseState
         canMove = false;
         canRotate = false;
         cancelMomentum = true;
+
     }
 
     public override void EnterState()
     {
         player.isDead = true;
-        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(false);
-        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(false);
-        player.transform.Find("PlayerIcon").gameObject.SetActive(false);
+
+
+        player.stats.lives--;
+        player.stats.health = 0;
+        player.stats.PlayerDie();
     }
 
     public override void UpdateState()
@@ -29,22 +32,17 @@ public class PlayerDeadState : PlayerBaseState
     public override void ExitState()
     {
         player.isDead = false;
-        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(true);
-        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(true);
-        player.transform.Find("PlayerIcon").gameObject.SetActive(true);
+        player.stats.PlayerDespawn();
+        // explode stuff should happen here
     }
 
     public override void CheckStateUpdate()
     {
-
-        if (player.stats.lives > 0)
+        if (!player.anim.GetBool("InDying"))
         {
-            player.stats.lives--;
-            player.stats.health = 0;
-            player.stats.PlayerDie();
             if (player.stats.lives == 0)
             {
-                player.stats.PlayerLose();
+                SwitchState(player.DefeatState);
             }
             else
             {
