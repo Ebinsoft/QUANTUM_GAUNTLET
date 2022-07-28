@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireFistProjectile
   m_EditorClassIdentifier: 
   attackName: FireFistProjectile
-  damage: 15
+  damage: 150
   manaCost: 0
   manaGain: 0
   hitlagTime: 0.2
@@ -21,7 +21,15 @@ MonoBehaviour:
   knockbackMagnitude: 2
   stunCalculation: 0
   baseStun: 0.2
+  hasAimAssist: 0
+  aimAssistDistance: 0
+  aimAssistAngle: 0
   hasSpecialBehavior: 0
   specialBehavior:
     className: 
     qualifiedName: 
+  impactSoundType: 0
+  presetImpactSound: 0
+  customImpactSound:
+    clip: {fileID: 0}
+    volume: 0

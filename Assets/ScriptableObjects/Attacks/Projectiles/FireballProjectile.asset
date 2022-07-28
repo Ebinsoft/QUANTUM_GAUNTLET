@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireballProjectile
   m_EditorClassIdentifier: 
   attackName: FireballProjectile
-  damage: 15
+  damage: 150
   manaCost: 0
   manaGain: 0
   hitlagTime: 0.13333334
@@ -21,7 +21,15 @@ MonoBehaviour:
   knockbackMagnitude: 5
   stunCalculation: 0
   baseStun: 0.5
+  hasAimAssist: 0
+  aimAssistDistance: 0
+  aimAssistAngle: 0
   hasSpecialBehavior: 0
   specialBehavior:
     className: 
     qualifiedName: 
+  impactSoundType: 0
+  presetImpactSound: 0
+  customImpactSound:
+    clip: {fileID: 0}
+    volume: 0
