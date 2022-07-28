@@ -1,9 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLightAttackState : PlayerBaseState
 {
 
     private PlayerManager player;
+
+
+    private enum BufferedAttack
+    {
+        Light,
+        Heavy
+    }
+    private List<BufferedAttack> bufferedAttacks;
+
     public PlayerLightAttackState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -17,14 +27,35 @@ public class PlayerLightAttackState : PlayerBaseState
         player.isAttacking = true;
         player.anim.SetBool("InMelee", true);
 
-        TriggerHit();
+        bufferedAttacks = new List<BufferedAttack>();
+
+        // trigger initial light attack
+        player.isLightAttackTriggered = false;
+        player.lightAttacksLeft--;
+        player.anim.SetTrigger("LightAttack");
     }
 
     public override void UpdateState()
     {
+        // buffer a subsequent light attack
         if (player.lightAttacksLeft > 0 && player.isLightAttackTriggered)
         {
-            TriggerHit();
+            player.isLightAttackTriggered = false;
+            player.lightAttacksLeft--;
+            bufferedAttacks.Add(BufferedAttack.Light);
+        }
+        // buffer a heavy attack
+        else if (player.isHeavyAttackTriggered)
+        {
+            player.isHeavyAttackTriggered = false;
+            bufferedAttacks.Add(BufferedAttack.Heavy);
+        }
+
+        // if a light attack is buffered, trigger it
+        if (!player.anim.GetBool("LightAttack") && NextBufferedIs(BufferedAttack.Light))
+        {
+            bufferedAttacks.RemoveAt(0);
+            player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
         }
     }
 
@@ -42,19 +73,16 @@ public class PlayerLightAttackState : PlayerBaseState
             SwitchState(player.IdleState);
         }
 
-        else if (player.isHeavyAttackTriggered)
+        // if a heavy attack is buffered, transition to heavy atttack state
+        else if (!player.anim.GetBool("LightAttack") && NextBufferedIs(BufferedAttack.Heavy))
         {
             SwitchState(player.HeavyAttackState);
         }
     }
 
-    void TriggerHit()
+
+    bool NextBufferedIs(BufferedAttack attackType)
     {
-        if (player.lightAttacksLeft > 0)
-        {
-            player.isLightAttackTriggered = false;
-            player.anim.SetTrigger("LightAttack");     // triggers the start of an attack
-            player.lightAttacksLeft--;
-        }
+        return bufferedAttacks.Count > 0 && bufferedAttacks[0] == attackType;
     }
 }
