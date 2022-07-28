@@ -15,7 +15,7 @@ MonoBehaviour:
   attackName: Roundhouse Kick
   damage: 150
   manaCost: 0
-  manaGain: 100
+  manaGain: 50
   hitlagTime: 0.13333334
   knockbackAngle: 80
   knockbackMagnitude: 5

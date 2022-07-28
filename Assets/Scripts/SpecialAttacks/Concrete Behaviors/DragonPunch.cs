@@ -13,7 +13,7 @@ public class DragonPunch : SpecialAttackBehavior
     float chargeTimer;
     float maxChargeTime = 2.0f;
 
-    float manaDrainPerSecond = 200;
+    float manaDrainPerSecond = 100;
 
     // distance away from player's XZ position to spawn projectile
     float spawnDistance = 0.5f;
