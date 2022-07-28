@@ -7,12 +7,12 @@ public class FireFistBehavior : ProjectileBehavior
     private float lifetime;
 
     private float chargePercent;
-    private float baseRange = 1f;
+    private float baseRange = 2.5f;
 
     private float damageScaling = 2f;
     private float knockbackScaling = 2.5f;
     private float sizeScaling = 2f;
-    private float rangeScaling = 1.5f;
+    private float rangeScaling = 2f;
 
     public override void OnSpawn()
     {

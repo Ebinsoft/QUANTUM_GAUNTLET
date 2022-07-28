@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knee
   m_EditorClassIdentifier: 
   attackName: Knee
-  damage: 70
+  damage: 100
   manaCost: 0
   manaGain: 100
   hitlagTime: 0.13333334

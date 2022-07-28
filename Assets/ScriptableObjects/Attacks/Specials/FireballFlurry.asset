@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: FireballFlurry
   damage: 0
-  manaCost: 350
+  manaCost: 300
   manaGain: 0
   hitlagTime: 0
   knockbackAngle: 90

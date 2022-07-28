@@ -9832,7 +9832,7 @@ MonoBehaviour:
     className: FireballBehavior
     qualifiedName: FireballBehavior, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  attack: {fileID: 11400000, guid: 418e210b1ed60bb4495807d5326a96e2, type: 2}
+  attack: {fileID: 11400000, guid: 696ca4ed8e7e0124eac0529ba25c666b, type: 2}
   movementSpeed: 7
   rotationSpeed: 10
   rotationTargetDirection: {x: 0, y: 0, z: 0}

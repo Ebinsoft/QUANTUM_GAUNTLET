@@ -4159,7 +4159,7 @@ MonoBehaviour:
       character: 0
     - playerID: 1
       playerName: CPU2
-      playerType: 2
+      playerType: 1
       deviceString: 
       team:
         teamID: 1
