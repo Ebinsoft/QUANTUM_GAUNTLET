@@ -17,10 +17,10 @@ MonoBehaviour:
   manaCost: 0
   manaGain: 100
   hitlagTime: 0.13333334
-  knockbackAngle: 90
+  knockbackAngle: 5
   knockbackMagnitude: 1
   stunCalculation: 0
-  baseStun: 0.1
+  baseStun: 0.5
   hasAimAssist: 0
   aimAssistDistance: 0
   aimAssistAngle: 0

@@ -20,7 +20,7 @@ MonoBehaviour:
   knockbackAngle: 90
   knockbackMagnitude: 3
   stunCalculation: 0
-  baseStun: 0.15
+  baseStun: 0.4
   hasAimAssist: 0
   aimAssistDistance: 0
   aimAssistAngle: 0
