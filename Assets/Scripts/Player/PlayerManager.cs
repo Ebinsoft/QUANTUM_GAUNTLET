@@ -26,11 +26,12 @@ public class PlayerManager : MonoBehaviour
     public PlayerSpecial2State Special2State;
     public PlayerSpecial3State Special3State;
     public PlayerStunState StunState;
-    public PlayerDyingState DyingState;
+    public PlayerDefeatState DefeatState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
     public PlayerTumblingState TumblingState;
     public PlayerCrashingState CrashingState;
+    public PlayerVictoryState VictoryState;
 
     // Other Stuff
     public Animator anim;
@@ -154,6 +155,10 @@ public class PlayerManager : MonoBehaviour
     // respawn variables
     public bool isRespawning = false;
 
+    // victory variables
+    public bool triggerVictory = false;
+
+
     void Awake()
     {
         // initialize each concrete state
@@ -171,11 +176,12 @@ public class PlayerManager : MonoBehaviour
         Special3State = new PlayerSpecial3State(this);
         DashingState = new PlayerDashingState(this);
         StunState = new PlayerStunState(this);
-        DyingState = new PlayerDyingState(this);
+        DefeatState = new PlayerDefeatState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
         TumblingState = new PlayerTumblingState(this);
         CrashingState = new PlayerCrashingState(this);
+        VictoryState = new PlayerVictoryState(this);
 
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();

@@ -18,6 +18,7 @@ public class PlayerRespawningState : PlayerBaseState
     {
         player.isRespawning = true;
         player.animEffects.CancelHit();
+        player.stats.PlayerRespawn();
 
 
         player.stats.ResetStats();

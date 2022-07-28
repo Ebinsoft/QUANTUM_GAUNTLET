@@ -66,19 +66,23 @@ public abstract class PlayerBaseState
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
-        if (player.triggerDead)
+        if (player.triggerVictory)
+        {
+            player.triggerVictory = false;
+            SwitchState(player.VictoryState);
+        }
+        else if (player.triggerDead)
         {
             player.triggerHit = false;
             player.triggerDead = false;
 
             if (player.playDeathAnimation)
             {
-                SwitchState(player.DyingState);
+                player.anim.SetBool("InDying", true);
+                player.anim.Play("Die");
             }
-            else
-            {
-                SwitchState(player.DeadState);
-            }
+
+            SwitchState(player.DeadState);
         }
         else if (player.triggerHit)
         {

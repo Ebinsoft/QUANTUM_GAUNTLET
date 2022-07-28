@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using Cinemachine;
+using TMPro;
 using System;
 
 public class VersusSceneManager : MonoBehaviour
@@ -11,11 +12,14 @@ public class VersusSceneManager : MonoBehaviour
     public static VersusSceneManager instance;
     public PlayerInputManager playerInputManager;
     public PauseMenu gameOverMenu;
+    public GameObject GameOverSplash;
+    public GameObject WinText;
     public CinemachineTargetGroup playerTargetGroup;
+    public CinemachineVirtualCamera cinemachineCamera;
+    public CinemachineVirtualCamera gameEndCamera;
     public UnityEngine.Object playerHUDPrefab;
     // should generate these dynamically once we add stage loading
     private SpawnPoints spawnPoints;
-    private bool isGameOver = false;
 
     void Awake()
     {
@@ -25,7 +29,6 @@ public class VersusSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isGameOver = false;
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
         GameObject stage = SpawnStage();
         spawnPoints = stage.GetComponent<SpawnPoints>();
@@ -68,11 +71,7 @@ public class VersusSceneManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isGameOver && CheckIfGameOver())
-        {
-            isGameOver = true;
-            gameOverMenu.EnableGameOver();
-        }
+
     }
 
     // Will load the stage from VersusInfo, handle random, and return the instantiated object
@@ -101,8 +100,9 @@ public class VersusSceneManager : MonoBehaviour
         // subscribe to player's event for their death for removal from list
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         playerStats.onPlayerSpawn += onPlayerSpawn;
-        playerStats.onPlayerLose += onPlayerLose;
         playerStats.onPlayerDie += onPlayerDie;
+        playerStats.onPlayerRespawn += onPlayerRespawn;
+        playerStats.onPlayerLose += onPlayerLose;
         // Add player to tracked objects of camera
         playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
@@ -113,14 +113,51 @@ public class VersusSceneManager : MonoBehaviour
             GameManager.instance.versusInfo.playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
             .GroupBy(c => c.tag)
             .Count();
-        if (numUniqueTeamsStillAlive > 1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+
+        return numUniqueTeamsStillAlive <= 1;
+    }
+
+    public void FinishGame()
+    {
+        StartCoroutine(GameOutro());
+    }
+
+    // This will immediately print game on the screen and slow the game down for a bit for cool effect
+    public IEnumerator GameOutro()
+    {
+        GameOverSplash.SetActive(true);
+        Time.timeScale = .25f;
+        yield return new WaitForSeconds(1f);
+        GameOverSplash.SetActive(false);
+        Time.timeScale = 1f;
+        // rotate camera
+
+        // get first player that's alive in the winning team so only focus on one
+        var firstPlayer = GameManager.instance.versusInfo.playerList
+        .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
+        .First(c => c);
+
+        cinemachineCamera.gameObject.SetActive(false);
+        gameEndCamera.gameObject.SetActive(true);
+        gameEndCamera.Follow = firstPlayer.transform;
+        gameEndCamera.LookAt = firstPlayer.transform;
+        // this should probably actually wait for the winning animation to finish
+        yield return new WaitForSeconds(2f);
+
+        // put winning player into victory state
+        firstPlayer.GetComponent<PlayerManager>().triggerVictory = true;
+        yield return new WaitForSeconds(2f);
+
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(firstPlayer.GetComponent<PlayerManager>().playerID);
+        WinText.GetComponent<TextMeshProUGUI>().color = ps.team.teamColor;
+        string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName + " TEAM";
+        WinText.SetActive(true);
+        WinText.GetComponent<TextMeshProUGUI>().SetText(winString + " WINS!");
+
+        yield return new WaitForSeconds(2f);
+
+        WinText.SetActive(false);
+        gameOverMenu.EnablePauseMenu();
     }
 
     public void onPlayerSpawn(GameObject player)
@@ -129,13 +166,21 @@ public class VersusSceneManager : MonoBehaviour
         pm.stats.lives = GameManager.instance.versusInfo.numLives;
     }
 
+    public void onPlayerDie(GameObject player)
+    {
+        if (CheckIfGameOver())
+        {
+            FinishGame();
+        }
+    }
+
     public void onPlayerLose(GameObject player)
     {
         GameManager.instance.versusInfo.playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
     }
 
-    public void onPlayerDie(GameObject player)
+    public void onPlayerRespawn(GameObject player)
     {
         PlayerManager pm = player.GetComponent<PlayerManager>();
         pm.Teleport(spawnPoints.GetSpawnPoint());
