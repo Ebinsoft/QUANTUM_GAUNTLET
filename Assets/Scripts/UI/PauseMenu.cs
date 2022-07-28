@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     private GameObject pauseMenuPane;
     private GameObject firstSelectedButton;
+    private VolumeSlider musicSlider;
+    private VolumeSlider sfxSlider;
     private bool isEnabled = false;
     // Start is called before the first frame update
     void Start()
     {
+        isEnabled = false;
         pauseMenuPane = transform.Find("Pane").gameObject;
         firstSelectedButton = pauseMenuPane.transform.Find("Buttons").Find("Restart").gameObject;
-        isEnabled = false;
+        var buttons = pauseMenuPane.transform.Find("Buttons");
+        musicSlider = buttons.Find("Music Volume").GetComponent<VolumeSlider>();
+        sfxSlider = buttons.Find("SFX Volume").GetComponent<VolumeSlider>();
         DisablePauseMenu();
     }
 
@@ -34,6 +40,12 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void UpdateSliderVolumes()
+    {
+        musicSlider.UpdateSlider();
+        sfxSlider.UpdateSlider();
+    }
+
     public void EnablePauseMenu()
     {
         AudioManager.instance.masterMixer.SetFloat("MusicLowPassFreq", 500f);
@@ -45,6 +57,7 @@ public class PauseMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         // set starting button
         EventSystem.current.SetSelectedGameObject(firstSelectedButton);
+        UpdateSliderVolumes();
     }
 
     public void DisablePauseMenu()
