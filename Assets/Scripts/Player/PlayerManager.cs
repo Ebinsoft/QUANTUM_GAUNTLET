@@ -136,7 +136,7 @@ public class PlayerManager : MonoBehaviour
     public float gravity;
     public float jumpGravity;
     public float gravityMultiplier = 1.0f;
-    private float groundedGravity = -5f;
+    private float groundedGravity = -8f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
@@ -238,7 +238,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 p1 = transform.position + characterController.center;
 
         float capsuleWidth = 0.35f;
-        float centerToFloor = (characterController.height / 2);
+        float centerToFloor = (characterController.height / 2f);
 
         bool isSphereHit = false;
         // cast a sphere
