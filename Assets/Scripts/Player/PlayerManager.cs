@@ -141,8 +141,8 @@ public class PlayerManager : MonoBehaviour
 
     // normal-attack variables
     public bool isAttacking = false;
-    public int maxLightAttackChain = 3;
-    public int lightAttacksLeft = 3;
+    public int maxLightAttackChain = 4;
+    public int lightAttacksLeft = 4;
     public int maxHeavyAttackChain = 1;
     public int heavyAttacksLeft = 1;
 

@@ -34829,14 +34829,16 @@ MonoBehaviour:
   gravityMultiplier: 1
   maxFallingSpeed: -10
   isAttacking: 0
-  maxLightAttackChain: 3
-  lightAttacksLeft: 3
+  maxLightAttackChain: 4
+  lightAttacksLeft: 4
   maxHeavyAttackChain: 1
   heavyAttacksLeft: 1
   triggerDead: 0
+  playDeathAnimation: 0
   canDie: 1
   isDead: 0
   isRespawning: 0
+  triggerVictory: 0
 --- !u!114 &1866671546389507605
 MonoBehaviour:
   m_ObjectHideFlags: 0

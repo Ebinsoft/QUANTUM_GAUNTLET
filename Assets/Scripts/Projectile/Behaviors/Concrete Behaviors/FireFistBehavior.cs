@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class FireFistBehavior : ProjectileBehavior
 {
-    private float timeSpentMoving = 15f / 60;
+    private float timeSpentMoving = 20f / 60;
     private float maxLifetime = 30f / 60;
     private float lifetime;
 
     private float chargePercent;
-    private float baseRange = 1f;
+    private float baseRange = 2.5f;
 
-    private float damageScaling = 2f;
+    private float damageScaling = 4f;
     private float knockbackScaling = 2.5f;
     private float sizeScaling = 2f;
-    private float rangeScaling = 1.5f;
+    private float rangeScaling = 4f;
 
     public override void OnSpawn()
     {
