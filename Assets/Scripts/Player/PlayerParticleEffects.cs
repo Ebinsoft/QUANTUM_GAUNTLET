@@ -6,13 +6,11 @@ public class PlayerParticleEffects : MonoBehaviour
 {
     PlayerManager player;
 
+    public HitSparks hitSparks;
     public ParticleSystem dustBurst;
     public ParticleSystem dustTrail;
     public ParticleSystem smokeTrail;
     public ParticleSystem fireTrail;
-
-    public ParticleSystem hitParticles;
-
     public ParticleSystem fireBurst;
     public ParticleSystem chargingParticles;
 
@@ -21,10 +19,10 @@ public class PlayerParticleEffects : MonoBehaviour
         dustBurst.Play();
     }
 
-    public void PlayHitEffectAt(Vector3 pos)
+    public void PlayHitSparksAt(Vector3 pos, int damage)
     {
-        hitParticles.transform.position = pos;
-        hitParticles.Play();
+        hitSparks.transform.position = pos;
+        hitSparks.Play(damage);
     }
 
     public void PlayFireBurstAt(Vector3 pos)
