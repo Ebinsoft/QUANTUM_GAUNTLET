@@ -2162,7 +2162,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.5943396, g: 0.48249727, b: 0.3498754, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -4146,7 +4146,7 @@ MonoBehaviour:
       stagePrefab: {fileID: 2068888630654130343, guid: b6ef7217d7c638e42b6949ff4128ed5c, type: 3}
   versusInfo:
     numPlayers: 2
-    stage: 2
+    stage: 1
     gameType: 0
     numLives: 3
     playerSettings:
