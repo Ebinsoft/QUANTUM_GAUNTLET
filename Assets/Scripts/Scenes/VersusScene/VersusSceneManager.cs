@@ -4,17 +4,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using Cinemachine;
+using TMPro;
 using System;
 
 public class VersusSceneManager : MonoBehaviour
 {
     public static VersusSceneManager instance;
     public PlayerInputManager playerInputManager;
-    public List<GameObject> playerList;
     public PauseMenu gameOverMenu;
+    public GameObject GameOverSplash;
+    public GameObject WinText;
     public CinemachineTargetGroup playerTargetGroup;
+    public CinemachineVirtualCamera cinemachineCamera;
+    public CinemachineVirtualCamera gameEndCamera;
     public UnityEngine.Object playerHUDPrefab;
-    private bool isGameOver = false;
+    // should generate these dynamically once we add stage loading
+    private SpawnPoints spawnPoints;
 
     void Awake()
     {
@@ -24,94 +29,168 @@ public class VersusSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var versusInfo = GameManager.instance.versusInfo;
-        int numPlayers = versusInfo.numPlayers;
-        isGameOver = false;
-        // order Humans first so that we don't have Robot instantiation gobbling up PlayerIndexes
-        versusInfo.playerSettings = versusInfo.playerSettings.OrderBy(c => c.playerType).ToList<PlayerSetting>();
-        for (int i = 0; i < versusInfo.playerSettings.Count; i++)
+        GameManager.instance.versusInfo.playerList = new List<GameObject>();
+        GameObject stage = SpawnStage();
+        spawnPoints = stage.GetComponent<SpawnPoints>();
+        List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
+        foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
         {
-            PlayerSetting ps = versusInfo.playerSettings[i];
-            // TODO: Remove the need to ever gather playerIndex and just generate it here
-            ps.playerIndex = i;
+            CharacterData c = GameManager.instance.roster.GetCharacter(ps.character);
+            playerInputManager.playerPrefab = c.characterPrefab;
+            // set player ID
+            c.characterPrefab.GetComponent<PlayerManager>().playerID = ps.playerID;
 
-            CharacterData c = GameManager.instance.roster.GetCharacter(ps.characterName);
             PlayerManager playerManager = null;
-
-            if (ps.playerType == PlayerType.Human)
+            switch (ps.playerType)
             {
-                playerInputManager.playerPrefab = c.characterPrefab;
-                if (ps.device != null)
-                {
-
-                    var playerInput = playerInputManager.JoinPlayer(i, -1, null, ps.device);
-                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                }
-                else
-                {
-                    // This is for simple debugging directly from Versus scene
-                    var playerInput = playerInputManager.JoinPlayer(i, -1, null);
-                    playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
-                }
-
+                case PlayerType.Human:
+                    if (ps.device != null)
+                    {
+                        var playerInput = playerInputManager.JoinPlayer(-1, -1, null, ps.device);
+                        playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                    }
+                    else
+                    {
+                        // This is for simple debugging directly from Versus scene
+                        var playerInput = playerInputManager.JoinPlayer();
+                        playerManager = playerInput.gameObject.GetComponent<PlayerManager>();
+                    }
+                    break;
+                case PlayerType.Robot:
+                    playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
+                    break;
             }
 
-            else if (ps.playerType == PlayerType.Robot)
-            {
-                playerManager = ((GameObject)Instantiate(c.characterPrefab)).GetComponent<PlayerManager>();
-            }
-
+            playerManager.Teleport(startingSpawns[0]);
+            startingSpawns.RemoveAt(0);
+            HookUpPlayer(playerManager.gameObject);
             CreatePlayerHUD(playerManager, ps);
+            c.characterPrefab.GetComponent<PlayerManager>().playerID = 0;
         }
     }
 
     private void Update()
     {
-        if (!isGameOver && CheckIfGameOver())
-        {
-            isGameOver = true;
-            gameOverMenu.EnableGameOver();
-        }
+
     }
 
-    public void OnPlayerJoined(PlayerInput playerInput)
+    // Will load the stage from VersusInfo, handle random, and return the instantiated object
+    public GameObject SpawnStage()
     {
-        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(playerInput.playerIndex);
+        StageData sd;
+        var vi = GameManager.instance.versusInfo;
+        if (vi.stage == Stage.Random)
+        {
+            sd = GameManager.instance.roster.GetRandomStage();
+        }
+        else
+        {
+            sd = GameManager.instance.roster.GetStage(vi.stage);
+        }
+
+        GameObject stage = Instantiate(sd.stagePrefab);
+
+        return stage;
+    }
+
+    public void HookUpPlayer(GameObject playerObject)
+    {
         // whenever a player joins, get a reference to their GameObject 
-        playerList.Add(playerInput.gameObject);
+        GameManager.instance.versusInfo.playerList.Add(playerObject);
         // subscribe to player's event for their death for removal from list
-        playerInput.gameObject.GetComponent<PlayerStats>().onPlayerLose += onPlayerLose;
+        PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
+        playerStats.onPlayerSpawn += onPlayerSpawn;
+        playerStats.onPlayerDie += onPlayerDie;
+        playerStats.onPlayerRespawn += onPlayerRespawn;
+        playerStats.onPlayerLose += onPlayerLose;
         // Add player to tracked objects of camera
-        playerTargetGroup.AddMember(playerInput.gameObject.transform, 1f, 2f);
+        playerTargetGroup.AddMember(playerObject.transform, 1f, 2f);
     }
 
     public bool CheckIfGameOver()
     {
         int numUniqueTeamsStillAlive =
-            playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
+            GameManager.instance.versusInfo.playerList.Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
             .GroupBy(c => c.tag)
             .Count();
-        if (numUniqueTeamsStillAlive > 1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
 
+        return numUniqueTeamsStillAlive <= 1;
+    }
+
+    public void FinishGame()
+    {
+        StartCoroutine(GameOutro());
+    }
+
+    // This will immediately print game on the screen and slow the game down for a bit for cool effect
+    public IEnumerator GameOutro()
+    {
+        GameOverSplash.SetActive(true);
+        Time.timeScale = .25f;
+        yield return new WaitForSeconds(1f);
+        GameOverSplash.SetActive(false);
+        Time.timeScale = 1f;
+        // rotate camera
+
+        // get first player that's alive in the winning team so only focus on one
+        var firstPlayer = GameManager.instance.versusInfo.playerList
+        .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
+        .First(c => c);
+
+        cinemachineCamera.gameObject.SetActive(false);
+        gameEndCamera.gameObject.SetActive(true);
+        gameEndCamera.Follow = firstPlayer.transform;
+        gameEndCamera.LookAt = firstPlayer.transform;
+        // this should probably actually wait for the winning animation to finish
+        yield return new WaitForSeconds(2f);
+
+        // put winning player into victory state
+        firstPlayer.GetComponent<PlayerManager>().triggerVictory = true;
+        yield return new WaitForSeconds(2f);
+
+        PlayerSetting ps = GameManager.instance.versusInfo.GetPlayer(firstPlayer.GetComponent<PlayerManager>().playerID);
+        WinText.GetComponent<TextMeshProUGUI>().color = ps.team.teamColor;
+        string winString = GameManager.instance.versusInfo.gameType == GameMode.FFA ? ps.playerName : ps.team.teamName + " TEAM";
+        WinText.SetActive(true);
+        WinText.GetComponent<TextMeshProUGUI>().SetText(winString + " WINS!");
+
+        yield return new WaitForSeconds(2f);
+
+        WinText.SetActive(false);
+        gameOverMenu.EnablePauseMenu();
+    }
+
+    public void onPlayerSpawn(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.stats.lives = GameManager.instance.versusInfo.numLives;
+    }
+
+    public void onPlayerDie(GameObject player)
+    {
+        if (CheckIfGameOver())
+        {
+            FinishGame();
+        }
     }
 
     public void onPlayerLose(GameObject player)
     {
-        playerList.Remove(player);
+        GameManager.instance.versusInfo.playerList.Remove(player);
         playerTargetGroup.RemoveMember(player.transform);
+    }
+
+    public void onPlayerRespawn(GameObject player)
+    {
+        PlayerManager pm = player.GetComponent<PlayerManager>();
+        pm.Teleport(spawnPoints.GetSpawnPoint());
     }
 
     private void CreatePlayerHUD(PlayerManager playerManager, PlayerSetting playerSetting)
     {
         GameObject hudObj = (GameObject)Instantiate(playerHUDPrefab);
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+
         hudObj.transform.SetParent(canvas.transform);
 
         PlayerHUD hud = hudObj.GetComponent<PlayerHUD>();

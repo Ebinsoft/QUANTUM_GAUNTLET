@@ -9,7 +9,7 @@ public class KillPlane : MonoBehaviour
         var player = other.GetComponent<PlayerManager>();
         if (player != null)
         {
-            player.triggerDead = true;
+            player.TriggerDeath(playAnimation: false);
         }
     }
 }

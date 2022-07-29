@@ -1,9 +1,6 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 
 public class ProjectileManager : MonoBehaviour
 {
@@ -87,7 +84,7 @@ public class ProjectileManager : MonoBehaviour
             HitData hitData = new HitData() { attack = attack, direction = direction };
 
             GameObject playerHit = other.attachedRigidbody.gameObject;
-            bool hitResolved = playerHit.GetComponent<PlayerHitHandler>().handleHit(hitData);
+            bool hitResolved = playerHit.GetComponent<IHitHandler>().handleHit(hitData);
 
             if (hitResolved)
             {
@@ -102,30 +99,5 @@ public class ProjectileManager : MonoBehaviour
     {
         behavior.OnDestroy();
         Destroy(gameObject, delay);
-    }
-}
-
-
-[CustomEditor(typeof(ProjectileManager))]
-public class ProjectileManagerEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        ProjectileManager obj = target as ProjectileManager;
-
-        // projectile behavior selector
-        obj.behaviorType = SubclassSelector.Dropdown<ProjectileBehavior>("Behavior", obj.behaviorType);
-
-        // attack info
-        obj.attack = (AttackInfo)EditorGUILayout.ObjectField("Attack", obj.attack, typeof(AttackInfo), false);
-
-        // speeds
-        obj.movementSpeed = EditorGUILayout.FloatField("Movement Speed", obj.movementSpeed);
-        obj.rotationSpeed = EditorGUILayout.FloatField("Rotation Speed", obj.rotationSpeed);
-
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(obj);
-        }
     }
 }

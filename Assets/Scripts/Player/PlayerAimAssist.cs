@@ -15,7 +15,7 @@ public class PlayerAimAssist : MonoBehaviour
 
     public void TrackNearestOpponent(float distance, float angle)
     {
-        var closestOpponent = VersusSceneManager.instance.playerList
+        var closestOpponent = GameManager.instance.versusInfo.playerList
             .Where(p => p.tag != this.tag)
             .Where(p => AngleToMe(p.transform.position) < angle / 2)
             .Select(p => new Tuple<GameObject, float>(p, Vector3.Distance(transform.position, p.transform.position)))

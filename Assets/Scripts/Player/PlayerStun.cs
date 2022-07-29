@@ -16,9 +16,18 @@ public class PlayerStun : MonoBehaviour
         player.anim.SetBool("IsStunned", true);
     }
 
+    private void CancelStun(GameObject obj)
+    {
+        player.isStunned = false;
+        player.anim.SetBool("IsStunned", false);
+    }
+
     void Start()
     {
         player = GetComponent<PlayerManager>();
+
+        // cancel any lingering stun on player death
+        player.stats.onPlayerDie += CancelStun;
     }
 
     void Update()

@@ -6,9 +6,9 @@ public abstract class PlayerBaseState
 
     // Behavior booleans - concrete states can override these to easily modify common behaviors
     // allows X/Z movement during state
-    protected bool canMove = false;
-    protected bool canRotate = false;
-    protected bool cancelMomentum = false;
+    public bool canMove = false;
+    public bool canRotate = false;
+    public bool cancelMomentum = false;
     public PlayerBaseState(PlayerManager psm)
     {
         player = psm;
@@ -34,7 +34,7 @@ public abstract class PlayerBaseState
     public void Update()
     {
 
-        if (player.currentState.canMove && player.isMovePressed)
+        if (player.isMovementEnabled && player.currentState.canMove && player.isMovePressed)
         {
             Move();
         }
@@ -66,13 +66,30 @@ public abstract class PlayerBaseState
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
-        if (player.triggerDead)
+        if (player.triggerVictory)
+        {
+            player.triggerVictory = false;
+            SwitchState(player.VictoryState);
+        }
+        else if (player.triggerDead)
         {
             player.triggerHit = false;
+            player.triggerDead = false;
+
+            if (player.playDeathAnimation)
+            {
+                player.anim.SetBool("InDying", true);
+                player.anim.Play("Die");
+            }
+
             SwitchState(player.DeadState);
         }
         else if (player.triggerHit)
         {
+            player.triggerHit = false;
+            // force the animator to ignore its current transition rules and play the stun animation
+            player.anim.Play("Take Hit");
+
             if (player.isGrounded)
             {
                 SwitchState(player.StunState);
@@ -82,7 +99,6 @@ public abstract class PlayerBaseState
             {
                 SwitchState(player.TumblingState);
             }
-
         }
 
         else

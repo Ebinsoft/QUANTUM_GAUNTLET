@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public PlayerBaseStats baseStats;
     public int health;
     public float mana;
-    public int lives = 3;
+    public int lives;
 
     public bool canTakeDamage { get; private set; }
     public bool canGiveRecoil { get; private set; }
@@ -66,9 +66,14 @@ public class PlayerStats : MonoBehaviour
         canTakeDamage = true;
         canGetStunned = true;
         canGiveRecoil = true;
-        resetStats();
+        ResetStats();
 
         shaderEffects = GetComponentInChildren<ShaderEffects>();
+    }
+
+    void Start()
+    {
+        PlayerSpawn();
     }
 
     void Update()
@@ -76,7 +81,7 @@ public class PlayerStats : MonoBehaviour
         RestoreMana(baseStats.manaRegen * Time.deltaTime);
     }
 
-    public void resetStats()
+    public void ResetStats()
     {
         health = baseStats.baseHealth;
         mana = baseStats.baseMana;
@@ -102,15 +107,48 @@ public class PlayerStats : MonoBehaviour
         mana = Mathf.Clamp(mana + amount, 0, baseStats.baseMana);
     }
 
+    public event Action<GameObject> onPlayerSpawn;
+    public void PlayerSpawn()
+    {
+        if (onPlayerSpawn != null)
+        {
+            onPlayerSpawn(gameObject);
+        }
+    }
+
     public event Action<GameObject> onPlayerLose;
     public void PlayerLose()
     {
-        onPlayerLose(gameObject);
+        if (onPlayerLose != null)
+        {
+            onPlayerLose(gameObject);
+        }
     }
 
     public event Action<GameObject> onPlayerDie;
     public void PlayerDie()
     {
-        onPlayerDie(gameObject);
+        if (onPlayerDie != null)
+        {
+            onPlayerDie(gameObject);
+        }
+    }
+
+    public event Action<GameObject> onPlayerRespawn;
+    public void PlayerRespawn()
+    {
+        if (onPlayerRespawn != null)
+        {
+            onPlayerRespawn(gameObject);
+        }
+    }
+
+    public event Action<GameObject> onPlayerDespawn;
+    public void PlayerDespawn()
+    {
+        if (onPlayerDespawn != null)
+        {
+            onPlayerDespawn(gameObject);
+        }
     }
 }
