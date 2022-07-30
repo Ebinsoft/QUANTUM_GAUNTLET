@@ -1285,7 +1285,19 @@ MonoBehaviour:
       volume: 1
   - soundType: 2
     sound:
-      clip: {fileID: 8300000, guid: 1ed13209f2dd53041b241b84acb548f6, type: 3}
+      clip: {fileID: 8300000, guid: 9da8a5b98e437754ea2e14d8b13c3a7f, type: 3}
+      volume: 1
+  - soundType: 3
+    sound:
+      clip: {fileID: 8300000, guid: b0e397bf036b5d8479644f2cd19c43f0, type: 3}
+      volume: 1
+  - soundType: 4
+    sound:
+      clip: {fileID: 8300000, guid: 5141580a600e6e041bd07d02be46921e, type: 3}
+      volume: 1
+  - soundType: 5
+    sound:
+      clip: {fileID: 8300000, guid: f69065d96097af5409fd08c90de87002, type: 3}
       volume: 1
   _movementSounds:
   - soundType: 0
@@ -1307,7 +1319,7 @@ MonoBehaviour:
   _fireSounds:
   - soundType: 0
     sound:
-      clip: {fileID: 8300000, guid: f76548b7bd325504ab569d0d87ee9d48, type: 3}
+      clip: {fileID: 8300000, guid: be91383f44a48644db879d3ee16c2ba6, type: 3}
       volume: 1
   - soundType: 1
     sound:
@@ -1319,8 +1331,8 @@ MonoBehaviour:
       volume: 1
   - soundType: 3
     sound:
-      clip: {fileID: 8300000, guid: d311f89d091410b43babd25f96884fcc, type: 3}
-      volume: 0.6
+      clip: {fileID: 8300000, guid: 248279c6e71f661448ca10d6a8ec6896, type: 3}
+      volume: 1
   _magicSounds:
   - soundType: 0
     sound:
