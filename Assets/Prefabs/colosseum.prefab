@@ -2615,7 +2615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299447095096700414, guid: 6727bd5f49ebb0746bc0e6b125a96096, type: 3}
       propertyPath: timer
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6299447095096700414, guid: 6727bd5f49ebb0746bc0e6b125a96096, type: 3}
       propertyPath: spawnee
