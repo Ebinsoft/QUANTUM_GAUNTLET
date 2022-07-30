@@ -1290,7 +1290,7 @@ MonoBehaviour:
   _movementSounds:
   - soundType: 0
     sound:
-      clip: {fileID: 8300000, guid: 3809d059b5ad79b43891e40a9e11fd12, type: 3}
+      clip: {fileID: 8300000, guid: 3c9c2e943680a904ebcd1e9b902c7430, type: 3}
       volume: 0.4
   - soundType: 1
     sound:
@@ -1298,11 +1298,11 @@ MonoBehaviour:
       volume: 1
   - soundType: 2
     sound:
-      clip: {fileID: 8300000, guid: ff4610360523fc745a67fd72ae5ac735, type: 3}
+      clip: {fileID: 8300000, guid: 19b16bf38c6b02c45b45c2f658f752d5, type: 3}
       volume: 1
   - soundType: 3
     sound:
-      clip: {fileID: 8300000, guid: 624c56db724fa9a439884ec333b28217, type: 3}
+      clip: {fileID: 8300000, guid: e947f4dcbcb21f84fa4e2fc526cd8f9c, type: 3}
       volume: 1
   _fireSounds:
   - soundType: 0
