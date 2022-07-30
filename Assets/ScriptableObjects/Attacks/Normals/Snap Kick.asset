@@ -29,7 +29,7 @@ MonoBehaviour:
     className: 
     qualifiedName: 
   impactSoundType: 1
-  presetImpactSound: 1
+  presetImpactSound: 4
   customImpactSound:
     clip: {fileID: 0}
     volume: 0

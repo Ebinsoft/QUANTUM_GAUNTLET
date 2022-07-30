@@ -42,7 +42,10 @@ public enum ImpactSound
 {
     PunchLight,
     PunchMedium,
-    PunchHeavy
+    PunchHeavy,
+    KickLight,
+    KickMedium,
+    KickHeavy
 }
 
 [System.Serializable]
