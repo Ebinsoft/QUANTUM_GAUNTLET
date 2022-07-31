@@ -31,6 +31,9 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoin
 
     public void OnDeselect(BaseEventData eventData)
     {
+        Sound s = AudioManager.UISounds[UISound.MainHover];
+        AudioManager.PlayAt(s, transform.parent.gameObject);
+
         buttonAnim.SetBool("IsSelected", false);
         iconAnim.SetBool("IsActive", false);
     }
