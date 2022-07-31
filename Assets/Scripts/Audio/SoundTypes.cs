@@ -116,3 +116,17 @@ public class MagicSoundElem
     public MagicSound soundType;
     public Sound sound;
 }
+
+// UI SOUNDS
+public enum UISound
+{
+    MainHover,
+    MainClick
+}
+
+[System.Serializable]
+public class UISoundElem
+{
+    public UISound soundType;
+    public Sound sound;
+}

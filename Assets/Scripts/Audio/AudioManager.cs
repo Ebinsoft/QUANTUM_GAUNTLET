@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
 
     public MagicSoundElem[] _magicSounds;
     public static Dictionary<MagicSound, Sound> magicSounds;
+
+    public UISoundElem[] _UISounds;
+    public static Dictionary<UISound, Sound> UISounds;
     public AudioMixer masterMixer;
     public AudioMixerGroup sfxMixerGroup;
     public AudioMixerGroup musicMixerGroup;
@@ -46,6 +49,7 @@ public class AudioManager : MonoBehaviour
         movementSounds = _movementSounds.ToDictionary(s => s.soundType, s => s.sound);
         fireSounds = _fireSounds.ToDictionary(s => s.soundType, s => s.sound);
         magicSounds = _magicSounds.ToDictionary(s => s.soundType, s => s.sound);
+        UISounds = _UISounds.ToDictionary(s => s.soundType, s => s.sound);
     }
 
     // play misc attack sound effect
