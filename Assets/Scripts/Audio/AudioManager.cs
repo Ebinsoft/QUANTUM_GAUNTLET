@@ -30,6 +30,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup sfxMixerGroup;
     public AudioMixerGroup musicMixerGroup;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
         if (instance == null)
@@ -44,6 +46,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         miscAttackSounds = _miscAttackSounds.ToDictionary(s => s.soundType, s => s.sound);
         impactSounds = _impactSounds.ToDictionary(s => s.soundType, s => s.sound);
         movementSounds = _movementSounds.ToDictionary(s => s.soundType, s => s.sound);
@@ -104,6 +107,12 @@ public class AudioManager : MonoBehaviour
         AudioSource source = GetAudioSource(obj);
         source.clip = s.clip;
         source.Play();
+    }
+
+    // play 2D sounds via the AudioManager's source, uses PlayOneShot so sounds dont interrupt each other
+    public static void Play2D(Sound s)
+    {
+        instance.audioSource.PlayOneShot(s.clip, 1f);
     }
 
     // play a custom sound effect
