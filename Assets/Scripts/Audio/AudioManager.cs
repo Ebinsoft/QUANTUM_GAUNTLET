@@ -97,6 +97,15 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
+    // play a UI sound effect
+    public static void PlayAt(UISound sound, GameObject obj)
+    {
+        Sound s = UISounds[sound];
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
+    }
+
     // play a custom sound effect
     public static void PlayAt(Sound sound, GameObject obj)
     {
