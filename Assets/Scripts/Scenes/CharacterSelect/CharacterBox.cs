@@ -28,6 +28,8 @@ public class CharacterBox : MonoBehaviour
 
     public void PlaceToken(CharacterToken token)
     {
+        Sound s = AudioManager.UISounds[UISound.CSClick];
+        AudioManager.Play2D(s);
         token.lastCharacterBox = this;
         placedTokens.Add(token);
         DistributeTokens();
@@ -38,6 +40,8 @@ public class CharacterBox : MonoBehaviour
 
     public void RemoveToken(CharacterToken token)
     {
+        Sound s = AudioManager.UISounds[UISound.CSHover];
+        AudioManager.Play2D(s);
         placedTokens.Remove(token);
         DistributeTokens();
         // remove token's character-field back to none
