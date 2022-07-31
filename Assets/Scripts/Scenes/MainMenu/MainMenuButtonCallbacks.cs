@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MainMenuButtonCallbacks : MonoBehaviour
 {
+
     public void SceneTransition(string scene)
     {
+        Sound clickSound = AudioManager.UISounds[UISound.MainClick];
+        AudioManager.PlayAt(clickSound, gameObject);
         GameManager.instance.TransitionToScene(scene);
     }
 

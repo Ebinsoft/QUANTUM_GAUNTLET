@@ -23,9 +23,14 @@ public class AudioManager : MonoBehaviour
 
     public MagicSoundElem[] _magicSounds;
     public static Dictionary<MagicSound, Sound> magicSounds;
+
+    public UISoundElem[] _UISounds;
+    public static Dictionary<UISound, Sound> UISounds;
     public AudioMixer masterMixer;
     public AudioMixerGroup sfxMixerGroup;
     public AudioMixerGroup musicMixerGroup;
+
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -41,11 +46,13 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         miscAttackSounds = _miscAttackSounds.ToDictionary(s => s.soundType, s => s.sound);
         impactSounds = _impactSounds.ToDictionary(s => s.soundType, s => s.sound);
         movementSounds = _movementSounds.ToDictionary(s => s.soundType, s => s.sound);
         fireSounds = _fireSounds.ToDictionary(s => s.soundType, s => s.sound);
         magicSounds = _magicSounds.ToDictionary(s => s.soundType, s => s.sound);
+        UISounds = _UISounds.ToDictionary(s => s.soundType, s => s.sound);
     }
 
     // play misc attack sound effect
@@ -91,6 +98,21 @@ public class AudioManager : MonoBehaviour
         AudioSource source = GetAudioSource(obj);
         source.clip = s.clip;
         source.Play();
+    }
+
+    // play a UI sound effect
+    public static void PlayAt(UISound sound, GameObject obj)
+    {
+        Sound s = UISounds[sound];
+        AudioSource source = GetAudioSource(obj);
+        source.clip = s.clip;
+        source.Play();
+    }
+
+    // play 2D sounds via the AudioManager's source, uses PlayOneShot so sounds dont interrupt each other
+    public static void Play2D(Sound s)
+    {
+        instance.audioSource.PlayOneShot(s.clip, 1f);
     }
 
     // play a custom sound effect

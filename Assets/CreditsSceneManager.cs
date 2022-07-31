@@ -7,6 +7,7 @@ using TMPro;
 public class CreditsSceneManager : MonoBehaviour
 {
     public GameObject scrollingText;
+    private GameObject gameTitleText;
     public TextMeshProUGUI exitText;
     public TextMeshProUGUI leavingSceneText;
     private PlayerInputManager playerInputManager;
@@ -16,6 +17,7 @@ public class CreditsSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        gameTitleText = scrollingText.transform.Find("Game Title").gameObject;
         players = new List<GameObject>();
         playerInputManager = GetComponent<PlayerInputManager>();
     }
@@ -42,9 +44,19 @@ public class CreditsSceneManager : MonoBehaviour
         }
         return text;
     }
-    private void onStart(InputAction.CallbackContext context)
+    public void Outro()
     {
         GameManager.instance.TransitionToScene("MainMenu");
+    }
+
+    public void ActivateGameTitle()
+    {
+        gameTitleText.SetActive(true);
+    }
+
+    private void onStart(InputAction.CallbackContext context)
+    {
+        Outro();
     }
     public string GetPlayerBindingName(string action)
     {

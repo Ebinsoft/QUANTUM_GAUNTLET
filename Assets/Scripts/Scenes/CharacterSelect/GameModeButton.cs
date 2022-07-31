@@ -34,6 +34,8 @@ public class GameModeButton : MonoBehaviour, IBasicButton
 
     void IBasicButton.HoverEnter()
     {
+        Sound s = AudioManager.UISounds[UISound.CSHover];
+        AudioManager.Play2D(s);
         anim.SetBool("Hovering", true);
     }
 
@@ -44,6 +46,8 @@ public class GameModeButton : MonoBehaviour, IBasicButton
 
     void IBasicButton.Click()
     {
+        Sound s = AudioManager.UISounds[UISound.CSClick];
+        AudioManager.Play2D(s);
         anim.SetTrigger("Click");
 
         switch (versusInfo.gameType)
