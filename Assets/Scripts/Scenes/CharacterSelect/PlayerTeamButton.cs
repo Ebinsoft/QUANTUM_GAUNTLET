@@ -28,6 +28,8 @@ public class PlayerTeamButton : MonoBehaviour, IBasicButton
 
     void IBasicButton.HoverEnter()
     {
+        Sound s = AudioManager.UISounds[UISound.CSHover];
+        AudioManager.Play2D(s);
         anim.SetBool("Hovering", true);
     }
 
@@ -38,6 +40,8 @@ public class PlayerTeamButton : MonoBehaviour, IBasicButton
 
     void IBasicButton.Click()
     {
+        Sound s = AudioManager.UISounds[UISound.CSClick];
+        AudioManager.Play2D(s);
         anim.SetTrigger("Click");
 
         PlayerSetting ps = versusInfo.GetPlayer(playerID);
