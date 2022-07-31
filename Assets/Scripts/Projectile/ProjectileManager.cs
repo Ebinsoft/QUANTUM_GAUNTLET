@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,9 @@ public class ProjectileManager : MonoBehaviour
     // rigidbodies
     private Rigidbody projectileRigidbody;
     private HashSet<Rigidbody> hitRigidbodies;
+
+    // Hitlag
+    private IEnumerator FreezeRoutine;
 
     void Awake()
     {
@@ -99,5 +103,23 @@ public class ProjectileManager : MonoBehaviour
     {
         behavior.OnDestroy();
         Destroy(gameObject, delay);
+    }
+
+    public void FreezeMovement(float duration)
+    {
+        if (FreezeRoutine != null) StopCoroutine(FreezeRoutine);
+
+        FreezeRoutine = FreezeCoroutine(duration);
+        StartCoroutine(FreezeRoutine);
+    }
+
+    IEnumerator FreezeCoroutine(float duration)
+    {
+        var oldSpeed = movementSpeed;
+        movementSpeed = 0;
+
+        yield return new WaitForSeconds(duration);
+
+        movementSpeed = oldSpeed;
     }
 }

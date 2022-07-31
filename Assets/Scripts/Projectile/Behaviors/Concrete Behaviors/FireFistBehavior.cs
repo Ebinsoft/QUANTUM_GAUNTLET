@@ -1,9 +1,10 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class FireFistBehavior : ProjectileBehavior
 {
-    private float timeSpentMoving = 20f / 60;
-    private float maxLifetime = 30f / 60;
+    private float maxLifetime = 20f / 60;
     private float lifetime;
 
     private float chargePercent;
@@ -13,6 +14,8 @@ public class FireFistBehavior : ProjectileBehavior
     private float knockbackScaling = 2.5f;
     private float sizeScaling = 2f;
     private float rangeScaling = 4f;
+
+    HitSparks hitSparks;
 
     public override void OnSpawn()
     {
@@ -29,32 +32,41 @@ public class FireFistBehavior : ProjectileBehavior
 
         float rangeMultiplier = Mathf.Lerp(1, rangeScaling, chargePercent);
         float range = baseRange * rangeMultiplier;
-        float speed = range / timeSpentMoving;
+        float speed = range / maxLifetime;
         projectile.movementSpeed = speed;
+
+        hitSparks = projectile.transform.Find("Hit Sparks").GetComponent<HitSparks>();
 
         lifetime = 0;
     }
 
     public override void OnCollision()
     {
+        // play hitlag
+        float hitlagDuration = 0.1f;
+        projectile.FreezeMovement(hitlagDuration);
+        lifetime -= hitlagDuration;
+
+        // play impact sound
+        AudioManager.PlayAt(FireSound.ExplosionMedium, projectile.gameObject);
+
+        // play hitsparks
+        hitSparks.Play(projectile.attack.damage);
     }
 
     public override void OnDestroy()
     {
+        Animator anim = projectile.GetComponent<Animator>();
+        anim.Play("DieOut");
     }
 
     public override void Update()
     {
         lifetime += Time.deltaTime;
 
-        if (lifetime >= timeSpentMoving)
-        {
-            projectile.movementSpeed = 0;
-        }
-
         if (lifetime >= maxLifetime)
         {
-            projectile.SelfDestruct(0.1f);
+            projectile.SelfDestruct(0.25f);
         }
     }
 }
