@@ -121,7 +121,11 @@ public class MagicSoundElem
 public enum UISound
 {
     MainHover,
-    MainClick
+    MainClick,
+    CSHover,
+    CSClick,
+    CSFightReady,
+    CSFightClick
 }
 
 [System.Serializable]
