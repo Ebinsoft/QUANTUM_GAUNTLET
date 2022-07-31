@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerTumblingState : PlayerBaseState
 {
     private PlayerManager player;
+    private PlayerParticleEffects effects;
 
     public PlayerTumblingState(PlayerManager psm) : base(psm)
     {
@@ -13,20 +14,28 @@ public class PlayerTumblingState : PlayerBaseState
         canMove = false;
         canRotate = false;
         cancelMomentum = false;
+
+        effects = player.gameObject.GetComponent<PlayerParticleEffects>();
     }
 
     public override void EnterState()
     {
         player.isTumbling = true;
+        effects.StartDashingEffect();
     }
 
     public override void UpdateState()
     {
+        if (player.currentMovement.y < 0)
+        {
+            effects.StopDashingEffect();
+        }
     }
 
     public override void ExitState()
     {
         player.isTumbling = false;
+        effects.StopDashingEffect();
     }
 
     public override void CheckStateUpdate()
