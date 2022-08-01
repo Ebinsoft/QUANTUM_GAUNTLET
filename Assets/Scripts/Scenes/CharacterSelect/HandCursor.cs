@@ -8,7 +8,7 @@ using TMPro;
 public class HandCursor : MonoBehaviour
 {
     public PlayerInput playerInput;
-    private float cursorSpeed = 15f;
+    private float cursorSpeed = 17f;
 
     private SkinnedMeshRenderer rend;
     private TextMeshPro label;
@@ -26,6 +26,8 @@ public class HandCursor : MonoBehaviour
     private List<GameObject> focusedElements;
     private bool isOverRoster = false;
     private bool isSummoning = false;
+    private float timeSinceAccel = 0f;
+    private float accelTime = .25f;
     private CharacterSelectManager cs;
 
 
@@ -62,6 +64,10 @@ public class HandCursor : MonoBehaviour
     private void onMove(InputAction.CallbackContext context)
     {
         isMovePressed = playerInput.actions["Move"].ReadValue<Vector2>().magnitude > 0;
+        if (!isMovePressed)
+        {
+            timeSinceAccel = 0f;
+        }
     }
 
     private void onClick(InputAction.CallbackContext context)
@@ -232,7 +238,12 @@ public class HandCursor : MonoBehaviour
 
     void updateCursor()
     {
+        timeSinceAccel += Time.deltaTime / accelTime;
+        timeSinceAccel = Mathf.Clamp(timeSinceAccel, 0.1f, 1f);
+        Debug.Log(timeSinceAccel);
         currentMovement = playerInput.actions["Move"].ReadValue<Vector2>();
+        currentMovement *= currentMovement.magnitude;
+        currentMovement *= timeSinceAccel;
         Vector2 moveVector = new Vector2();
         moveVector.x = transform.position.x + currentMovement.x * cursorSpeed * Time.deltaTime;
         moveVector.y = transform.position.y + currentMovement.y * cursorSpeed * Time.deltaTime;
