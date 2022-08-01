@@ -576,6 +576,10 @@ MonoBehaviour:
     sound:
       clip: {fileID: 8300000, guid: 238a77775a3a4ca41b9d164a41b5f874, type: 3}
       volume: 1
+  - soundType: 6
+    sound:
+      clip: {fileID: 8300000, guid: c70a931f40139be4cb2555e522e582eb, type: 3}
+      volume: 0.2
   masterMixer: {fileID: 24100000, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
   sfxMixerGroup: {fileID: -7543794490252263930, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}
   musicMixerGroup: {fileID: 3702411289305159271, guid: f89a73fbb754225cbb8e56b01819d0c9, type: 2}

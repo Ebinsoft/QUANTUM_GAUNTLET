@@ -125,7 +125,8 @@ public enum UISound
     CSHover,
     CSClick,
     CSFightReady,
-    CSFightClick
+    CSFightClick,
+    PowerToggle
 }
 
 [System.Serializable]

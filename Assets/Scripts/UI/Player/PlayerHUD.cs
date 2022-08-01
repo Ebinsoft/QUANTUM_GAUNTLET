@@ -17,6 +17,7 @@ public class PlayerHUD : MonoBehaviour
     TMPro.TextMeshProUGUI playerID;
     Image[] stockIcons;
     Text debugText;
+    private bool powerToggleActivated = false;
 
     void Awake()
     {
@@ -38,11 +39,24 @@ public class PlayerHUD : MonoBehaviour
         float percentMana = player.stats.mana / player.stats.baseStats.baseMana;
         manaBar.materialForRendering.SetFloat("_FillAmount", percentMana);
 
-        if(player.isPowerTogglePressed) {
-            manaBar.materialForRendering.SetFloat("_Shimmering", 1);
-        } else {
-            manaBar.materialForRendering.SetFloat("_Shimmering", 0);
+
+
+        if (player.isPowerTogglePressed != powerToggleActivated)
+        {
+            if (player.isPowerTogglePressed)
+            {
+                Sound s = AudioManager.UISounds[UISound.PowerToggle];
+                AudioManager.Play2D(s);
+                manaBar.materialForRendering.SetFloat("_Shimmering", 1);
+                powerToggleActivated = true;
+            }
+            else
+            {
+                manaBar.materialForRendering.SetFloat("_Shimmering", 0);
+                powerToggleActivated = false;
+            }
         }
+
 
         debugText.text = player.currentState.ToString();
     }
