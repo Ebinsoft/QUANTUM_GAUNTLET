@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  healthRestored: 50
+  healthRestored: 300
 --- !u!95 &6626634337029988267
 Animator:
   serializedVersion: 3

@@ -42,7 +42,10 @@ public enum ImpactSound
 {
     PunchLight,
     PunchMedium,
-    PunchHeavy
+    PunchHeavy,
+    KickLight,
+    KickMedium,
+    KickHeavy
 }
 
 [System.Serializable]
@@ -111,5 +114,23 @@ public enum MagicSound
 public class MagicSoundElem
 {
     public MagicSound soundType;
+    public Sound sound;
+}
+
+// UI SOUNDS
+public enum UISound
+{
+    MainHover,
+    MainClick,
+    CSHover,
+    CSClick,
+    CSFightReady,
+    CSFightClick
+}
+
+[System.Serializable]
+public class UISoundElem
+{
+    public UISound soundType;
     public Sound sound;
 }

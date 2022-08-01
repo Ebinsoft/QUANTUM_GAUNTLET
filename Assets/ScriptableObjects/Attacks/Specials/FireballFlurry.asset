@@ -14,15 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: FireballFlurry
   damage: 0
-  manaCost: 350
+  manaCost: 300
   manaGain: 0
   hitlagTime: 0
   knockbackAngle: 90
   knockbackMagnitude: 0
   stunCalculation: 0
   baseStun: 0.1
+  hasAimAssist: 0
+  aimAssistDistance: 0
+  aimAssistAngle: 0
   hasSpecialBehavior: 1
   specialBehavior:
     className: FireballFlurry
     qualifiedName: FireballFlurry, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  impactSoundType: 0
+  presetImpactSound: 0
+  customImpactSound:
+    clip: {fileID: 0}
+    volume: 0

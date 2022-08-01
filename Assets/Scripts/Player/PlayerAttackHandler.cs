@@ -108,7 +108,7 @@ public class PlayerAttackHandler : MonoBehaviour
             animEffects.PlayRecoilLag(activeAttack.hitlagTime);
 
             // play hit particle effect at contact point
-            effects.PlayHitEffectAt(hitPoint);
+            effects.PlayHitSparksAt(hitPoint, activeAttack.damage);
 
             // restore mana to attacking player
             player.stats.RestoreMana(activeAttack.manaGain);

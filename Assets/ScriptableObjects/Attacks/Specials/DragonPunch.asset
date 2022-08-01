@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DragonPunch
   m_EditorClassIdentifier: 
   attackName: DragonPunch
-  damage: 10
+  damage: 0
   manaCost: 150
   manaGain: 0
   hitlagTime: 0.2

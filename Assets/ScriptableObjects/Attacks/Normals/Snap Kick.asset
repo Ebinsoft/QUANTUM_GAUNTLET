@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Snap Kick
   m_EditorClassIdentifier: 
   attackName: Snap Kick
-  damage: 8
+  damage: 80
   manaCost: 0
   manaGain: 100
   hitlagTime: 0.13333334
   knockbackAngle: 90
   knockbackMagnitude: 3
   stunCalculation: 0
-  baseStun: 0.15
+  baseStun: 0.4
   hasAimAssist: 0
   aimAssistDistance: 0
   aimAssistAngle: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     className: 
     qualifiedName: 
   impactSoundType: 1
-  presetImpactSound: 1
+  presetImpactSound: 4
   customImpactSound:
     clip: {fileID: 0}
     volume: 0

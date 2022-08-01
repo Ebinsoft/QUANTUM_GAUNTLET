@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerTumblingState TumblingState;
     public PlayerCrashingState CrashingState;
     public PlayerVictoryState VictoryState;
+    public PlayerDisabledState DisabledState;
 
     // Other Stuff
     public Animator anim;
@@ -86,6 +87,8 @@ public class PlayerManager : MonoBehaviour
     // Select
     public bool isSelectPressed;
     public bool isSelectTriggered;
+    // RT
+    public bool isPowerTogglePressed;
 
     /***************************************/
 
@@ -136,13 +139,13 @@ public class PlayerManager : MonoBehaviour
     public float gravity;
     public float jumpGravity;
     public float gravityMultiplier = 1.0f;
-    private float groundedGravity = -5f;
+    private float groundedGravity = -8f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
     public bool isAttacking = false;
-    public int maxLightAttackChain = 3;
-    public int lightAttacksLeft = 3;
+    public int maxLightAttackChain = 4;
+    public int lightAttacksLeft = 4;
     public int maxHeavyAttackChain = 1;
     public int heavyAttacksLeft = 1;
 
@@ -157,6 +160,7 @@ public class PlayerManager : MonoBehaviour
 
     // victory variables
     public bool triggerVictory = false;
+    public bool triggerDisabled = false;
 
 
     void Awake()
@@ -182,6 +186,7 @@ public class PlayerManager : MonoBehaviour
         TumblingState = new PlayerTumblingState(this);
         CrashingState = new PlayerCrashingState(this);
         VictoryState = new PlayerVictoryState(this);
+        DisabledState = new PlayerDisabledState(this);
 
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();
@@ -238,7 +243,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 p1 = transform.position + characterController.center;
 
         float capsuleWidth = 0.35f;
-        float centerToFloor = (characterController.height / 2);
+        float centerToFloor = (characterController.height / 2f);
 
         bool isSphereHit = false;
         // cast a sphere

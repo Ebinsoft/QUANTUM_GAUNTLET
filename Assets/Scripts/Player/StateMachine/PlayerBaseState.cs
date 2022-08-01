@@ -71,6 +71,11 @@ public abstract class PlayerBaseState
             player.triggerVictory = false;
             SwitchState(player.VictoryState);
         }
+        else if (player.triggerDisabled)
+        {
+            player.triggerDisabled = false;
+            SwitchState(player.DisabledState);
+        }
         else if (player.triggerDead)
         {
             player.triggerHit = false;

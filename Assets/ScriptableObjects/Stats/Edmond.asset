@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acac2b080495ebf8ab93ea744423adc, type: 3}
   m_Name: Edmond
   m_EditorClassIdentifier: 
-  baseHealth: 100
+  baseHealth: 1000
   baseMana: 1000
   manaRegen: 20

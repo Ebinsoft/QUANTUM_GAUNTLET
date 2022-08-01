@@ -25,7 +25,7 @@ public class FireballBehavior : ProjectileBehavior
         projectile.movementSpeed = 0;
         explosion.Play();
         AudioManager.PlayAt(FireSound.ExplosionSmall, projectile.gameObject);
-        projectile.SelfDestruct(0.6f);
+        projectile.SelfDestruct(1f);
     }
 
     public override void OnDestroy()

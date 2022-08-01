@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Roundhouse Kick
   m_EditorClassIdentifier: 
   attackName: Roundhouse Kick
-  damage: 9
+  damage: 150
   manaCost: 0
-  manaGain: 100
+  manaGain: 50
   hitlagTime: 0.13333334
   knockbackAngle: 80
   knockbackMagnitude: 5
@@ -29,7 +29,7 @@ MonoBehaviour:
     className: 
     qualifiedName: 
   impactSoundType: 1
-  presetImpactSound: 1
+  presetImpactSound: 5
   customImpactSound:
     clip: {fileID: 0}
     volume: 0

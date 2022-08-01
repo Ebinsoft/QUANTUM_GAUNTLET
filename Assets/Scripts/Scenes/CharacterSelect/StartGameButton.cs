@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartGameButton : MonoBehaviour, IBasicButton
 {
     Animator anim;
-
+    private bool isFightVisible = false;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -14,7 +14,20 @@ public class StartGameButton : MonoBehaviour, IBasicButton
 
     void Update()
     {
-        anim.SetBool("ReadyToStart", IsGameReady());
+        var igr = IsGameReady();
+        anim.SetBool("ReadyToStart", igr);
+
+        if (anim.GetBool("ReadyToStart") && !isFightVisible)
+        {
+            Sound s = AudioManager.UISounds[UISound.CSFightReady];
+            AudioManager.PlayAt(s, gameObject);
+            isFightVisible = true;
+        }
+
+        if (!igr)
+        {
+            isFightVisible = false;
+        }
     }
 
     // This function will check the variety of conditions that
@@ -54,6 +67,8 @@ public class StartGameButton : MonoBehaviour, IBasicButton
     {
         if (IsGameReady())
         {
+            Sound s = AudioManager.UISounds[UISound.CSFightClick];
+            AudioManager.PlayAt(s, gameObject);
             GameManager.instance.TransitionToScene("VersusScene");
         }
     }
