@@ -27,7 +27,7 @@ public class HandCursor : MonoBehaviour
     private bool isOverRoster = false;
     private bool isSummoning = false;
     private float timeSinceAccel = 0f;
-    private float accelTime = 0.3f;
+    private float accelTime = .25f;
     private CharacterSelectManager cs;
 
 
