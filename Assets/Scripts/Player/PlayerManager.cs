@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerTumblingState TumblingState;
     public PlayerCrashingState CrashingState;
     public PlayerVictoryState VictoryState;
+    public PlayerDisabledState DisabledState;
 
     // Other Stuff
     public Animator anim;
@@ -157,6 +158,7 @@ public class PlayerManager : MonoBehaviour
 
     // victory variables
     public bool triggerVictory = false;
+    public bool triggerDisabled = false;
 
 
     void Awake()
@@ -182,6 +184,7 @@ public class PlayerManager : MonoBehaviour
         TumblingState = new PlayerTumblingState(this);
         CrashingState = new PlayerCrashingState(this);
         VictoryState = new PlayerVictoryState(this);
+        DisabledState = new PlayerDisabledState(this);
 
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();
