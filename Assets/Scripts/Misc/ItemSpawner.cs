@@ -11,8 +11,9 @@ public class ItemSpawner : MonoBehaviour
     // public for debugging purposes
     public bool spawningItem;   // set true by spawnee's Cleanup()
     public float timeRemaining;
-
-    private InteractableItem spawnedItem; 
+    public ParticleSystem particleSystem;
+    private InteractableItem spawnedItem;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,9 @@ public class ItemSpawner : MonoBehaviour
             SpawnItem();
         }
 
+        if(particleSystem == null) {
+            Debug.Log("Cannot find reference to particle system.");
+        }
         spawningItem = false;
     }
 
@@ -49,6 +53,8 @@ public class ItemSpawner : MonoBehaviour
         } else {
             spawnedItem.spawner = this;
         }
+
+        particleSystem.Play();
         spawningItem = false;
     }
 
@@ -56,5 +62,6 @@ public class ItemSpawner : MonoBehaviour
     public void ItemTaken() {
         timeRemaining = timer;
         spawningItem = true;
+        particleSystem.Stop();
     }
 }
