@@ -40,7 +40,7 @@ public class PlayerDeadState : PlayerBaseState
     {
         if (!player.anim.GetBool("InDying"))
         {
-            if (player.stats.lives == 0)
+            if (player.stats.lives <= 0)
             {
                 SwitchState(player.DefeatState);
             }

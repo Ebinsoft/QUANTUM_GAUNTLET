@@ -20,6 +20,7 @@ public class VersusSceneManager : MonoBehaviour
     public UnityEngine.Object playerHUDPrefab;
     // should generate these dynamically once we add stage loading
     private SpawnPoints spawnPoints;
+    private GameObject killPlane;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class VersusSceneManager : MonoBehaviour
     {
         GameManager.instance.versusInfo.playerList = new List<GameObject>();
         GameObject stage = SpawnStage();
+        killPlane = stage.transform.Find("KillPlane").gameObject;
         spawnPoints = stage.GetComponent<SpawnPoints>();
         List<Vector3> startingSpawns = spawnPoints.GetMututallyExclusiveSpawnPoints(GameManager.instance.versusInfo.numPlayers);
         foreach (PlayerSetting ps in GameManager.instance.versusInfo.GetActivePlayers())
@@ -131,11 +133,15 @@ public class VersusSceneManager : MonoBehaviour
         GameOverSplash.SetActive(false);
         Time.timeScale = 1f;
         // rotate camera and disable characters
+        // also disable kill plane
+        killPlane.SetActive(false);
         var playersLeft = GameManager.instance.versusInfo.playerList
         .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0);
         foreach (var p in playersLeft)
         {
-            p.GetComponent<PlayerManager>().triggerDisabled = true;
+            var pm = p.GetComponent<PlayerManager>();
+            pm.canDie = false;
+            pm.triggerDisabled = true;
         }
         // get first player that's alive in the winning team so only focus on one
         var firstPlayer = playersLeft.First(c => c);
