@@ -130,12 +130,15 @@ public class VersusSceneManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         GameOverSplash.SetActive(false);
         Time.timeScale = 1f;
-        // rotate camera
-
+        // rotate camera and disable characters
+        var playersLeft = GameManager.instance.versusInfo.playerList
+        .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0);
+        foreach (var p in playersLeft)
+        {
+            p.GetComponent<PlayerManager>().triggerDisabled = true;
+        }
         // get first player that's alive in the winning team so only focus on one
-        var firstPlayer = GameManager.instance.versusInfo.playerList
-        .Where(c => c.GetComponent<PlayerManager>().stats.lives > 0)
-        .First(c => c);
+        var firstPlayer = playersLeft.First(c => c);
 
         cinemachineCamera.gameObject.SetActive(false);
         gameEndCamera.gameObject.SetActive(true);
