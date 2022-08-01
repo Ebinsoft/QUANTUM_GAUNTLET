@@ -93,6 +93,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_df9e5e2561b74c4bbc384844ee88fcf6: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -109,6 +110,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Highlight: 0
+    - _Highlighted: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
