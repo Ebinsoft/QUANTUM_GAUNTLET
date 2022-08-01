@@ -107,7 +107,8 @@ public class FireSoundElem
 public enum MagicSound
 {
     ChargeUp,
-    Zoom
+    Zoom,
+    Powerup
 }
 
 [System.Serializable]
