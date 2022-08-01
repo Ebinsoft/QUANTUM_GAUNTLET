@@ -29,7 +29,8 @@ public class TutorialDummy : MonoBehaviour
         {
             currentQuest.OnQuestExit();
 
-            if (questIndex == questList.Count-1) {
+            if (questIndex == questList.Count - 2)
+            {
                 GameManager.instance.TransitionToScene("MainMenu");
             }
             currentQuest = questList[++questIndex];
@@ -211,32 +212,20 @@ public class TutorialDummy : MonoBehaviour
         questList.Add(new ListenQuest
         {
             questType = QuestType.Listen,
-            questText = "Wow, you actually won, huh? You've gotten strong.",
+            questText = "Wow, you actually won, huh? You've gotten strong. It seems you're no longer in need for a tutorial.",
             timer = 5f
         });
         questList.Add(new ListenQuest
         {
             questType = QuestType.Listen,
-            questText = "So strong, in fact, that I'm not really comfortable with letting you live any longer, teehee.",
+            questText = "You're a pro now, so I'm sending you back to the main menu! Go play Versus!",
             timer = 5f
         });
+        // just so we don't error, doesn't actually happen except for screen transition
         questList.Add(new ListenQuest
         {
             questType = QuestType.Listen,
-            questText = "TIME TO <color=#FF0000>DIEEEEEEEEEEEEEEEEEEEEEEE</color>",
-            timer = 1f
-        });
-        questList.Add(new FightEdmondQuest
-        {
-            questType = QuestType.FightEdmond,
-            questText = "<color=#FF0000>REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</color>",
-            numEdmond = 10
-        });
-        questList.Add(new ListenQuest
-        {
-            questType = QuestType.Listen,
-            questText = "WOW JEEZ, OKAY YOU WIN. There's no main menu yet so you can really just hit pause and restart "
-            + " or go to character select and play the real game.",
+            questText = "You're a pro now, so I'm sending you back to the main menu! Go play Versus!",
             timer = 1000f
         });
     }
