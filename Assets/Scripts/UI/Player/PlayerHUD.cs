@@ -38,6 +38,12 @@ public class PlayerHUD : MonoBehaviour
         float percentMana = player.stats.mana / player.stats.baseStats.baseMana;
         manaBar.materialForRendering.SetFloat("_FillAmount", percentMana);
 
+        if(player.isPowerTogglePressed) {
+            manaBar.materialForRendering.SetFloat("_Shimmering", 1);
+        } else {
+            manaBar.materialForRendering.SetFloat("_Shimmering", 0);
+        }
+
         debugText.text = player.currentState.ToString();
     }
 

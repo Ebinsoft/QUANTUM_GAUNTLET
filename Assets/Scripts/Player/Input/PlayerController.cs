@@ -92,6 +92,11 @@ public class PlayerController : MonoBehaviour
         player.isSelectTriggered = context.ReadValueAsButton();
     }
 
+    private void onPowerToggle(InputAction.CallbackContext context)
+    {
+        player.isPowerTogglePressed = context.ReadValueAsButton();
+    }
+
 
 
     private void OnEnable()
@@ -133,6 +138,8 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Select"].started += onSelect;
         playerInput.actions["Select"].canceled += onSelect;
 
+        playerInput.actions["PowerToggle"].started += onPowerToggle;
+        playerInput.actions["PowerToggle"].canceled += onPowerToggle;
 
     }
 
@@ -174,5 +181,8 @@ public class PlayerController : MonoBehaviour
 
         playerInput.actions["Select"].started -= onSelect;
         playerInput.actions["Select"].canceled -= onSelect;
+
+        playerInput.actions["PowerToggle"].started -= onPowerToggle;
+        playerInput.actions["PowerToggle"].started -= onPowerToggle;
     }
 }

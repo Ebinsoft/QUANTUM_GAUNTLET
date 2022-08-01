@@ -87,6 +87,8 @@ public class PlayerManager : MonoBehaviour
     // Select
     public bool isSelectPressed;
     public bool isSelectTriggered;
+    // RT
+    public bool isPowerTogglePressed;
 
     /***************************************/
 
