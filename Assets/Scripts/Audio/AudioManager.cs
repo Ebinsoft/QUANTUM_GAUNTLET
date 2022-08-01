@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -112,7 +113,7 @@ public class AudioManager : MonoBehaviour
     // play 2D sounds via the AudioManager's source, uses PlayOneShot so sounds dont interrupt each other
     public static void Play2D(Sound s)
     {
-        instance.audioSource.PlayOneShot(s.clip, 1f);
+        instance.audioSource.PlayOneShot(s.clip, s.volume);
     }
 
     // play a custom sound effect
