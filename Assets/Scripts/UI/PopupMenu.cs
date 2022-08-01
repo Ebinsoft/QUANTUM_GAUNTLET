@@ -60,9 +60,12 @@ public class PopupMenu : MonoBehaviour, ICancelHandler
 
     public void ToggleMenu()
     {
-        if (buttonPanel.activeSelf) {
+        if (buttonPanel.activeSelf)
+        {
             CloseMenu();
-        } else {
+        }
+        else
+        {
             OpenMenu();
         }
     }

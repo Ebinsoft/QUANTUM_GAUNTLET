@@ -44,7 +44,7 @@ public class CreditsSceneManager : MonoBehaviour
         }
         return text;
     }
-    public void Outro()
+    public static void Outro()
     {
         GameManager.instance.TransitionToScene("MainMenu");
     }
@@ -66,6 +66,5 @@ public class CreditsSceneManager : MonoBehaviour
     public void OnPlayerJoined(PlayerInput p)
     {
         players.Add(p.gameObject);
-        p.actions["Start"].started += onStart;
     }
 }
