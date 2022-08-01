@@ -16,6 +16,11 @@ public class VolumeSlider : MonoBehaviour
         volumeSlider = GetComponent<Slider>();
     }
 
+    void OnEnable()
+    {
+        UpdateSlider();
+    }
+
     public void SetVolume(float value)
     {
         mixer.SetFloat(mixerName, Mathf.Log10(value) * 20);
