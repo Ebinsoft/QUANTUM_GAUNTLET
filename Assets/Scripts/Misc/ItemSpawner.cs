@@ -28,6 +28,7 @@ public class ItemSpawner : MonoBehaviour
         if(particleSystem == null) {
             Debug.Log("Cannot find reference to particle system.");
         }
+
         spawningItem = false;
     }
 
@@ -45,7 +46,7 @@ public class ItemSpawner : MonoBehaviour
 
     // Make call to instantiate prefab
     public void SpawnItem() {
-        GameObject go = Instantiate(spawnee, transform.position + new Vector3(0f, 1.5f, 0f), new Quaternion(0.25f, 0.5f, 0.5f, 0.0f));
+        GameObject go = Instantiate(spawnee, transform.position + new Vector3(0f, 1.25f, 0f), new Quaternion(0.25f, 0.5f, 0.5f, 0.0f));
         spawnedItem = go.GetComponent<InteractableItem>();
 
         if(spawnedItem == null) {
