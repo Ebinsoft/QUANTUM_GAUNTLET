@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class PopupMenu : MonoBehaviour, ICancelHandler, IMoveHandler
+public class PopupMenu : MonoBehaviour, ICancelHandler
 {
     public GameObject selectedOnEnter;
     public GameObject selectedOnExit;
+    public bool pauseWhileActive = false;
 
 
     // internal parts
@@ -29,13 +30,13 @@ public class PopupMenu : MonoBehaviour, ICancelHandler, IMoveHandler
         CloseMenu();
     }
 
-    public void OnMove(AxisEventData eventData)
-    {
-        Debug.Log("I'm gay bro");
-    }
-
     public void OpenMenu()
     {
+        if (pauseWhileActive)
+        {
+            Time.timeScale = 0;
+        }
+
         backdrop.enabled = true;
         buttonPanel.SetActive(true);
 
@@ -45,10 +46,24 @@ public class PopupMenu : MonoBehaviour, ICancelHandler, IMoveHandler
 
     public void CloseMenu()
     {
+        if (pauseWhileActive)
+        {
+            Time.timeScale = 1;
+        }
+
         backdrop.enabled = false;
         buttonPanel.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(selectedOnExit);
+    }
+
+    public void ToggleMenu()
+    {
+        if (buttonPanel.activeSelf) {
+            CloseMenu();
+        } else {
+            OpenMenu();
+        }
     }
 }

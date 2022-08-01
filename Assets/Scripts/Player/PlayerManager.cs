@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerKnockback playerKnockback;
     public PlayerMoveset moveset;
     public CharacterController characterController;
-    public GameObject gameOverMenu;
+    public GameObject pauseMenu;
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
@@ -193,7 +193,7 @@ public class PlayerManager : MonoBehaviour
         playerKnockback = GetComponent<PlayerKnockback>();
         moveset = GetComponent<PlayerMoveset>();
 
-        gameOverMenu = GameObject.Find("Canvas/GameOverMenu");
+        pauseMenu = GameObject.Find("Canvas/Pause Menu");
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
@@ -222,7 +222,7 @@ public class PlayerManager : MonoBehaviour
 
         if (isStartTriggered)
         {
-            gameOverMenu.GetComponent<PauseMenu>().ToggleMenu();
+            pauseMenu.GetComponent<PopupMenu>().ToggleMenu();
             isStartTriggered = false;
         }
 
