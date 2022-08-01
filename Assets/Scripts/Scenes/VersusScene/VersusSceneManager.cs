@@ -11,7 +11,7 @@ public class VersusSceneManager : MonoBehaviour
 {
     public static VersusSceneManager instance;
     public PlayerInputManager playerInputManager;
-    public PauseMenu gameOverMenu;
+    public PopupMenu gameOverMenu;
     public GameObject GameOverSplash;
     public GameObject WinText;
     public CinemachineTargetGroup playerTargetGroup;
@@ -166,7 +166,7 @@ public class VersusSceneManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         WinText.SetActive(false);
-        gameOverMenu.EnablePauseMenu();
+        gameOverMenu.OpenMenu();
     }
 
     public void onPlayerSpawn(GameObject player)
