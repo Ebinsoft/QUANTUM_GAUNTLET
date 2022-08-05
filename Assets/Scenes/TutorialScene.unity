@@ -1856,6 +1856,10 @@ MonoBehaviour:
     sound:
       clip: {fileID: 8300000, guid: 248279c6e71f661448ca10d6a8ec6896, type: 3}
       volume: 1
+  - soundType: 4
+    sound:
+      clip: {fileID: 8300000, guid: acdbeb06ca5cc924eaf1aafe23dd1942, type: 3}
+      volume: 1
   _magicSounds:
   - soundType: 0
     sound:
@@ -1868,7 +1872,7 @@ MonoBehaviour:
   - soundType: 2
     sound:
       clip: {fileID: 8300000, guid: fc697900fb2981843b17ba6dbb273ddf, type: 3}
-      volume: 1
+      volume: 0.2
   _UISounds:
   - soundType: 0
     sound:
