@@ -109,7 +109,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Falloff: 0
-    - _FillAmount: 0.69809264
+    - _FillAmount: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
