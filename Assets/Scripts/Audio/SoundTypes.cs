@@ -92,7 +92,8 @@ public enum FireSound
     FlameBurst,
     ExplosionSmall,
     ExplosionMedium,
-    ExplosionBig
+    ExplosionBig,
+    DeathExplosion
 }
 
 [System.Serializable]

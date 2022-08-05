@@ -13,6 +13,7 @@ public class PlayerParticleEffects : MonoBehaviour
     public ParticleSystem fireTrail;
     public ParticleSystem fireBurst;
     public ParticleSystem chargingParticles;
+    public DeathExplosion deathExplosion;
 
     public void PlayLandingEffect()
     {
@@ -62,5 +63,10 @@ public class PlayerParticleEffects : MonoBehaviour
     public void StopChargingEffect()
     {
         chargingParticles.Stop();
+    }
+
+    public void PlayDeathExplosion()
+    {
+        deathExplosion.Play();
     }
 }
