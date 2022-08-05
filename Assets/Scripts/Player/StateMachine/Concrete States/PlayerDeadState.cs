@@ -37,7 +37,7 @@ public class PlayerDeadState : PlayerBaseState
     {
         timer += Time.deltaTime;
 
-        if (timer >= timeBeforeExplode && !exploded)
+        if ((timer >= timeBeforeExplode || !player.delayBeforeDeathExplosion) && !exploded)
         {
             player.GetComponent<PlayerParticleEffects>().PlayDeathExplosion();
             HidePlayer();

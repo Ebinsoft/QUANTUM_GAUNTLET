@@ -151,7 +151,7 @@ public class PlayerManager : MonoBehaviour
 
     // death variables
     public bool triggerDead = false;
-    public bool playDeathAnimation = false;
+    public bool delayBeforeDeathExplosion = false;
     public bool canDie = true;
     public bool isDead = false;
 
@@ -287,11 +287,11 @@ public class PlayerManager : MonoBehaviour
         isMovementEnabled = true;
     }
 
-    public void TriggerDeath(bool playAnimation = true)
+    public void TriggerDeath(bool delayBeforeExplode = true)
     {
         canDie = false;
         triggerDead = true;
-        playDeathAnimation = playAnimation;
+        this.delayBeforeDeathExplosion = delayBeforeExplode;
     }
 
     void setupJumpVariables()

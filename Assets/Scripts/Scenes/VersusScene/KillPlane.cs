@@ -11,7 +11,7 @@ public class KillPlane : MonoBehaviour
         // if they're already dead, don't kill them again, respawn them immediately
         if (player != null && player.currentState != player.DeadState)
         {
-            player.TriggerDeath(playAnimation: false);
+            player.TriggerDeath(delayBeforeExplode: false);
         }
     }
 }
