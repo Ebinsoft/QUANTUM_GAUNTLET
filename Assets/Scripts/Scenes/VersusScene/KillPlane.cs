@@ -7,14 +7,11 @@ public class KillPlane : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var player = other.GetComponent<PlayerManager>();
+
         // if they're already dead, don't kill them again, respawn them immediately
-        if (player != null && player.currentState == player.DeadState)
+        if (player != null && player.currentState != player.DeadState)
         {
-            player.anim.SetBool("InDying", false);
-        }
-        else if (player != null)
-        {
-            player.TriggerDeath(playAnimation: false);
+            player.TriggerDeath(delayBeforeExplode: false);
         }
     }
 }

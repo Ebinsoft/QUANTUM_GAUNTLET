@@ -623,6 +623,7 @@ GameObject:
   - component: {fileID: 753325726}
   - component: {fileID: 753325725}
   - component: {fileID: 753325727}
+  - component: {fileID: 753325728}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -696,6 +697,21 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 0}
   ZAxis: {fileID: 0}
+--- !u!114 &753325728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753325724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
 --- !u!1 &780989430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1448,7 @@ MonoBehaviour:
       stagePrefab: {fileID: 2068888630654130343, guid: b6ef7217d7c638e42b6949ff4128ed5c, type: 3}
   versusInfo:
     numPlayers: 2
-    stage: 1
+    stage: 2
     gameType: 0
     numLives: 3
     playerSettings:
@@ -1889,6 +1905,10 @@ MonoBehaviour:
   - soundType: 3
     sound:
       clip: {fileID: 8300000, guid: 248279c6e71f661448ca10d6a8ec6896, type: 3}
+      volume: 1
+  - soundType: 4
+    sound:
+      clip: {fileID: 8300000, guid: acdbeb06ca5cc924eaf1aafe23dd1942, type: 3}
       volume: 1
   _magicSounds:
   - soundType: 0

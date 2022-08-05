@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerDeadState : PlayerBaseState
 {
     private PlayerManager player;
+
+    float timer;
+    float timeBeforeExplode = 0.5f;
+    float timeAfterExplode = 0.75f;
+    bool exploded;
+
     public PlayerDeadState(PlayerManager psm) : base(psm)
     {
         player = psm;
@@ -18,27 +24,39 @@ public class PlayerDeadState : PlayerBaseState
     {
         player.isDead = true;
 
+        timer = 0;
+        exploded = false;
 
         player.stats.lives--;
         player.stats.health = 0;
         player.stats.PlayerDie();
+
     }
 
     public override void UpdateState()
     {
+        timer += Time.deltaTime;
 
+        if ((timer >= timeBeforeExplode || !player.delayBeforeDeathExplosion) && !exploded)
+        {
+            player.GetComponent<PlayerParticleEffects>().PlayDeathExplosion();
+            HidePlayer();
+
+            exploded = true;
+            timer = 0;
+        }
     }
 
     public override void ExitState()
     {
         player.isDead = false;
         player.stats.PlayerDespawn();
-        // explode stuff should happen here
+        ShowPlayer();
     }
 
     public override void CheckStateUpdate()
     {
-        if (!player.anim.GetBool("InDying"))
+        if (exploded && timer >= timeAfterExplode)
         {
             if (player.stats.lives <= 0)
             {
@@ -49,5 +67,19 @@ public class PlayerDeadState : PlayerBaseState
                 SwitchState(player.RespawnState);
             }
         }
+    }
+
+    void HidePlayer()
+    {
+        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(false);
+        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(false);
+        player.transform.Find("PlayerIcon").gameObject.SetActive(false);
+    }
+
+    void ShowPlayer()
+    {
+        player.transform.Find("Model/Edmond/Armature").gameObject.SetActive(true);
+        player.transform.Find("Model/Edmond/Body").gameObject.SetActive(true);
+        player.transform.Find("PlayerIcon").gameObject.SetActive(true);
     }
 }
