@@ -33,7 +33,6 @@ public class ManaPotion : InteractableItem
         if (stats != null)
         {
             stats.RestoreMana(manaRestored);
-            Debug.Log("Mana Restored: " + manaRestored);
             Cleanup();
         }
         else
@@ -47,7 +46,6 @@ public class ManaPotion : InteractableItem
     {
         Destroy(gameObject);
         spawner.ItemTaken();
-        Debug.Log("Destroyed");
     }
 
     // Handle collisions
@@ -62,13 +60,7 @@ public class ManaPotion : InteractableItem
 
             Sound s = AudioManager.magicSounds[MagicSound.Powerup];
             AudioManager.Play2D(s);
-            Debug.Log("Collision with player");
             RestoreMana(pm);
-        }
-        else
-        {
-            // otherwise
-            Debug.Log("Collision with other");
         }
     }
 }

@@ -33,7 +33,6 @@ public class HealthPack : InteractableItem
         if (stats != null)
         {
             stats.RestoreHealth(healthRestored);
-            Debug.Log("Health Restored: " + healthRestored);
             Cleanup();
         }
         else
@@ -47,7 +46,6 @@ public class HealthPack : InteractableItem
     {
         Destroy(gameObject);
         spawner.ItemTaken();
-        Debug.Log("Destroyed");
     }
 
     // Handle collisions
@@ -62,13 +60,7 @@ public class HealthPack : InteractableItem
 
             Sound s = AudioManager.magicSounds[MagicSound.Powerup];
             AudioManager.Play2D(s);
-            Debug.Log("Collision with player");
             RestoreHealth(pm);
-        }
-        else
-        {
-            // otherwise
-            Debug.Log("Collision with other");
         }
     }
 }

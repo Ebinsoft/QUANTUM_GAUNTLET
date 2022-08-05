@@ -85,7 +85,6 @@ public class Options : MonoBehaviour
 
     public void ResLeft()
     {
-        Debug.Log("hit res left");
         selectedResolution--;
         if (selectedResolution < 0)
         {
@@ -95,7 +94,6 @@ public class Options : MonoBehaviour
     }
     public void ResRight()
     {
-        Debug.Log("hit res right");
         selectedResolution++;
         if (selectedResolution > resolutions.Count - 1)
         {

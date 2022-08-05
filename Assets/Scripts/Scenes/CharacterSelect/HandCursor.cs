@@ -173,10 +173,7 @@ public class HandCursor : MonoBehaviour
         }
     }
 
-    private void onStart(InputAction.CallbackContext context)
-    {
-        Debug.Log("START");
-    }
+    private void onStart(InputAction.CallbackContext context) { }
 
     private void Summon()
     {
@@ -240,7 +237,6 @@ public class HandCursor : MonoBehaviour
     {
         timeSinceAccel += Time.deltaTime / accelTime;
         timeSinceAccel = Mathf.Clamp(timeSinceAccel, 0.1f, 1f);
-        Debug.Log(timeSinceAccel);
         currentMovement = playerInput.actions["Move"].ReadValue<Vector2>();
         currentMovement *= currentMovement.magnitude;
         currentMovement *= timeSinceAccel;

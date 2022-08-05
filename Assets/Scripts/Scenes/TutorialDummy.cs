@@ -104,7 +104,6 @@ public class TutorialDummy : MonoBehaviour
             if (proj != null && currentQuest.GetQuestType() == QuestType.HitDummy)
             {
                 PlayerManager p = TutorialSceneManager.instance.player;
-                Debug.Log(p.currentState.ToString());
                 HitDummyQuest hdq = (HitDummyQuest)currentQuest;
                 if (p.currentState.ToString() == hdq.state)
                 {
