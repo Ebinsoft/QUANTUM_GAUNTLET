@@ -15,48 +15,52 @@ public class HealthPack : InteractableItem
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Restore the character's health
-    private void RestoreHealth(PlayerManager pm) {
+    private void RestoreHealth(PlayerManager pm)
+    {
         stats = pm.stats;
 
         // Actually update health
-        if(stats != null) {
+        if (stats != null)
+        {
             stats.RestoreHealth(healthRestored);
-            Debug.Log("Health Restored: " + healthRestored);
             Cleanup();
-        } else {
+        }
+        else
+        {
             Debug.Log("Unable to find reference to PlayerStats from PlayerManager.");
         }
     }
 
     // Destroy this GameObject. Signal the PickupSpawner.
-    public override void Cleanup() {
+    public override void Cleanup()
+    {
         Destroy(gameObject);
         spawner.ItemTaken();
-        Debug.Log("Destroyed");
     }
 
     // Handle collisions
-    public override void OnTriggerEnter(Collider other) {
+    public override void OnTriggerEnter(Collider other)
+    {
         go = other.gameObject;
         pm = go.GetComponent<PlayerManager>();
 
-        if(pm != null) {
+        if (pm != null)
+        {
             // collision with a player character
-            Debug.Log("Collision with player");
+
+            Sound s = AudioManager.magicSounds[MagicSound.Powerup];
+            AudioManager.Play2D(s);
             RestoreHealth(pm);
-        } else {
-            // otherwise
-            Debug.Log("Collision with other");
         }
     }
 }

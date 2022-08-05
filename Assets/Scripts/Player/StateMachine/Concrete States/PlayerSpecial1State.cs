@@ -15,6 +15,7 @@ public class PlayerSpecial1State : PlayerBaseState
     public override void EnterState()
     {
         player.isSpecial1Triggered = false;
+        player.anim.SetBool("InSpecialAttack", true);
         player.anim.SetTrigger("Special1");
     }
 
@@ -24,6 +25,7 @@ public class PlayerSpecial1State : PlayerBaseState
 
     public override void ExitState()
     {
+        player.anim.SetBool("InSpecialAttack", false);
     }
 
     public override void CheckStateUpdate()

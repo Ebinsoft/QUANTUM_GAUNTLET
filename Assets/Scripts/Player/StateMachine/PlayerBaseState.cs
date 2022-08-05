@@ -34,7 +34,7 @@ public abstract class PlayerBaseState
     public void Update()
     {
 
-        if (player.currentState.canMove && player.isMovePressed)
+        if (player.isMovementEnabled && player.currentState.canMove && player.isMovePressed)
         {
             Move();
         }
@@ -66,13 +66,32 @@ public abstract class PlayerBaseState
     // High priority state transitions that all states share.
     private void anyStateUpdate()
     {
-        if (player.triggerDead)
+        if (player.triggerVictory)
+        {
+            player.triggerVictory = false;
+            SwitchState(player.VictoryState);
+        }
+        else if (player.triggerDisabled)
+        {
+            player.triggerDisabled = false;
+            SwitchState(player.DisabledState);
+        }
+        else if (player.triggerDead)
         {
             player.triggerHit = false;
+            player.triggerDead = false;
+
+            player.anim.SetBool("InDying", true);
+            player.anim.Play("Die");
+
             SwitchState(player.DeadState);
         }
         else if (player.triggerHit)
         {
+            player.triggerHit = false;
+            // force the animator to ignore its current transition rules and play the stun animation
+            player.anim.Play("Take Hit");
+
             if (player.isGrounded)
             {
                 SwitchState(player.StunState);
@@ -82,7 +101,6 @@ public abstract class PlayerBaseState
             {
                 SwitchState(player.TumblingState);
             }
-
         }
 
         else

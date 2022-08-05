@@ -20,14 +20,19 @@ public class PlayerManager : MonoBehaviour
     public PlayerDashingState DashingState;
     public PlayerLightAttackState LightAttackState;
     public PlayerHeavyAttackState HeavyAttackState;
+    public PlayerAirLightAttackState AirLightAttackState;
+    public PlayerAirHeavyAttackState AirHeavyAttackState;
     public PlayerSpecial1State Special1State;
     public PlayerSpecial2State Special2State;
     public PlayerSpecial3State Special3State;
     public PlayerStunState StunState;
+    public PlayerDefeatState DefeatState;
     public PlayerDeadState DeadState;
     public PlayerRespawningState RespawnState;
     public PlayerTumblingState TumblingState;
     public PlayerCrashingState CrashingState;
+    public PlayerVictoryState VictoryState;
+    public PlayerDisabledState DisabledState;
 
     // Other Stuff
     public Animator anim;
@@ -36,14 +41,18 @@ public class PlayerManager : MonoBehaviour
     public PlayerKnockback playerKnockback;
     public PlayerMoveset moveset;
     public CharacterController characterController;
-    public GameObject gameOverMenu;
+    public GameObject pauseMenu;
 
     // Handles all movmement once per frame with cc.Move
     public Vector3 currentMovement;
+    public bool isMovementEnabled = true;
+
     // Current XZ target direction to rotate towards
     public Vector2 rotationTarget;
+
     // Our updated version of isGrounded that checks a spherecast
     public bool isGrounded;
+    private bool isGravityApplied = true;
 
     /********** input variables **********/
     // Left Stick
@@ -78,8 +87,14 @@ public class PlayerManager : MonoBehaviour
     // Select
     public bool isSelectPressed;
     public bool isSelectTriggered;
+    // RT
+    public bool isPowerTogglePressed;
 
     /***************************************/
+
+    // PLAYER ID - set up before instantiation
+    public int playerID;
+
     // idle variables
     public bool isIdle = false;
 
@@ -124,23 +139,29 @@ public class PlayerManager : MonoBehaviour
     public float gravity;
     public float jumpGravity;
     public float gravityMultiplier = 1.0f;
-    private float groundedGravity = -5f;
+    private float groundedGravity = -8f;
     public float maxFallingSpeed = -15.0f;
 
     // normal-attack variables
     public bool isAttacking = false;
-    public int maxLightAttackChain = 3;
-    public int lightAttacksLeft = 3;
+    public int maxLightAttackChain = 4;
+    public int lightAttacksLeft = 4;
     public int maxHeavyAttackChain = 1;
     public int heavyAttacksLeft = 1;
 
     // death variables
     public bool triggerDead = false;
+    public bool delayBeforeDeathExplosion = false;
     public bool canDie = true;
     public bool isDead = false;
 
     // respawn variables
     public bool isRespawning = false;
+
+    // victory variables
+    public bool triggerVictory = false;
+    public bool triggerDisabled = false;
+
 
     void Awake()
     {
@@ -152,22 +173,27 @@ public class PlayerManager : MonoBehaviour
         LandingState = new PlayerLandingState(this);
         LightAttackState = new PlayerLightAttackState(this);
         HeavyAttackState = new PlayerHeavyAttackState(this);
+        AirLightAttackState = new PlayerAirLightAttackState(this);
+        AirHeavyAttackState = new PlayerAirHeavyAttackState(this);
         Special1State = new PlayerSpecial1State(this);
         Special2State = new PlayerSpecial2State(this);
         Special3State = new PlayerSpecial3State(this);
         DashingState = new PlayerDashingState(this);
         StunState = new PlayerStunState(this);
+        DefeatState = new PlayerDefeatState(this);
         DeadState = new PlayerDeadState(this);
         RespawnState = new PlayerRespawningState(this);
         TumblingState = new PlayerTumblingState(this);
         CrashingState = new PlayerCrashingState(this);
+        VictoryState = new PlayerVictoryState(this);
+        DisabledState = new PlayerDisabledState(this);
 
         characterController = GetComponent<CharacterController>();
         playerStun = GetComponent<PlayerStun>();
         playerKnockback = GetComponent<PlayerKnockback>();
         moveset = GetComponent<PlayerMoveset>();
 
-        gameOverMenu = GameObject.Find("Canvas/GameOverMenu");
+        pauseMenu = GameObject.Find("Canvas/Pause Menu");
 
         currentMovement = new Vector3(0.0f, 0.0f, 0.0f);
         rotationTarget = new Vector2(transform.forward.x, transform.forward.z);
@@ -191,13 +217,12 @@ public class PlayerManager : MonoBehaviour
         // check for if we died
         if (canDie && stats.health <= 0)
         {
-            canDie = false;
-            triggerDead = true;
+            TriggerDeath();
         }
 
         if (isStartTriggered)
         {
-            gameOverMenu.GetComponent<PauseMenu>().ToggleMenu();
+            pauseMenu.GetComponent<PopupMenu>().ToggleMenu();
             isStartTriggered = false;
         }
 
@@ -217,8 +242,8 @@ public class PlayerManager : MonoBehaviour
         RaycastHit hit;
         Vector3 p1 = transform.position + characterController.center;
 
-        float capsuleWidth = characterController.radius;
-        float centerToFloor = (characterController.height / 2);
+        float capsuleWidth = 0.35f;
+        float centerToFloor = (characterController.height / 2f);
 
         bool isSphereHit = false;
         // cast a sphere
@@ -227,12 +252,46 @@ public class PlayerManager : MonoBehaviour
             isSphereHit = true;
         }
         // also make sure we have negative velocity so we don't "land" when we jump up
-        isGrounded = (characterController.isGrounded || isSphereHit) && currentMovement.y < 0f;
+        isGrounded = isSphereHit && currentMovement.y <= 0f;
     }
     void FixedUpdate()
     {
         resetJumps();
-        handleGravity();
+        if (isGravityApplied)
+        {
+            handleGravity();
+        }
+
+    }
+
+    public void DisableGravity()
+    {
+        isGravityApplied = false;
+        currentMovement.y = 0;
+    }
+
+    public void EnableGravity()
+    {
+        isGravityApplied = true;
+    }
+
+    public void DisableMovement()
+    {
+        isMovementEnabled = false;
+        currentMovement.x = 0;
+        currentMovement.z = 0;
+    }
+
+    public void EnableMovement()
+    {
+        isMovementEnabled = true;
+    }
+
+    public void TriggerDeath(bool delayBeforeExplode = true)
+    {
+        canDie = false;
+        triggerDead = true;
+        this.delayBeforeDeathExplosion = delayBeforeExplode;
     }
 
     void setupJumpVariables()
@@ -258,12 +317,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Teleport(Vector3 newPosition)
+    {
+        characterController.enabled = false;
+        transform.position = newPosition;
+        characterController.enabled = true;
+    }
+
     void handleGravity()
     {
         // this will handle early falling if you release the jump button
         bool isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
         // a lower grounded gravity makes clipping less likely but will still trigger isGrounded
-        if (characterController.isGrounded && currentMovement.y < 0)
+        if (isGrounded && currentMovement.y < 0)
         {
             currentMovement.y = groundedGravity;
         }
@@ -276,7 +342,7 @@ public class PlayerManager : MonoBehaviour
 
     private void resetJumps()
     {
-        if (characterController.isGrounded && jumpsLeft < maxJumps)
+        if (isGrounded && jumpsLeft < maxJumps)
         {
             jumpsLeft = maxJumps;
         }
@@ -286,5 +352,48 @@ public class PlayerManager : MonoBehaviour
     public bool EnoughManaFor(MoveType moveType)
     {
         return moveset.TotalManaCost(moveType) <= stats.mana;
+    }
+
+    // check if our pushbox is standing on top of another player's
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            if ((characterController.collisionFlags & CollisionFlags.Below) != 0)
+            {
+                float minHeightDiff = 1f;
+                if (hit.gameObject.transform.position.y < gameObject.transform.position.y - minHeightDiff)
+                {
+                    // move us off their head
+                    float slideSpeed = 10f;
+                    Vector3 p1 = gameObject.transform.position;
+                    Vector3 p2 = hit.gameObject.transform.position;
+                    Vector3 dir3 = (p1 - p2);
+                    Vector2 dir = new Vector2(dir3.x, dir3.z);
+
+
+                    float maxDist = characterController.radius * 2.25f;
+                    float speedMultiplier = Mathf.Clamp(
+                        (maxDist - dir.magnitude) / maxDist,
+                        0, 1
+                    );
+
+                    dir.Normalize();
+                    currentMovement.x = dir.x * slideSpeed * speedMultiplier;
+                    currentMovement.z = dir.y * slideSpeed * speedMultiplier;
+                }
+            }
+        }
+    }
+
+    public void ResetAllAnimatorTriggers()
+    {
+        foreach (var param in anim.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Trigger)
+            {
+                anim.ResetTrigger(param.name);
+            }
+        }
     }
 }

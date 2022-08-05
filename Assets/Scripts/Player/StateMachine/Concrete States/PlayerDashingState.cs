@@ -25,6 +25,8 @@ public class PlayerDashingState : PlayerBaseState
     {
         player.isDashing = true;
         Dash();
+
+        player.stats.currentStatus = PlayerStats.Status.intangible;
     }
 
     public override void UpdateState()
@@ -34,6 +36,7 @@ public class PlayerDashingState : PlayerBaseState
         {
             player.anim.SetBool("IsDashing", false);
             DecayVelocity();
+            player.stats.currentStatus = PlayerStats.Status.normal;
 
             if (player.dashesLeft > 0 && player.isUtilityAttackTriggered)
             {
@@ -49,6 +52,8 @@ public class PlayerDashingState : PlayerBaseState
         effects.StopDashingEffect();
 
         player.dashesLeft = player.maxDashes;
+
+        player.stats.currentStatus = PlayerStats.Status.normal;
     }
 
     public override void CheckStateUpdate()

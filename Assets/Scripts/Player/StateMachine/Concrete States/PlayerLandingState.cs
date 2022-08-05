@@ -12,11 +12,16 @@ public class PlayerLandingState : PlayerBaseState
         cancelMomentum = true;
     }
 
-    public override void EnterState() { }
+    public override void EnterState()
+    {
+        player.anim.SetBool("InLanding", true);
+    }
 
     public override void UpdateState() { }
 
-    public override void ExitState() { }
+    public override void ExitState() { 
+        player.anim.SetBool("InLanding", false);
+    }
 
     public override void CheckStateUpdate()
     {

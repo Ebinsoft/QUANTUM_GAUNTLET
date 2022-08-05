@@ -11,8 +11,9 @@ public class ItemSpawner : MonoBehaviour
     // public for debugging purposes
     public bool spawningItem;   // set true by spawnee's Cleanup()
     public float timeRemaining;
-
-    private InteractableItem spawnedItem; 
+    public ParticleSystem particleSystem;
+    private InteractableItem spawnedItem;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,10 @@ public class ItemSpawner : MonoBehaviour
             Debug.Log("ItemSpawner spawnee is set to null!");
         } else {
             SpawnItem();
+        }
+
+        if(particleSystem == null) {
+            Debug.Log("Cannot find reference to particle system.");
         }
 
         spawningItem = false;
@@ -41,15 +46,16 @@ public class ItemSpawner : MonoBehaviour
 
     // Make call to instantiate prefab
     public void SpawnItem() {
-        GameObject go = Instantiate(spawnee, transform.position + new Vector3(0f, 1.5f, 0f), new Quaternion(0.25f, 0.5f, 0.5f, 0.0f));
+        GameObject go = Instantiate(spawnee, transform.position + new Vector3(0f, 1.25f, 0f), new Quaternion(0.25f, 0.5f, 0.5f, 0.0f));
         spawnedItem = go.GetComponent<InteractableItem>();
 
         if(spawnedItem == null) {
             Debug.Log("Could not obtain reference to InteractableItem");
         } else {
-            Debug.Log("Item spawned");
             spawnedItem.spawner = this;
         }
+
+        particleSystem.Play();
         spawningItem = false;
     }
 
@@ -57,5 +63,6 @@ public class ItemSpawner : MonoBehaviour
     public void ItemTaken() {
         timeRemaining = timer;
         spawningItem = true;
+        particleSystem.Stop();
     }
 }

@@ -101,14 +101,14 @@ public class PlayerAttackHandler : MonoBehaviour
         Vector3 direction = hitPoint - transform.position;
         HitData hitData = new HitData() { attack = activeAttack, direction = direction };
 
-        bool hitResolved = playerObj.GetComponent<PlayerHitHandler>().handleHit(hitData);
+        bool hitResolved = playerObj.GetComponent<IHitHandler>().handleHit(hitData);
         if (hitResolved)
         {
             // do hitlag for attacking player
             animEffects.PlayRecoilLag(activeAttack.hitlagTime);
 
             // play hit particle effect at contact point
-            effects.PlayHitEffectAt(hitPoint);
+            effects.PlayHitSparksAt(hitPoint, activeAttack.damage);
 
             // restore mana to attacking player
             player.stats.RestoreMana(activeAttack.manaGain);
@@ -117,11 +117,11 @@ public class PlayerAttackHandler : MonoBehaviour
             switch (activeAttack.impactSoundType)
             {
                 case SoundEffectType.preset:
-                    AudioManager.PlayAt(activeAttack.presetImpactSound, hitPoint);
+                    AudioManager.PlayAt(activeAttack.presetImpactSound, gameObject);
                     break;
 
                 case SoundEffectType.custom:
-                    AudioManager.PlayAt(activeAttack.customImpactSound, hitPoint);
+                    AudioManager.PlayAt(activeAttack.customImpactSound, gameObject);
                     break;
             }
         }
@@ -137,7 +137,8 @@ public class PlayerAttackHandler : MonoBehaviour
             activeSpecialBehavior.OnEnter();
         }
 
-        if (attack.hasAimAssist) {
+        if (attack.hasAimAssist)
+        {
             aimAssist.TrackNearestOpponent(attack.aimAssistDistance, attack.aimAssistAngle);
         }
 

@@ -86,7 +86,7 @@ public class DashingUppercut : SpecialAttackBehavior
         {
             StopEffects();
             zoomSound.StopAndDestroy();
-            AudioManager.PlayAt(FireSound.ExplosionMedium, player.transform.position);
+            AudioManager.PlayAt(FireSound.ExplosionMedium, player.gameObject);
 
             currentPhase = Phase.Hit;
             player.anim.SetTrigger("UppercutHit");
@@ -104,14 +104,10 @@ public class DashingUppercut : SpecialAttackBehavior
             // move player closer to opponent if we're too far away
             float maxDistance = 1f;
             float opponentDistance = Vector3.Distance(player.transform.position, opponentPosition);
-            Debug.Log(opponentDistance);
             if (opponentDistance > maxDistance)
             {
                 Vector3 targetPosition = opponentPosition - opponentDirection.normalized * maxDistance;
-                player.characterController.enabled = false;
-
-                player.transform.position = targetPosition;
-                player.characterController.enabled = true;
+                player.Teleport(targetPosition);
             }
         }
     }
@@ -152,7 +148,7 @@ public class DashingUppercut : SpecialAttackBehavior
         particleEffects.StartFireDashingEffect();
 
         zoomSound.Play();
-        AudioManager.PlayAt(FireSound.ExplosionSmall, player.transform.position);
+        AudioManager.PlayAt(FireSound.ExplosionSmall, player.gameObject);
     }
 
     private void StopEffects()

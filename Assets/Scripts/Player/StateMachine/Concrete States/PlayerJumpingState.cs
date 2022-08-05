@@ -38,6 +38,16 @@ public class PlayerJumpingState : PlayerBaseState
         {
             SwitchState(player.JumpingState);
         }
+
+        else if (player.isLightAttackTriggered)
+        {
+            SwitchState(player.AirLightAttackState);
+        }
+
+        else if (player.isHeavyAttackTriggered)
+        {
+            SwitchState(player.AirHeavyAttackState);
+        }
     }
 
     private void Jump()

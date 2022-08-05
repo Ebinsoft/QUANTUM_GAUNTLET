@@ -1,9 +1,7 @@
 using System;
-using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 
 public class ProjectileManager : MonoBehaviour
 {
@@ -24,6 +22,9 @@ public class ProjectileManager : MonoBehaviour
     // rigidbodies
     private Rigidbody projectileRigidbody;
     private HashSet<Rigidbody> hitRigidbodies;
+
+    // Hitlag
+    private IEnumerator FreezeRoutine;
 
     void Awake()
     {
@@ -87,7 +88,7 @@ public class ProjectileManager : MonoBehaviour
             HitData hitData = new HitData() { attack = attack, direction = direction };
 
             GameObject playerHit = other.attachedRigidbody.gameObject;
-            bool hitResolved = playerHit.GetComponent<PlayerHitHandler>().handleHit(hitData);
+            bool hitResolved = playerHit.GetComponent<IHitHandler>().handleHit(hitData);
 
             if (hitResolved)
             {
@@ -103,29 +104,22 @@ public class ProjectileManager : MonoBehaviour
         behavior.OnDestroy();
         Destroy(gameObject, delay);
     }
-}
 
-
-[CustomEditor(typeof(ProjectileManager))]
-public class ProjectileManagerEditor : Editor
-{
-    public override void OnInspectorGUI()
+    public void FreezeMovement(float duration)
     {
-        ProjectileManager obj = target as ProjectileManager;
+        if (FreezeRoutine != null) StopCoroutine(FreezeRoutine);
 
-        // projectile behavior selector
-        obj.behaviorType = SubclassSelector.Dropdown<ProjectileBehavior>("Behavior", obj.behaviorType);
+        FreezeRoutine = FreezeCoroutine(duration);
+        StartCoroutine(FreezeRoutine);
+    }
 
-        // attack info
-        obj.attack = (AttackInfo)EditorGUILayout.ObjectField("Attack", obj.attack, typeof(AttackInfo), false);
+    IEnumerator FreezeCoroutine(float duration)
+    {
+        var oldSpeed = movementSpeed;
+        movementSpeed = 0;
 
-        // speeds
-        obj.movementSpeed = EditorGUILayout.FloatField("Movement Speed", obj.movementSpeed);
-        obj.rotationSpeed = EditorGUILayout.FloatField("Rotation Speed", obj.rotationSpeed);
+        yield return new WaitForSeconds(duration);
 
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(obj);
-        }
+        movementSpeed = oldSpeed;
     }
 }

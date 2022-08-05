@@ -17,6 +17,7 @@ public class PlayerHUD : MonoBehaviour
     TMPro.TextMeshProUGUI playerID;
     Image[] stockIcons;
     Text debugText;
+    private bool powerToggleActivated = false;
 
     void Awake()
     {
@@ -38,6 +39,25 @@ public class PlayerHUD : MonoBehaviour
         float percentMana = player.stats.mana / player.stats.baseStats.baseMana;
         manaBar.materialForRendering.SetFloat("_FillAmount", percentMana);
 
+
+
+        if (player.isPowerTogglePressed != powerToggleActivated)
+        {
+            if (player.isPowerTogglePressed)
+            {
+                Sound s = AudioManager.UISounds[UISound.PowerToggle];
+                AudioManager.Play2D(s);
+                manaBar.materialForRendering.SetFloat("_Shimmering", 1);
+                powerToggleActivated = true;
+            }
+            else
+            {
+                manaBar.materialForRendering.SetFloat("_Shimmering", 0);
+                powerToggleActivated = false;
+            }
+        }
+
+
         debugText.text = player.currentState.ToString();
     }
 
@@ -54,16 +74,16 @@ public class PlayerHUD : MonoBehaviour
         this.playerSetting = playerSetting;
 
         // annoying workaround because Unity doesn't instance materials for UI images
-        healthBar.material = healthBarMaterials[playerSetting.playerIndex];
-        manaBar.material = manaBarMaterials[playerSetting.playerIndex];
+        healthBar.material = healthBarMaterials[playerSetting.playerID];
+        manaBar.material = manaBarMaterials[playerSetting.playerID];
 
-        playerID.text = "P" + (playerSetting.playerIndex + 1);
-        portraitBg.color = playerSetting.team.teamColor + (Color.white * 0.4f);
+        playerID.text = "P" + (playerSetting.playerID + 1);
+        portraitBg.color = playerSetting.team.teamColor;
 
         GenerateStockIcons();
 
         // subscribe to player deaths
-        player.stats.onPlayerDie += onPlayerDie;
+        player.stats.onPlayerDespawn += onPlayerDespawn;
 
         ComputePositionAndScale();
     }
@@ -76,7 +96,7 @@ public class PlayerHUD : MonoBehaviour
         RectTransform rectTrans = GetComponent<RectTransform>();
         rectTrans.anchoredPosition = new Vector2()
         {
-            x = (canvasWidth / 4) * playerSetting.playerIndex + padding,
+            x = (canvasWidth / 4) * playerSetting.playerID + padding,
             y = 0
         };
 
@@ -107,7 +127,7 @@ public class PlayerHUD : MonoBehaviour
         }
     }
 
-    private void onPlayerDie(GameObject playerObj)
+    private void onPlayerDespawn(GameObject playerObj)
     {
         // update stock icons
         int remainingLives = player.stats.lives;

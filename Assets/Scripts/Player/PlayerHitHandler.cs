@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerHitHandler : MonoBehaviour
+public class PlayerHitHandler : MonoBehaviour, IHitHandler
 {
     private PlayerManager player;
 
@@ -14,6 +14,9 @@ public class PlayerHitHandler : MonoBehaviour
     {
         AttackInfo attack = hitData.attack;
 
+        // don't resolve hit if we are already dead
+        if (player.stats.health <= 0) return false;
+
         if (player.stats.canTakeDamage)
         {
             player.stats.health -= attack.damage;
@@ -25,6 +28,7 @@ public class PlayerHitHandler : MonoBehaviour
 
             // if player got interrupted out of an attack, make sure to clean up
             player.GetComponent<PlayerAttackHandler>().FinishAttack();
+            player.ResetAllAnimatorTriggers();
 
             if (attack.stunTime > 0)
             {

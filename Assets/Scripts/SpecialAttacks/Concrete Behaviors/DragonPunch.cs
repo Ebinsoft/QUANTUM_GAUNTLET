@@ -11,9 +11,9 @@ public class DragonPunch : SpecialAttackBehavior
     bool canPunch;
 
     float chargeTimer;
-    float maxChargeTime = 1.0f;
+    float maxChargeTime = 2.0f;
 
-    float manaDrainPerSecond = 200;
+    float manaDrainPerSecond = 100;
 
     // distance away from player's XZ position to spawn projectile
     float spawnDistance = 0.5f;
@@ -21,7 +21,6 @@ public class DragonPunch : SpecialAttackBehavior
     // distance above player's Y position to spawn projectile
     float spawnHeight = 0.4f;
 
-    float oldSpeed;
     float oldRotation;
 
     public override void OnEnter()
@@ -30,11 +29,9 @@ public class DragonPunch : SpecialAttackBehavior
         canPunch = false;
         chargeTimer = 0f;
 
+        // allow very slow rotation
         player.currentState.canRotate = true;
-        player.currentState.canMove = true;
-        oldSpeed = player.playerSpeed;
         oldRotation = player.rotationSpeed;
-        player.playerSpeed = 2.0f;
         player.rotationSpeed = 2f;
 
         Sound s = AudioManager.magicSounds[MagicSound.ChargeUp];
@@ -48,6 +45,7 @@ public class DragonPunch : SpecialAttackBehavior
     {
         chargeTimer += Time.deltaTime;
         if (!player.isSpecial2Pressed) buttonWasReleased = true;
+        if (chargeTimer >= maxChargeTime) buttonWasReleased = true;
 
         // slowly drain mana over time while charging
         if (canPunch)
@@ -70,6 +68,9 @@ public class DragonPunch : SpecialAttackBehavior
 
     private void ActivatePunch(float chargePercent)
     {
+        // stop the player from rotating
+        player.rotationSpeed = 0;
+
         canPunch = false;
 
         chargePercent = Mathf.Min(1, chargePercent);
@@ -83,7 +84,7 @@ public class DragonPunch : SpecialAttackBehavior
 
         GameObject fireCone = SpawnProjectile(fireFistPrefab, spawnPoint, spawnRot, extraParams: extraParams);
         chargingSound.StopAndDestroy();
-        AudioManager.PlayAt(FireSound.ExplosionBig, player.transform.position);
+        AudioManager.PlayAt(FireSound.ExplosionBig, player.gameObject);
         particleEffects.StopChargingEffect();
     }
 
@@ -92,7 +93,6 @@ public class DragonPunch : SpecialAttackBehavior
         // cleanup in case of interruption
         player.currentState.canRotate = false;
         player.currentState.canMove = false;
-        player.playerSpeed = oldSpeed;
         player.rotationSpeed = oldRotation;
         chargingSound.StopAndDestroy();
         particleEffects.StopChargingEffect();
@@ -109,11 +109,6 @@ public class DragonPunch : SpecialAttackBehavior
                 canPunch = true;
                 chargeTimer = 0;
                 particleEffects.StartChargingEffectAt(player.transform.position);
-                break;
-
-            case 1:
-                // punch has reached its maximum charge time, forced release
-                ActivatePunch(1f);
                 break;
 
             default:

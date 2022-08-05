@@ -42,7 +42,10 @@ public enum ImpactSound
 {
     PunchLight,
     PunchMedium,
-    PunchHeavy
+    PunchHeavy,
+    KickLight,
+    KickMedium,
+    KickHeavy
 }
 
 [System.Serializable]
@@ -89,7 +92,8 @@ public enum FireSound
     FlameBurst,
     ExplosionSmall,
     ExplosionMedium,
-    ExplosionBig
+    ExplosionBig,
+    DeathExplosion
 }
 
 [System.Serializable]
@@ -104,12 +108,32 @@ public class FireSoundElem
 public enum MagicSound
 {
     ChargeUp,
-    Zoom
+    Zoom,
+    Powerup
 }
 
 [System.Serializable]
 public class MagicSoundElem
 {
     public MagicSound soundType;
+    public Sound sound;
+}
+
+// UI SOUNDS
+public enum UISound
+{
+    MainHover,
+    MainClick,
+    CSHover,
+    CSClick,
+    CSFightReady,
+    CSFightClick,
+    PowerToggle
+}
+
+[System.Serializable]
+public class UISoundElem
+{
+    public UISound soundType;
     public Sound sound;
 }
