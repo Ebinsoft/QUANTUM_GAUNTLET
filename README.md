@@ -16,6 +16,8 @@ Features a dynamic combat system with mana resources, combos, and power-ups. Con
 
 <img src="https://github.com/user-attachments/assets/f90c1af3-0fca-4b40-8fc3-e09b83543ec6" width=50%><img src="https://github.com/user-attachments/assets/3eada87f-53d2-4ff9-aa5a-bfb4183c32cd" width=50%>
 
+<a href="https://www.youtube.com/watch?v=0U-hM4oxC_U">Link to full gameplay trailer </a>
+
 # Getting Started
 1. Install Unity 2021.3.45
 2. Export to desired runtime
