@@ -28,4 +28,4 @@ Features a dynamic combat system with mana resources, combos, and power-ups. Con
 </a>
 
 # License
-Licensed under the <a href="https://opensource.org/license/mit"> MIT </a> license.
+Licensed under the <a href="https://github.com/Ebinsoft/QUANTUM_GAUNTLET/blob/readme-update/LICENSE.txt"> MIT </a> license.
