@@ -1,6 +1,6 @@
 # QUANTUM GAUNTLET
-[![Game Version](https://img.shields.io/badge/Latest-0.3.0-333.svg?style=flat)](https://unity3d.com)
-[![Game Status](https://img.shields.io/badge/Status-BETA-f60.svg?style=flat)](https://unity3d.com)
+[![GitHub Release](https://img.shields.io/github/v/release/Ebinsoft/QUANTUM_GAUNTLET)](https://github.com/Ebinsoft/QUANTUM_GAUNTLET/releases)
+![Game Status](https://img.shields.io/badge/Status-BETA-f60.svg?style=flat)
 [![Unity Version](https://img.shields.io/badge/UNITY-%202021.3.45-fff.svg?style=flat&logo=unity)](https://unity3d.com)
 [![License](https://img.shields.io/badge/License-MIT-0298c3.svg?style=flat)](https://opensource.org/license/mit)
 
